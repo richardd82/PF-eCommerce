@@ -2,10 +2,11 @@ const { Router } = require("express");
 const { Product, Category, Stock } = require("../db");
 const { Op } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
-const getApiProducts = require("./getProductsApi");
+const getApiProducts = require("./getApiProducts");
+const e = require("express");
 
 const router = Router();
-/*
+
 router.delete("/:id", async (req, res, next) => {
   console.log("Entra");
   const { id } = req.params;
@@ -15,8 +16,8 @@ router.delete("/:id", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});*/
-/*
+});
+
 router.post("/", async (req, res, next) => {
   const { name, price, image, brand, gender, nameCategory, description } =
     req.body;
@@ -49,22 +50,22 @@ router.post("/", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});*/
+});
 
 router.get("/", async (req, res, next) => {
   const { name, category,id } = req.query;
-  let ProductosTotales = await Product.findAll(/*{
+  let ProductosTotales = await Product.findAll({
     include: {
       model: Stock,
     },
-  }*/);
+  });
   if (ProductosTotales.length === 0) {
     await getApiProducts();
-    ProductosTotales = await Product.findAll(/*{
+    ProductosTotales = await Product.findAll({
       include: {
         model: Stock,
       },
-    }*/);
+    });
   }
   try {
     if (name) {
@@ -74,9 +75,9 @@ router.get("/", async (req, res, next) => {
             [Op.iLike]: `%${name}%`,
           },
         },
-        /*include: {
+        include: {
           model: Stock,
-        },*/
+        },
       });
       res.send(filteredProducts);
     } else if (category) {
@@ -84,9 +85,9 @@ router.get("/", async (req, res, next) => {
         where: {
           categoryId: category,
         },
-        /*include: {
+        include: {
           model: Stock,
-        },*/
+        },
       });
       res.send(filteredProducts);
     } 
@@ -95,9 +96,9 @@ router.get("/", async (req, res, next) => {
         where: {
           id: id,
         },
-        /*include: {
+        include: {
           model: Stock,
-        },*/
+        },
       });
       res.send(filteredProducts);
     }
@@ -108,7 +109,7 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-/*
+
 router.put("/:id", async (req, res, next) => {
   const { type } = req.query;
   const { id } = req.params;
@@ -159,6 +160,6 @@ router.put("/:id", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});*/
+});
 
 module.exports = router;
