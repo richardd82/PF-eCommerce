@@ -1,0 +1,144 @@
+#SizeSeleccionada {
+  color: #008000;
+  border-radius: 10px;
+}
+
+.SizeSoldOut {
+  font-size: 30px;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.SizeOnSale {
+  font-size: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.textChooseSize {
+  font-size: 30px;
+}
+
+.containerFormAddCarry {
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 10px;
+  justify-content: center;
+  align-content: center;
+  padding: 20px;
+  color: #343a40;
+}
+
+.paragraphSizes {
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+.paragraphSizes label {
+  display: inline-block;
+  width: 100%;
+}
+
+.soldOut {
+  color: red;
+  font-weight: bold;
+}
+
+.paragraphQuantity input {
+  padding: 5px 0;
+  padding-left: 5px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #343a40;
+  outline: none;
+  margin-left: 5px;
+}
+
+.paragraphQuantity span {
+  margin-top: 8px;
+  display: block;
+}
+
+.ParagraphTotalPrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.btnAddCarry {
+  padding: 10px 15px;
+  outline: none;
+  cursor: pointer;
+  background-color: #008000;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+}
+.btnAddCarry:hover {
+  color: white;
+  margin-right: 5px;
+}
+
+.cardDetailContainer {
+  margin-bottom: 30px;
+}
+
+.cardDetailContainer h1 {
+  color: rgba(52, 58, 64, 0.75);
+  letter-spacing: 1px;
+}
+
+.detailsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 0 30px;
+}
+
+.imageContainer img {
+  border-radius: 15px;
+  box-shadow: 5px 5px 8px 0px rgba(52, 58, 64, 0.75);
+}
+
+.infoContainer {
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #8f9191;
+  color: white;
+  width: 60%;
+}
+
+.infoContainer p {
+  margin-bottom: 0;
+}
+
+.btnDetails {
+  padding: 10px 15px;
+  outline: none;
+  cursor: pointer;
+  background-color: #008000;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.btnDetails:hover {
+  color: white;
+  background-color: #05b405;
+}
+
+.btnBackFav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}

@@ -1,0 +1,104 @@
+* {
+  text-decoration: none;
+}
+
+.letra {
+  justify-content: space-between;
+  color: white;
+  text-decoration: none;
+  width: 100px;
+}
+
+.letra:hover {
+  color: #008000;
+}
+
+.btnCarry {
+  color: white;
+}
+
+.btnCarry:hover {
+  color: #008000;
+}
+
+.NavUl {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  width: 50%;
+}
+
+.liFormat {
+  margin-left: 15px;
+}
+.NavBarComplete {
+  background: url("../image/FondoNavBar.jpg");
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font: bold 16px sans-serif;
+  padding: 3px 5px;
+}
+
+/* IZQUIERDA */
+
+.left {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  gap: 10px;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 40%;
+}
+.NavBarComplete .logo {
+  border-radius: 5rem;
+  margin-left: 3rem;
+}
+.logo:hover {
+  transform: scale(1.025, 1.025);
+  filter: drop-shadow(0 0 12px white);
+}
+
+.buttonlogin {
+  width: 30%;
+  padding: 10px 10px;
+  background-color: #008000;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: white;
+
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.buttonlogin:hover {
+  background-color:rgb(38, 241, 38);
+}
+/* CENTRO /
+
+/ DERECHA /
+
+/ .right {
+  width: 20%;
+} */
+.ModalAbiertoBackground {
+   position: absolute;
+   background-color: #273141c3;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+
+.ModalLogin {
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   top: 15%;
+}
