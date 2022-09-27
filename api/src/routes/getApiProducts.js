@@ -51,13 +51,13 @@ module.exports = async () => {
                description: `${producsNew[index].name} is very good quality clothing, made by the ${producsNew[index].brandName} brand in the USA with the best quality materials. We have different sizes and colors of this product so you can choose the one you like best.`,
             },
          });
-        /* size.forEach((item) => {
+         size.forEach((item) => {
             Stock.create({
                productSize: item,
                stock: stock[Math.floor(Math.random() * 7)],
                productId: id,
             });
-         });*/
+         });
          ProductosPorCategoria.push(createProduct);
       }
    }
