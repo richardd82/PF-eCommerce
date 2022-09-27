@@ -1,3 +1,4 @@
+
 /* import "./App.css"; */
 import { Route, Switch } from "react-router-dom";
 import { Home } from "./components/Home/Home";
@@ -39,6 +40,8 @@ import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery
 import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra"
 
 function App() {
+
+
   return (
     <div className={styles.App}>
       <AuthProvider>
