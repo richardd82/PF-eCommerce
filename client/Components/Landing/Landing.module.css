@@ -1,0 +1,19 @@
+.landingContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.landingContainer button {
+  padding: 10px 15px;
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.landingContainer button:hover {
+  background-color: aquamarine;
+}
