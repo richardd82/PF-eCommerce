@@ -27,13 +27,12 @@ import Favorites from "./components/Favs/Favorites";
 import ModifyUser from "./components/ModifyUser/ModifyUser";
 import ModifyUserImage from "./components/ModifyUser/ModifyUserImage";
 import ModifyUserPassword from "./components/ModifyUser/ModifyUserPassword";
+// import NavUser from "./components/NavUser/NavUser.jsx";
+// import Orders2 from "./components/Orders/Orders2";
+// import OrdersDetails from "./components/Orders/OrdersDetails";
 
-import NavUser from "./components/NavUser/NavUser.jsx";
-import Orders2 from "./components/Orders/Orders2";
-import OrdersDetails from "./components/Orders/OrdersDetails";
-
-// login Google
-import LoginGoogle from "./components/Login/Login Google/LoginGoogle";
+// // login Google
+// import LoginGoogle from "./components/Login/Login Google/LoginGoogle";
 
 import styles from "./App.module.css";
 import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
