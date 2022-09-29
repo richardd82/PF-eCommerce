@@ -8,8 +8,8 @@ const SizeEnumeracionCards_byPage = 8;
 class Paginated extends Component {
 
   Actualizar() {
-   let NumeracionMaximaPaginas=this.props.NumMaxPag==undefined?SizeEnumeracionPaginado:this.props.NumMaxPag;
-   let NumeracionMaximoTarjetas=this.props.NumMaxtarg==undefined?SizeEnumeracionCards_byPage:this.props.NumMaxtarg;
+   let NumeracionMaximaPaginas = this.props.NumMaxPag == undefined ? SizeEnumeracionPaginado : this.props.NumMaxPag;
+   let NumeracionMaximoTarjetas = this.props.NumMaxtarg == undefined ? SizeEnumeracionCards_byPage : this.props.NumMaxtarg;
 
     let IndiceFinal =
       Math.floor(this.props.paginated.productsView.length / NumeracionMaximoTarjetas) +
@@ -25,15 +25,19 @@ class Paginated extends Component {
     PaginaStart = PaginaStart < 1 ? 1 : PaginaStart;
 
     let IndicesArray = [];
+
     IndicesArray.push(1);
+
     let Longitud =
       IndiceFinal > NumeracionMaximaPaginas - 1
         ? NumeracionMaximaPaginas
         : IndiceFinal;
+
     for (let i = 1; i < Longitud; i++) {
       if (i !== Longitud - 1) IndicesArray.push(PaginaStart + i);
       else IndicesArray.push(IndiceFinal);
     }
+    
     IndiceFinal=IndiceFinal==0?1:IndiceFinal;
   
     return {IndiceFinal: IndiceFinal,IndicesArray:IndicesArray};
