@@ -1,0 +1,17 @@
+.Component {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 0px;
+   /* background-color: aqua; */
+}
+
+.filterC {
+   margin: 30px 15px;
+   margin-bottom: 10px;
+   background-color:#008000;
+   padding: 10px;
+   color: #fff;
+   font-size: 1.1rem;
+   /* font-weight: 500; */
+   border-radius: 10px;
+}

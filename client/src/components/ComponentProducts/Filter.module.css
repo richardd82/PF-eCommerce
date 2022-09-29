@@ -1,0 +1,30 @@
+main {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+.NavFilter {
+   margin: 20px;
+   width: 18rem;
+   background-color: white;
+   text-align: left;
+   margin-bottom: 10px;
+   color: white;
+   background: url("../image/FondoTarjetas.jpg");
+   background-size:     cover;  
+   padding-top: 10px;
+   padding-bottom: 10px;
+   border-radius: 8px;
+}
+
+.ItemFilter {
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.NameFilter {
+   color:#008000;
+   text-shadow: 0 -10px 20px white;
+   font-weight: bold;
+
+}
