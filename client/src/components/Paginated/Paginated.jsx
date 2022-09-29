@@ -38,7 +38,7 @@ class Paginated extends Component {
       else IndicesArray.push(IndiceFinal);
     }
     
-    IndiceFinal=IndiceFinal==0?1:IndiceFinal;
+    IndiceFinal = IndiceFinal == 0 ? 1 : IndiceFinal;
   
     return {IndiceFinal: IndiceFinal,IndicesArray:IndicesArray};
   }
