@@ -1,15 +1,15 @@
 import React from "react";
-import Style from "./Footer.module.css";
+// import Style from "./Footer.module.css";
 import { Link } from "react-router-dom";
 // import logo_wooly from "../../assets/logo_wooly.png";
-import logo from "../image/logo.png";
+// import logo from "../image/logo.png";
 
 export default function Footer() {
   return (
-    <footer className={Style.footerDistributed}>
-      <div className={Style.footerLeft}>
-        <div className={Style.footerLinks}>
-          <Link to={"/contact"} className={Style.formatLinks}>
+    <footer >
+      <div >
+        <div >
+          <Link to={"/contact"} >
             CONTACT
           </Link>
           {/* <Link to={"/"} >
@@ -26,16 +26,17 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className={Style.containerCenter}>
-        <div className={Style.footerCenter}>
+      <div>
+        <div >
           <Link to="/">
-            <img src={logo} alt="Img Not Found" className={Style.img} />
+            {/* <img src={logo} alt="Img Not Found" className={Style.img} /> */}
+            <p>VA IMAGEN</p>
           </Link>
         </div>
       </div>
 
-      <div className={Style.footerRight}>
-        <Link to={"/about"} className={Style.formatLinks}>
+      <div >
+        <Link to={"/about"} >
           ABOUT
         </Link>
         {/* <p className={Style.footerCompanyAbout}> */}

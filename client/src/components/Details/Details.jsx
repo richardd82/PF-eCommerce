@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./Details.module.css";
 import CARRY_LOCALHOST from "../Globales";
 import swal from "sweetalert2";
-import FeedBack from "../Orders/FeedBack";
-import Favs from "../Favs/Favs";
+// import FeedBack from "../Orders/FeedBack";
+// import Favs from "../Favs/Favs";
 
 import {
   deleteDetails,
@@ -14,7 +14,7 @@ import {
   getStockbyID,
   deleteStockbyID,
   // LoginGoogleUser
-} from "../../redux/actions";
+} from "../../redux/actions/index";
 
 export default function Details(props) {
   const dispatch = useDispatch();
@@ -214,7 +214,7 @@ export default function Details(props) {
       </div>
       <div className={style.btnBackFav}>
         <div>
-          <Favs id={props.match.params.id} key="id" />
+          {/* <Favs id={props.match.params.id} key="id" /> */} <p>AQUI VA FAVORITOS</p>
         </div>
         <div>
           <Link to={`/products/${genderPrevius}`}>
@@ -223,7 +223,7 @@ export default function Details(props) {
         </div>
       </div>
       {/* <Comments userName={user.name} productId={props.match.params.id}></Comments> */}
-      <FeedBack productId={props.match.params.id} products={producto} />
+      {/* <FeedBack productId={props.match.params.id} products={producto} /> */} <p>AQUI VA FEEDBACK</p>
     </div>
   );
 }

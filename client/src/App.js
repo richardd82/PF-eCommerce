@@ -1,32 +1,32 @@
 /* import "./App.css"; */
 import { Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./context/authContext.jsx";
-import { NavBar } from "./components/NavBar/NavBar.jsx";
-import { Details } from "./components/Details/Details.jsx";
-import { Landing } from "./components/Landing/Landing";
+import NavBar from "./components/NavBar/NavBar.jsx";
+import Details from "./components/Details/Details";
+import Landing from "./components/Landing/Landing";
 
 
-import ErrorPage from "./components/ErrorPage/ErrorPage";
-import Formulario from "./components/Formulario/Formulario";
-// register
-import Register from "./components/Register/Register.jsx";
+// import ErrorPage from "./components/ErrorPage/ErrorPage";
+// import Formulario from "./components/Formulario/Formulario";
+// // register
+// import Register from "./components/Register/Register.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import About from "./components/About/About.jsx";
-import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
-import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
-import Contact from "./components/Contact/Contact";
-import Carry from "./components/Carry/Carry";
+// import About from "./components/About/About.jsx";
+// import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
+// import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
+// import Contact from "./components/Contact/Contact";
+// import Carry from "./components/Carry/Carry";
 // import GoogleLogin from "react-google-login";
-import Login from "./components/Login/Login";
-import payment from "./components/Pago/Pay";
-import Profile from "./components/Profile/Profile";
-import ModifyItem from "./components/ModifyITem/ModifyItem";
-import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
-import AdminOrders from "./components/AdminOrders/AdminOrders.tsx";
-import Favorites from "./components/Favs/Favorites";
-import ModifyUser from "./components/ModifyUser/ModifyUser";
-import ModifyUserImage from "./components/ModifyUser/ModifyUserImage";
-import ModifyUserPassword from "./components/ModifyUser/ModifyUserPassword";
+// import Login from "./components/Login/Login";
+// import payment from "./components/Pago/Pay";
+// import Profile from "./components/Profile/Profile";
+// import ModifyItem from "./components/ModifyITem/ModifyItem";
+// import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
+// import AdminOrders from "./components/AdminOrders/AdminOrders.tsx";
+// import Favorites from "./components/Favs/Favorites";
+// import ModifyUser from "./components/ModifyUser/ModifyUser";
+// import ModifyUserImage from "./components/ModifyUser/ModifyUserImage";
+// import ModifyUserPassword from "./components/ModifyUser/ModifyUserPassword";
 // import NavUser from "./components/NavUser/NavUser.jsx";
 // import Orders2 from "./components/Orders/Orders2";
 // import OrdersDetails from "./components/Orders/OrdersDetails";
@@ -34,14 +34,14 @@ import ModifyUserPassword from "./components/ModifyUser/ModifyUserPassword";
 // // login Google
 // import LoginGoogle from "./components/Login/Login Google/LoginGoogle";
 
-import styles from "./App.module.css";
-import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
-import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
-import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
+// import styles from "./App.module.css";
+// import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
+// import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
+// import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
 
 function App() {
 	return (
-		<div className={styles.App}>
+		<div >
 			<AuthProvider>
 				{/* nav bar */}
 				<NavBar />

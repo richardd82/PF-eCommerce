@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo_wooly from "../../assets/logo_wooly.png";
-import Style from "./NavBar.module.css";
-import logo from "../image/logo.png";
+// import Style from "./NavBar.module.css";
+// import logo from "../image/logo.png";
 import { useState } from "react";
-import Login from "../Login/Login";
+// import Login from "../Login/Login";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import { Badge } from '@mui/material';
 import { useSelector } from "react-redux";
-import NavUser from "../NavUser/NavUser";
+// import NavUser from "../NavUser/NavUser";
 
 
 export default function NavBar(props) {
@@ -33,38 +33,38 @@ export default function NavBar(props) {
 
   return (
     <header>
-      <nav className={Style.NavBarComplete}>
-        <div className={Style.left}>
+      <nav >
+        <div >
           <Link to={"/"}>
             {/* <img src={logo_wooly} alt="Not Found" width="85px" height="85px" className={Style.logo} /> */}
-            <img
-              src={logo}
+            {/* <img
+              src=""
               alt="Not Found"
               width="85px"
               height="85px"
               className={Style.logo}
-            />
+            /> */} <p>VA LOGO</p>
           </Link>
-          <ul className={Style.NavUl}>
+          <ul>
             <li>
-              <Link to={"/products/Men"} className={Style.letra}>
+              <Link to={"/products/Men"}>
                 MEN
               </Link>
             </li>
             <li>
-              <Link to={"/products/Women"} className={Style.letra}>
+              <Link to={"/products/Women"}>
                 WOMEN
               </Link>
             </li>
             <li>
-              <Link to={"/favorites"} className={Style.letra}>
+              <Link to={"/favorites"}>
                 FAVORITES
               </Link>
             </li>
           </ul>
         </div>
-        <div className={Style.center}>
-          <ul className={Style.NavUl}>
+        <div >
+          <ul>
             {/* <li>
                 <Link to={"/products/Men"} className={Style.letra}>
                   MEN
@@ -87,7 +87,7 @@ export default function NavBar(props) {
                 </li> */}
             {user_login.isAdmin !== true &&
               <li>
-                <Link to={"/carry"} className={Style.btnCarry}>
+                <Link to={"/carry"} >
                   <Badge badgeContent={Cantidad} color="primary">
                     <IconContext.Provider value={{ size: "40px" }}>
                       <AiOutlineShoppingCart />
@@ -108,11 +108,11 @@ export default function NavBar(props) {
             </li>
             } */}
           </ul>
-          {user_login.id !== undefined && user_login.id === false ?
+          {/* {user_login.id !== undefined && user_login.id === false ?
             <button onClick={handleOpen} className={Style.buttonlogin}>
               Login/Register
             </button> : <NavUser />
-          }
+          } */}
         </div>
         {/* <div className={Style.right}>
         
@@ -122,10 +122,10 @@ export default function NavBar(props) {
             </div> */}
       </nav>
 
-      {openModal && <div className={Style.ModalAbiertoBackground}></div>}
+      {openModal && <div ></div>}
       {openModal && (
-        <div className={Style.ModalLogin}>
-          <Login close={handleClose} />
+        <div >
+          {/* <Login close={handleClose} /> */} <p>AQUI VA LOGIN</p>
         </div>
       )}
     </header>
