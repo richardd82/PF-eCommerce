@@ -4,7 +4,7 @@ import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
 // import Formulario from "./components/Formulario/Formulario";
