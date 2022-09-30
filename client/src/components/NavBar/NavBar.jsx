@@ -36,18 +36,18 @@ export default function NavBar(props) {
 			<nav>
 				<div className="mainNav">
 					<ul className="listNav">
-						<li>
+						<li >
 							<Link to={"/"} className="btnNavEffect">							                
 								<img src={logo} alt="Logo" className="logoNav"/>
 							</Link>
 						</li>
-						<li>
+						<li >
 							<Link to={"/products/Men"} className="btnNavEffect">MEN</Link>
-						</li>
-						<li>
+						</li >
+						<li >
 							<Link to={"/products/Women"} className="btnNavEffect">WOMEN</Link>
 						</li>
-						<li>
+						<li >
 						    <Link to={"/create"} className="btnNavEffect">CREATE</Link>
 						</li>
             {user_login.isAdmin !== true && (

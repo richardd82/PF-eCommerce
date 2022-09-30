@@ -24,10 +24,15 @@
 }
 
 #pagSeleccionada {
-  color: rgb(100, 61, 136);
+  color: rgb(132, 0, 255);
+  background-color: rgba(191, 123, 255, 0.781);
   box-shadow: 0 0 1px 0.2px rgb(217, 176, 255),
 		0 0 4px 2px rgba(191, 123, 255, 0.781), 0 0 0.75px 0.2px rgb(217, 176, 255);
   cursor: default;
+}
+
+#Inhabilitado{
+  visibility:collapse;
 }
 
 /* #Inhabilitado {

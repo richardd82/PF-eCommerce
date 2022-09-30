@@ -1,7 +1,7 @@
 .card {
     margin: auto;
 	width: 350px;
-	height: 450px;
+	height: auto;
 	border-radius: 10px;
 	padding: 5px;
 	box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -36,3 +36,15 @@
 .linkCard{
     text-decoration: none;    
 }
+
+
+
+
+
+  .card:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0px 0px 38px 3px rgba(151,22,232,0.73);
+-webkit-box-shadow: 0px 0px 38px 3px rgba(151,22,232,0.73);
+-moz-box-shadow: 0px 0px 38px 3px rgba(151,22,232,0.73);
+    transition: all 0.2s ease;
+  }
