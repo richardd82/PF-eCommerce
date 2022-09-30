@@ -1,0 +1,60 @@
+nav {
+	display: flex;
+	position: relative;
+	width: 100%;
+	flex-direction: column;
+	align-items: stretch;
+	align-content: center;
+	box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
+	-webkit-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
+	-moz-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
+	z-index: 100;
+}
+
+.listNav li a {
+	text-decoration: none;
+	--glow-color: rgb(217, 176, 255);
+	--glow-spread-color: rgba(191, 123, 255, 0.781);
+	--enhanced-glow-color: rgb(231, 206, 255);
+	--btn-color: rgb(100, 61, 136);
+	color: var(--glow-color);
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 0 0 0.5em var(--glow-color);
+	position: relative;
+	transition: all 0.3s;
+}
+.btnNavEffect:hover {
+	color: var(--btn-color);
+	border-radius: 5px;
+	background-color: var(--glow-color);
+	box-shadow: 0 0 1em 0.25em var(--glow-color),
+		0 0 4em 2em var(--glow-spread-color), 0 0 0.75em 0.25em var(--glow-color);
+}
+
+.listNav {
+	list-style: none;
+	overflow: hidden;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	/* background-color: rgb(61, 5, 67); */
+	background-image: url("../../assets/backgroundBlocks.jpg");
+	background-repeat: repeat-x;
+}
+.mainNav li {
+	float: left;
+	padding: 20px;
+	font-size: 2em;
+}
+.listNavRight {
+	float: left;
+}
+.shippingCart {
+	display: flex;
+	flex-direction: row;
+	margin-left: 73%;
+}
+.logoNav {
+	width: 40px;
+}

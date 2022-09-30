@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import style from "./Details.module.css";
+import "./details.css";
 import CARRY_LOCALHOST from "../Globales";
 import swal from "sweetalert2";
 // import FeedBack from "../Orders/FeedBack";
@@ -117,14 +117,14 @@ export default function Details(props) {
     }
   });
   return (
-    <div className={style.cardDetailMainContainer}>
-      <div className={style.cardDetailContainer}>
+    <div className="cardDetailMainContainer">
+      <div className="cardDetailContainer">
         {detail.length > 0 ? (
           <div>
             {/*TARJETA DE DETALLES*/}
             <h1>{detail[0].name}</h1>
-            <div className={style.detailsContainer}>
-              <div className={style.imageContainer}>
+            <div className="detailsContainer">
+              <div className="imageContainer">
                 <img src={`https://${detail[0].image}`} alt="Not Found" />
               </div>
 
@@ -133,25 +133,25 @@ export default function Details(props) {
 
               {/*MUESTREO DE SIZE (TALLAS)*/}
               {stock_by_ID.length > 0 && stateSize !== undefined ? (
-                <div className={style.containerFormAddCarry}>
+                <div className="containerFormAddCarry">
                   {(stateSize === undefined ||
                     stateSize.size === undefined) && (
-                    <label className={style.textChooseSize}>Choose Size</label>
+                    <label className="textChooseSize">Choose Size</label>
                   )}
-                  <p className={style.paragraphSizes}>
+                  <p className="paragraphSizes">
                     Available sizes:{" "}
                     {stock_by_ID.map((sizeStock, index) => {
                       return (
                         <label
                           id={
                             sizeStock.productSize === stateSize.size
-                              ? style.SizeSeleccionada
-                              : style.SizeNoSeleccionada
+                              ? "SizeSeleccionada"
+                              : "SizeNoSeleccionada"
                           }
                           className={
                             sizeStock.stock === 0
-                              ? style.SizeSoldOut
-                              : style.SizeOnSale
+                              ? "SizeSoldOut"
+                              : "SizeOnSale"
                           }
                           onClick={(e) => changeSize(e, index, sizeStock.stock)}
                         >
@@ -165,7 +165,7 @@ export default function Details(props) {
                   {/*MUESTREO DE CANTIDAD PRECIO Y BOTON COMPRA*/}
                   {stateSize.stock > 0 ? (
                     <div>
-                      <p className={style.paragraphQuantity}>
+                      <p className="paragraphQuantity">
                         Quantity:
                         {
                           <input
@@ -179,12 +179,12 @@ export default function Details(props) {
                         }
                         <span>(Stock:{stateSize.stock})</span>
                       </p>
-                      <p className={style.ParagraphTotalPrice}>
+                      <p className="ParagraphTotalPrice">
                         Total price:
                         {`  $${Number2Decimals(detail[0].price * stateQuanty)}`}
                       </p>
                       <button
-                        className={style.btnAddCarry}
+                        className="btnAddCarry"
                         onClick={() => handleAddCarry()}
                       >
                         Add Carry
@@ -193,7 +193,7 @@ export default function Details(props) {
                   ) : stateSize.size === undefined ? (
                     " "
                   ) : (
-                    <p className={style.soldOut}>SOLD OUT</p>
+                    <p className="soldOut">SOLD OUT</p>
                   )}
                   {/*---------------------------------*/}
                 </div>
@@ -201,7 +201,7 @@ export default function Details(props) {
                 <div>Loading Stock</div>
               )}
             </div>
-            <div className={style.infoContainer}>
+            <div className="infoContainer">
               <p>Brand: {detail[0].brand} </p>
               <p>Price: {`$${Number2Decimals(detail[0].price)}`} </p>
               <p>Genre: {detail[0].gender} </p>
@@ -212,13 +212,13 @@ export default function Details(props) {
           <p>LOADING...</p>
         )}
       </div>
-      <div className={style.btnBackFav}>
+      <div className="btnBackFav">
         <div>
           {/* <Favs id={props.match.params.id} key="id" /> */} <p>AQUI VA FAVORITOS</p>
         </div>
         <div>
           <Link to={`/products/${genderPrevius}`}>
-            <button className={style.btnDetails}>Go Back</button>
+            <button className="btnDetails">Go Back</button>
           </Link>
         </div>
       </div>

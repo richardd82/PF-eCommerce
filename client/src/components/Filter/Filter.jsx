@@ -6,6 +6,7 @@ import {
   changeFilternameProductSearched,changeFilterURL
 } from '../../redux/actions'
 import { withRouter } from "react-router";
+import './filter.css';
 
 export class Filter extends Component {
 
@@ -71,11 +72,12 @@ export class Filter extends Component {
       filterCategory, filterForPrice, min, max, getGenderbyMatch)
 
     return (
-      <div>
-        <nav className={this.props.styleFilter.NavFilter}>
+      <div className="containerFilter">
+        <nav className="NavFilter">
+        <div className="contentFilter">
           <ul >
-            <li className={this.props.styleFilter.ItemFilter}>
-              <label className={this.props.styleFilter.NameFilter} >Search Product Name: </label>
+            <li className="ItemFilter">
+              <label className="NameFilter">Search Product Name: </label>
               <input
                 type="text"
                 id="nombreProducto"
@@ -85,8 +87,8 @@ export class Filter extends Component {
               />
             </li>
             { getGenderbyMatch==undefined &&
-            <li className={this.props.styleFilter.ItemFilter}>
-              <p><label className={this.props.styleFilter.NameFilter}  >Gender: </label>
+            <li className="ItemFilter">
+              <p><label className="NameFilter"  >Gender: </label>
                 <select value={filterGender} onChange={(e) => this.props.changeFilterGender(e.target.value)}>
                 <option key={"Men"} value={"Men"}>Men</option>
                 <option key={"Women"} value={"Women"}>Women</option>
@@ -94,8 +96,8 @@ export class Filter extends Component {
             </li>
             }
 
-            <li className={this.props.styleFilter.ItemFilter}>
-              <p><label className={this.props.styleFilter.NameFilter}  >Category: </label>
+            <li className="ItemFilter">
+              <p><label className="NameFilter"  >Category: </label>
                 <select value={filterCategory} onChange={(e) => this.props.changeFilterCategory(e.target.value)}>
                   {values.IDsGender.map((elemento) => {
                     return (
@@ -105,30 +107,33 @@ export class Filter extends Component {
                 </select></p>
             </li>
 
-            <li className={this.props.styleFilter.ItemFilter}>
-              <label className={this.props.styleFilter.NameFilter} > BrandName</label>
+            <li className="ItemFilter">
+              <label className="NameFilter" > BrandName</label>
               {
                 values.Brands.map((elemento) => {
                   return (
                     <div>
                       <input type="checkbox" id={elemento} name={elemento} value={elemento} checked={filterBrand.includes(elemento)}
-                        onChange={(e) => this.props.changeFilterBrand(e.target)} />
-                      <label for={elemento}> {elemento}</label>
+                        onChange={(e) => this.props.changeFilterBrand(e.target)} className="checkboxBrand"/>
+                      <label for={elemento} className="lblBrand"> {elemento}</label>
                     </div>)
                 })
               }
             </li>
 
-            <li className={this.props.styleFilter.ItemFilter}>
+            <li className="ItemFilter">
               <input type="checkbox" id={"ActivateFilterPrice"} name={"ActivateFilterPrice"} value={"ActivateFilterPrice"} checked={filterForPrice}
                 onChange={(e) => this.props.changeFilterPrice(e.target.checked)} />
-              <label className={this.props.styleFilter.NameFilter} for={"ActivateFilterPrice"}> {"Filter for Price"}</label>
+              <label className="NameFilter" for={"ActivateFilterPrice"}> Filter for Price</label>
               <input type="number" min="0" step="50" placeholder="Precio Minimo" value={min} onChange={(e) => this.props.changeFilterMin(e)} />
-              <label >{" a "}</label>
+              <br />
+              <div className="priceA">{" a "}</div>
+              <br />
               <input type="number" min="0" step="50" placeholder="Precio Maximo" value={max} onChange={(e) => this.props.changeFilterMax(e)} />
             </li>
 
           </ul>
+          </div>
         </nav>
       </div>
     );

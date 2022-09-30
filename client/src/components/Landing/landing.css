@@ -1,0 +1,16 @@
+.virtualBody{
+    background-color: rgb(255, 255, 255);
+    height: 77vh;
+    z-index: 0;
+}
+.containerLanding{
+    width: 60%;
+    margin: auto;
+    margin-top: 0px;
+}
+.carousel-item{
+    margin-top: 30px;
+}
+
+
+
