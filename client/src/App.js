@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from "./components/Footer/Footer.jsx";
 // import About from "./components/About/About.jsx";
  import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
+import Formulario from "./components/Formulario/Formulario.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import Contact from "./components/Contact/Contact";
 // import Carry from "./components/Carry/Carry";
@@ -56,6 +57,9 @@ function App() {
 					<Route exact path="/products/:gender">
 						<ComponentProducts />{" "} 
 						{/*Se pone asi porque los componentes estan creadas como Clase*/} 
+					</Route>
+					<Route exact path="/create">
+						<Formulario />
 					</Route>
                      {/*
 					<Route exact path="/profile" component={Profile} />

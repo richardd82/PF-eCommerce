@@ -47,6 +47,9 @@ export default function NavBar(props) {
 						<li>
 							<Link to={"/products/Women"} className="btnNavEffect">WOMEN</Link>
 						</li>
+						<li>
+						    <Link to={"/create"} className="btnNavEffect">CREATE</Link>
+						</li>
             {user_login.isAdmin !== true && (
 							<li className="shippingCart">
 								<Link to={"/carry"} className="btnNavEffect">
