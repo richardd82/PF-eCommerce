@@ -42,18 +42,19 @@ nav {
 	background-image: url("../../assets/backgroundBlocks.jpg");
 	background-repeat: repeat-x;
 }
-.mainNav li {
+.mainNav li  {
 	float: left;
 	padding: 20px;
 	font-size: 2em;
 }
+
+
 .listNavRight {
 	float: left;
 }
-.shippingCart {
-	display: flex;
-	flex-direction: row;
-	margin-left: 73%;
+.mainNav li.shippingCart {
+	float: right;
+	margin-right: 3%;
 }
 .logoNav {
 	width: 40px;

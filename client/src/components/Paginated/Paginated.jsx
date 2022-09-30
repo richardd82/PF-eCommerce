@@ -73,7 +73,7 @@ class Paginated extends Component {
           <li
             key={0}
             className="page-item"
-            id={this.props.paginated.page === 1 && this.props.stylePaginated.Inhabilitado}
+            id={this.props.paginated.page === 1 && "Inhabilitado"}
             onClick={() =>
               this.changePage(this.props.paginated.page - 1, IndiceFinal)
             }
@@ -85,7 +85,7 @@ class Paginated extends Component {
               <li
                 key={index + 1}
                 className="page-item"
-                id={this.props.paginated.page === page && this.props.stylePaginated.pagSeleccionada}
+                id={this.props.paginated.page === page && "pagSeleccionada"}
                 onClick={() => this.changePage(page, IndiceFinal)}
               >
                 {page}
@@ -95,7 +95,7 @@ class Paginated extends Component {
           <li
             key={IndiceFinal + 1}
             className="page-item"
-            id={this.props.paginated.page === IndiceFinal && this.props.stylePaginated.Inhabilitado}
+            id={this.props.paginated.page === IndiceFinal && "Inhabilitado"}
             onClick={() =>
               this.changePage(this.props.paginated.page + 1, IndiceFinal)
             }
