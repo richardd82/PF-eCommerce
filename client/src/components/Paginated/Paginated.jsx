@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { changePaginatedPage,changePaginatedByPage } from "../../redux/actions";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import './paginated.css'
 
 const SizeEnumeracionPaginado = 10;
 const SizeEnumeracionCards_byPage = 8;
@@ -66,9 +67,9 @@ class Paginated extends Component {
     this.props.changePaginatedByPage(NewPageProducts)}
 
     return (
-      <nav aria-label="Countries Pagination" className={this.props.stylePaginated.paginationGlobal}>
+      <div className="paginationGlobal">
         {IndiceFinal!=1 &&
-        <ul className={this.props.stylePaginated.pagination}>
+        <ul className="pagination">
           <li
             key={0}
             className="page-item"
@@ -102,7 +103,7 @@ class Paginated extends Component {
             <AiFillCaretRight />
           </li>
         </ul>}
-      </nav>
+      </div>
     );
   }
 }

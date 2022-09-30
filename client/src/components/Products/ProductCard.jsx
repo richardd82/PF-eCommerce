@@ -1,27 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./productCard.css";
 
-function ProductCard({ img, name, brand, price, id,styleCard }) {
-  return (
-    <div className={styleCard.productContainer}>
-      <div className={styleCard.photoContainer}>
-        <div>
-        <img src={`https://${img}`} alt="No Found"  width="140" height="150" /></div>
-      </div>
-      <h3>{name}</h3>
-      <p>{brand}</p>
-      <div className={styleCard.priceCartContainer}>
-        <div>{`$/${Number2Decimals(price)}`}</div>
-        <Link to={`/details/${id}`}>
-          <button>Details</button>
-        </Link>
-      </div>
-    </div>
-  );
+function ProductCard({ img, name, brand, price, id, styleCard }) {
+	return (
+		<div>
+			<Link to={`/details/${id}`} className="linkCard">
+				<div className="card" key={id}>
+					<div className="containerImgCard">
+						<img src={`https://${img}`} alt="No Found" className="imgCard" />
+					</div>
+					<div className="card__content">
+						<h3>{name}</h3>
+						<p>{brand}</p>
+						<div>{`$/${Number2Decimals(price)}`}</div>
+					</div>
+				</div>
+			</Link>
+		</div>
+	);
 }
 
 function Number2Decimals(x) {
-  return Number.parseFloat(x).toFixed(2);
+	return Number.parseFloat(x).toFixed(2);
 }
 
 export default ProductCard;
