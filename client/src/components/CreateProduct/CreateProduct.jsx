@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import style from "./Formulario.module.css";
+import style from "./CreateProduct.module.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CreateNewProduct } from "../../redux/actions";
 import swal from "sweetalert";
 import {
-  getCategorys,
+  getCategorys,searchNameProduct,
 } from "../../redux/actions";
 
 // instalar sweetalert y usarla, crear nuevos inputs: talle, y stock
@@ -63,25 +63,11 @@ function validate(input) {
   } else if (input.image.startsWith(" ")) {
     errores.image = "Dont input blank spaces";
   } else if (input.image.endsWith(" ")) {
-    errores.image = "Dont input blank space";
-  } else if (!input.brand) {
-    /*    BRAND   */
-    errores.brand = "Brand name is required";
-  } else if (input.brand.length < 3) {
-    errores.brand = "The Brand name must contain at least 3 letters";
-  } else if (/^\s+$/.test(input.brand)) {
-    errores.brand = "The Brand name cannot be a blank space";
-  } else if (!/^[a-zA-Z ]*$/.test(input.brand)) {
-    errores.brand = "The Brand name must only contain letters";
-  } else if (input.brand.startsWith(" ")) {
-    errores.brand = "Dont input blank spaces";
-  } else if (input.brand.endsWith(" ")) {
-    errores.brand = "Dont input blank space";
-  }
+    errores.image = "Dont input blank space";}
 
   /*      DESCRIPTION      */
 
-  else if (!input.description) {
+  else if (!input.description ) {
     errores.description = "the description is required";
   } else if (input.description.length < 20) {
     errores.description = "The description must contain at least 20 letters";
@@ -120,6 +106,7 @@ function validate(input) {
 function Formulario() {
   const dispatch = useDispatch();
   const categorys = useSelector((state) => state.categorys);
+  const products = useSelector((state) => state.products);
   const [error, SetErrors] = useState({});
   const history = useHistory();
   const initialState = {
@@ -127,13 +114,16 @@ function Formulario() {
     name: "",
     price: "",
     image: "",
-    brand: "",
     gender: "",
     categoryId: undefined,
     NewCategory: "",
+    BrandId: undefined,
+    NewBrand: "",
     description: "",
-    nameCategory: "",
+    nameCategory: "Disable",
+    nameBrand: "Disable",
     categorysGender: [],
+    BrandOptions:[],
   };
   const [input, SetInput] = useState(initialState);
 
@@ -153,6 +143,7 @@ function Formulario() {
 
   function handleSelect(e) {
     dispatch(getCategorys());
+    dispatch(searchNameProduct(""));
     let CategorysG = categorys.filter(element => element.gender === e.target.value);
 
     SetInput({
@@ -160,20 +151,50 @@ function Formulario() {
       categorysGender: CategorysG,
       gender: e.target.value,
       nameCategory: "Disable",
+      BrandOptions:[],
+      nameBrand:"Disable",
     });
   }
 
   function handleSelectCategory(e) {
+    e.preventDefault();
+    let id=e.target[e.target.selectedIndex].title
+    let Brands=products.filter(element=>element.gender==input.gender);
+    Brands=Brands.filter(element=>element.categoryId==id)
+    Brands=obtenerMarcas(Brands)
+    console.log(Brands)
+
     if (input.categoryId === "Create") {
       SetInput({
         ...input,
         categoryId: undefined,
+        BrandOptions:[],
       })
     } else {
       SetInput({
         ...input,
         nameCategory: e.target.value,
         NewCategory: e.target.value,
+        BrandOptions:Brands,
+        nameBrand: "Disable",
+        NewBrand:undefined,
+      });
+    }
+  }
+
+
+  function handleSelectBrand(e) {
+    if (input.BrandId === "Create") {
+      SetInput({
+        ...input,
+        BrandId: undefined,
+      })
+    } else {
+      
+      SetInput({
+        ...input,
+        nameBrand: e.target.value,
+        NewBrand: e.target.value,
       });
     }
   }
@@ -185,15 +206,15 @@ function Formulario() {
       input.name &&
       input.price &&
       input.image &&
-      input.brand &&
+      (input.nameBrand && input.nameBrand!="Disable") &&
       input.gender &&
-      input.nameCategory
+      (input.nameCategory  && input.nameCategory!="Disable") 
     ) {
       dispatch(CreateNewProduct({
         name: input.name,
         price: input.price,
         image: input.image,
-        brand: input.brand,
+        brand: input.nameBrand,
         gender: input.gender,
         nameCategory: input.nameCategory,
         description: input.description,
@@ -215,14 +236,26 @@ function Formulario() {
       input.name &&
       input.price &&
       input.image &&
-      input.brand &&
+      (input.nameBrand && input.nameBrand!="Disable") &&
       input.gender &&
-      input.nameCategory
+      (input.nameCategory  && input.nameCategory!="Disable") 
     ) {
       return true;
     } else {
       return false;
     }
+  }
+
+  //OBTENER MARCAS
+
+  function obtenerMarcas(productosNuevos) {
+    var Brands=[];
+    for (let index = 0; index < productosNuevos.length; index++) {
+      const element = productosNuevos[index].brand;
+      if (!Brands.includes(element))
+        Brands.push(element);
+    }
+    return Brands
   }
 
   // AUMENTAR STOCK
@@ -272,12 +305,14 @@ function Formulario() {
       ...input,
       categoryId: e.target.value,
     });
-    // SetErrors(
-    //   validate({
-    //     ...input,
-    //     [e.target.name]: e.target.value,
-    //   })
-    // );
+  }
+
+  function handleChangeBrand(e) {
+    e.preventDefault();
+    SetInput({
+      ...input,
+      BrandId: e.target.value,
+    });
   }
 
   function CreateNewCategory(e) {
@@ -290,11 +325,27 @@ function Formulario() {
     SetInput({
       ...input,
       NewCategory: "undefined",
+      nameCategory: input.categoryId,
+      categoryId:"",
+    })
+  }
+
+  function CreateNewBrand(e) {
+    e.preventDefault();
+    input.BrandOptions.push(
+      input.BrandId,
+    );
+    SetInput({
+      ...input,
+      NewBrand: "undefined",
+      nameBrand: input.BrandId,
+      BrandId:"",
     })
   }
 
   useEffect(() => {
     dispatch(getCategorys());
+    dispatch(searchNameProduct(""));
     let CategorysG = categorys.filter(element => element.gender === input.gender);
 
     SetInput({
@@ -305,6 +356,8 @@ function Formulario() {
 
 
   console.log(input.categorysGender)
+  console.log(input.BrandOptions)
+  console.log(input.nameCategory)
   return (
     < div className={style.containerMain} >
       {console.log(error)}
@@ -354,7 +407,7 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div>
+          {/*<div>
             <p>brand:</p>
             {error.brand && ( // si hay un error hara un <p> nuevo con el error
               <p className={style.error}>{error.brand}</p>
@@ -366,7 +419,7 @@ function Formulario() {
               name="brand"
               onChange={(e) => handleChange(e)}
             />
-          </div>
+          </div>*/}
         </div>
 
         <div className={style.select}>
@@ -384,8 +437,6 @@ function Formulario() {
         </div>
         <div>
           <p>Select Category:</p>
-
-
           <div className={style.select}>
             {input.categoryId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className={style.error}>{"choose a category"}</p>
@@ -405,13 +456,14 @@ function Formulario() {
           </select>*/}
 
             <select value={input.nameCategory} className={style.select} onChange={(e) => handleSelectCategory(e)}>
-              <option selected disabled value={"Disable"} > Select Category</option>
+              <option selected disabled value={"Disable"} title={"Disable"} > Select Category</option>
               {input.categorysGender.map((elemento) => {
                 return (
-                  <option key={elemento.id} value={elemento.name}>{elemento.name}</option>)
+                  <option key={elemento.id} value={elemento.name} title={elemento.id}>{elemento.name}</option>)
               })
               }
-              <option className={style.optionCreate} key={"Create"} value={"Create"} >Create Category</option>
+              {input.gender!=="" && 
+              <option className={style.optionCreate} key={"Create"} value={"Create"} title={"Create"} >Create Category</option>}
             </select>
           </div>
 
@@ -428,6 +480,41 @@ function Formulario() {
                 onChange={(e) => handleChangeCate(e)}
               />
               <button className={style.buttonCreateCategory} onClick={(e) => CreateNewCategory(e)}>Create category</button>
+            </div>
+          )}
+
+
+
+
+          <p>Select Brand:</p>
+          <div className={style.select}>
+            {input.BrandId === null && ( // si hay un error hara un <p> nuevo con el error
+              <p className={style.error}>{"choose a brand"}</p>
+            )}
+            <select value={input.nameBrand} className={style.select} onChange={(e) => handleSelectBrand(e)}>
+              <option selected disabled value={"Disable"} title={"Disable"} > Select Brand</option>
+              {input.BrandOptions.map((elemento) => {
+                return (
+                  <option key={elemento} value={elemento} title={elemento}>{elemento}</option>)
+              })
+              }
+              {input.nameCategory !== "Disable" && input.nameCategory !== "Create" &&
+              <option className={style.optionCreate} key={"Create"} value={"Create"} title={"Create"} >Create Brand</option>}
+            </select>
+          </div>
+
+
+          {input.NewBrand === "Create" && ( // si hay un error hara un <p> nuevo con el error
+            <div className={style.containerCrate}>
+              <input
+                type="text"
+                value={input.BrandId}
+                name="BrandId"
+                className={style.fieldCreate}
+                placeholder="New Brand"
+                onChange={(e) => handleChangeBrand(e)}
+              />
+              <button className={style.buttonCreateCategory} onClick={(e) => CreateNewBrand(e)}>Create Brand</button>
             </div>
           )}
 
