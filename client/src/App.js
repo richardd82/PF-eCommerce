@@ -14,9 +14,9 @@ import Footer from "./components/Footer/Footer.jsx";
 
 // import About from "./components/About/About.jsx";
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
-import Formulario from "./components/Formulario/Formulario.jsx";
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
+import Login from "./Pages/Login/Login"
 
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import Contact from "./components/Contact/Contact";
@@ -68,12 +68,15 @@ function App() {
 					<Route exact path="/register">
 						<Register />
 					</Route>
+					<Route exact path="/login">
+						<Login/>
+					</Route>
                      {/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
-					<Route exact path="/about" component={About}></Route>
+					{/* <Route exact path="/about" component={About}></Route> */}
 					{/* < Route exact path="/contact" component={Contact} />
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
