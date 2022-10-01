@@ -12,6 +12,7 @@ const CommentRoute = require("./CommentRoute");
 const orderRouter = require("./orderRouter");
 const FavoriteRoute = require("./FavoriteRoute")
 const CalendarRoute = require("./CalendarRoute")
+const AuthRoute = require("./authRoutes")
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.use("/stock", StockRoute);
 router.use("/favorites", FavoriteRoute);
 router.use("/comment", CommentRoute);
 router.use("/orders", orderRouter);
+router.use("/auth", AuthRoute)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
