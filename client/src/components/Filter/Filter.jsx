@@ -22,7 +22,8 @@ export class Filter extends Component {
     this.props.getCategorys()
   }
 
-  obtenerMarcas(Brands, productosNuevos) {
+  obtenerMarcas(productosNuevos) {
+    var Brands=[];
     for (let index = 0; index < productosNuevos.length; index++) {
       const element = productosNuevos[index].brand;
       if (!Brands.includes(element))
@@ -44,15 +45,19 @@ export class Filter extends Component {
 
     let ID_Category = (DetectarID === undefined) ? (IDsGender.length > 0 ? (`${IDsGender[0].id}`) : 0) : DetectarID.id;
     productosNuevos = productosNuevos.filter(element => `${element.categoryId}` === ID_Category);
-    Brands = this.obtenerMarcas(Brands, productosNuevos);
+    Brands = this.obtenerMarcas(productosNuevos);
 
     if (filterBrand.length !== 0)
       productosNuevos = productosNuevos.filter(element => filterBrand.includes(element.brand));
     if (filterForPrice)
       productosNuevos = productosNuevos.filter(element => (min <= element.price && element.price <= max));
     //console.log(productosNuevos);
-    if(gender!==undefined)
+    if(gender!==undefined){
     productosNuevos = productosNuevos.filter(element => (element.stocks.some((stock) => stock.stock>0)));
+    
+    console.log(gender,"  ",this.props.filterGender)
+    }
+    
 
     if (JSON.stringify(paginated.productsView) !== JSON.stringify(productosNuevos))
       this.props.changePaginatedProducts(productosNuevos)

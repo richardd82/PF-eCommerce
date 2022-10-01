@@ -7,6 +7,11 @@ const e = require("express");
 
 const router = Router();
 
+///HARCODEADOOOOOOOOOOOOOOOO
+const size = ["S", "M", "L"];
+const stock = [0, 5, 10, 20, 30, 40, 50];
+/////////////////////////////////////////////
+
 router.delete("/:id", async (req, res, next) => {
   console.log("Entra");
   const { id } = req.params;
@@ -46,6 +51,16 @@ router.post("/", async (req, res, next) => {
         description,
       },
     });
+    //////////HARCODEADOOOOO
+    size.forEach((item) => {
+      Stock.create({
+        productSize: item,
+        stock: stock[Math.floor(Math.random() * 7)],
+        productId: id,
+      });
+    });
+    //////////////////////////////
+
     res.status(202).send("Producto Creado Satisfactoriamente");
   } catch (err) {
     next(err);
@@ -53,7 +68,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
-  const { name, category,id } = req.query;
+  const { name, category, id } = req.query;
   let ProductosTotales = await Product.findAll({
     include: {
       model: Stock,
@@ -90,8 +105,8 @@ router.get("/", async (req, res, next) => {
         },
       });
       res.send(filteredProducts);
-    } 
-    else if(id){
+    }
+    else if (id) {
       let filteredProducts = await Product.findAll({
         where: {
           id: id,
@@ -115,7 +130,7 @@ router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const { name, price, image, brand, gender, categoryId, description } =
     req.body;
-  console.log(id,type,name,price,image)
+  console.log(id, type, name, price, image)
   const product = await Product.findOne({ where: { id: id } });
   try {
     switch (type) {
