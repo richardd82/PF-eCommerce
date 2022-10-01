@@ -11,9 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // // register
 // import Register from "./components/Register/Register.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import About from "./components/About/About.jsx";
- import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
+
+// import About from "./components/About/About.jsx";
+import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
+import Formulario from "./components/Formulario/Formulario.jsx";
+import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
+
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import Contact from "./components/Contact/Contact";
 // import Carry from "./components/Carry/Carry";
@@ -60,6 +64,9 @@ function App() {
 					</Route>
 					<Route exact path="/create">
 						<CreateProduct />
+					</Route>
+					<Route exact path="/register">
+						<Register />
 					</Route>
                      {/*
 					<Route exact path="/profile" component={Profile} />
