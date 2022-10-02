@@ -19,6 +19,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+      username: {
+        type: String,
+        require: true,
+        unique: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -28,8 +33,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       password: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: String,
+        require: true,
       },
       image: {
         type: DataTypes.STRING,
@@ -44,6 +49,7 @@ module.exports = (sequelize) => {
       isAdmin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       isBaned: {
         type: DataTypes.BOOLEAN,

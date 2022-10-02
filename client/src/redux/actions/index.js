@@ -618,3 +618,19 @@ export function ChangeDeliveryInitial() {
      }
   };
 }
+
+export function register(payload){
+   return async function(){
+       const resp = await axios.post('http://localhost:3001/auth/register', payload)
+       console.log(resp)
+       return resp
+   }
+}
+
+export function login(payload){
+   return async function(){
+       const resp = await axios.post('http://localhost:3001/auth', payload)
+       console.log(resp)
+       return resp
+   }
+}
