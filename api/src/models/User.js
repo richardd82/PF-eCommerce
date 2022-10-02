@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         unique: true,
       },
       username: {
-        type: String,
+        type: DataTypes.STRING,
         require: true,
         unique: true,
       },
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       password: {
-        type: String,
+        type: DataTypes.STRING,
         require: true,
       },
       image: {
