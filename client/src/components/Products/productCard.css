@@ -22,6 +22,7 @@
     padding-top: 25px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 10px;
     backdrop-filter: blur(10px);
     text-shadow: 0 0 1em var(--glow-color);
     position: absolute;
