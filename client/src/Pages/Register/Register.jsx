@@ -13,28 +13,28 @@ function validate(input){
     let passwordValidator = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/
    
     if (!input.email || emailValidator.test(input.email) === false)
-    errors.life = 'Please Enter a valid email direction'
+    errors.email = 'Please Enter a valid email direction'
     else if (!input.username || usernameValidator.test(input.username) === false)
-    errors.attack = 'It should have between 6 and 18 characters, only contain letter,number'
+    errors.username = 'It should have between 6 and 18 characters, only contain letter,number'
     else if (!input.name || input.name < 1 || input.name > 20)
-    errors.defense = 'It should have between 2 and 20 characters'
+    errors.name = 'It should have between 2 and 20 characters'
     else if (!input.lastName || input.lastName < 1 || input.lastName > 20)
-    errors.speed = 'It should have between 2 and 20 characters'
+    errors.lastName = 'It should have between 2 and 20 characters'
     else if (!input.password || passwordValidator.test(input.password) === false)
     errors.password = 'Password must have, one digit, one lowercase character, one uppercase character and be at least 8 characters in length but no more than 20'
     else if (!input.confirmPass || input.password !== input.confirmPass)
     errors.confirmPass = 'Check that you have entered your password correctly'
     else if (!input.phone)
-    errors.height = 'Please enter your phone number'
+    errors.phone = 'Please enter your phone number'
     else if (!input.address)
-    errors.weight = 'Please enter your address'
+    errors.address = 'Please enter your address'
     else if (!input.image || urlValidator.test(input.image) == false) 
     errors.image = 'Image cannot be null or incorrect (png, gif, jpg)'
 
     return errors
 }
 
-export default function PokemonCreate(){
+export default function Register(){
     const dispatch = useDispatch()
     const history = useHistory()
     const [errors, setErrors] = useState({})
@@ -81,7 +81,7 @@ export default function PokemonCreate(){
                 address: '',
                 image: '',
             })
-            history.push('/home')    
+            history.push('/login')    
     }
 
     return(

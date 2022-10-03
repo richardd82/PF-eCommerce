@@ -10,13 +10,13 @@ function validate(input){
     let passwordValidator = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/
    
     if (!input.username || usernameValidator.test(input.username) === false)
-    errors.attack = 'It should have between 6 and 18 characters, only contain letter,number'
+    errors.uesrname = 'It should have between 6 and 18 characters, only contain letter,number'
     else if (!input.password || passwordValidator.test(input.password) === false)
     errors.password = 'Password must have, one digit, one lowercase character, one uppercase character and be at least 8 characters in length but no more than 20'
     return errors
 }
 
-export default function PokemonCreate(){
+export default function Login(){
     const dispatch = useDispatch()
     const history = useHistory()
     const [errors, setErrors] = useState({})
