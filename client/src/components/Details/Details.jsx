@@ -127,6 +127,13 @@ export default function Details(props) {
       <div className="cardDetail">
         {detail.length > 0 ? (
           <div>
+
+            <div className="infoContainer">
+              <p>Genre: {detail[0].gender} </p>
+              <p>Category: {detail[0].category.name}</p>
+              <p>Brand: {detail[0].brand} </p>
+              <p>Price: {`$${Number2Decimals(detail[0].price)}`} </p>
+            </div>
             {/*TARJETA DE DETALLES*/}
 
             <div className="detailsContainer">
@@ -139,8 +146,8 @@ export default function Details(props) {
                   <div className="containerFormAddCarry">
                     {(stateSize === undefined ||
                       stateSize.size === undefined) && (
-                      <label className="textChooseSize">Choose Size</label>
-                    )}
+                        <label className="textChooseSize">Choose Size</label>
+                      )}
                     <div className="paragraphSizes">
                       Available sizes:
                       <br />
@@ -212,12 +219,6 @@ export default function Details(props) {
               )}
             </div>
 
-            <div className="infoContainer">
-              <p>Brand: {detail[0].brand} </p>
-              <p>Price: {`$${Number2Decimals(detail[0].price)}`} </p>
-              <p>Genre: {detail[0].gender} </p>
-              <p>Category: {detail[0].category.name}</p>
-            </div>
           </div>
         ) : (
           <p>LOADING...</p>
