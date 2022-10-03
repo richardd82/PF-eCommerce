@@ -31,27 +31,6 @@ export default function NavBar(props) {
     Cantidad = Cantidad + carry.amount;
   }
 
-<<<<<<< Updated upstream
-	return (
-		<header>
-			<nav>
-				<div className="mainNav">
-					<ul className="listNav">
-						<li >
-							<Link to={"/"} className="btnNavEffect">							                
-								<img src={logo} alt="Logo" className="logoNav"/>
-							</Link>
-						</li>
-						<li >
-							<Link to={"/products/Men"} className="btnNavEffect">MEN</Link>
-						</li >
-						<li >
-							<Link to={"/products/Women"} className="btnNavEffect">WOMEN</Link>
-						</li>
-						<li >
-						    <Link to={"/create"} className="btnNavEffect">CREATE</Link>
-						</li>
-=======
   return (
     <header>
       <nav>
@@ -78,7 +57,6 @@ export default function NavBar(props) {
                 CREATE
               </Link>
             </li>
->>>>>>> Stashed changes
             {user_login.isAdmin !== true && (
               <li className="shippingCart">
                 <Link to={"/carry"} className="btnNavEffect">

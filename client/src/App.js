@@ -12,11 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import Register from "./components/Register/Register.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
-<<<<<<< Updated upstream
-// import About from "./components/About/About.jsx";
-=======
 import About from "./components/About/About.jsx";
->>>>>>> Stashed changes
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
@@ -80,11 +76,7 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
-<<<<<<< Updated upstream
-					{/* <Route exact path="/about" component={About}></Route> */}
-=======
 					<Route exact path="/about" component={About}></Route>
->>>>>>> Stashed changes
 					{/* < Route exact path="/contact" component={Contact} />
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
