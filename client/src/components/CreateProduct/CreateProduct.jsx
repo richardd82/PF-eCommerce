@@ -364,20 +364,20 @@ function Formulario() {
         <h2 className="titulo">Product creation</h2>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         {console.log(input)}
-        <div className="l__form__input-field">
+        <div className={input.name=="" ? "l__form__input-field" : "l__form__input-field2" }>
           {error.name && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{error.name}</p>
             )}
           <input
             type="text"
             value={input.name}
-            className="l__form__input-field"
+            className={input.name=="" ? "l__form__input-field" : "l__form__input-field2" }
             name="name"
             onChange={(e) => handleChange(e)}
           />
             <label className="label-form">Name</label>
         </div>
-        <div className="l__form__input-field">
+        <div className={input.price=="" ? "l__form__input-field" : "l__form__input-field2" }>
           {error.price && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{error.price}</p>
             )}
@@ -385,7 +385,7 @@ function Formulario() {
             type="number"
             min="0"
             step="25"
-            className="l__form__input-field"
+            className={input.price=="" ? "l__form__input-field" : "l__form__input-field2" }
             value={input.price}
             name="price"
             onChange={handleChange}
@@ -394,14 +394,14 @@ function Formulario() {
         </div>
 
         <div>
-          <div className="l__form__input-field">
+          <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
               )}
             <input
               type="text"
               value={input.image}
-              className="l__form__input-field"
+              className={ input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
               name="image"
               onChange={(e) => handleChange(e)}
             />
@@ -426,7 +426,7 @@ function Formulario() {
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{"choose a gender"}</p>
           )} */}
-          <p>Select Gender:</p>
+          <p className="SelectCreate">Select Gender:</p>
           <select className="select" onChange={(e) => handleSelect(e)}>
             <option selected disabled>
               Select Gender
@@ -436,7 +436,7 @@ function Formulario() {
           </select>
         </div>
         <div>
-          <p>Select Category:</p>
+          <p className="SelectCreate">Select Category:</p>
           <div className="select">
             {input.categoryId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{"choose a category"}</p>
@@ -486,7 +486,7 @@ function Formulario() {
 
 
 
-          <p>Select Brand:</p>
+          <p className="SelectCreate">Select Brand:</p>
           <div className="select">
             {input.BrandId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{"choose a brand"}</p>
@@ -519,7 +519,7 @@ function Formulario() {
           )}
 
           {/* DESCRIPTION */}
-          <div className="l__form__input-field">
+          <div className={ input.description=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.description && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.description}</p>
             )}
@@ -527,7 +527,7 @@ function Formulario() {
               name="description"
               value={input.description}
               onChange={(e) => handleChange(e)}
-              className="l__form__input-field"
+              className={ input.description=="" ? "l__form__input-field" : "l__form__input-field2" }
               cols="30"
               rows="8">
             </textarea>
