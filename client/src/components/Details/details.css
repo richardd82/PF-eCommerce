@@ -1,0 +1,182 @@
+.cardDetailMainContainer {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 73.7vh;
+    ;
+}
+
+.imageContainer {
+    transition: 0.5s;
+}
+
+.imageContainer img {
+    border: .25em solid var(--glow-color);
+    border-radius: 1em;
+    box-shadow: 0 0 1em .25em var(--glow-color),
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
+}
+
+.imageContainer:hover {
+    transform: scale(1.5);
+}
+
+.detailsContainer {
+    flex-grow: 2;
+
+}
+
+.mainDetails {
+    display: flex;
+}
+
+.cardDetail {
+    width: 25%;
+    height: fit-content;
+    --border-radius: 15px;
+    --border-width: 4px;
+    appearance: none;
+    position: relative;
+    padding: 1em 2em;
+    border: 0;
+    background: rgba(19, 5, 22, 0.795);
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 0;
+    border-radius: 15px;
+    font-size: 1.5em;
+    border: 1px solid;
+    z-index: 999;
+}
+
+.cardDetail::after {
+    --m-i: linear-gradient(#000, #000);
+    --m-o: content-box, padding-box;
+    content: "";
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    padding: var(--border-width);
+    border-radius: var(--border-radius);
+    
+    -webkit-mask-image: var(--m-i), var(--m-i);
+    mask-image: var(--m-i), var(--m-i);
+    -webkit-mask-origin: var(--m-o);
+    mask-origin: var(--m-o);
+    -webkit-mask-clip: var(--m-o);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    filter: hue-rotate(0);
+    animation: rotate-hue linear 500ms infinite;
+    animation-play-state: paused;
+    z-index: 0;
+}
+      
+   .paragraphSizes{
+    padding: 10px;
+    z-index: 999;
+   }
+   #SizeSeleccionada{
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    border: 2px solid var(--glow-color);
+    border-radius: 5px;
+    background-color: var(--glow-spread-color);
+    width: 25%;
+    text-align: center;
+   }
+   #SizeNoSeleccionada{
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border: 2px solid var(--glow-color);
+    border-radius: 5px;
+    width: 25%;
+    text-align: center;
+   }
+   .quantInput{
+    padding: 0px;
+    font-size: .7em;
+   }
+   .btnAddCarry{
+    margin-left: 40%;
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
+    position: relative;
+    transition: all 0.3s;
+   }
+   .btnAddCarry::after{
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--glow-spread-color);
+    filter: blur(2em);
+    opacity: .7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+   }
+   .btnAddCarry:hover{
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+   }
+
+
+
+   .btnDetailsBack{
+    margin-left: 40%;
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
+    position: relative;
+    transition: all 0.3s;
+   }
+   .btnDetailsBack::after{
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--glow-spread-color);
+    filter: blur(2em);
+    opacity: .7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+   }
+   .btnDetailsBack:hover{
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+   }

@@ -1,4 +1,5 @@
 footer {
+	font-family: 'Square Peg', cursive;
 	display: flex;
 	position: relative;
 	width: 100%;
@@ -7,7 +8,8 @@ footer {
 	align-content: center;
     /* background-color: rgb(61, 5, 67); */
     background-image: url('../../assets/backgroundBlocks.jpg');
-    background-repeat: repeat-x;
+    /* background-repeat: repeat-x; */
+	background-size: cover;
     height: 12vh;
     margin-top: 0px;
     z-index: 100;
