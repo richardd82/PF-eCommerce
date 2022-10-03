@@ -1,5 +1,6 @@
 .containerProductsGlobal{
     display: flex;
+    padding-top: 10px;
 }
 .containerProductsGlobal2{
     display: flex;

@@ -5,19 +5,16 @@ nav {
 	flex-direction: column;
 	align-items: stretch;
 	align-content: center;
-	box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
-	-webkit-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
-	-moz-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
 	z-index: 100;
 }
-
 .listNav li a {
 	text-decoration: none;
 	--glow-color: rgb(217, 176, 255);
 	--glow-spread-color: rgba(191, 123, 255, 0.781);
 	--enhanced-glow-color: rgb(231, 206, 255);
-	--btn-color: rgb(100, 61, 136);
+	--btn-color: #643d88;
 	color: var(--glow-color);
+	font-family: 'Square Peg', cursive;
 	font-size: 20px;
 	font-weight: bold;
 	text-shadow: 0 0 0.5em var(--glow-color);
@@ -38,14 +35,28 @@ nav {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	/* background-color: rgb(61, 5, 67); */
 	background-image: url("../../assets/backgroundBlocks.jpg");
-	background-repeat: repeat-x;
+	background-size: cover;
+	box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
+	-webkit-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
+	-moz-box-shadow: 0px 9px 24px 0px rgba(32, 31, 33, 0.92);
 }
 .mainNav li  {
 	float: left;
 	padding: 20px;
 	font-size: 2em;
+	height: 12vh;
+	margin-top: 2%px;
+}
+.titlePrincipal{
+	margin: auto;
+	margin-top: -5%;
+	color: rgb(217, 176, 255);
+	font-family: 'Square Peg', cursive;
+	font-style: italic;
+	font-size: 40px;
+	font-weight: bold;
+	text-shadow: 0 0 0.5em rgb(217, 176, 255);
 }
 
 

@@ -118,89 +118,100 @@ export default function Details(props) {
   });
   return (
     <div className="cardDetailMainContainer">
-      <div className="cardDetailContainer">
+      {detail.length > 0 ? (
+        // Se agrego un ternario y se movió la imagen para poder acomodar el CSS con la propiedad Flex
+        <div className="imageContainer">
+          <img src={`https://${detail[0].image}`} alt="Not Found" />
+        </div>
+      ) : null}
+      <div className="cardDetail">
         {detail.length > 0 ? (
           <div>
             {/*TARJETA DE DETALLES*/}
-            <h1>{detail[0].name}</h1>
-            <div className="detailsContainer">
-              <div className="imageContainer">
-                <img src={`https://${detail[0].image}`} alt="Not Found" />
-              </div>
 
+            <div className="detailsContainer">
               {/*----------------------------*/}
               {/*TEXTO CHOOSE SIZE*/}
 
               {/*MUESTREO DE SIZE (TALLAS)*/}
               {stock_by_ID.length > 0 && stateSize !== undefined ? (
-                <div className="containerFormAddCarry">
-                  {(stateSize === undefined ||
-                    stateSize.size === undefined) && (
-                    <label className="textChooseSize">Choose Size</label>
-                  )}
-                  <p className="paragraphSizes">
-                    Available sizes:{" "}
-                    {stock_by_ID.map((sizeStock, index) => {
-                      return (
-                        <label
-                          id={
-                            sizeStock.productSize === stateSize.size
-                              ? "SizeSeleccionada"
-                              : "SizeNoSeleccionada"
-                          }
-                          className={
-                            sizeStock.stock === 0
-                              ? "SizeSoldOut"
-                              : "SizeOnSale"
-                          }
-                          onClick={(e) => changeSize(e, index, sizeStock.stock)}
-                        >
-                          {sizeStock.productSize}{" "}
-                        </label>
-                      );
-                    })}
-                  </p>
-                  {/*----------------------------*/}
-
-                  {/*MUESTREO DE CANTIDAD PRECIO Y BOTON COMPRA*/}
-                  {stateSize.stock > 0 ? (
-                    <div>
-                      <p className="paragraphQuantity">
-                        Quantity:
-                        {
-                          <input
-                            type="number"
-                            placeholder="Amount"
-                            min={1}
-                            max={stateSize.stock}
-                            value={stateQuanty}
-                            onChange={(e) => changeQuanty(e)}
-                          />
-                        }
-                        <span>(Stock:{stateSize.stock})</span>
-                      </p>
-                      <p className="ParagraphTotalPrice">
-                        Total price:
-                        {`  $${Number2Decimals(detail[0].price * stateQuanty)}`}
-                      </p>
-                      <button
-                        className="btnAddCarry"
-                        onClick={() => handleAddCarry()}
-                      >
-                        Add Carry
-                      </button>
+                <div className="mainDetails">
+                  <div className="containerFormAddCarry">
+                    {(stateSize === undefined ||
+                      stateSize.size === undefined) && (
+                      <label className="textChooseSize">Choose Size</label>
+                    )}
+                    <div className="paragraphSizes">
+                      Available sizes:
+                      <br />
+                      {stock_by_ID.map((sizeStock, index) => {
+                        return (
+                          <label
+                            id={
+                              sizeStock.productSize === stateSize.size
+                                ? "SizeSeleccionada"
+                                : "SizeNoSeleccionada"
+                            }
+                            className={
+                              sizeStock.stock === 0
+                                ? "SizeSoldOut"
+                                : "SizeOnSale"
+                            }
+                            onClick={(e) =>
+                              changeSize(e, index, sizeStock.stock)
+                            }
+                          >
+                            {sizeStock.productSize}{" "}
+                          </label>
+                        );
+                      })}
                     </div>
-                  ) : stateSize.size === undefined ? (
-                    " "
-                  ) : (
-                    <p className="soldOut">SOLD OUT</p>
-                  )}
-                  {/*---------------------------------*/}
+                    {/*----------------------------*/}
+
+                    {/*MUESTREO DE CANTIDAD PRECIO Y BOTON COMPRA*/}
+                    {stateSize.stock > 0 ? (
+                      <div>
+                        <p className="paragraphQuantity">
+                          Quantity:
+                          {
+                            <input
+                              className="quantInput"
+                              type="number"
+                              placeholder="Amount"
+                              min={1}
+                              max={stateSize.stock}
+                              value={stateQuanty}
+                              onChange={(e) => changeQuanty(e)}
+                            />
+                          }
+                          <span>(Stock:{stateSize.stock})</span>
+                        </p>
+                        <p className="ParagraphTotalPrice">
+                          Total price:
+                          {`  $${Number2Decimals(
+                            detail[0].price * stateQuanty
+                          )}`}
+                        </p>
+                        <button
+                          className="btnAddCarry"
+                          onClick={() => handleAddCarry()}
+                        >
+                          Add Carry
+                        </button>
+                      </div>
+                    ) : stateSize.size === undefined ? (
+                      " "
+                    ) : (
+                      <p className="soldOut">SOLD OUT</p>
+                    )}
+                    {/*---------------------------------*/}
+                  </div>
                 </div>
               ) : (
                 <div>Loading Stock</div>
               )}
             </div>
+
             <div className="infoContainer">
               <p>Brand: {detail[0].brand} </p>
               <p>Price: {`$${Number2Decimals(detail[0].price)}`} </p>
@@ -214,16 +225,20 @@ export default function Details(props) {
       </div>
       <div className="btnBackFav">
         <div>
-          {/* <Favs id={props.match.params.id} key="id" /> */} <p>AQUI VA FAVORITOS</p>
-        </div>
-        <div>
-          <Link to={`/products/${genderPrevius}`}>
-            <button className="btnDetails">Go Back</button>
-          </Link>
+          {/* <Favs id={props.match.params.id} key="id" /> */}{" "}
+          <p>AQUI VA FAVORITOS</p>
         </div>
       </div>
       {/* <Comments userName={user.name} productId={props.match.params.id}></Comments> */}
-      {/* <FeedBack productId={props.match.params.id} products={producto} /> */} <p>AQUI VA FEEDBACK</p>
+      {/* <FeedBack productId={props.match.params.id} products={producto} /> */}{" "}
+      <div>
+        <p>AQUI VA FEEDBACK</p>
+      </div>
+      <div>
+        <Link to={`/products/${genderPrevius}`}>
+          <button className="btnDetailsBack">Go Back</button>
+        </Link>
+      </div>
     </div>
   );
 }

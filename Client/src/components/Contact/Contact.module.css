@@ -1,0 +1,76 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  font-family: "Signika", sans-serif;
+  font-size: 20px;
+  background-image: url(../image/FondoTarjetas.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding: 20px 5px;
+  margin-bottom: 30px;
+  width: 350px;
+  border-radius: 10px;
+  gap: 25px;
+  align-items: center;
+}
+
+.form input {
+  padding: 5px 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 80%;
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../image/fondo.png);
+  /* background-image: url(../image/Fondo2.png); */
+  background-size: 60% auto;
+  height: 80vh;
+}
+
+.titleForm {
+  margin: 0;
+}
+
+.contactTextarea {
+  resize: none;
+  font-family: "Signika", sans-serif;
+  border-radius: 10px;
+  width: 80%;
+  box-sizing: border-box;
+  padding: 14px;
+  outline: none;
+  border: none;
+  font-size: 1.1rem;
+}
+.todosCampos {
+  color: white;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background-color: rgb(223, 16, 16);
+}
+
+.form button {
+  background-color: #008000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  width: 30%;
+  font-size: 1.2rem;
+}
+
+.form button:hover {
+  background-color: #02d302;
+}
