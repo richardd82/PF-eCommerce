@@ -119,6 +119,12 @@ export function deleteStockbyID() {
 export function getCategorys() {
    return async function (dispatch) {
       try {
+        if(URL_BACK === undefined){
+          return dispatch({
+            type: GET_CATEGORYS,
+            payload: [],
+         });
+        }
          var json = await axios.get(`${URL_BACK}/category`);
          console.log(`${URL_BACK}/category`)
          console.log(json.data)
