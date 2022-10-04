@@ -118,7 +118,7 @@ export function deleteStockbyID() {
 export function getCategorys() {
    return async function (dispatch) {
       try {
-         var json = await axios.get(URL_BACK+`/category`);
+         var json = await axios.get(`${URL_BACK}/category`);
          console.log(json.data)
          return dispatch({
             type: GET_CATEGORYS,
