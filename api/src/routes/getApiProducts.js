@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Product, Category, Stock } = require("../db");
 const { v4: uuidv4 } = require("uuid");
-require ('dotenv').configure();
+require('dotenv').config();
 
 const {API_KEY, URL_API} = process.env;
 module.exports = async () => {
