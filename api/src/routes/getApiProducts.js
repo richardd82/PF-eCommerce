@@ -1,17 +1,18 @@
 const axios = require("axios");
 const { Product, Category, Stock } = require("../db");
 const { v4: uuidv4 } = require("uuid");
+require ('dotenv').configure();
 
+const {API_KEY, URL_API} = process.env;
 module.exports = async () => {
    const IDs = [8799, 3630, 9263, 4169, 2641, 4208, 7078, 3602, 5668, 14274];
    const size = ["S", "M", "L"];
    const stock = [0, 5, 10, 20, 30, 40, 50];
    let products = [];
-   const apiKey = "ca479c77b4mshb7ce1c91f151e4ep1a6f0cjsnbe936a5a8f28";
    for (let index = 0; index < IDs.length; index++) {
       let api = (
          await axios.get(
-            `https://asos2.p.rapidapi.com/products/v2/list?limit=48&store=US&offset=0&categoryId=${IDs[index]}&rapidapi-key=${apiKey}`
+            URL_API+`/list?limit=48&store=US&offset=0&categoryId=${IDs[index]}&rapidapi-key=${API_KEY}`
          )
       ).data;
       let categoryGenero = index < 5 ? "Women" : "Men";
