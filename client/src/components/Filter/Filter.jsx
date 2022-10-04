@@ -35,7 +35,7 @@ export class Filter extends Component {
   filtradoProductos(products, paginated, categorys, filterBrand, filterCategory, filterForPrice, min, max, gender) {
   
     let productosNuevos = products.filter(element => element.gender === (gender==undefined?this.props.filters.filterGender:gender));
-   
+    console.log(categorys)
     let IDsGender = categorys.filter(element => element.gender === (gender==undefined?this.props.filters.filterGender:gender));
     let Brands = [];
     const DetectarID = IDsGender.find(element => element.name == filterCategory);
@@ -72,7 +72,7 @@ export class Filter extends Component {
     const { categorys, products, paginated } = this.props;
     if(this.props.match.url!=filterUrl)
     this.props.changeFilterURL(this.props.match.url)
-
+    console.log(categorys)
     let values = this.filtradoProductos(products, paginated, categorys, filterBrand,
       filterCategory, filterForPrice, min, max, getGenderbyMatch)
 
