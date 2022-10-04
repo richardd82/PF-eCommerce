@@ -1,4 +1,5 @@
 import axios from "axios";
+require('dotenv').config();
 const {URL_BACK} = process.env;
 import CARRY_LOCALHOST from "../../components/Globales";
 import Swal from "sweetalert2";
