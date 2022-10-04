@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "./createProduct.css";
+import './createProduct.css'
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CreateNewProduct } from "../../redux/actions";
