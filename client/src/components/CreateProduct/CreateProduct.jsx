@@ -361,8 +361,8 @@ function Formulario() {
   return (
     < div className="containerCreate">
       {console.log(error)}
-        <h2 className="titulo">Product creation</h2>
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
+        <h2 className="titleCreate">Product creation</h2>
+      <form className="formCreateProduct" onSubmit={(e) => handleSubmit(e)}>
         {console.log(input)}
         <div className={input.name=="" ? "l__form__input-field" : "l__form__input-field2" }>
           {error.name && ( // si hay un error hara un <p> nuevo con el error
@@ -426,7 +426,7 @@ function Formulario() {
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{"choose a gender"}</p>
           )} */}
-          <p className="SelectCreate">Select Gender:</p>
+          {/* <p className="SelectCreate">Select Gender:</p> */}
           <select className="select" onChange={(e) => handleSelect(e)}>
             <option selected disabled>
               Select Gender
@@ -436,7 +436,7 @@ function Formulario() {
           </select>
         </div>
         <div>
-          <p className="SelectCreate">Select Category:</p>
+          {/* <p className="SelectCreate">Select Category:</p> */}
           <div className="select">
             {input.categoryId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{"choose a category"}</p>
@@ -479,14 +479,14 @@ function Formulario() {
                 placeholder="New Category"
                 onChange={(e) => handleChangeCate(e)}
               />
-              <button className="buttonCreateCategory" onClick={(e) => CreateNewCategory(e)}>Create category</button>
+              <button className="btnAddCarry buttonCreateCategory" onClick={(e) => CreateNewCategory(e)}>Create category</button>
             </div>
           )}
 
 
 
 
-          <p className="SelectCreate">Select Brand:</p>
+          {/* <p className="SelectCreate">Select Brand:</p> */}
           <div className="select">
             {input.BrandId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{"choose a brand"}</p>
@@ -514,7 +514,7 @@ function Formulario() {
                 placeholder="New Brand"
                 onChange={(e) => handleChangeBrand(e)}
               />
-              <button className="buttonCreateCategory" onClick={(e) => CreateNewBrand(e)}>Create Brand</button>
+              <button className="btnAddCarry buttonCreateCategory" onClick={(e) => CreateNewBrand(e)}>Create Brand</button>
             </div>
           )}
 
@@ -524,6 +524,7 @@ function Formulario() {
               <p className="error">{error.description}</p>
             )}
             <textarea
+              id="txtCreate"
               name="description"
               value={input.description}
               onChange={(e) => handleChange(e)}
