@@ -1,7 +1,6 @@
 .containerCreate{
   margin: auto;
   margin-top: 50px;
-  width: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -9,7 +8,7 @@
   align-content: space-around;
   border: 3px solid var(--glow-color);
   border-radius: 5px;
-  width: 30%;
+  width: 40%;
   height: 73.4vh;
   background-color: var(--glow-color);
   margin-bottom: 10px;
@@ -19,6 +18,9 @@
 }
 .containerCreate form, select{
   color: grey;
+}
+.containerCreate form{
+  margin: auto;
 }
 .l__form__input-field {
 margin: 40px 0;
