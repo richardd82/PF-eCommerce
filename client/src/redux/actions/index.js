@@ -1,6 +1,6 @@
 import axios from "axios";
 require('dotenv').config();
-const {URL_BACK} = process.env;
+const {REACT_APP_REACT_APP_URL_BACK} = process.env;
 import CARRY_LOCALHOST from "../../components/Globales";
 import Swal from "sweetalert2";
 
@@ -47,7 +47,7 @@ export function searchNameProduct(name) {
    return async function (dispatch) {
       try {
          var json = await axios.get(
-            URL_BACK+`/product/?name=${name}`
+            REACT_APP_URL_BACK+`/product/?name=${name}`
          );
          return dispatch({
             type: SEARCH_NAME,
@@ -63,7 +63,7 @@ export function searchNameProductID(id) {
    return async function (dispatch) {
       try {
          var json = await axios.get(
-            URL_BACK+`/product/?id=${id}`
+            REACT_APP_URL_BACK+`/product/?id=${id}`
          );
          return dispatch({
             type: SEARCH_ID,
@@ -91,7 +91,7 @@ export function changeFilternameProductSearched(name) {
 export function searchProductId(id) {
    return async function (dispatch) {
       try {
-         var json = await axios.get(URL_BACK+`/product/${id}`);
+         var json = await axios.get(REACT_APP_URL_BACK+`/product/${id}`);
          return dispatch({
             type: SEARCH_PRODUCT_ID,
             payload: json.data,
@@ -119,14 +119,14 @@ export function deleteStockbyID() {
 export function getCategorys() {
    return async function (dispatch) {
       try {
-        if(URL_BACK === undefined){
+        if(REACT_APP_URL_BACK === undefined){
           return dispatch({
             type: GET_CATEGORYS,
             payload: [],
          });
         }
-         var json = await axios.get(`${URL_BACK}/category`);
-         console.log(`${URL_BACK}/category`)
+         var json = await axios.get(`${REACT_APP_URL_BACK}/category`);
+         console.log(`${REACT_APP_URL_BACK}/category`)
          console.log(json.data)
          return dispatch({
             type: GET_CATEGORYS,
@@ -287,7 +287,7 @@ export function ChangeCarryProducts(CarryNew) {
 export function getStockbyID(id) {
    return async function (dispatch) {
       try {
-         var json = await axios.get(URL_BACK+`/stock/${id}`);
+         var json = await axios.get(REACT_APP_URL_BACK+`/stock/${id}`);
          return dispatch({
             type: GET_STOCK_PRODUCT_BY_ID,
             payload: json.data,
@@ -306,7 +306,7 @@ export function getStockbyIDTotalFilterCarry(carry) {
          for (let index = 0; index < carry.length; index++) {
             const element = carry[index];
             let json = await axios.get(
-               URL_BACK+`/stock/${element.id}`
+               REACT_APP_URL_BACK+`/stock/${element.id}`
             );
             let array = json.data;
             let elementoIndice = -1;
@@ -333,7 +333,7 @@ export function getStockbyIDTotalFilterCarry(carry) {
 
 export function DeleteDrop(payload) {
    return async function () {
-      const response = await axios.put(URL_BACK+"/stock/drop", {
+      const response = await axios.put(REACT_APP_URL_BACK+"/stock/drop", {
          stockProducts: payload,
       });
       return response;
@@ -345,7 +345,7 @@ export function DeleteDrop(payload) {
 export function CreateNewProduct(payload) {
    return async function () {
       const response = await axios.post(
-         URL_BACK+"/product/",
+         REACT_APP_URL_BACK+"/product/",
          payload
       );
       return response;
@@ -356,7 +356,7 @@ export function getChecklogin(newLoggedUser) {
    return async function (dispatch) {
       try {
          var json = await axios.get(
-            URL_BACK+`/users/login/?email=${newLoggedUser.email}&password=${newLoggedUser.password}`
+            REACT_APP_URL_BACK+`/users/login/?email=${newLoggedUser.email}&password=${newLoggedUser.password}`
          );
 
          var Dato = json.data;
@@ -418,7 +418,7 @@ export function createComment(payload) {
    console.log("este es el payload papi", payload);
    return function (dispatch) {
       axios
-         .post(URL_BACK+"/comment", payload)
+         .post(REACT_APP_URL_BACK+"/comment", payload)
          .then((res) => {
             dispatch({
                type: CREATE_COMMENT,
@@ -434,7 +434,7 @@ export function updateReview(payload) {
 
    return function (dispatch) {
       axios
-         .put(URL_BACK+`/comment`, payload)
+         .put(REACT_APP_URL_BACK+`/comment`, payload)
          .then((res) => {
             console.log("todo tranqui");
             dispatch({
@@ -450,7 +450,7 @@ export function getAllComments() {
    return function (dispatch) {
       console.log("gjogfjog");
       axios
-         .get(URL_BACK+"/comment")
+         .get(REACT_APP_URL_BACK+"/comment")
          .then((res) => {
             dispatch({
                type: GET_COMMENTS,
@@ -465,7 +465,7 @@ export function getOrders(type, parameter) {
    return function (dispatch) {
       axios
          .get(
-            URL_BACK+`/orders?type=${type}&parameter=${parameter}`
+            REACT_APP_URL_BACK+`/orders?type=${type}&parameter=${parameter}`
          )
          .then((res) => {
             console.log("ENTRAAAAAAAAAAAAAAAAAAAAA")
@@ -481,7 +481,7 @@ export function createOrder(payload) {
    console.log(payload);
    return function (dispatch) {
       axios
-         .post(URL_BACK+"/orders", payload)
+         .post(REACT_APP_URL_BACK+"/orders", payload)
          .then((res) => {
             dispatch({
                type: CREATE_ORDER,
@@ -497,7 +497,7 @@ export function createOrder(payload) {
 export function getAllUsers() {
    return function (dispatch) {
       axios
-         .get(URL_BACK+"/users")
+         .get(REACT_APP_URL_BACK+"/users")
          .then((res) => {
             dispatch({
                type: GET_ALL_USERS,
@@ -513,7 +513,7 @@ export function putUser(input, id) {
       console.log(input, id);
 
       const res = await axios.put(
-        URL_BACK+`/users/put/${id}`,
+        REACT_APP_URL_BACK+`/users/put/${id}`,
         input
       );
       return dispatch({
@@ -530,7 +530,7 @@ export function putUser(input, id) {
 //   console.log(id)
 //   return function (dispatch) {
 //     axios
-//       .get(URL_BACK+`/users/${id}`)
+//       .get(REACT_APP_URL_BACK+`/users/${id}`)
 //       .then((res) => {
 //         dispatch({
 //           type: CHANGE_USER_LOGIN,
@@ -545,7 +545,7 @@ export function getSearchUser(name) {
    return async function (dispatch) {
       try {
          var json = await axios.get(
-            URL_BACK+`/users/?name=${name}`
+            REACT_APP_URL_BACK+`/users/?name=${name}`
          );
          return dispatch({
             type: GET_SEARCH_USER,
@@ -568,7 +568,7 @@ export function deleteUsers() {
 export function getAllFavs(payload) {
    return function (dispatch) {
       axios
-         .get(URL_BACK+`/favorites/${payload}`)
+         .get(REACT_APP_URL_BACK+`/favorites/${payload}`)
          .then((res) => {
             dispatch({
                type: GET_ALL_FAVS,
@@ -590,7 +590,7 @@ export function getCalendar(stock) {
   return async function (dispatch) {
      try {
         var json = await axios.get(
-           URL_BACK+`/calendar/${stock}`
+           REACT_APP_URL_BACK+`/calendar/${stock}`
         );
         return dispatch({
            type: CALENDAR_DAYS,
@@ -630,7 +630,7 @@ export function ChangeDeliveryInitial() {
 
 export function register(payload){
    return async function(){
-       const resp = await axios.post(URL_BACK+'/auth/register', payload)
+       const resp = await axios.post(REACT_APP_URL_BACK+'/auth/register', payload)
        console.log(resp)
        return resp
    }
@@ -638,7 +638,7 @@ export function register(payload){
 
 export function login(payload){
    return async function(){
-       const resp = await axios.post(URL_BACK+'/auth', payload)
+       const resp = await axios.post(REACT_APP_URL_BACK+'/auth', payload)
        console.log(resp)
        return resp
    }
