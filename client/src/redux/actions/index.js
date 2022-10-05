@@ -626,14 +626,19 @@ export function register(payload){
    return async function(){
        const resp = await axios.post(REACT_APP_URL_BACK+'/auth/register', payload)
        console.log(resp)
-       return resp
+       return resp.data
    }
 }
 
-export function login(payload){
+export function loginAction(payload){
    return async function(){
-       const resp = await axios.post(REACT_APP_URL_BACK+'/auth', payload)
-       console.log(resp)
-       return resp
+      try {
+         const resp = await axios.post(REACT_APP_URL_BACK+'/auth', payload)
+         console.log('LOOOOOGINNN',resp.data)
+         return resp.data
+         
+      } catch (error) {
+         console.log(error)
+      }
    }
 }
