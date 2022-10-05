@@ -4,10 +4,10 @@ import  "./about.css"
 
 export default function About() {
     return (
-            <main>
+            <main className="aboutContainer">
                 <div className="parent">
                     <div className="div1">
-                        <div className="card">
+                        <div className="cardAbout">
                             <div className="blob"></div>
                             <span className="img"></span>
                             <h2>Leandro<br /><span>Bustamante</span></h2>
@@ -24,8 +24,8 @@ export default function About() {
                             </p>
                         </div>
                     </div>
-                    <div className="div2">
-                        <div className="card">
+                    {/* <div className="div2">
+                        <div className="cardAbout">
                             <div className="blob"></div>
                             <span className="img"></span>
                             <h2>Claudio<br /><span>Chumpitaz</span></h2>
@@ -42,7 +42,7 @@ export default function About() {
                             </p>
                         </div> </div>
                     <div className="div3">
-                        <div className="card">
+                        <div className="cardAbout">
                             <div className="blob"></div>
                             <span className="img"></span>
                             <h2>Matias<br /><span>Mogica</span></h2>
@@ -60,7 +60,7 @@ export default function About() {
                         </div>
                     </div>
                     <div className="div4">
-                        <div className="card">
+                        <div className="cardAbout">
                             <div className="blob"></div>
                             <span className="img"></span>
                             <h2>Ricardo<br /><span>Díaz Bautista</span></h2>
@@ -76,8 +76,8 @@ export default function About() {
                                 </svg>
                             </p>
                         </div>
-                    </div>
-                </div>
+                    </div>*/}
+                </div> 
             </main>
     )
 }
