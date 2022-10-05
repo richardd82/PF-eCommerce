@@ -623,14 +623,19 @@ export function register(payload){
    return async function(){
        const resp = await axios.post('http://localhost:3001/auth/register', payload)
        console.log(resp)
-       return resp
+       return resp.data
    }
 }
 
-export function login(payload){
+export function loginAction(payload){
    return async function(){
-       const resp = await axios.post('http://localhost:3001/auth', payload)
-       console.log(resp)
-       return resp
+      try {
+         const resp = await axios.post('http://localhost:3001/auth', payload)
+         console.log('LOOOOOGINNN',resp.data)
+         return resp.data
+         
+      } catch (error) {
+         console.log(error)
+      }
    }
 }
