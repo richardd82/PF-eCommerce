@@ -4,7 +4,7 @@ import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
 // import Formulario from "./components/Formulario/Formulario";
@@ -47,7 +47,7 @@ import Login from "./Pages/Login/Login"
 function App() {
 	return (
 		<div >
-			<AuthProvider>
+			
 				{/* nav bar */}
 				<NavBar />
 				<Switch>
@@ -104,7 +104,7 @@ function App() {
           {/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
 				</Switch>
-			</AuthProvider>
+			{/* </UserContextProvider> */}
 			<Footer />
 		</div>
 	);

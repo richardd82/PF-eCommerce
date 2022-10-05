@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { login } from "../../redux/actions";
+import { loginAction } from "../../redux/actions";
 
 function validate(input){
     let errors = {};
@@ -10,21 +10,36 @@ function validate(input){
     let passwordValidator = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/
    
     if (!input.username || usernameValidator.test(input.username) === false)
-    errors.attack = 'It should have between 6 and 18 characters, only contain letter,number'
+    errors.uesrname = 'It should have between 6 and 18 characters, only contain letter,number'
     else if (!input.password || passwordValidator.test(input.password) === false)
     errors.password = 'Password must have, one digit, one lowercase character, one uppercase character and be at least 8 characters in length but no more than 20'
     return errors
 }
 
-export default function PokemonCreate(){
+export default function Login(){
+
     const dispatch = useDispatch()
     const history = useHistory()
     const [errors, setErrors] = useState({})
+    const [user, setUser] = useState(null)
 
     const [input, setInput] = useState({
         username: '',
         password: '',
     })
+
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedHenryApp')
+        if(loggedUserJSON){
+            const user = JSON.parse(loggedUserJSON)
+            if(user.auth){
+              history.push('/')
+            }else{
+                console.log(user)
+                setUser(user)
+            }
+        }
+    },[])
 
     function handleChange(e){
         setInput({
@@ -40,16 +55,30 @@ export default function PokemonCreate(){
     }
 
 
-    function handleSubmit(e){
+    const handleLogin = async(e) => {
         e.preventDefault()
-        
-            dispatch(login(input))
+
+        try {
+            const user = await dispatch(loginAction(input))
+            if(user === undefined){
+                alert('User or password invalid')
+            }else{
             alert('User successfully sign in')
+            console.log(user)
+            window.localStorage.setItem(
+                'loggedHenryApp', JSON.stringify(user)
+            )
+            setUser(user)
             setInput({
                 username: '',
                 password: '',
             })
-            history.push('/')    
+             history.push('/')    
+        }
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
     return(
@@ -79,12 +108,7 @@ export default function PokemonCreate(){
                         <p>{errors.password}</p>
                     )}
                 </div>
-
-              {
-                !Object.keys(errors).length ?
-                (<button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>) :
-                (<button hidden='true'>Submit</button>)
-              } 
+                <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>    
             </form>
             </div>
     )    

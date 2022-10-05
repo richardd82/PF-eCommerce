@@ -1,8 +1,8 @@
 .virtualBody{
     position: relative;
     margin: auto;
-    align-items: center;
-    justify-content: center;
+    width: fit-content;
+    height: 79vh;
 }
 
 .virtualBody2 {
@@ -13,3 +13,12 @@
     padding-right: 5%;
     padding-top: 2%;
   }
+.imgCarrousel{
+    width: 72% !important;
+    border-radius: 15px;
+}
+.slider-wrapper{
+    background-color: #21072b4d;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+}

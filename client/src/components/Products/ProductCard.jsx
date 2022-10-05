@@ -14,8 +14,8 @@ function ProductCard({ img, name, brand, price, id, /*styleCard*/ }) {
 			</Link>
 			<div className="card__content">
 				<h3>{name}</h3>
-				<p>{brand}</p>
-				<div>{`$/${Number2Decimals(price)}`}</div>
+				<p className="cardContent2">{brand}</p>
+				<div className="cardContent2">{`$/${Number2Decimals(price)}`}</div>
 			</div>
 		</div>
 	);

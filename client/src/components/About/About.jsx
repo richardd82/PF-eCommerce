@@ -60,6 +60,7 @@ export default function About() {
                             </p>
                         </div>
                     </div>
+
                     <div className={"div4"}>
                         <div className={"cardAbout"}>
                             <div className={"blob"}></div>
@@ -77,10 +78,8 @@ export default function About() {
                                 </svg>
                             </p>
                         </div>
-                    </div>
-                </div>
+                    </div>*/}
+                </div> 
             </main>
     )
 }
-
-
