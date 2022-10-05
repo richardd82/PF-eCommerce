@@ -1,6 +1,6 @@
 import axios from "axios";
 require('dotenv').config();
-const {REACT_APP_REACT_APP_URL_BACK} = process.env;
+const {REACT_APP_URL_BACK} = process.env;
 import CARRY_LOCALHOST from "../../components/Globales";
 import Swal from "sweetalert2";
 
@@ -119,15 +119,9 @@ export function deleteStockbyID() {
 export function getCategorys() {
    return async function (dispatch) {
       try {
-        if(REACT_APP_URL_BACK === undefined){
-          return dispatch({
-            type: GET_CATEGORYS,
-            payload: [],
-         });
-        }
          var json = await axios.get(`${REACT_APP_URL_BACK}/category`);
-         console.log(`${REACT_APP_URL_BACK}/category`)
-         console.log(json.data)
+        //  console.log(`${REACT_APP_URL_BACK}/category`)
+        //  console.log(json.data)
          return dispatch({
             type: GET_CATEGORYS,
             payload: json.data,
