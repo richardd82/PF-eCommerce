@@ -1,16 +1,24 @@
 .virtualBody{
-    background-color: rgb(255, 255, 255);
-    height: 77vh;
-    z-index: 0;
-}
-.containerLanding{
-    width: 60%;
+    position: relative;
     margin: auto;
-    margin-top: 27px;
-}
-.carousel-item{
-    margin-top: 30px;
+    width: fit-content;
+    height: 79vh;
 }
 
-
-
+.virtualBody2 {
+    display: block;
+    margin: 10px;
+    width: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+  }
+.imgCarrousel{
+    width: 72% !important;
+    border-radius: 15px;
+}
+.slider-wrapper{
+    background-color: #21072b4d;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+}

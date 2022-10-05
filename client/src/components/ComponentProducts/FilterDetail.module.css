@@ -1,7 +1,7 @@
 .Component {
    display: flex;
    justify-content: center;
-   margin-bottom: 0px;
+   margin-top: 10px;
    /* background-color: aqua; */
 }
 
