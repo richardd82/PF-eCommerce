@@ -88,3 +88,7 @@ nav {
 	top: 15%;
 	z-index: 3001;
  }
+.btnLogin{
+	margin: auto;
+	margin-right: 4%;
+}

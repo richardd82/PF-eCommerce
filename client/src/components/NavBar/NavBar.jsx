@@ -68,9 +68,9 @@ export default function NavBar(props) {
               </Link>: <NavUser />
             }</li>*/}
 
-            <li className="itemRigh">
+            <li className="itemRigh btnLogin">
               {user_login == false ?
-                <button onClick={handleOpen} >
+                <button onClick={handleOpen} className="btnAddCarry">
                   Login/Register
                 </button> : <NavUser />
               }</li>
