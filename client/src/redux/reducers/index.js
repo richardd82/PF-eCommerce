@@ -221,6 +221,7 @@ const rootReducer = (state = initialState, action) => {
             carryProducts: action.payload,
          };
       case CHANGE_USER_LOGIN:
+        console.log("Entra aca en Login")
          Cambiar_ID_Login(action.payload);
          return {
             ...state,
@@ -315,8 +316,8 @@ function ObtenerInicialProductsCarry() {
 
 function ObtenerInicial_ID_Login() {
    let Data = JSON.parse(localStorage.getItem(USER_ID));
-   var Id_user = { id: false };
-   if (Data !== undefined && Data !== null && Data.id != undefined) {
+   var Id_user = false;
+   if (Data !== undefined && Data !== null) {
       Id_user = Data;
    }
    return Id_user;
