@@ -43,7 +43,7 @@ function NavUser() {
           <a href="#" onClick={handleLogout}>Logout</a>
           <a href="/profile">Profile</a>
           {
-           user2 !== false &&  (user2.userForToken.admin === true) &&
+           user2 !== false &&  (user2.admin === true) &&
           <div>
           <a href="/gestionProducts">Administracion Productos</a>
           <a href="/usersAdmin">Administracion Usuarios</a>

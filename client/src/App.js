@@ -1,4 +1,6 @@
 /* import "./App.css"; */
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -20,6 +22,7 @@ import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
 import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
 import Contact from "./components/Contact/Contact";
+import { ObtenerLogin } from "./redux/actions";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -44,10 +47,20 @@ import Contact from "./components/Contact/Contact";
 // import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
 // import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
 
+
+
 function App() {
+  const dispatch = useDispatch()
+  const user_login = useSelector((state) => state.user_login);
+
+  useEffect(() => {
+    if (user_login === "Loading"){
+      dispatch(ObtenerLogin())
+    }
+  }, [])
+
 	return (
 		<div >
-			
 				{/* nav bar */}
 				<NavBar />
 				<Switch>
