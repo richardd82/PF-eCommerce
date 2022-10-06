@@ -20,7 +20,7 @@ export default function Contact() {
         <div>
             <div className="container">
             <form onSubmit={sendEmail}>
-                    <div className="field">
+                    <div className="form">
                         <div className="field">
                             <input type="text" className="form-control" placeholder="Name" name="name"/>
                         </div>
