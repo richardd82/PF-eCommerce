@@ -16,11 +16,11 @@ import About from "./components/About/About.jsx";
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
-import Login from "./components/Login/Login"
 
-// import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
-// import Contact from "./components/Contact/Contact";
+import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
+import Contact from "./components/Contact/Contact";
+// import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
 // import payment from "./components/Pago/Pay";
@@ -80,7 +80,8 @@ function App() {
           <Route path="/carry">
 						<Carry />{" "}
 					</Route>
-					{/* < Route exact path="/contact" component={Contact} />
+          <Route exact path="/contact" component={Contact}></Route>
+					{/*  
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/prueba" component={Map} />
