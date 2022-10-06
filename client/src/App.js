@@ -17,9 +17,9 @@ import ComponentProducts from "./components/ComponentProducts/ComponentProducts.
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
 import Login from "./Pages/Login/Login"
+import Contact from "./components/Contact/Contact";
 
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
-// import Contact from "./components/Contact/Contact";
 // import Carry from "./components/Carry/Carry";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -77,7 +77,8 @@ function App() {
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
 					<Route exact path="/about" component={About}></Route>
-					{/* < Route exact path="/contact" component={Contact} />
+          <Route exact path="/contact" component={Contact}></Route>
+					{/*  
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/prueba" component={Map} />
