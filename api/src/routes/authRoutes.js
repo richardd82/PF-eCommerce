@@ -1,3 +1,4 @@
+
 const { Router } = require("express");
 const bcrypt = require("bcrypt");
 // const User = require("../models/User");
@@ -88,5 +89,33 @@ router.post("/", async (req, res, next) => {
     }
   });
   
+  router.post("/verify",verifyToken,(req,res)=>{
+ 
+    jwt.verify(req.token,process.env.JWT_secret_key,(error,authData)=>{
+    if(error){
+      res.sendStatus(403);
+    }
+    else{
+      res.json({
+      mensaje:"Post fue creado",
+      authData})
+    }
+  });
+
+});
+
+
+function verifyToken(req,res,next){
+  console.log(req.body)
+  const beareHeader=req.body['authorization'];
+  if(typeof beareHeader!=='undefined'){
+  req.token=beareHeader.split(" ")[1];
+  next();
+  }
+  else
+    res.sendStatus(403);
+}
+
+
 module.exports = router;
   
