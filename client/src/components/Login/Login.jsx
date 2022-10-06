@@ -122,13 +122,13 @@ export default function Login(props) {
         <input type="input" name="username" onChange={(e) => handleChange(e)} placeholder="UserName" />
         <label>Password:</label>
         <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" />
-        <button className={style.btnPrimary} onClick={(e) => handleLogin(e)}>LOGIN</button>
+        <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
       </div>
       <hr />
       <div className={style.createAcc}>
-        <button className={style.btnPrimary} onClick={(e) => changePageCreateAccount(e)}>CREATE ACCOUNT</button>
+        <button className={style.btnLoginModal} onClick={(e) => changePageCreateAccount(e)}>CREATE ACCOUNT</button>
       </div>
     </div>
   )
