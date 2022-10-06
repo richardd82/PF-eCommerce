@@ -6,6 +6,7 @@
     "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@firebase/auth": "^0.20.7",
     "@material/menu": "^14.0.0",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.4",

@@ -47,7 +47,7 @@ import Contact from "./components/Contact/Contact";
 function App() {
 	return (
 		<div >
-			
+			<AuthProvider>
 				{/* nav bar */}
 				<NavBar />
 				<Switch>
@@ -105,8 +105,8 @@ function App() {
           {/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
 				</Switch>
-			{/* </UserContextProvider> */}
 			<Footer />
+			</AuthProvider>
 		</div>
 	);
 }
