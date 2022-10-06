@@ -99,7 +99,7 @@ class Carry extends Component {
   onContinueBuy() {
     let { actualiceBuy } = this.VerificarStocks();
     console.log(this.props.user_login);
-    if(this.props.user_login==false || this.props.user_login.id==undefined || this.props.user_login.id==false){
+    if(this.props.user_login==false || this.props.user_login=="Loading"){
       Swal.fire({
         title: `You must log in before buying`,
         icon: "info",

@@ -35,8 +35,10 @@ export default function Login(props) {
   })
 
   useEffect(() => {
-    if (user !== false)
+    if (user !== false && user !== "Loading") {
+      props.close(false)
       history.push('/')
+    }
     /* const loggedUserJSON = window.localStorage.getItem('loggedHenryApp')
      if (loggedUserJSON) {
          const user = JSON.parse(loggedUserJSON)
@@ -79,7 +81,7 @@ export default function Login(props) {
     try {
       const user = await dispatch(loginAction(input))
       if (user === undefined) {
-        
+
         Swal.fire({
           customClass: {
             container: `${style.myswal}`
