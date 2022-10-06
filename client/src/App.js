@@ -4,7 +4,7 @@ import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
 // import Formulario from "./components/Formulario/Formulario";
@@ -17,9 +17,9 @@ import ComponentProducts from "./components/ComponentProducts/ComponentProducts.
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
 import Login from "./Pages/Login/Login"
+import Contact from "./components/Contact/Contact";
 
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
-// import Contact from "./components/Contact/Contact";
 // import Carry from "./components/Carry/Carry";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -47,7 +47,7 @@ import Login from "./Pages/Login/Login"
 function App() {
 	return (
 		<div >
-			<AuthProvider>
+			
 				{/* nav bar */}
 				<NavBar />
 				<Switch>
@@ -77,7 +77,8 @@ function App() {
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
 					<Route exact path="/about" component={About}></Route>
-					{/* < Route exact path="/contact" component={Contact} />
+          <Route exact path="/contact" component={Contact}></Route>
+					{/*  
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/prueba" component={Map} />
@@ -104,7 +105,7 @@ function App() {
           {/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
 				</Switch>
-			</AuthProvider>
+			{/* </UserContextProvider> */}
 			<Footer />
 		</div>
 	);
