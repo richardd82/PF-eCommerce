@@ -1,0 +1,92 @@
+.loginContainer {
+   max-width: 350px;
+   margin: 15px auto;
+   padding: 20px 15px;
+   background: url("../image/FondoNavBar.jpg");
+   background-size: cover;
+   color: white;
+   border-radius: 15px;
+}
+
+.loginContainer hr {
+   width: 75%;
+}
+
+.login {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   align-items: center;
+}
+
+.login h1 {
+   margin-top: 0;
+}
+
+.btnPrimary {
+   margin-top: 5px;
+   width: 50%;
+   padding: 10px 10px;
+   background-color: #008000;
+   outline: none;
+   border: none;
+   border-radius: 10px;
+   color: white;
+   font-size: 1rem;
+   cursor: pointer;
+   letter-spacing: 1px;
+}
+
+.btnPrimary:hover {
+   background-color: #02d302;
+}
+
+.login input {
+   padding: 7px 10px;
+   width: 60%;
+   border-radius: 10px;
+   outline: none;
+   border: none;
+   font-size: 1rem;
+   margin-bottom: 5px;
+}
+
+.login p {
+   margin-bottom: 0;
+}
+
+.btnGoogle {
+   outline: none;
+   border: none;
+   border-radius: 50%;
+   padding: 10px;
+   cursor: pointer;
+   margin-bottom: 15px;
+   margin-top: 10px;
+}
+
+.btnGoogle:hover {
+   background-color: #02d302;
+}
+
+/*        BUTTON CLOSE      */
+
+.btnClose {
+   align-self: flex-end;
+   background-color: rgb(223, 16, 16);
+   color: #fff;
+   width: 30px;
+   height: 30px;
+   border: none;
+   border-radius: 15px;
+   font-size: 16px;
+}
+
+.btnClose:hover {
+   background-color: rgb(153, 24, 24);
+   cursor: pointer;
+}
+
+.myswal{
+   z-index: 4000;
+}

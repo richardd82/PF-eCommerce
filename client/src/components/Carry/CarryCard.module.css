@@ -1,0 +1,111 @@
+.productContainer {
+  max-width: 600px;
+  background: url("../image/FondoTarjetas.jpg");
+  background-size: cover;
+  color: white;
+  padding: 15px;
+  margin: 15px auto;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 50px 5px #000000;
+  box-shadow: 5px 5px 50px 5px #000000;
+}
+
+.texContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.texContainer h2 {
+  margin-bottom: 0;
+}
+
+.texContainer p {
+  font-size: 1.2rem;
+}
+
+.productContainer h3 {
+  margin: 0;
+}
+
+.photoContainer {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.photoContainer img {
+  border-radius: 15px;
+  height: 100%;
+}
+
+.priceCartContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.priceCartContainer button {
+  background-color: #008000;
+  padding: 10px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.priceCartContainer button:hover {
+  background-color: #02d302;
+}
+
+.btnsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btnPlusMinus span {
+  margin: 0 8px;
+  font-size: 20px;
+}
+
+.btnPlusMinus button {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px 13px;
+  border-radius: 25%;
+  border: none;
+}
+
+.btnPlusMinus button:hover {
+  background-color: #008000;
+}
+
+.btnPlusMinus button:active {
+  color: white;
+}
+
+.btnDelete button {
+  background-color: white;
+  padding: 10px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.btnDelete button:hover {
+  background-color: #b40202;
+  color: white;
+}
+
+.btnDelete button:active {
+  color: #343a40;
+}

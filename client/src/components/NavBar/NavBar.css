@@ -63,10 +63,28 @@ nav {
 .listNavRight {
 	float: left;
 }
-.mainNav li.shippingCart {
+.mainNav li.itemRigh {
 	float: right;
-	margin-right: 3%;
 }
+
 .logoNav {
 	width: 40px;
 }
+
+
+.ModalAbiertoBackground {
+	position: absolute;
+	background-color: #273141c3;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3000;
+ }
+ 
+ .ModalLogin {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 15%;
+	z-index: 3001;
+ }

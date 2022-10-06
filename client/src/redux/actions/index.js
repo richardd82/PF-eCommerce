@@ -369,19 +369,6 @@ export function getChecklogin(newLoggedUser) {
    };
 }
 
-export function Logout() {
-   return async function (dispatch) {
-      try {
-         return dispatch({
-            type: CHANGE_USER_LOGIN,
-            payload: { id: false },
-         });
-      } catch (error) {
-         console.log(error);
-      }
-   };
-}
-
 // login google
 
 export function LoginGoogleUser(user) {
@@ -634,11 +621,36 @@ export function loginAction(payload){
    return async function(){
       try {
          const resp = await axios.post(REACT_APP_URL_BACK+'/auth', payload)
-         console.log('LOOOOOGINNN',resp.data)
          return resp.data
          
       } catch (error) {
          console.log(error)
       }
    }
+}
+
+export function Logout() {
+  return async function (dispatch) {
+     try {
+        return dispatch({
+           type: CHANGE_USER_LOGIN,
+           payload: false,
+        });
+     } catch (error) {
+        console.log(error);
+     }
+  };
+}
+
+export function put_User_Login(newLoggedUser) {
+  return async function (dispatch) {
+     try {
+        return dispatch({
+           type: CHANGE_USER_LOGIN,
+           payload: newLoggedUser,
+        });
+     } catch (error) {
+        console.log(error);
+     }
+  };
 }
