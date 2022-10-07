@@ -27,9 +27,6 @@ import {
   GET_ALL_FAVS,
   DELETE_FAVS,
   GET_SEARCH_USER,
-  CALENDAR_DAYS,
-  CHANGE_DELIVERY,
-  CHANGE_DELIVERY_INITIAL,
   SEARCH_ID
 } from "../actions";
 
@@ -64,8 +61,6 @@ const initialState = {
   orders: [],
   comments: [],
   favs: [],
-  calendar: [],
-  delivery: undefined
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -273,22 +268,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favs: action.payload,
       };
-    case CALENDAR_DAYS:
-      return {
-        ...state,
-        calendar: action.payload,
-      }
-    case CHANGE_DELIVERY:
-      console.log(action.payload)
-      return {
-        ...state,
-        delivery: action.payload
-      }
-    case CHANGE_DELIVERY_INITIAL:
-      return {
-        ...state,
-        delivery: undefined
-      }
     default:
       return state;
   }

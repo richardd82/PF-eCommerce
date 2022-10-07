@@ -11,12 +11,10 @@ const StockRoute = require("./StockRoute");
 const CommentRoute = require("./CommentRoute");
 const orderRouter = require("./orderRouter");
 const FavoriteRoute = require("./FavoriteRoute")
-const CalendarRoute = require("./CalendarRoute")
 const AuthRoute = require("./authRoutes")
 
 const router = Router();
 
-router.use('/calendar', CalendarRoute)
 router.use("/product", ProductRoute);
 router.use("/category", CategoryRoute);
 router.use("/product", ProductDetailsRoute);

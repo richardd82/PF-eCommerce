@@ -24,7 +24,7 @@ function CarryCard({
         {/* <p>{brand}</p> */}{" "}
         {/* Me parece innecesario en este punto de la compra */}
         <div className={styles.priceCartContainer}>
-          <p>{`Price: $/${Number2Decimals(price)}`}</p>
+          <p>{`Price: $${Number2Decimals(price)}`}</p>
           <p>Size: {size}</p>
         </div>
         <div className={styles.btnsContainer}>

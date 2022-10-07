@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStockbyIDTotalFilterCarry,ChangeCarryProducts, createOrder,getOrders} from "../../redux/actions";
+import { getStockbyIDTotalFilterCarry, ChangeCarryProducts, createOrder, getOrders } from "../../redux/actions";
 import style from "./Carry.module.css";
 import CarryCard from "./CarryCard.jsx";
 import Swal from "sweetalert2";
@@ -13,7 +13,10 @@ class Carry extends Component {
   }
 
   componentDidMount() {
-    let Data=this.props.carryProducts;
+    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.admin==true)
+    this.props.history.push("/");
+
+    let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     console.log(this.props.user_login.id)
     this.props.getOrders("UserID", this.props.user_login.id);
@@ -69,7 +72,7 @@ class Carry extends Component {
   }
 
   onDelete(index) {
-    let Data=this.props.carryProducts;
+    let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     Data = this.DeleteElementCarry(Data, index);
     this.props.ChangeCarryProducts(Data)
@@ -84,13 +87,13 @@ class Carry extends Component {
     });
   }
   onDecrease(index) {
-    let Data=this.props.carryProducts;
+    let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     Data = this.DecreaseElementCarry(Data, index);
   }
 
   onIncrease(index) {
-    let Data=this.props.carryProducts;
+    let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     Data = this.IncreaseElementCarry(Data, index);
     this.props.ChangeCarryProducts(Data)
@@ -99,52 +102,52 @@ class Carry extends Component {
   onContinueBuy() {
     let { actualiceBuy } = this.VerificarStocks();
     console.log(this.props.user_login);
-    if(this.props.user_login==false || this.props.user_login=="Loading"){
+    if (this.props.user_login == false || this.props.user_login == "Loading") {
       Swal.fire({
         title: `You must log in before buying`,
         icon: "info",
         button: "Ok",
       });
     }
-    else{
+    else {
       if (actualiceBuy) return
-     console.log(this.props.orders)
-      for (let index = 0; index < this.props.orders.length; index++) {
+      
+      /*for (let index = 0; index < this.props.orders.length; index++) {
         const element = this.props.orders[index];
         console.log(element)
-        if(element.stateOrder==="Cancelada" || element.stateOrder==="Creada"){
-        Swal.fire({
-          title: `You have a pending order`,
-          icon: "warning",
-          button: "Ok",
-        });
-       return
-      }
-      }
-     this.props.history.push("/FormDelivery");
+        if (element.stateOrder === "Cancelada" || element.stateOrder === "Creada") {
+          Swal.fire({
+            title: `You have a pending order`,
+            icon: "warning",
+            button: "Ok",
+          });
+          return
+        }
+      }*/
+      this.props.history.push("/FormDelivery");
     }
   }
 
   VerificarStocks() {
     let Stocks = this.props.carryProductsStocks;
-    let Data=this.props.carryProducts;
+    let Data = this.props.carryProducts;
     let Actualizar = false;
     let start = 0;
     let Total = 0;
     let actualizoBuy = false;
-  
+
     //Metodo para iterar 2 arrays para encontrar el elemento del local Storage dentro del Stock y hacer verificaciones
-    console.log(Stocks,"  ",Data)
-    
+    console.log(Stocks, "  ", Data)
+
     for (let index = 0; index < Stocks.length; index++) {
       const stock = Stocks[index];
       for (let index2 = start; index2 < Data.length; index2++) {
         console.log("entra 1")
         const datalocal = Data[index2];
-        let monto=(Number.parseInt(datalocal.amount))
+        let monto = (Number.parseInt(datalocal.amount))
         /// Encontrar dentro Stock el mismo id del elemento del local storage
-        console.log(datalocal.id,"  ",stock.productId,"  ",
-        datalocal.state.size,"  ",stock.productSize)
+        console.log(datalocal.id, "  ", stock.productId, "  ",
+          datalocal.state.size, "  ", stock.productSize)
         if (
           datalocal.id == stock.productId &&
           datalocal.state.size == stock.productSize
@@ -194,7 +197,7 @@ class Carry extends Component {
     }
     // Si hubo cambio en el Stock, actualiza los elementos del local Storage, asi como su stock nuevo, o cantidad de productos
     // del mismo elemento
-    if (Actualizar) { 
+    if (Actualizar) {
       this.props.ChangeCarryProducts(Data)
       this.setState({ carry: Data });
     }
@@ -202,7 +205,7 @@ class Carry extends Component {
     return { priceTotal: Total, actualiceBuy: actualizoBuy };
   }
 
-  
+
 
   render() {
     let carryProducts = this.props.carryProducts;
@@ -260,18 +263,18 @@ function mapStateToProps(state) {
   return {
     carryProductsStocks: state.carryProductsStocks,
     carryProducts: state.carryProducts,
-    user_login:state.user_login,
-    orders:state.orders
+    user_login: state.user_login,
+    orders: state.orders
   };
 }
 
 function mapDispatchToProps(dispatch) {
   //pasandole al componente la posibilidad como props de hacer un dispatch de la function getcountries
   return {
-      getStockbyIDTotalFilterCarry: (carry) => dispatch(getStockbyIDTotalFilterCarry(carry)),
-      ChangeCarryProducts: (carrynew) => dispatch(ChangeCarryProducts(carrynew)),
-      createOrder:(SendPP)=>dispatch(createOrder(SendPP)),
-      getOrders:(type,parameter)=>dispatch(getOrders(type,parameter)),
+    getStockbyIDTotalFilterCarry: (carry) => dispatch(getStockbyIDTotalFilterCarry(carry)),
+    ChangeCarryProducts: (carrynew) => dispatch(ChangeCarryProducts(carrynew)),
+    createOrder: (SendPP) => dispatch(createOrder(SendPP)),
+    getOrders: (type, parameter) => dispatch(getOrders(type, parameter)),
     //changePaginatedPage: (page) => dispatch(changePaginatedPage(page)),
   };
 }

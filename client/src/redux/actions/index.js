@@ -35,9 +35,6 @@ export const GET_ALL_FAVS = "GET_ALL_FAVS";
 export const DELETE_FAVS = "DELETE_FAVS";
 export const PUT_USERS = "PUT_USERS";
 export const GET_SEARCH_USER = "GET_SEARCH_USER";
-export const CALENDAR_DAYS = "CALENDAR_DAYS";
-export const CHANGE_DELIVERY = "CHANGE_REFERENCE";
-export const CHANGE_DELIVERY_INITIAL = "CHANGE_REFERENCE_INITIAL";
 export const SEARCH_ID = "SEARCH_ID";
 export const PUT_STOCKS = "PUT_STOCKS";
 
@@ -462,7 +459,7 @@ export function createOrder(payload) {
   console.log(payload);
   return function (dispatch) {
     axios
-      .post(REACT_APP_URL_BACK + "/orders", payload)
+      .post(`${REACT_APP_URL_BACK}/orders`, payload)
       .then((res) => {
         dispatch({
           type: CREATE_ORDER,
@@ -564,48 +561,6 @@ export function deleteFavs() {
   return {
     type: DELETE_FAVS,
     payload: [],
-  };
-}
-
-export function getCalendar(stock) {
-  return async function (dispatch) {
-    try {
-      var json = await axios.get(
-        REACT_APP_URL_BACK + `/calendar/${stock}`
-      );
-      return dispatch({
-        type: CALENDAR_DAYS,
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-
-export function ChangeDelivery(ObjectDelivey) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: CHANGE_DELIVERY,
-        payload: ObjectDelivey,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function ChangeDeliveryInitial() {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: CHANGE_DELIVERY_INITIAL
-      });
-    } catch (error) {
-      console.log(error);
-    }
   };
 }
 
