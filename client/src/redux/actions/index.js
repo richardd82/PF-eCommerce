@@ -369,11 +369,12 @@ export function getChecklogin(newLoggedUser) {
 // login google
 
 export function LoginGoogleUser(user) {
+  console.log('USER', user)
   return async function (dispatch) {
     try {
       return dispatch({
         type: CHANGE_USER_LOGIN,
-        payload: user,
+        payload: { user: user.userForToken, token: user.token }
       });
     } catch (error) {
       console.log(error);

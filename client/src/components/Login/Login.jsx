@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginAction, put_User_Login } from "../../redux/actions";
+import { loginAction, put_User_Login, LoginGoogleUser } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
+const { REACT_APP_URL_BACK } = process.env;
 import style from "./Login.module.css";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 /*
 function validate(input) {
@@ -24,10 +26,10 @@ export default function Login(props) {
 
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = useSelector((state) => state.user_login);
+  const userLog = useSelector((state) => state.user_login);
   //const [errors, setErrors] = useState({})
   //const [user, setUser] = useState(null)
-  const { googleLogin } = useAuth()
+  const { googleLogin, user } = useAuth()
 
   const [input, setInput] = useState({
     username: '',
@@ -35,7 +37,7 @@ export default function Login(props) {
   })
 
   useEffect(() => {
-    if (user !== false && user !== "Loading") {
+    if (userLog !== false && userLog !== "Loading") {
       props.close(false)
       history.push('/')
     }
@@ -117,6 +119,33 @@ export default function Login(props) {
 
   }
 
+  const register = async (user) => {
+    console.log("entra ACA")
+    let nombreSep = user.displayName.split(" ");
+
+    let name = nombreSep[0]
+    let lastname = nombreSep[1].concat(" ", nombreSep[2])
+
+    const { uid, email, photoURL } = user;
+    console.log('USER_LOGIN', user)
+    return await axios
+       .post(`${REACT_APP_URL_BACK}/auth/google`, {
+          username: email,
+          name: name,
+          email: email,
+          password: uid,
+          lastName: lastname,
+          image: photoURL,
+          address: "Need to complete",
+       })
+       .then((response) => {
+          props.close(false)
+          console.log("respuesta ", response.data);
+          dispatch(LoginGoogleUser(response.data))
+       });
+ 
+};
+ 
   const handleGoogleSignIn = async() => {
     
     try {
@@ -126,6 +155,11 @@ export default function Login(props) {
       console.log(error)
     }
   }
+
+  if (user) {
+    console.log(user)
+    register(user.providerData[0])
+ }
 
   return (
     <div className={style.loginContainer}>
