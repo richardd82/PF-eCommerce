@@ -3,15 +3,16 @@ import { IconContext } from "react-icons";
 import Style from "./NavUser.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../redux/actions";
-//import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/authContext";
 
 function NavUser() {
   //login Google
- // const { logout, user } = useAuth();
+  const { logout, user } = useAuth();
   const user2 = useSelector((state) => state.user_login);
 
   const handleLogout = async () => {
     try {
+      await logout()
       dispatch(Logout());
     } catch (error) {
       console.error(error.message);
