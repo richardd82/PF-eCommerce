@@ -81,7 +81,7 @@ export default function Register(){
                 address: '',
                 image: '',
             })
-            history.push('/login')    
+            history.push('/')    
     }
 
     return(

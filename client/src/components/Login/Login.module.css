@@ -1,0 +1,148 @@
+.loginContainer {
+   width: 550px;
+   height: 65vh;
+   margin: 15px auto;
+   padding: 5px 15px;
+   background: url("../../assets/backgroundBlocks2.jpg");
+   background-size: contain;
+   color: white;
+   border-radius: 15px;
+}
+
+.loginContainer hr {
+   width: 75%;
+}
+
+.login {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   align-items: center;
+}
+
+.login h1 {
+   margin-top: 0;
+}
+
+.btnPrimary:hover {
+   background-color: #02d302;
+}
+
+.login input {
+   padding: 10px 10px;
+   width: 40%;
+   border-radius: 10px;
+   outline: none;
+   border: none;
+   font-size: 1rem;
+   margin-bottom: 5px;
+}
+
+.login p {
+   margin-bottom: 0;
+}
+
+.btnGoogle {
+   outline: none;
+   border: none;
+   border-radius: 50%;
+   padding: 10px;
+   cursor: pointer;
+   margin-bottom: 15px;
+   margin-top: 10px;
+}
+
+.btnGoogle:hover {
+   background-color: #02d302;
+}
+
+/*        BUTTON CLOSE      */
+
+.btnClose {
+   align-self: flex-end;
+   background-color: rgb(223, 16, 16);
+   color: #fff;
+   width: 30px;
+   height: 30px;
+   border: none;
+   border-radius: 15px;
+   font-size: 16px;
+}
+
+.btnClose:hover {
+   background-color: rgb(153, 24, 24);
+   cursor: pointer;
+}
+
+.myswal {
+   z-index: 4000;
+}
+
+.btnLoginModal {
+   margin: auto;
+   margin-top: 5%;
+   cursor: pointer;
+   border: .25em solid var(--glow-color);
+   padding: 1em 3em;
+   color: var(--glow-color);
+   font-size: 15px;
+   font-weight: bold;
+   background-color: var(--btn-color);
+   border-radius: 1em;
+   outline: none;
+   box-shadow: 0 0 1em .25em var(--glow-color),
+      0 0 4em 1em var(--glow-spread-color),
+      inset 0 0 .75em .25em var(--glow-color);
+   text-shadow: 0 0 .5em var(--glow-color);
+   position: relative;
+   transition: all 0.3s;
+}
+
+.btnLoginModal::after {
+   pointer-events: none;
+   content: "";
+   position: absolute;
+   top: 120%;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   background-color: var(--glow-spread-color);
+   filter: blur(2em);
+   opacity: .7;
+   transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+}
+
+.btnLoginModal:hover {
+   color: var(--btn-color);
+   background-color: var(--glow-color);
+   box-shadow: 0 0 1em .25em var(--glow-color),
+      0 0 4em 2em var(--glow-spread-color),
+      inset 0 0 .75em .25em var(--glow-color);
+}
+
+.createAcc {
+   margin-left: 30%;
+}
+
+.loginGoogle {
+   width: 18%;
+   height: 10vh;
+   background-image: url('../../assets/logoGoogle.png');
+   background-size: 110%;
+   background-position-y: 60%;
+   background-position-x: 70%;
+   border-radius: 50px;
+   border: .25em solid var(--glow-color);
+   box-shadow: 0 0 1em .25em var(--glow-color),
+      0 0 4em 1em var(--glow-spread-color),
+      inset 0 0 .75em .25em var(--glow-color);
+      cursor: pointer;
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}

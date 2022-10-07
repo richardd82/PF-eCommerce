@@ -1,4 +1,6 @@
 /* import "./App.css"; */
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -16,14 +18,15 @@ import About from "./components/About/About.jsx";
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
-import Login from "./Pages/Login/Login"
 
+import Login from "./components/Login/Login"
+import Carry from "./components/Carry/Carry";
+import Contact from "./components/Contact/Contact";
+import { ObtenerLogin } from "./redux/actions";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
-// import Contact from "./components/Contact/Contact";
-// import Carry from "./components/Carry/Carry";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
-// import payment from "./components/Pago/Pay";
+ //import payment from "./components/Pago/Pay";
 // import Profile from "./components/Profile/Profile";
 // import ModifyItem from "./components/ModifyITem/ModifyItem";
 // import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
@@ -41,13 +44,26 @@ import Login from "./Pages/Login/Login"
 
 // import styles from "./App.module.css";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
-// import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
-// import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
+ import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
+import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
+
+
 
 function App() {
+  const dispatch = useDispatch()
+  const user_login = useSelector((state) => state.user_login);
+
+  useEffect(() => {
+    if (user_login === "Loading"){
+      dispatch(ObtenerLogin())
+    }
+  }, [])
+
 	return (
 		<div >
-			
+
+			<AuthProvider>
+
 				{/* nav bar */}
 				<NavBar />
 				<Switch>
@@ -77,13 +93,14 @@ function App() {
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
 					<Route exact path="/about" component={About}></Route>
-					{/* < Route exact path="/contact" component={Contact} />
+          <Route path="/carry">
+						<Carry />{" "}
+					</Route>
+          <Route exact path="/contact" component={Contact}></Route>
+					{/*  
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/prueba" component={Map} />
-					<Route path="/carry">
-						<Carry />{" "}
-					</Route>
 					<Route path={"/Favorites"} component={Favorites}></Route>
 					<Route path={"/ModifyUser"} component={ModifyUser}></Route>
 					<Route path={"/ModifyUserImage"} component={ModifyUserImage}></Route>
@@ -91,10 +108,10 @@ function App() {
 						path={"/ModifyUserPassword"}
 						component={ModifyUserPassword}
 					></Route> */}
-					{/* <Route exact path="/adminOrders" component={AdminOrders}></Route>
+					{/*<Route exact path="/adminOrders" component={AdminOrders}></Route>*/}
 					<Route exact path="/FormDelivery" component={FormDelivery}></Route>
-					<Route exact path="/MethodPay" component={MethodPay}></Route>
-					<Route exact path="/payment" component={payment} />
+					 <Route exact path="/MethodPay" component={MethodPay}></Route>
+					{/*<Route exact path="/payment" component={payment} />
 					<Route exact path="/orders" component={Orders2} />
 					<Route path="/OrderDetails/:id" component={OrdersDetails} />
 					<Route path="/AdminDetailOrder/:id" component={AdminDetailOrder} />
@@ -104,8 +121,8 @@ function App() {
           {/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
 				</Switch>
-			{/* </UserContextProvider> */}
 			<Footer />
+			</AuthProvider>
 		</div>
 	);
 }

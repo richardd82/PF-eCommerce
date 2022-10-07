@@ -59,3 +59,19 @@ main {
 	vertical-align: baseline;
 	font-size: 1.5em;
 }
+@media screen and (max-width: 1366px) {
+	.NavFilter{
+		width: 15rem;
+	}
+	.contentFilter ul{
+		margin: -15px;
+		font-size: .7em;
+	}
+	.contentFilter input, select{
+		padding: 5px;
+	}
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}
