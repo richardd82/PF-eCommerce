@@ -26,7 +26,7 @@ import { ObtenerLogin } from "./redux/actions";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
-// import payment from "./components/Pago/Pay";
+ //import payment from "./components/Pago/Pay";
 // import Profile from "./components/Profile/Profile";
 // import ModifyItem from "./components/ModifyITem/ModifyItem";
 // import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
@@ -44,8 +44,8 @@ import { ObtenerLogin } from "./redux/actions";
 
 // import styles from "./App.module.css";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
-// import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
-// import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
+ import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
+import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
 
 
 
@@ -105,10 +105,10 @@ function App() {
 						path={"/ModifyUserPassword"}
 						component={ModifyUserPassword}
 					></Route> */}
-					{/* <Route exact path="/adminOrders" component={AdminOrders}></Route>
+					{/*<Route exact path="/adminOrders" component={AdminOrders}></Route>*/}
 					<Route exact path="/FormDelivery" component={FormDelivery}></Route>
-					<Route exact path="/MethodPay" component={MethodPay}></Route>
-					<Route exact path="/payment" component={payment} />
+					 <Route exact path="/MethodPay" component={MethodPay}></Route>
+					{/*<Route exact path="/payment" component={payment} />
 					<Route exact path="/orders" component={Orders2} />
 					<Route path="/OrderDetails/:id" component={OrdersDetails} />
 					<Route path="/AdminDetailOrder/:id" component={AdminDetailOrder} />

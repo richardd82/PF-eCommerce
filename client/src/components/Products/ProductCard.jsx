@@ -15,7 +15,7 @@ function ProductCard({ img, name, brand, price, id, /*styleCard*/ }) {
 			<div className="card__content">
 				<h3>{name}</h3>
 				<p className="cardContent2">{brand}</p>
-				<div className="cardContent2">{`$/${Number2Decimals(price)}`}</div>
+				<div className="cardContent2">{`$${Number2Decimals(price)}`}</div>
 			</div>
 		</div>
 	);
