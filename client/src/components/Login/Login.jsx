@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAction, put_User_Login } from "../../redux/actions";
+import { useAuth } from "../../context/authContext";
 import style from "./Login.module.css";
 import Swal from "sweetalert2";
 
@@ -26,6 +27,7 @@ export default function Login(props) {
   const user = useSelector((state) => state.user_login);
   //const [errors, setErrors] = useState({})
   //const [user, setUser] = useState(null)
+  const { googleLogin } = useAuth()
 
   const [input, setInput] = useState({
     username: '',
@@ -115,6 +117,16 @@ export default function Login(props) {
 
   }
 
+  const handleGoogleSignIn = async() => {
+    
+    try {
+      await googleLogin()
+      history.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className={style.loginContainer}>
       <div className={style.login}>
@@ -127,6 +139,7 @@ export default function Login(props) {
         <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
+        <button onClick={handleGoogleSignIn}>Login with Google</button>
       </div>
       <hr />
       <div className={style.createAcc}>
