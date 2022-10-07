@@ -1,0 +1,85 @@
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #ea0be3 rgb(216, 148, 233);
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(220, 151, 245);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color:  rgba(181, 88, 191, 0.626);
+    border-radius: 5px;
+    border: 2px solid #ba0bea;
+  }
+.mainContainer {
+  margin: auto;
+  margin-top: 2.2%;
+  margin-bottom: 0%;
+  padding: 35px;
+  height: 68vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  overflow-y: scroll;
+}
+
+.containCarry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 68vh;
+}
+
+.paragraph {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #343a40;
+  color: white;
+  font-size: 2rem;
+}
+
+.PriceTotal {
+  height: 100px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 20px;
+  background-image: url('../../assets/backgroundBlocks2.jpg');
+  background-size: 100%;
+  background-repeat:repeat-y;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 50px 5px #000000;
+  box-shadow: 5px 5px 40px -4px #000000;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1.1px;
+}
+
+.PriceTotal p {
+  margin: auto;
+  margin-top: 10px;
+}
+@media screen and (max-width: 1366px) {
+  .mainContainer {
+    height: 60vh;
+  }
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}

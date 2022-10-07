@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser';
 import React from 'react';
 import './contact.css';
+import '../CreateProduct/CreateProduct.css'
 
 export default function Contact() {
 
@@ -18,26 +19,26 @@ export default function Contact() {
 
     return(
         <div>
-            <div className="container">
-            <form onSubmit={sendEmail}>
-                    <div className="form">
-                        <div className="field">
+            <div className="containerContact">
+                <div className="formContact">
+                    <form onSubmit={sendEmail} >
+                        <div className="l__form__input-field">
                             <input type="text" className="form-control" placeholder="Name" name="name"/>
                         </div>
-                        <div className="field">
+                        <div className="l__form__input-field">
                             <input type="email" className="form-control" placeholder="Email Address" name="email"/>
                         </div>
-                        <div className="field">
+                        <div className="l__form__input-field">
                             <input type="text" className="form-control" placeholder="Subject" name="subject"/>
                         </div>
                         <div className="field">
-                            <textarea className="form-control" id="" cols="30" rows="8" placeholder="Your message" name="message"></textarea>
+                            <textarea className="form-txtArea" id="" cols="30" rows="8" placeholder="Your message" name="message"></textarea>
                         </div>
                         <div className="field">
-                            <input type="submit" className="btn btn-info" value="Send Message"></input>
+                            <input type="submit" className="Login_btnLoginModal__1R93O btnContact" value="Send Message"></input>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     )

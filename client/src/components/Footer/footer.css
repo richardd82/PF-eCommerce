@@ -51,3 +51,18 @@ footer {
 .logoFooter {
 	width: 40px;
 }
+@media screen and (max-width: 1366px) {
+	footer{
+		height: 13.7vh;
+	}
+	.logoFooter {
+		width: 30px;
+	}
+	.footerContainer{
+		
+	}
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}

@@ -127,7 +127,6 @@ export default function Details(props) {
       <div className="cardDetail">
         {detail.length > 0 ? (
           <div>
-
             <div className="infoContainer">
               <p>Genre: {detail[0].gender} </p>
               <p>Category: {detail[0].category.name}</p>
@@ -146,30 +145,32 @@ export default function Details(props) {
                   <div className="containerFormAddCarry">
                     {(stateSize === undefined ||
                       stateSize.size === undefined) && (
-                        <label className="textChooseSize">Choose Size</label>
-                      )}
+                      <label className="textChooseSize">Choose Size</label>
+                    )}
                     <div className="paragraphSizes">
                       Available sizes:
                       <br />
                       {stock_by_ID.map((sizeStock, index) => {
                         return (
-                          <label
-                            id={
-                              sizeStock.productSize === stateSize.size
-                                ? "SizeSeleccionada"
-                                : "SizeNoSeleccionada"
-                            }
-                            className={
-                              sizeStock.stock === 0
-                                ? "SizeSoldOut"
-                                : "SizeOnSale"
-                            }
-                            onClick={(e) =>
-                              changeSize(e, index, sizeStock.stock)
-                            }
-                          >
-                            {sizeStock.productSize}{" "}
-                          </label>
+                          <div className="selectSize">
+                            <label
+                              id={
+                                sizeStock.productSize === stateSize.size
+                                  ? "SizeSeleccionada"
+                                  : "SizeNoSeleccionada"
+                              }
+                              className={
+                                sizeStock.stock === 0
+                                  ? "SizeSoldOut"
+                                  : "SizeOnSale"
+                              }
+                              onClick={(e) =>
+                                changeSize(e, index, sizeStock.stock)
+                              }
+                            >
+                              {sizeStock.productSize}{" "}
+                            </label>
+                          </div>
                         );
                       })}
                     </div>
@@ -218,7 +219,6 @@ export default function Details(props) {
                 <div>Loading Stock</div>
               )}
             </div>
-
           </div>
         ) : (
           <p>LOADING...</p>

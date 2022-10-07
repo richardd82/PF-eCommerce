@@ -20,7 +20,8 @@ function CarryCard({
         <img src={`https://${img}`} alt="No Found" />
       </div>
       <div className={styles.texContainer}>
-        <h2>{name}</h2>
+        <p>{name}</p>
+      </div>
         {/* <p>{brand}</p> */}{" "}
         {/* Me parece innecesario en este punto de la compra */}
         <div className={styles.priceCartContainer}>
@@ -37,7 +38,6 @@ function CarryCard({
             <button onClick={onDelete}>Delete</button>
           </div>
         </div>
-      </div>
     </div>
   );
 }

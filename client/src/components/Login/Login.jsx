@@ -139,7 +139,7 @@ export default function Login(props) {
         <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
-        <button onClick={handleGoogleSignIn}>Login with Google</button>
+        <button onClick={handleGoogleSignIn} className={style.loginGoogle}></button>
       </div>
       <hr />
       <div className={style.createAcc}>

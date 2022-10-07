@@ -1,4 +1,4 @@
-.container {
+.containerContact {
   display: flex;
   margin: auto;
   margin-top: 40px;
@@ -10,7 +10,7 @@
   border: 3px solid var(--glow-color);
   border-radius: 5px;
   width: 40%;
-  height: 73.4vh;
+  height: 74vh;
   background-color: var(--glow-color);
   margin-bottom: 10px;
   box-shadow: 0 0 1em .25em var(--btn-color),
@@ -24,13 +24,13 @@
 
 }
 
-.form {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
+.formContact {
+  margin-top: 10%;
+}
+
+::placeholder{
+  font-family: 'Square peg', cursive ;
+  font-size: 1.5em;
 }
 
 .field {
@@ -49,12 +49,13 @@
   line-height: 1.5;
   font-size: 14px;
 }
-
-input[type="submit"] {
-  display: block;
-  padding: 6px 30px;
-  font-size: 14px;
-  background-color: #4460AA;
-  color: #fff;
-  border: none
+.form-txtArea{
+  border: 1px solid rgb(152, 40, 204);
+  margin-left: 0%;
+  border-radius: 5px;
+  width: 106%;
+}
+.btnContact{
+  margin: auto;
+  margin-left: 3%;
 }

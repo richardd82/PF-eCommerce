@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStockbyIDTotalFilterCarry, ChangeCarryProducts, createOrder, getOrders } from "../../redux/actions";
-import style from "./Carry.module.css";
+import "./Carry.css";
 import CarryCard from "./CarryCard.jsx";
 import Swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
@@ -214,10 +214,10 @@ class Carry extends Component {
     console.log(this.props.orders);
 
     return (
-      <div className={style.mainContainer}>
-        {carryProducts.length !== 0 ? (
-          <div className={style.containCarry}>
-            <div>
+      <div className="mainContainer">
+       {carryProducts.length !== 0 ? (
+          <div className="containCarry">
+          <div>
               {carryProducts?.map((c, index) => (
                 <CarryCard
                   id={c.details.id}
@@ -233,11 +233,11 @@ class Carry extends Component {
                 />
               ))}
             </div>
-            <div className={style.PriceTotalGlobal}>
-              <div className={style.PriceTotal}>
-                <p>Total: ${this.Number2Decimals(priceTotal)}</p>
+            <div className="PriceTotalGlobal">
+              <div className="PriceTotal">
+               <p>Total: ${this.Number2Decimals(priceTotal)}</p>
                 <button
-                  className={style.buttonPriceTotal}
+                  className="Login_btnLoginModal__1R93O"
                   onClick={() => this.onContinueBuy()}
                 >
                   Continuar Compra

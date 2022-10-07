@@ -57,3 +57,25 @@
 .cardContent2 {
     color: aliceblue;
 }
+@media screen and (max-width: 1366px) {
+    .card {
+        width: 210px;
+        height: 360px;
+    }
+    .card__content {
+        margin: 3px;
+        width: 176px;
+        font-size: .7em;
+        padding-top: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 10px;
+    }
+    .imgCard {
+        width: 97%;
+    }
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}

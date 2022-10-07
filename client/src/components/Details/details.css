@@ -4,8 +4,8 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 73.7vh;
-    ;
+    width: 99%;
+    height: 73.9vh;
 }
 
 .imageContainer {
@@ -62,7 +62,7 @@
     height: 100%;
     padding: var(--border-width);
     border-radius: var(--border-radius);
-    
+
     -webkit-mask-image: var(--m-i), var(--m-i);
     mask-image: var(--m-i), var(--m-i);
     -webkit-mask-origin: var(--m-o);
@@ -75,12 +75,14 @@
     animation-play-state: paused;
     z-index: 0;
 }
-      
-   .paragraphSizes{
+
+.paragraphSizes {
+    display: flex;
     padding: 10px;
     z-index: 999;
-   }
-   #SizeSeleccionada{
+}
+
+#SizeSeleccionada {
     padding: 5px;
     font-size: 1em;
     cursor: pointer;
@@ -89,21 +91,25 @@
     background-color: var(--glow-spread-color);
     width: 25%;
     text-align: center;
-   }
-   #SizeNoSeleccionada{
-    margin: 5px;
+}
+
+#SizeNoSeleccionada {
+    margin: 7px;
     padding: 5px;
     cursor: pointer;
     border: 2px solid var(--glow-color);
     border-radius: 5px;
     width: 25%;
     text-align: center;
-   }
-   .quantInput{
+}
+
+.quantInput {
     padding: 0px;
     font-size: .7em;
-   }
-   .btnAddCarry{
+}
+
+.btnAddCarry {
+    margin-right: 10px;
     margin-left: 40%;
     border: .25em solid var(--glow-color);
     padding: 1em 3em;
@@ -114,13 +120,15 @@
     border-radius: 1em;
     outline: none;
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 1em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
     text-shadow: 0 0 .5em var(--glow-color);
     position: relative;
     transition: all 0.3s;
-   }
-   .btnAddCarry::after{
+    cursor: pointer;
+}
+
+.btnAddCarry::after {
     pointer-events: none;
     content: "";
     position: absolute;
@@ -132,18 +140,19 @@
     filter: blur(2em);
     opacity: .7;
     transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
-   }
-   .btnAddCarry:hover{
+}
+
+.btnAddCarry:hover {
     color: var(--btn-color);
     background-color: var(--glow-color);
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 2em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
-   }
+        0 0 4em 2em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
+}
 
 
 
-   .btnDetailsBack{
+.btnDetailsBack {
     margin-left: 40%;
     border: .25em solid var(--glow-color);
     padding: 1em 3em;
@@ -154,13 +163,14 @@
     border-radius: 1em;
     outline: none;
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 1em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
     text-shadow: 0 0 .5em var(--glow-color);
     position: relative;
     transition: all 0.3s;
-   }
-   .btnDetailsBack::after{
+}
+
+.btnDetailsBack::after {
     pointer-events: none;
     content: "";
     position: absolute;
@@ -172,11 +182,39 @@
     filter: blur(2em);
     opacity: .7;
     transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
-   }
-   .btnDetailsBack:hover{
+}
+
+.btnDetailsBack:hover {
     color: var(--btn-color);
     background-color: var(--glow-color);
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 2em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
-   }
+        0 0 4em 2em var(--glow-spread-color),
+        inset 0 0 .75em .25em var(--glow-color);
+}
+.selectSize{
+    
+}
+@media screen and (max-width: 1366px) {
+    .cardDetailMainContainer{
+        width: 95%;
+        height: 69.7vh;
+    }
+    .imageContainer img{
+        margin-left: 5%;
+        width: 85%;
+    }
+	.imageContainer:hover {
+        transform: scale(1.2);
+    }
+    .cardDetail{
+        width: 15%;
+        font-size: 1em;
+    }
+    .SizeOnSale, .SizeSoldOut{
+        margin-top: 10px !important;
+    }
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+  
+}
