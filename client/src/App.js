@@ -46,6 +46,7 @@ import { ObtenerLogin } from "./redux/actions";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
  import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
 import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
+import GoogleMap from "./components/GoogleMap/GoogleMap";
 
 
 
@@ -87,6 +88,11 @@ function App() {
 					<Route exact path="/login">
 						<Login/>
 					</Route>
+
+          <Route exact path="/map">
+						<GoogleMap/>
+					</Route>
+          
                      {/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />
