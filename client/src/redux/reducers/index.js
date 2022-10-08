@@ -27,7 +27,8 @@ import {
   GET_ALL_FAVS,
   DELETE_FAVS,
   GET_SEARCH_USER,
-  SEARCH_ID
+  SEARCH_ID,
+  IMAGE_POST
 } from "../actions";
 
 
@@ -268,6 +269,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favs: action.payload,
       };
+    case IMAGE_POST:
+      return{
+        ...state,
+      }
     default:
       return state;
   }

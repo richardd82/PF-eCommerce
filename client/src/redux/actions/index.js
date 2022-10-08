@@ -37,6 +37,7 @@ export const PUT_USERS = "PUT_USERS";
 export const GET_SEARCH_USER = "GET_SEARCH_USER";
 export const SEARCH_ID = "SEARCH_ID";
 export const PUT_STOCKS = "PUT_STOCKS";
+export const IMAGE_POST = "IMAGE_POST"
 
 
 
@@ -640,6 +641,22 @@ export function ObtenerLogin() {
         });
     }
   };
+}
+
+export function image_post(payload){
+  return async function(dispatch) {
+    try {
+      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/upload`, payload)
+      return dispatch({
+        type: IMAGE_POST,
+        payload: json.data,
+      });
+  
+  } catch(e) {
+      console.log(e);
+  }
+  }
+  
 }
 
 
