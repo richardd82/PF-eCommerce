@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./CreateProduct.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CreateNewProduct, post_image } from "../../redux/actions";
+import { CreateNewProduct, image_post} from "../../redux/actions";
 import swal from "sweetalert";
 import {
   getCategorys, searchNameProduct,
@@ -154,11 +154,10 @@ function Formulario() {
   }
   function imageHandleChange(e){
     //console.log(e.target.defaultValue);
-    console.log(e.target.value);
     e.preventDefault();
     const file = e.target.value;
     //previewFile(file);
-    setSelectedFile(file);
+    setSelectedFile(e.target.files[0]);
     setFileInputState(e.target.value);
 
     SetErrors(
@@ -234,7 +233,7 @@ function Formulario() {
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
-      uploadImage(reader.result);
+      dispatch(image_post(reader.result));
     };
     if (
       input.description &&

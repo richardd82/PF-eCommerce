@@ -646,7 +646,7 @@ export function ObtenerLogin() {
 export function image_post(payload){
   return async function(dispatch) {
     try {
-      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/upload`, payload)
+      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`,{file:payload})
       return dispatch({
         type: IMAGE_POST,
         payload: json.data,
