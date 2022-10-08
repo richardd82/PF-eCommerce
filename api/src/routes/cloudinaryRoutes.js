@@ -6,10 +6,15 @@ var cors = require('cors');
 
 router.use(express.static('public'));
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.use(express.json({ limit: '10mb' }));
 router.use(express.urlencoded({ limit: '10mb', extended: true }));
 =======
 >>>>>>> 634165a (Cambiando las configuraciones del server sequelize para que reciba bien el body pasado para el cloudinary)
+=======
+router.use(express.json({ limit: '120mb' }));
+router.use(express.urlencoded({ limit: '120mb', extended: true }));
+>>>>>>> 3cf927a (minor changes)
 router.use(cors());
 
 router.get('/images', async (_req, res) => {
