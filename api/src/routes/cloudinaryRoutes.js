@@ -1,4 +1,4 @@
-const { cloudinary } = require('./cloudinaryResource.js');
+const  cloudinary  = require('../source/cloudinarySource.js');
 const express = require('express');
 const router = express();
 var cors = require('cors');
@@ -19,9 +19,10 @@ router.get('/images', async (_req, res) => {
     res.send(publicIds);
 });
 router.post('/upload', async (req, res) => {
+    const {file} = req.body;
+    console.log(file)
     try {
-        const fileStr = req.body.data;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+        const uploadResponse = await cloudinary.uploader.upload(file, {
             upload_preset: 'zt3zbmga',
         });
         console.log(uploadResponse);
