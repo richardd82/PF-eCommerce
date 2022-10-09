@@ -433,7 +433,7 @@ function Formulario() {
           <label className="label-form">Price</label>
         </div>
 
-        <div>
+        {/* <div> */}
           <input 
             id="fileInput"
             type="file"
@@ -443,7 +443,7 @@ function Formulario() {
             className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
           />
 
-          <div />
+          {/* <div /> */}
           {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
@@ -470,7 +470,7 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
           </div>*/}
-        </div>
+        {/* </div> */}
 
         <div className="select">
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
@@ -582,7 +582,7 @@ function Formulario() {
               cols="30"
               rows="8">
             </textarea>
-            <label className="label-form">Description</label>
+            <label className="label-formTxt">Description</label>
           </div>
 
 
