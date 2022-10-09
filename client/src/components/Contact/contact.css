@@ -59,3 +59,18 @@
   margin: auto;
   margin-left: 3%;
 }
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+  .containerContact{
+    margin-top: 27px;
+    width: 30%;
+    height: 69.3vh;
+  }
+  .formContact{
+    margin-top: 0%;
+  }
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2048px) {
+
+}

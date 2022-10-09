@@ -88,6 +88,73 @@ router.post("/", async (req, res, next) => {
       return res.status(400).send("Error: " + e);
     }
   });
+
+  router.post("/google", async (req, res, next) => {
+    const { email, password, name, lastName, image, address } = req.body;
+
+    console.log("entro validacion Google", email, password, name, lastName, image, address);
+    let isAdmin = false;
+    let isBaned = false;
+    try {
+       var userValidate = await User.findAll({
+          where: { email: email },
+       });
+ 
+       console.log("user validate", userValidate);
+      //  if (
+      //     email === "enzoholgadodev@gmail.com" ||
+      //     email === "makoski.ed@gmail.com" ||
+      //     email === "sebaslkjh@gmail.com" ||
+      //     email === "ingdcuevas@gmail.com" ||
+      //     email === "mattvalenti11@gmail.com" ||
+      //     email === "rider_shock@outlook.es" ||
+      //     email === "marina-mansilla@hotmail.com" ||
+      //     email === "eze-leiva@hotmail.com"
+      //  ) {
+      //     isAdmin = true;
+      //  }
+ 
+       let passwordHash = await bcrypt.hash(password, 10);
+ 
+       if (Object.entries(userValidate).length === 0) {
+          const user = await User.findOrCreate({
+             where: {
+                username: email,
+                email: email,
+                name: name,
+                lastName: lastName,
+                password: passwordHash,
+                image: image,
+                address: address,
+                isAdmin: isAdmin,
+                isBaned: isBaned,
+             },
+          });
+          // await transporter.sendMail({ , // html body
+          // }); VA ENVIO DE EMAIL!!!!!!!!!!!
+          userValidate = User.findAll({
+             where: { email: email },
+          });
+       }
+
+       const userForToken = {
+        username: "username",
+        name: userValidate[0].dataValues.name,
+        lastName: userValidate[0].dataValues.lastName,
+        image: userValidate[0].dataValues.image,
+        address: userValidate[0].dataValues.address,
+        isAdmin: userValidate[0].dataValues.isAdmin,
+        id: userValidate[0].dataValues.id,
+       }
+
+       const token = jwt.sign(userForToken, process.env.JWT_secret_key);
+
+       res.status(200).json({ userForToken, token })
+    } catch (err) {
+       console.log("entro error");
+       next(err);
+    }
+ });
   
   router.post("/verify",verifyToken,(req,res)=>{
  

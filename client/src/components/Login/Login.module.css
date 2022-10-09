@@ -140,7 +140,34 @@
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
-
+   .loginContainer {
+      width: 330px;
+      height: 67vh;
+      margin: 10px auto;
+      padding: 0px 0px;
+   }
+   .btnClose {
+      margin-right: 1%;
+      margin-top: 1%;
+      align-self: flex-end;
+      width: 21px;
+      height: 23px;
+      font-size: 15px;
+      cursor: pointer;
+   }
+   .login {
+      gap: 0px;
+   }
+   .login input{
+      padding: 5px 9px;
+   }
+   .btnLoginModal{
+      margin-top: 3%;
+      padding: 0.5em 1em;
+   }
+   .createAcc {
+      margin-left: 25%;
+   }   
 }
 /*----------Media Queries (HIGH DEVICES) ----------*/
 @media screen and (min-width: 2048px) {

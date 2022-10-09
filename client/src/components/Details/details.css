@@ -191,9 +191,6 @@
         0 0 4em 2em var(--glow-spread-color),
         inset 0 0 .75em .25em var(--glow-color);
 }
-.selectSize{
-    
-}
 @media screen and (max-width: 1366px) {
     .cardDetailMainContainer{
         width: 95%;

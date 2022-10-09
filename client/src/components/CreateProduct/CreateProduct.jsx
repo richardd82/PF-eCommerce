@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./CreateProduct.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CreateNewProduct, post_image } from "../../redux/actions";
+import { CreateNewProduct, image_post} from "../../redux/actions";
 import swal from "sweetalert";
 import {
   getCategorys, searchNameProduct,
@@ -154,11 +154,10 @@ function Formulario() {
   }
   function imageHandleChange(e){
     //console.log(e.target.defaultValue);
-    console.log(e.target.value);
     e.preventDefault();
     const file = e.target.value;
     //previewFile(file);
-    setSelectedFile(file);
+    setSelectedFile(e.target.files[0]);
     setFileInputState(e.target.value);
 
     SetErrors(
@@ -234,7 +233,7 @@ function Formulario() {
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
-      uploadImage(reader.result);
+      dispatch(image_post(reader.result));
     };
     if (
       input.description &&
@@ -434,7 +433,7 @@ function Formulario() {
           <label className="label-form">Price</label>
         </div>
 
-        <div>
+        {/* <div> */}
           <input 
             id="fileInput"
             type="file"
@@ -444,7 +443,7 @@ function Formulario() {
             className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
           />
 
-          <div />
+          {/* <div /> */}
           {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
@@ -471,7 +470,7 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
           </div>*/}
-        </div>
+        {/* </div> */}
 
         <div className="select">
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
@@ -583,7 +582,7 @@ function Formulario() {
               cols="30"
               rows="8">
             </textarea>
-            <label className="label-form">Description</label>
+            <label className="label-formTxt">Description</label>
           </div>
 
 

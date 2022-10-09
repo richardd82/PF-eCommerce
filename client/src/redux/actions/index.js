@@ -370,11 +370,12 @@ export function getChecklogin(newLoggedUser) {
 // login google
 
 export function LoginGoogleUser(user) {
+  console.log('USER', user)
   return async function (dispatch) {
     try {
       return dispatch({
         type: CHANGE_USER_LOGIN,
-        payload: user,
+        payload: { user: user.userForToken, token: user.token }
       });
     } catch (error) {
       console.log(error);
@@ -645,7 +646,7 @@ export function ObtenerLogin() {
 export function image_post(payload){
   return async function(dispatch) {
     try {
-      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/upload`, payload)
+      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`,{file:payload})
       return dispatch({
         type: IMAGE_POST,
         payload: json.data,
