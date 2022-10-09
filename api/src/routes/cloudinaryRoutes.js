@@ -3,9 +3,8 @@ const express = require('express');
 const router = express();
 var cors = require('cors');
 
+
 router.use(express.static('public'));
-router.use(express.json({ limit: '120mb' }));
-router.use(express.urlencoded({ limit: '120mb', extended: true }));
 router.use(cors());
 
 router.get('/images', async (_req, res) => {
@@ -20,7 +19,7 @@ router.get('/images', async (_req, res) => {
 });
 router.post('/upload', async (req, res) => {
     const {file} = req.body;
-    console.log(file)
+    //console.log(file)
     try {
         const uploadResponse = await cloudinary.uploader.upload(file, {
             upload_preset: 'zt3zbmga',
