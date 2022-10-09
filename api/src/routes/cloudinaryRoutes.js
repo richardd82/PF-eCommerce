@@ -3,9 +3,13 @@ const express = require('express');
 const router = express();
 var cors = require('cors');
 
+
 router.use(express.static('public'));
+<<<<<<< HEAD
 router.use(express.json({ limit: '10mb' }));
 router.use(express.urlencoded({ limit: '10mb', extended: true }));
+=======
+>>>>>>> 634165a (Cambiando las configuraciones del server sequelize para que reciba bien el body pasado para el cloudinary)
 router.use(cors());
 
 router.get('/images', async (_req, res) => {
@@ -20,7 +24,7 @@ router.get('/images', async (_req, res) => {
 });
 router.post('/upload', async (req, res) => {
     const {file} = req.body;
-    console.log(file)
+    //console.log(file)
     try {
         const uploadResponse = await cloudinary.uploader.upload(file, {
             upload_preset: 'zt3zbmga',
