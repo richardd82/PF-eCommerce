@@ -117,7 +117,7 @@ function Formulario() {
     id: Math.floor(Math.random() * 1000),
     name: "",
     price: "",
-    image: "",
+    image: [],
     gender: "",
     categoryId: undefined,
     NewCategory: "",
@@ -262,6 +262,13 @@ function Formulario() {
       history.push("/");
     } else alert(" missing data for the creation of a new product");
   }
+
+  /* const file = await res.json();
+      if(file.secure_url !== undefined){
+        setForm({
+          ...form, image: [...form.image, file.secure_url]
+        }) */
+        
   //comprobacion de INPUT
 
   function comprobacionInput(input) {
@@ -433,7 +440,7 @@ function Formulario() {
           <label className="label-form">Price</label>
         </div>
 
-        {/* <div> */}
+        <div>
           <input 
             id="fileInput"
             type="file"
@@ -443,7 +450,7 @@ function Formulario() {
             className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
           />
 
-          {/* <div /> */}
+          <div />
           {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
@@ -470,7 +477,7 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
           </div>*/}
-        {/* </div> */}
+        </div>
 
         <div className="select">
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
@@ -582,7 +589,7 @@ function Formulario() {
               cols="30"
               rows="8">
             </textarea>
-            <label className="label-formTxt">Description</label>
+            <label className="label-form">Description</label>
           </div>
 
 
