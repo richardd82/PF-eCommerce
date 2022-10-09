@@ -25,7 +25,7 @@
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
     .virtualBody{
-        height: 75vh;
+        height: 74.7vh;
     }
     .imgCarrousel{
         width: 63% !important;
@@ -35,6 +35,9 @@
         backdrop-filter: blur(10px);
         border-radius: 15px;
         width: 90%;
+    }
+    footer {
+        height: 13.3vh;
     }
 }
 /*----------Media Queries (HIGH DEVICES) ----------*/
