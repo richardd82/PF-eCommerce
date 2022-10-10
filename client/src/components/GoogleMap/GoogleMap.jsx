@@ -22,9 +22,12 @@ import {
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
 
+import { useHistory } from "react-router-dom";
+
 const center = { lat: 48.8584, lng: 2.2945 }
 
 function Map() {
+  const history = useHistory();
   const [libraries] = useState(['places']);
 
   const { isLoaded } = useJsApiLoader({
@@ -33,6 +36,8 @@ function Map() {
   })
 
   const [coordinates, setCoordinates] = useState([])
+  const [SelectTypeSearch, setSelectTypeSearch] = useState("TypeSearchBox")
+  const [myAdress, setMyAdress] = useState({ name: "", adress: "" })
 
   const [map, setMap] = useState(/** @type google.maps.Map */(null))
 
@@ -43,7 +48,7 @@ function Map() {
   }
 
 
-  async function Print(e) {
+  async function SearchByBox(e) {
     const directionsService = new google.maps.Geocoder()
     console.log(PlaceRef.current.value)
     try {
@@ -53,6 +58,7 @@ function Map() {
         const element = A.results[index];
         array.push({ adress: { lat: element.geometry.location.lat(), lng: element.geometry.location.lng() }, name: element.formatted_address })
       }
+      setMyAdress(array[0])
       setCoordinates(array);
       map.panTo(array[0].adress)
       map.setZoom(15)
@@ -62,12 +68,21 @@ function Map() {
     }
   }
 
-  function Pointer() {
-    console.log(e)
+  function ChangeTypeSearch(e) {
+    setSelectTypeSearch(e)
+  }
+  async function SelectAdress(e, elemento) {
+    try {
+      setMyAdress(elemento)
+      map.panTo(elemento.adress)
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
   const svgMarker = {
-    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+    path: "M 10 11 l 4 0 l 0 -3 l -2 -2 l -2 2 z M 12 2.016 q 2.906 0 4.945 2.039 t 2.039 4.945 q 0 1.453 -0.727 3.328 t -1.758 3.516 t -2.039 3.07 t -1.711 2.273 l -0.75 0.797 q -0.281 -0.328 -0.75 -0.867 t -1.688 -2.156 t -2.133 -3.141 t -1.664 -3.445 t -0.75 -3.375 q 0 -2.906 2.039 -4.945 t 4.945 -2.039 z",
     fillColor: "blue",
     fillOpacity: 0.6,
     strokeWeight: 0,
@@ -75,6 +90,46 @@ function Map() {
     scale: 2,
     anchor: new google.maps.Point(15, 30),
   };
+
+  const svgMarker2 = {
+    path: "M 10 11 l 4 0 l 0 -3 l -2 -2 l -2 2 z M 12 2.016 q 2.906 0 4.945 2.039 t 2.039 4.945 q 0 1.453 -0.727 3.328 t -1.758 3.516 t -2.039 3.07 t -1.711 2.273 l -0.75 0.797 q -0.281 -0.328 -0.75 -0.867 t -1.688 -2.156 t -2.133 -3.141 t -1.664 -3.445 t -0.75 -3.375 q 0 -2.906 2.039 -4.945 t 4.945 -2.039 z",
+    fillColor: "red",
+    fillOpacity: 0.6,
+    strokeWeight: 0,
+    rotation: 0,
+    scale: 2,
+    anchor: new google.maps.Point(15, 30),
+  };
+
+
+  function ClickContinue(){
+    history.push("/")
+  }
+
+  async function Pointer(e) {
+    if (SelectTypeSearch == "TypePointer") {
+      const directionsService = new google.maps.Geocoder()
+      console.log(e.latLng)
+      try {
+        var A = await directionsService.geocode({ location: { lat: e.latLng.lat(), lng: e.latLng.lng() } })
+        var array = [];
+        for (let index = 0; index < A.results.length; index++) {
+          const element = A.results[index];
+          array.push({ adress: { lat: element.geometry.location.lat(), lng: element.geometry.location.lng() }, name: element.formatted_address })
+        }
+        setMyAdress(array[0])
+        var array2 = []
+        array2.push(array[0])
+        setCoordinates(array2);
+        map.panTo(array[0].adress)
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  var Adress = myAdress.name != "" ? myAdress.name : "Search your adress"
 
   return (
     <Flex
@@ -100,78 +155,60 @@ function Map() {
           onLoad={map => setMap(map)}
         >
           {coordinates.map((elemento, index) => {
-            return (<Marker key={"Marker " + index} position={elemento.adress} icon={svgMarker} />)
+            console.log(elemento," ",myAdress)
+            return (<Marker key={"Marker " + index} position={elemento.adress} 
+            icon={JSON.stringify(myAdress)!==JSON.stringify(elemento)? svgMarker:svgMarker2} />)
           })}
 
         </GoogleMap>
       </Box>
 
-      <StandaloneSearchBox >
-        <input
-          type='text'
-          placeholder='find your address'
-          ref={PlaceRef}
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `18px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: 'absolute',
-            top: '10%',
-            left: '65%',
-            width: `30%`,
-            height: `5%`,
-          }
-          }
-        />
-      </StandaloneSearchBox>
-      <IconButton
-        aria-label='center back'
-        icon={<FaSearchLocation
-          style={{
-            width: `100%`,
-            height: `100%`,
-          }}
-        />}
-        isRound
-        onClick={() => { Print() }}
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `100%`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-          position: 'absolute',
-          top: '10%',
-          left: '95%',
-          width: `3%`,
-          height: `5%`,
-        }
-        }
-      />
-     
-     <div className='GoogleMapPlacesSearch'
-      style={{position: 'absolute',
-      top: '20%',
-      left: '65%',
-      width: `33%`}}>
-    
-      {coordinates.map((elemento, index) => {
-        console.log(elemento)
-        console.log(elemento.name)
-        return (<Button 
-          colorScheme='pink' type='submit' key={"adress" + elemento.address} >
-          {elemento.name}
-        </Button>)
-      })}
-     </div>
+
+
+      <div className='GoogleMapPlacesSearch'>
+       <p><label>Your Adress:</label>
+        <label>{Adress}</label></p> 
+
+        <p><label>Type Search: </label>
+          <select value={SelectTypeSearch} onChange={(e) => ChangeTypeSearch(e.target.value)}>
+            <option key={"TypeSearchBox"} value={"TypeSearchBox"}>{"SearchBox"}</option>
+            <option key={"TypePointer"} value={"TypePointer"}>{"Pointer"}</option>
+          </select>
+        </p>
+
+
+        {SelectTypeSearch == "TypeSearchBox" &&
+          <div>
+            <p className='SearchBox'>
+              <StandaloneSearchBox >
+                <input
+                  type='text'
+                  placeholder='find your address'
+                  ref={PlaceRef}
+                />
+              </StandaloneSearchBox>
+              <IconButton
+                aria-label='center back'
+                icon={<FaSearchLocation />}
+                isRound
+                onClick={() => { SearchByBox() }}
+              />
+            </p>
+
+            <div className='OpcionesAdress'>
+              {coordinates.map((elemento, index) => {
+                console.log(elemento)
+                console.log(elemento.name)
+                return (<button
+                  type='submit' key={"adress" + elemento.name + index} onClick={(e) => SelectAdress(e, elemento)} >
+                  {elemento.name}
+                </button>)
+              })}
+            </div>
+          </div>}
+        {myAdress.name != "" &&
+          <button onClick={()=>ClickContinue()}>Continue</button>}
+      </div>
     </Flex >
   )
 }

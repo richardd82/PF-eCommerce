@@ -334,16 +334,6 @@ export function DeleteDrop(payload) {
 
 /* CREAR PRODUCTO */
 
-export function CreateNewProduct(payload) {
-  return async function () {
-    const response = await axios.post(
-      REACT_APP_URL_BACK + "/product/",
-      payload
-    );
-    return response;
-  };
-}
-
 export function getChecklogin(newLoggedUser) {
   return async function (dispatch) {
     try {
@@ -643,21 +633,17 @@ export function ObtenerLogin() {
   };
 }
 
-export function image_post(payload){
-  return async function(dispatch) {
+export function CreateNewProduct(payload) {
+
+  const { name, price, brand, gender, nameCategory, description, imageData } = payload
+  return async function (dispatch) {
     try {
-      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`,{file:payload})
-      return dispatch({
-        type: IMAGE_POST,
-        payload: json.data,
-      });
-  
-  } catch(e) {
+      let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
+      console.log(clouData)
+      const response = await axios.post(REACT_APP_URL_BACK + "/product/", { name, price, brand, gender, nameCategory, description, image: clouData.data.url });
+      return response;
+    } catch (e) {
       console.log(e);
+    }
   }
-  }
-  
 }
-
-
-
