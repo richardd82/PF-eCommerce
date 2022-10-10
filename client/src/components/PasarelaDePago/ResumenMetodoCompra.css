@@ -7,7 +7,7 @@
   padding: 15px;
 }
 
-.btnPay {
+.btnPayPasarela {
   margin: 0 auto;
   display: block;
   max-width: 100%;
@@ -22,6 +22,6 @@
   font-size: 1.2rem;
 }
 
-.btnPay:hover {
+.btnPayPasarela:hover {
   background-color: #05b405;
 }

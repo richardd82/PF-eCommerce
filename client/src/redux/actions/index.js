@@ -449,7 +449,8 @@ export function getOrders(type, parameter) {
 
 export function createOrder(payload) {
   console.log(payload);
-  return function (dispatch) {
+  return  async function (dispatch) {
+    try{
     axios
       .post(`${REACT_APP_URL_BACK}/orders`, payload)
       .then((res) => {
@@ -458,8 +459,22 @@ export function createOrder(payload) {
           payload: res,
         });
       })
-      .catch((error) => console.log(error));
+    }
+    catch(error) {
+     console.log(error);}
   };
+}
+
+export async function createOrder2(payload) {
+    try{
+    axios
+      .post(`${REACT_APP_URL_BACK}/orders`, payload)
+      .then((res) => {
+        return res;
+      })
+    }
+    catch(error) {
+     console.log(error);}
 }
 
 //USERS ADMIN
