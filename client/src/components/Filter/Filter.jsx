@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   searchNameProduct, changeFilterGender, changeFilterCategory, changeFilterBrand,
   getCategorys, changeFilterMin, changeFilterMax, changeFilterPrice, changePaginatedProducts,
-  changeFilternameProductSearched,changeFilterURL
+  changeFilternameProductSearched, changeFilterURL
 } from '../../redux/actions'
 import { withRouter } from "react-router";
 import './filter.css';
@@ -23,7 +23,7 @@ export class Filter extends Component {
   }
 
   obtenerMarcas(productosNuevos) {
-    var Brands=[];
+    var Brands = [];
     for (let index = 0; index < productosNuevos.length; index++) {
       const element = productosNuevos[index].brand;
       if (!Brands.includes(element))
@@ -32,14 +32,14 @@ export class Filter extends Component {
     return Brands
   }
 
-  filtradoProductos(products, paginated, categorys, filterBrand, filterCategory, filterForPrice, min, max, gender) {
-  
-    let productosNuevos = products.filter(element => element.gender === (gender==undefined?this.props.filters.filterGender:gender));
+  filtradoProductos(products, paginated, categorys, filterBrand, filterCategory, filterForPrice, min, max, gender, filterGender) {
+
+    let productosNuevos = products.filter(element => element.gender === (gender == undefined ? this.props.filters.filterGender : gender));
     console.log(categorys)
-    let IDsGender = categorys.filter(element => element.gender === (gender==undefined?this.props.filters.filterGender:gender));
+    let IDsGender = categorys.filter(element => element.gender === (gender == undefined ? this.props.filters.filterGender : gender));
     let Brands = [];
     const DetectarID = IDsGender.find(element => element.name == filterCategory);
-    if(IDsGender.length > 0 && filterCategory==0){
+    if (IDsGender.length > 0 && filterCategory == 0) {
       this.props.changeFilterCategory(IDsGender[0].name);
     }
 
@@ -52,12 +52,12 @@ export class Filter extends Component {
     if (filterForPrice)
       productosNuevos = productosNuevos.filter(element => (min <= element.price && element.price <= max));
     //console.log(productosNuevos);
-    if(gender!==undefined){
-    productosNuevos = productosNuevos.filter(element => (element.stocks.some((stock) => stock.stock>0)));
-    
-    console.log(gender,"  ",this.props.filterGender)
+
+    if (gender !== undefined) {
+      productosNuevos = productosNuevos.filter(element => (element.stocks.some((stock) => stock.stock > 0)));
+      if (filterGender !== gender)
+        this.props.changeFilterGender(gender)
     }
-    
 
     if (JSON.stringify(paginated.productsView) !== JSON.stringify(productosNuevos))
       this.props.changePaginatedProducts(productosNuevos)
@@ -67,77 +67,77 @@ export class Filter extends Component {
   }
 
   render() {
-    var getGenderbyMatch=this.props.match.params.gender
-    const { nameProductSearched, filterBrand, filterGender, filterCategory, filterForPrice, min, max,filterUrl } = this.props.filters;
+    var getGenderbyMatch = this.props.match.params.gender
+    const { nameProductSearched, filterBrand, filterGender, filterCategory, filterForPrice, min, max, filterUrl } = this.props.filters;
     const { categorys, products, paginated } = this.props;
-    if(this.props.match.url!=filterUrl)
-    this.props.changeFilterURL(this.props.match.url)
+    if (this.props.match.url != filterUrl)
+      this.props.changeFilterURL(this.props.match.url)
     console.log(categorys)
     let values = this.filtradoProductos(products, paginated, categorys, filterBrand,
-      filterCategory, filterForPrice, min, max, getGenderbyMatch)
+      filterCategory, filterForPrice, min, max, getGenderbyMatch, filterGender)
 
     return (
       <div className="containerFilter">
         <nav className="NavFilter">
-        <div className="contentFilter">
-          <ul >
-            <li className="ItemFilter">
-              <label className="NameFilter">Search Product Name: </label>
-              <input
-                type="text"
-                id="nombreProducto"
-                autoComplete="off"
-                value={nameProductSearched}
-                onChange={(e) => this.handleChange(e)}
-              />
-            </li>
-            { getGenderbyMatch==undefined &&
-            <li className="ItemFilter">
-              <p><label className="NameFilter"  >Gender: </label>
-                <select value={filterGender} onChange={(e) => this.props.changeFilterGender(e.target.value)}>
-                <option key={"Men"} value={"Men"}>Men</option>
-                <option key={"Women"} value={"Women"}>Women</option>
-                </select></p>
-            </li>
-            }
-
-            <li className="ItemFilter">
-              <p><label className="NameFilter"  >Category: </label>
-                <select value={filterCategory} onChange={(e) => this.props.changeFilterCategory(e.target.value)}>
-                  {values.IDsGender.map((elemento) => {
-                    return (
-                      <option key={elemento.id} value={elemento.name}>{elemento.name}</option>)
-                  })
-                  }
-                </select></p>
-            </li>
-
-            <li className="ItemFilter">
-              <label className="NameFilter" > BrandName</label>
-              {
-                values.Brands.map((elemento) => {
-                  return (
-                    <div>
-                      <input type="checkbox" id={elemento} name={elemento} value={elemento} checked={filterBrand.includes(elemento)}
-                        onChange={(e) => this.props.changeFilterBrand(e.target)} className="checkboxBrand"/>
-                      <label for={elemento} className="lblBrand"> {elemento}</label>
-                    </div>)
-                })
+          <div className="contentFilter">
+            <ul >
+              <li className="ItemFilter">
+                <label className="NameFilter">Search Product Name: </label>
+                <input
+                  type="text"
+                  id="nombreProducto"
+                  autoComplete="off"
+                  value={nameProductSearched}
+                  onChange={(e) => this.handleChange(e)}
+                />
+              </li>
+              {getGenderbyMatch == undefined &&
+                <li className="ItemFilter">
+                  <p><label className="NameFilter"  >Gender: </label>
+                    <select value={filterGender} onChange={(e) => this.props.changeFilterGender(e.target.value)}>
+                      <option key={"Men"} value={"Men"}>Men</option>
+                      <option key={"Women"} value={"Women"}>Women</option>
+                    </select></p>
+                </li>
               }
-            </li>
 
-            <li className="ItemFilter">
-              <input type="checkbox" id={"ActivateFilterPrice"} name={"ActivateFilterPrice"} value={"ActivateFilterPrice"} checked={filterForPrice}
-                onChange={(e) => this.props.changeFilterPrice(e.target.checked)} />
-              <label className="NameFilter" for={"ActivateFilterPrice"}> Filter for Price</label>
-              <input type="number" min="0" step="50" placeholder="Precio Minimo" value={min} onChange={(e) => this.props.changeFilterMin(e)} />
-              <br />
-              <div className="priceA">{" a "}</div>
-              <br />
-              <input type="number" min="0" step="50" placeholder="Precio Maximo" value={max} onChange={(e) => this.props.changeFilterMax(e)} />
-            </li>
+              <li className="ItemFilter">
+                <p><label className="NameFilter"  >Category: </label>
+                  <select value={filterCategory} onChange={(e) => this.props.changeFilterCategory(e.target.value)}>
+                    {values.IDsGender.map((elemento) => {
+                      return (
+                        <option key={elemento.id} value={elemento.name}>{elemento.name}</option>)
+                    })
+                    }
+                  </select></p>
+              </li>
 
-          </ul>
+              <li className="ItemFilter">
+                <label className="NameFilter" > BrandName</label>
+                {
+                  values.Brands.map((elemento) => {
+                    return (
+                      <div>
+                        <input type="checkbox" id={elemento} name={elemento} value={elemento} checked={filterBrand.includes(elemento)}
+                          onChange={(e) => this.props.changeFilterBrand(e.target)} className="checkboxBrand" />
+                        <label for={elemento} className="lblBrand"> {elemento}</label>
+                      </div>)
+                  })
+                }
+              </li>
+
+              <li className="ItemFilter">
+                <input type="checkbox" id={"ActivateFilterPrice"} name={"ActivateFilterPrice"} value={"ActivateFilterPrice"} checked={filterForPrice}
+                  onChange={(e) => this.props.changeFilterPrice(e.target.checked)} />
+                <label className="NameFilter" for={"ActivateFilterPrice"}> Filter for Price</label>
+                <input type="number" min="0" step="50" placeholder="Precio Minimo" value={min} onChange={(e) => this.props.changeFilterMin(e)} />
+                <br />
+                <div className="priceA">{" a "}</div>
+                <br />
+                <input type="number" min="0" step="50" placeholder="Precio Maximo" value={max} onChange={(e) => this.props.changeFilterMax(e)} />
+              </li>
+
+            </ul>
           </div>
         </nav>
       </div>
@@ -171,7 +171,7 @@ function mapDispatchToProps(dispatch) {
     changeFilterPrice: (e) => dispatch(changeFilterPrice(e)),
     changePaginatedProducts: (e) => dispatch(changePaginatedProducts(e)),
     changeFilternameProductSearched: (nameSearch) => dispatch(changeFilternameProductSearched(nameSearch)),
-    changeFilterURL:(url)=>dispatch(changeFilterURL(url))
+    changeFilterURL: (url) => dispatch(changeFilterURL(url))
   }
 }
 
