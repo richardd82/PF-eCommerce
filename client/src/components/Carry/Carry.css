@@ -35,8 +35,9 @@
 .containCarry {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   height: 68vh;
+  margin-top: 110px;
 }
 
 .paragraph {
@@ -46,8 +47,13 @@
   color: white;
   font-size: 2rem;
 }
-
+.PriceTotalGlobal{
+  margin-left: 100px;
+}
 .PriceTotal {
+  position: absolute;
+  display: block;
+  width: 9%;
   height: 100px;
   border-radius: 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
@@ -55,7 +61,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: -5%;
+  margin-left: 126px;
   margin-bottom: 40px;
   padding: 20px;
   background-image: url('../../assets/backgroundBlocks2.jpg');
@@ -79,7 +86,24 @@
     height: 60vh;
   }
 }
-/*----------Media Queries (HIGH DEVICES) ----------*/
+/*----------Media Queries (2K DEVICES) ----------*/
+@media screen and (min-width: 1400px) and (max-width: 1680px){
+	.mainContainer{
+    height: 63vh;
+  }
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1728px)  {
+  .mainContainer{
+    height: 68.3vh;
+  }
+  .PriceTotal {
+    margin-top: -5%;
+    margin-left: 105px;
+    margin-bottom: 40px;
+}
+}
+/*----------Media Queries (UHD DEVICES) ----------*/
 @media screen and (min-width: 2048px) {
   
 }

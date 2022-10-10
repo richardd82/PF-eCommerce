@@ -58,11 +58,19 @@ footer {
 	.logoFooter {
 		width: 30px;
 	}
-	.footerContainer{
-		
+}
+/*----------Media Queries (2K DEVICES) ----------*/
+@media screen and (min-width: 1400px) and (max-width: 1680px){
+	footer{
+		height: 12.4vh;
 	}
 }
-/*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2048px) {
-  
-}
+/*----------Media Queries (UHD DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2160px)  {
+	.parendAbout {
+	  margin-left: 7%;
+	}
+	.mainAbout {
+	  height: 77.9vh;
+	}
+  }

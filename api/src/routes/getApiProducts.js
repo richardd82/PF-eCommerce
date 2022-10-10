@@ -46,7 +46,7 @@ module.exports = async () => {
                name: producsNew[index].name,
                price: producsNew[index].price.current.value,
                brand: producsNew[index].brandName,
-               image: producsNew[index].imageUrl,
+               image: `https://${producsNew[index].imageUrl}`,
                gender: genero,
                categoryId: producsNew[index].categoryId,
                description: `${producsNew[index].name} is very good quality clothing, made by the ${producsNew[index].brandName} brand in the USA with the best quality materials. We have different sizes and colors of this product so you can choose the one you like best.`,

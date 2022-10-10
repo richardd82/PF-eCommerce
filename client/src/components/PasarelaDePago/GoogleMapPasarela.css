@@ -1,0 +1,44 @@
+.GoogleMapPlacesSearch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.Columnas{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.OpcionesAdress {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.SearchBox {
+    display: flex;
+    justify-content: center;
+}
+
+.SearchboxK{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input.inputSearchbox{
+    width: 300px;
+}
+
+
+.Adress{
+    width: 300px;
+    display: flex;
+}

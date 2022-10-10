@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./productCard.css";
 
 function ProductCard({ img, name, brand, price, id, /*styleCard*/ }) {
+	
 	return (
 		<div className="card" 	>
 			<Link to={`/details/${id}`} className="linkCard">
 				<div key={id}>
 					<div className="containerImgCard">
-						<img src={`https://${img}`} alt="No Found" className="imgCard" />
+						<img src={img} alt="No Found" className="imgCard" />
 					</div>
 				</div>
 			</Link>

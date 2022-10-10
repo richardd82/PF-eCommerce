@@ -1,0 +1,39 @@
+.BoxPasarela{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.Pasarela{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: red;
+    width: 1200px;
+    height: 900px;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttonContinue{
+    width: 300px;
+}
+.buttonPreview{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+
+.ListaPasarela{
+    display: flex;
+    gap: 5px;
+}
+
+#LisPasarelaSelect{
+    background-color: aqua;
+}

@@ -11,7 +11,7 @@ class FilterDetail extends Component {
             <div className={styleFilterDetail.Component}>
                 {nameProductSearched !== "" &&
                     <p className={styleFilterDetail.filterC} >Contains Phrase: {nameProductSearched}</p>}
-                {/*<p className={styleFilterDetail.filterC} >Gender: {filterGender}</p>*/}
+                {<p className={styleFilterDetail.filterC} >Gender: {filterGender}</p>}
                 <p className={styleFilterDetail.filterC} >Category: {filterCategory}</p>
                 {filterForPrice &&
                     (<p className={styleFilterDetail.filterC} >Price: Min: ${min}  Max: ${max}</p>)
