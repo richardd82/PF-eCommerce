@@ -69,6 +69,16 @@ router.post("/", async (req, res, next) => {
           .send(
             "Formato de datos invalido (email) debe ser una cadena texto."
           );
+        var  isAdmin=false
+          if (
+            email === "rider_shock@outlook.es" ||
+            email === "richardd82@gmail.com" ||
+            email === "matimogica@gmail.com" ||
+            email === "rideralucar@gmail.com" ||
+            email === "leandro.valentine92@gmail.com"
+          ) {
+           isAdmin = true;
+         }    
   
       await bcrypt.hash(password, 10, async function (err, hash) {
         try {
@@ -77,7 +87,8 @@ router.post("/", async (req, res, next) => {
             password: hash,
             email,
             name: name.toLowerCase(),
-            lastName: lastName.toLowerCase()
+            lastName: lastName.toLowerCase(),
+            isAdmin:isAdmin
           });
           return res.status(201).json(userNew);
         } catch (error) {
@@ -101,18 +112,15 @@ router.post("/", async (req, res, next) => {
        });
  
        console.log("user validate", userValidate);
-      //  if (
-      //     email === "enzoholgadodev@gmail.com" ||
-      //     email === "makoski.ed@gmail.com" ||
-      //     email === "sebaslkjh@gmail.com" ||
-      //     email === "ingdcuevas@gmail.com" ||
-      //     email === "mattvalenti11@gmail.com" ||
-      //     email === "rider_shock@outlook.es" ||
-      //     email === "marina-mansilla@hotmail.com" ||
-      //     email === "eze-leiva@hotmail.com"
-      //  ) {
-      //     isAdmin = true;
-      //  }
+        if (
+          email === "rider_shock@outlook.es" ||
+          email === "richardd82@gmail.com" ||
+          email === "matimogica@gmail.com" ||
+          email === "rideralucar@gmail.com" ||
+          email === "leandro.valentine92@gmail.com"
+        ) {
+         isAdmin = true;
+       }
  
        let passwordHash = await bcrypt.hash(password, 10);
  

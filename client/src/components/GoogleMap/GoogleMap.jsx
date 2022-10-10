@@ -102,7 +102,7 @@ function Map() {
   };
 
 
-  function ClickContinue(){
+  function ClickContinue() {
     history.push("/")
   }
 
@@ -132,84 +132,93 @@ function Map() {
   var Adress = myAdress.name != "" ? myAdress.name : "Search your adress"
 
   return (
-    <Flex
-      position='relative'
-      flexDirection='column'
-      alignItems='center'
-      h='100vh'
-      w='100vw'
-    >
-      <Box position='absolute' left="10px" top='10%' h='80%' w='60%'>
-        {/* Google Map Box */}
-        <GoogleMap
-          center={center}
-          onClick={e => (Pointer(e))}
-          zoom={15}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-          }}
-          onLoad={map => setMap(map)}
+    <div className='BoxPasarela'>
+      <div className='Pasarela '>
+        <Flex
+          position='relative'
+          flexDirection='column'
+          alignContent="center"
+          justifyContent="center"
+          alignItems="center"
+          justifyItems="center"
         >
-          {coordinates.map((elemento, index) => {
-            console.log(elemento," ",myAdress)
-            return (<Marker key={"Marker " + index} position={elemento.adress} 
-            icon={JSON.stringify(myAdress)!==JSON.stringify(elemento)? svgMarker:svgMarker2} />)
-          })}
-
-        </GoogleMap>
-      </Box>
-
-
-
-      <div className='GoogleMapPlacesSearch'>
-       <p><label>Your Adress:</label>
-        <label>{Adress}</label></p> 
-
-        <p><label>Type Search: </label>
-          <select value={SelectTypeSearch} onChange={(e) => ChangeTypeSearch(e.target.value)}>
-            <option key={"TypeSearchBox"} value={"TypeSearchBox"}>{"SearchBox"}</option>
-            <option key={"TypePointer"} value={"TypePointer"}>{"Pointer"}</option>
-          </select>
-        </p>
-
-
-        {SelectTypeSearch == "TypeSearchBox" &&
-          <div>
-            <p className='SearchBox'>
-              <StandaloneSearchBox >
-                <input
-                  type='text'
-                  placeholder='find your address'
-                  ref={PlaceRef}
-                />
-              </StandaloneSearchBox>
-              <IconButton
-                aria-label='center back'
-                icon={<FaSearchLocation />}
-                isRound
-                onClick={() => { SearchByBox() }}
-              />
-            </p>
-
-            <div className='OpcionesAdress'>
+          <Box h='600px' w='1100px'>
+            {/* Google Map Box */}
+            <GoogleMap
+              center={center}
+              onClick={e => (Pointer(e))}
+              zoom={15}
+              mapContainerStyle={{ width: '100%', height: '100%' }}
+              options={{
+                zoomControl: false,
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
+              }}
+              onLoad={map => setMap(map)}
+            >
               {coordinates.map((elemento, index) => {
-                console.log(elemento)
-                console.log(elemento.name)
-                return (<button
-                  type='submit' key={"adress" + elemento.name + index} onClick={(e) => SelectAdress(e, elemento)} >
-                  {elemento.name}
-                </button>)
+                console.log(elemento, " ", myAdress)
+                return (<Marker key={"Marker " + index} position={elemento.adress}
+                  icon={JSON.stringify(myAdress) !== JSON.stringify(elemento) ? svgMarker : svgMarker2} />)
               })}
+
+            </GoogleMap>
+          </Box>
+
+
+
+          <div className='GoogleMapPlacesSearch'>
+
+            <div className='Columnas'>
+              <p className='Adress'><label>Your Adress:</label>
+                <label>{Adress}</label></p>
+
+              <p><label>Type Search: </label>
+                <select value={SelectTypeSearch} onChange={(e) => ChangeTypeSearch(e.target.value)}>
+                  <option key={"TypeSearchBox"} value={"TypeSearchBox"}>{"SearchBox"}</option>
+                  <option key={"TypePointer"} value={"TypePointer"}>{"Pointer"}</option>
+                </select>
+              </p>
+
+
+              {SelectTypeSearch == "TypeSearchBox" &&
+                <div>
+                  <div>
+                    <p className='SearchBox'>
+                      <StandaloneSearchBox >
+                        <input
+                          type='text'
+                          placeholder='find your address'
+                          ref={PlaceRef}
+                        />
+                      </StandaloneSearchBox>
+                      <IconButton
+                        aria-label='center back'
+                        icon={<FaSearchLocation />}
+                        isRound
+                        onClick={() => { SearchByBox() }}
+                      />
+                    </p>
+                  </div>
+                  <div className='OpcionesAdress'>
+                    {coordinates.map((elemento, index) => {
+                      console.log(elemento)
+                      console.log(elemento.name)
+                      return (<button
+                        type='submit' key={"adress" + elemento.name + index} onClick={(e) => SelectAdress(e, elemento)} >
+                        {elemento.name}
+                      </button>)
+                    })}
+                  </div>
+                </div>}
             </div>
-          </div>}
-        {myAdress.name != "" &&
-          <button onClick={()=>ClickContinue()}>Continue</button>}
+          </div>
+          {myAdress.name != "" &&
+            <button onClick={() => ClickContinue()}>Continue</button>}
+        </Flex >
       </div>
-    </Flex >
+    </div>
   )
 }
 
