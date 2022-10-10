@@ -9,7 +9,7 @@
   border: 3px solid var(--glow-color);
   border-radius: 5px;
   width: 40%;
-  height: 73.4vh;
+  height: 73vh;
   background-color: var(--glow-color);
   margin-bottom: 10px;
   box-shadow: 0 0 1em .25em var(--btn-color),
@@ -191,6 +191,56 @@ color: gray;
 .select {
   padding-bottom: 10px;
 }
+.file-select {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.file-select::before {
+  border: .25em solid var(--glow-color);
+   padding: 1em 3em;
+   color: var(--glow-color);
+   font-size: 15px;
+   font-weight: bold;
+   background-color: var(--btn-color);
+   border-radius: 1em;
+   outline: none;
+   box-shadow: 0 0 1em 3.25em var(--glow-color),
+      0 0 4em -1em var(--glow-spread-color),
+      inset 0 0 .75em .25em var(--glow-color);
+   text-shadow: 0 0 .5em var(--glow-color);   position: relative;
+   transition: all 0.3s;
+  content: 'Upload'; /* testo por defecto */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.file-select:hover{
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 1.25em var(--glow-color),
+     0 0 4em 1em var(--glow-spread-color),
+     inset 0 0 .75em .25em var(--glow-color);
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 100px;
+  height: 32px;
+  display: inline-block;
+}
+
+#src-file1::before {
+  content: 'Upload File';
+  
+}
 
 @media screen and (max-width: 1366px) {
   .containerCreate {
@@ -249,6 +299,20 @@ color: gray;
     font-size: .8em !important;
   }
 }
-
-/*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2048px) {}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1725px)  {
+  .containerCreate {
+    height: 72.4vh;
+  }
+}
+/*----------Media Queries (UHD DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2160px)  {
+  .containerCreate {
+    /* margin: auto;
+    margin-top: 20px;
+    width: 32%;
+    margin-bottom: 10px;
+    flex-wrap: nowrap; */
+    height: 70vh;
+  }
+}

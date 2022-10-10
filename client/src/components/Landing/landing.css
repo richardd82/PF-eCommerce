@@ -40,8 +40,17 @@
         height: 13.3vh;
     }
 }
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1728px)  {
+    .virtualBody{
+        height: 78vh;
+    }
+    .imgCarrousel{
+        width: 85% !important;
+    }
+  }
 /*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2040px) and (max-width: 2160px)  {
+@media screen and (min-width: 2040px) and (max-width: 2161px)  {
     .virtualBody{
         height: 80.1vh;
     }
