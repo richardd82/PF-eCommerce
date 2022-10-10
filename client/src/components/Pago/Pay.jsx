@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
-import {Link, useHistory }from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Pay.module.css";
-import { DeleteDrop ,ChangeCarryProducts,createOrder} from "../../redux/actions";
+import { DeleteDrop, ChangeCarryProducts, createOrder } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Pay() {
+export default function Pay(props) {
   const dispatch = useDispatch();
   const carryProducts = useSelector((state) => state.carryProducts);
   const history = useHistory();
-  const user = useSelector(state=>state.user_login)
-  let [arrProduc,setArrProduc] = useState([])
-  let [arrPrecio,setArrPrecio] = useState(0)
+  const user = useSelector(state => state.user_login)
+  let [arrProduc, setArrProduc] = useState([])
+  let [arrPrecio, setArrPrecio] = useState(0)
 
-  useEffect(()=>{
+  console.log(props)
+
+  useEffect(() => {
     let articulos = carryProducts.map((e) => {
       return {
         name: e.details.name,
@@ -29,11 +31,11 @@ export default function Pay() {
     });
     setArrProduc(articulos)
     let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
-  
+
     let multiplicacionEntreValueYQuantity = articulos.map((e) => {
       return e.unit_amount.value * e.quantity;
     });
-  
+
     if (articulos.length > 1) {
       PrecioTotalArticulos = multiplicacionEntreValueYQuantity.reduce(
         (prev, current) => {
@@ -44,7 +46,7 @@ export default function Pay() {
     setArrPrecio(PrecioTotalArticulos)
   }, [])
 
-  
+
   const createOrderPaypal = (data, actions) => {
     console.log("Entra aca")
     return actions.order
@@ -69,13 +71,13 @@ export default function Pay() {
         return orderId;
       }).catch(error =>
         console.log(error)
-        )
+      )
   };
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async function (detalles) {
 
-       const sendOrderPP = {
+      const sendOrderPP = {
         stocks: carryProducts.map((e) => {
           return {
             amount: e.amount,
@@ -85,20 +87,31 @@ export default function Pay() {
           }
         }),
         userId: user.id,
-        estado:'Cancelada'
+        estado: 'Cancelada',
+        contactAdress: { contact: props.contact, myAdress: props.myAdress }
       };
       dispatch(createOrder(sendOrderPP));
 
       let arregloObjetosIdQuantity = carryProducts.map((e) => {
-        return {size: e.state.size, stock: e.amount ,id:e.id};
+        return { size: e.state.size, stock: e.amount, id: e.id };
       });
 
-      let stockProducts = {stockProducts:arregloObjetosIdQuantity};
+      let stockProducts = { stockProducts: arregloObjetosIdQuantity };
 
-      function CambioPagina(){
+      function CambioPagina() {
         dispatch(ChangeCarryProducts([]))
-        history.push("/orders")  
-        window.location.reload();
+        Swal.fire({
+          title: "Se creo la orden con exito",
+          showDenyButton: false,
+          showCancelButton: false,
+          confirmButtonText: "Yes",
+          denyButtonText: `No`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            props.ClickContinue()
+          }
+        });
       }
 
       await axios({
@@ -106,10 +119,10 @@ export default function Pay() {
         url: `${process.env.REACT_APP_URL_BACK}/stock/drop`,
         data: stockProducts,
       })
-        .then((e)=>e.data,CambioPagina())
-        .catch((e) => console.log(e),CambioPagina());
+        .then((e) => e.data, CambioPagina())
+        .catch((e) => console.log(e), CambioPagina());
 
-  }).catch(error =>console.log(error)
+    }).catch(error => console.log(error)
     )
   };
 
@@ -133,7 +146,7 @@ export default function Pay() {
     history.push("/");
   };
 
-  function onError (error){
+  function onError(error) {
 
     Swal.fire({
       icon: "error",
@@ -153,17 +166,14 @@ export default function Pay() {
       <br />
       <br />
       */}
-      <PayPalScriptProvider deferLoading = { false }>
+      <PayPalScriptProvider deferLoading={false}>
         <PayPalButtons
           createOrder={(data, actions) => createOrderPaypal(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
-          onCancel={()=>onCancel()}
-          onError={(error)=>onError(error)}
+          onCancel={() => onCancel()}
+          onError={(error) => onError(error)}
         />
       </PayPalScriptProvider>
-      <a href="/">
-        <button className={styles.btnBack}>Back to home</button>
-      </a>
     </div>
   );
 }

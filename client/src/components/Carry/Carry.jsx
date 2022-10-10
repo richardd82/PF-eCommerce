@@ -124,7 +124,7 @@ class Carry extends Component {
           return
         }
       }*/
-      this.props.history.push("/FormDelivery");
+      this.props.history.push("/pasarela");
     }
   }
 

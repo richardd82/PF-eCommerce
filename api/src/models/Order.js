@@ -13,6 +13,10 @@ module.exports = (sequelize) => {
         type: DataTypes.JSON, //ARRAY(DataTypes.JSON)
         allowNull: false,
       },
+      contactAdress: {
+        type: DataTypes.JSON, //ARRAY(DataTypes.JSON)
+        allowNull: false,
+      },
       price: {
         type: DataTypes.FLOAT,
         allowNull: false,

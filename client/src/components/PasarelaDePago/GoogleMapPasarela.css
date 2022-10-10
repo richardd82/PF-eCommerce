@@ -18,30 +18,25 @@
     gap: 10px;
 }
 
-p.SearchBox {
+.SearchBox {
     display: flex;
-    width: 100%;
     justify-content: center;
 }
 
-.BoxPasarela{
+.SearchboxK{
     display: flex;
-    flex-direction: row;
+    align-items: center;
     align-content: center;
     justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.Pasarela{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    background-color: red;
-    width: 1200px;
-    height: 800px;
+input.inputSearchbox{
+    width: 300px;
 }
+
 
 .Adress{
     width: 300px;
