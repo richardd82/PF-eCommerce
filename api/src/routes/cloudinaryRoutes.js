@@ -4,6 +4,10 @@ const router = express();
 var cors = require('cors');
 
 router.use(express.static('public'));
+
+router.use(express.json({ limit: '10mb' }));
+router.use(express.urlencoded({ limit: '10mb', extended: true }));
+
 router.use(cors());
 
 router.get('/images', async (_req, res) => {
