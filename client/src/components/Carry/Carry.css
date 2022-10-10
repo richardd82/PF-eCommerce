@@ -79,6 +79,12 @@
     height: 60vh;
   }
 }
+/*----------Media Queries (2K DEVICES) ----------*/
+@media screen and (min-width: 1400px) and (max-width: 1680px){
+	.mainContainer{
+    height: 63vh;
+  }
+}
 /*----------Media Queries (HIGH DEVICES) ----------*/
 @media screen and (min-width: 2048px) {
   
