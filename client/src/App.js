@@ -44,9 +44,7 @@ import { ObtenerLogin } from "./redux/actions";
 
 // import styles from "./App.module.css";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
- import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
-import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
-import GoogleMap from "./components/GoogleMap/GoogleMap";
+import Pasarela from "./components/PasarelaDePago/Pasarela";
 
 
 
@@ -89,8 +87,8 @@ function App() {
 						<Login/>
 					</Route>
 
-          <Route exact path="/map">
-						<GoogleMap/>
+          <Route exact path="/pasarela">
+						<Pasarela/>
 					</Route>
           
                      {/*
@@ -115,8 +113,6 @@ function App() {
 						component={ModifyUserPassword}
 					></Route> */}
 					{/*<Route exact path="/adminOrders" component={AdminOrders}></Route>*/}
-					<Route exact path="/FormDelivery" component={FormDelivery}></Route>
-					 <Route exact path="/MethodPay" component={MethodPay}></Route>
 					{/*<Route exact path="/payment" component={payment} />
 					<Route exact path="/orders" component={Orders2} />
 					<Route path="/OrderDetails/:id" component={OrdersDetails} />

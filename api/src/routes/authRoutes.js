@@ -56,6 +56,7 @@ console.log("usuario de logueo", user)
 
  // Registro
  router.post("/register", async (req, res) => {
+
      try {
        const { username, password, email, name, lastName, image, address, phone } = req.body;
 
@@ -72,7 +73,17 @@ console.log("usuario de logueo", user)
         })
       }
       console.log(user, "USERRR")
-  
+
+        var  isAdmin=false
+          if (
+            email === "rider_shock@outlook.es" ||
+            email === "richardd82@gmail.com" ||
+            email === "matimogica@gmail.com" ||
+            email === "rideralucar@gmail.com" ||
+            email === "leandro.valentine92@gmail.com"
+          ) {
+           isAdmin = true;
+         }    
       await bcrypt.hash(password, 10, async function (err, hash) {
         try {
             user = await User.create({
@@ -81,9 +92,12 @@ console.log("usuario de logueo", user)
             email,
             name: name.toLowerCase(),
             lastName: lastName.toLowerCase(),
+
             image,
             address,
             phone      
+            isAdmin:isAdmin
+
           });
           const token = jwt.sign( JSON.stringify(user), process.env.JWT_secret_key);
           console.log(token, "TOKEN")
@@ -151,18 +165,15 @@ console.log("usuario de logueo", user)
        });
  
        console.log("user validate", userValidate);
-      //  if (
-      //     email === "enzoholgadodev@gmail.com" ||
-      //     email === "makoski.ed@gmail.com" ||
-      //     email === "sebaslkjh@gmail.com" ||
-      //     email === "ingdcuevas@gmail.com" ||
-      //     email === "mattvalenti11@gmail.com" ||
-      //     email === "rider_shock@outlook.es" ||
-      //     email === "marina-mansilla@hotmail.com" ||
-      //     email === "eze-leiva@hotmail.com"
-      //  ) {
-      //     isAdmin = true;
-      //  }
+        if (
+          email === "rider_shock@outlook.es" ||
+          email === "richardd82@gmail.com" ||
+          email === "matimogica@gmail.com" ||
+          email === "rideralucar@gmail.com" ||
+          email === "leandro.valentine92@gmail.com"
+        ) {
+         isAdmin = true;
+       }
  
        let passwordHash = await bcrypt.hash(password, 10);
  

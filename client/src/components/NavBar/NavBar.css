@@ -17,18 +17,18 @@ nav {
 	font-family: 'Square Peg', cursive;
 	font-size: 20px;
 	font-weight: bold;
-	text-shadow: 0 0 0.5em var(--glow-color);
+	text-shadow: 2px 2px 5px #D9B0FF;
 	position: relative;
 	transition: all 0.3s;
 }
 .btnNavEffect:hover {
-	color: var(--btn-color);
+	color: rgb(217, 176, 255);;
 	border-radius: 5px;
-	background-color: var(--glow-color);
-	box-shadow: 0 0 1em 0.25em var(--glow-color),
-		0 0 4em 2em var(--glow-spread-color), 0 0 0.75em 0.25em var(--glow-color);
+	text-shadow: 0px 10px 5px var(--glow-color);
+	/* background-color: var(--glow-color); */
+	/* box-shadow: 0 0 1px 10px var(--glow-color),
+		0 0 4em 2em var(--glow-spread-color), 0 0 0.75em 0.25em var(--glow-color); */
 }
-
 .listNav {
 	list-style: none;
 	overflow: hidden;

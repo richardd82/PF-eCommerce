@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 import "./CreateProduct.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CreateNewProduct } from "../../redux/actions";
+import { CreateNewProduct, image_post } from "../../redux/actions";
 import swal from "sweetalert";
 import {
-  getCategorys,searchNameProduct,
+  getCategorys, searchNameProduct,
 } from "../../redux/actions";
 
 // instalar sweetalert y usarla, crear nuevos inputs: talle, y stock
@@ -49,25 +49,27 @@ function validate(input) {
     errores.price = "The Price is required";
   } else if (!isNumeric(input.price)) {
     errores.price = "The price must be a positive number";
-  } else if (!input.image) {
-    /*    IMG    */
-    errores.image = "URL Image is required";
-  } else if (input.image.length < 5) {
-    errores.image = "The URl must contain at least 5 letters";
-  } else if (/^\s+$/.test(input.image)) {
-    errores.image = "The URL cannot be a blank space";
-  } else if (input.image.includes("https://")) {
-    errores.image = "The URL must not contain the text 'https://'";
-  } else if (input.image.includes("http://")) {
-    errores.image = "The URL must not contain the text 'http://'";
-  } else if (input.image.startsWith(" ")) {
-    errores.image = "Dont input blank spaces";
-  } else if (input.image.endsWith(" ")) {
-    errores.image = "Dont input blank space";}
+  }
+  
+  // } else if (!input.image) {
+  /*    IMG    */
+  //   errores.image = "URL Image is required";
+  // } else if (input.image.length < 5) {
+  //   errores.image = "The URl must contain at least 5 letters";
+  // } else if (/^\s+$/.test(input.image)) {
+  //   errores.image = "The URL cannot be a blank space";
+  // } else if (input.image.includes("https://")) {
+  //   errores.image = "The URL must not contain the text 'https://'";
+  // } else if (input.image.includes("http://")) {
+  //   errores.image = "The URL must not contain the text 'http://'";
+  // } else if (input.image.startsWith(" ")) {
+  //   errores.image = "Dont input blank spaces";
+  // } else if (input.image.endsWith(" ")) {
+  //   errores.image = "Dont input blank space";}
 
   /*      DESCRIPTION      */
 
-  else if (!input.description ) {
+  else if (!input.description) {
     errores.description = "the description is required";
   } else if (input.description.length < 20) {
     errores.description = "The description must contain at least 20 letters";
@@ -104,6 +106,9 @@ function validate(input) {
 }
 
 function Formulario() {
+  const [fileInputState, setFileInputState] = useState('');
+  //const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
   const dispatch = useDispatch();
   const categorys = useSelector((state) => state.categorys);
   const products = useSelector((state) => state.products);
@@ -123,9 +128,17 @@ function Formulario() {
     nameCategory: "Disable",
     nameBrand: "Disable",
     categorysGender: [],
-    BrandOptions:[],
+    BrandOptions: [],
   };
   const [input, SetInput] = useState(initialState);
+
+  // const previewFile = (file) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setPreviewSource(reader.result);
+  //   };
+  // };
 
   function handleChange(e) {
     e.preventDefault();
@@ -140,6 +153,21 @@ function Formulario() {
       })
     );
   }
+  function imageHandleChange(e) {
+    //console.log(e.target.defaultValue);
+    console.log(e.target)
+    e.preventDefault();
+    const file = e.target.value;
+    //previewFile(file);
+    setSelectedFile(e.target.files[0]);
+    setFileInputState(e.target.value);
+
+    SetErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      }));
+  };
 
   function handleSelect(e) {
     dispatch(getCategorys());
@@ -151,33 +179,33 @@ function Formulario() {
       categorysGender: CategorysG,
       gender: e.target.value,
       nameCategory: "Disable",
-      BrandOptions:[],
-      nameBrand:"Disable",
+      BrandOptions: [],
+      nameBrand: "Disable",
     });
   }
 
   function handleSelectCategory(e) {
     e.preventDefault();
-    let id=e.target[e.target.selectedIndex].title
-    let Brands=products.filter(element=>element.gender==input.gender);
-    Brands=Brands.filter(element=>element.categoryId==id)
-    Brands=obtenerMarcas(Brands)
+    let id = e.target[e.target.selectedIndex].title
+    let Brands = products.filter(element => element.gender == input.gender);
+    Brands = Brands.filter(element => element.categoryId == id)
+    Brands = obtenerMarcas(Brands)
     console.log(Brands)
 
     if (input.categoryId === "Create") {
       SetInput({
         ...input,
         categoryId: undefined,
-        BrandOptions:[],
+        BrandOptions: [],
       })
     } else {
       SetInput({
         ...input,
         nameCategory: e.target.value,
         NewCategory: e.target.value,
-        BrandOptions:Brands,
+        BrandOptions: Brands,
         nameBrand: "Disable",
-        NewBrand:undefined,
+        NewBrand: undefined,
       });
     }
   }
@@ -190,7 +218,7 @@ function Formulario() {
         BrandId: undefined,
       })
     } else {
-      
+
       SetInput({
         ...input,
         nameBrand: e.target.value,
@@ -201,55 +229,64 @@ function Formulario() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (
-      input.description &&
-      input.name &&
-      input.price &&
-      input.image &&
-      (input.nameBrand && input.nameBrand!="Disable") &&
-      input.gender &&
-      (input.nameCategory  && input.nameCategory!="Disable") 
-    ) {
-      dispatch(CreateNewProduct({
-        name: input.name,
-        price: input.price,
-        image: input.image,
-        brand: input.nameBrand,
-        gender: input.gender,
-        nameCategory: input.nameCategory,
-        description: input.description,
-      }));
-      swal({
-        title: "Product created successfully!",
-        icon: "success",
-        button: "Ok",
-      });
-      SetInput(initialState);
-      history.push("/");
-    } else alert(" missing data for the creation of a new product");
+    if (!selectedFile || selectedFile=="") return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      if (
+        input.description &&
+        input.name &&
+        input.price &&
+        selectedFile!=='' &&
+        (input.nameBrand && input.nameBrand != "Disable") &&
+        input.gender &&
+        (input.nameCategory && input.nameCategory != "Disable")
+      ) {
+        dispatch(CreateNewProduct({
+          name: input.name,
+          price: input.price,
+          brand: input.nameBrand,
+          gender: input.gender,
+          nameCategory: input.nameCategory,
+          description: input.description,
+          imageData:reader.result
+        }));
+        swal({
+          title: "Product created successfully!",
+          icon: "success",
+          button: "Ok",
+        });
+        SetInput(initialState);
+        history.push("/");
+      }
+      else alert(" missing data for the creation of a new product");
+    }
   }
   //comprobacion de INPUT
 
   function comprobacionInput(input) {
-    console.log("entrar input comprobacion")
+    //console.log("entrar input comprobacion");
+    console.log(fileInputState);
+    console.log(selectedFile)
     if (
       input.name &&
       input.price &&
-      input.image &&
-      (input.nameBrand && input.nameBrand!="Disable") &&
+      //input.image &&
+      (input.nameBrand && input.nameBrand != "Disable") &&
       input.gender &&
-      (input.nameCategory  && input.nameCategory!="Disable") 
+      (input.nameCategory && input.nameCategory != "Disable")
     ) {
       return true;
     } else {
       return false;
     }
+
   }
 
   //OBTENER MARCAS
 
   function obtenerMarcas(productosNuevos) {
-    var Brands=[];
+    var Brands = [];
     for (let index = 0; index < productosNuevos.length; index++) {
       const element = productosNuevos[index].brand;
       if (!Brands.includes(element))
@@ -326,7 +363,7 @@ function Formulario() {
       ...input,
       NewCategory: "undefined",
       nameCategory: input.categoryId,
-      categoryId:"",
+      categoryId: "",
     })
   }
 
@@ -339,7 +376,7 @@ function Formulario() {
       ...input,
       NewBrand: "undefined",
       nameBrand: input.BrandId,
-      BrandId:"",
+      BrandId: "",
     })
   }
 
@@ -358,43 +395,56 @@ function Formulario() {
   console.log(input.categorysGender)
   console.log(input.BrandOptions)
   console.log(input.nameCategory)
+
+  /*AQUI SE RENDERIZA*/
+
   return (
     < div className="containerCreate">
       {console.log(error)}
-        <h2 className="titleCreate">Product creation</h2>
+      <h2 className="titleCreate">Product creation</h2>
       <form className="formCreateProduct" onSubmit={(e) => handleSubmit(e)}>
         {console.log(input)}
-        <div className={input.name=="" ? "l__form__input-field" : "l__form__input-field2" }>
+        <div className={input.name == "" ? "l__form__input-field" : "l__form__input-field2"}>
           {error.name && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{error.name}</p>
-            )}
+          )}
           <input
             type="text"
             value={input.name}
-            className={input.name=="" ? "l__form__input-field" : "l__form__input-field2" }
+            className={input.name == "" ? "l__form__input-field" : "l__form__input-field2"}
             name="name"
             onChange={(e) => handleChange(e)}
           />
-            <label className="label-form">Name</label>
+          <label className="label-form">Name</label>
         </div>
-        <div className={input.price=="" ? "l__form__input-field" : "l__form__input-field2" }>
+        <div className={input.price == "" ? "l__form__input-field" : "l__form__input-field2"}>
           {error.price && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{error.price}</p>
-            )}
+          )}
           <input
             type="number"
             min="0"
             step="25"
-            className={input.price=="" ? "l__form__input-field" : "l__form__input-field2" }
+            className={input.price == "" ? "l__form__input-field" : "l__form__input-field2"}
             value={input.price}
             name="price"
             onChange={handleChange}
           />
-            <label className="label-form">Price</label>
+          <label className="label-form">Price</label>
         </div>
 
-        <div>
-          <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
+        {/* <div> */}
+        <input
+          id="src-file1"
+          type="file"
+          name="image"
+          onChange={imageHandleChange}
+          value={fileInputState}
+          className={input.image == "" ? "l__form__input-field file-select" : "l__form__input-field2 file-select"}
+        />
+
+        {/* <div /> */}
+        {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
               )}
@@ -406,8 +456,8 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
               <label className="label-form">Link Img:</label>
-          </div>
-          {/*<div>
+          </div> */}
+        {/*<div>
             <p>brand:</p>
             {error.brand && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.brand}</p>
@@ -420,7 +470,7 @@ function Formulario() {
               onChange={(e) => handleChange(e)}
             />
           </div>*/}
-        </div>
+        {/* </div> */}
 
         <div className="select">
           {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
@@ -462,8 +512,8 @@ function Formulario() {
                   <option key={elemento.id} value={elemento.name} title={elemento.id}>{elemento.name}</option>)
               })
               }
-              {input.gender!=="" && 
-              <option className="optionCreate" key={"Create"} value={"Create"} title={"Create"} >Create Category</option>}
+              {input.gender !== "" &&
+                <option className="optionCreate" key={"Create"} value={"Create"} title={"Create"} >Create Category</option>}
             </select>
           </div>
 
@@ -499,7 +549,7 @@ function Formulario() {
               })
               }
               {input.nameCategory !== "Disable" && input.nameCategory !== "Create" &&
-              <option className="optionCreate" key={"Create"} value={"Create"} title={"Create"} >Create Brand</option>}
+                <option className="optionCreate" key={"Create"} value={"Create"} title={"Create"} >Create Brand</option>}
             </select>
           </div>
 
@@ -519,7 +569,7 @@ function Formulario() {
           )}
 
           {/* DESCRIPTION */}
-          <div className={ input.description=="" ? "l__form__input-field" : "l__form__input-field2" }>
+          <div className={input.description == "" ? "l__form__input-field" : "l__form__input-field2"}>
             {error.description && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.description}</p>
             )}
@@ -528,11 +578,11 @@ function Formulario() {
               name="description"
               value={input.description}
               onChange={(e) => handleChange(e)}
-              className={ input.description=="" ? "l__form__input-field" : "l__form__input-field2" }
+              className={input.description == "" ? "l__form__input-field" : "l__form__input-field2"}
               cols="30"
               rows="8">
             </textarea>
-              <label className="label-form">Description</label>
+            <label className="label-formTxt">Description</label>
           </div>
 
 

@@ -9,7 +9,7 @@
   border: 3px solid var(--glow-color);
   border-radius: 5px;
   width: 40%;
-  height: 73.4vh;
+  height: 73vh;
   background-color: var(--glow-color);
   margin-bottom: 10px;
   box-shadow: 0 0 1em .25em var(--btn-color),
@@ -22,18 +22,23 @@ form,
 select {
   border-radius: 5px;
   color: rgb(152, 40, 204);
-  
+
 }
-.containerCreate select{
+
+.containerCreate select {
   border: 1px solid rgb(152, 40, 204);
 }
 
 .containerCreate form {
   margin: auto;
 }
-.titleCreate{
+
+.titleCreate {
   margin-bottom: -11px;
+  color: var(--glow-spread-color);
+  text-shadow: 1px 2px 3px rgb(88, 1, 122);
 }
+
 .formCreateProduct {
   width: 55%;
   display: flex;
@@ -168,12 +173,12 @@ color: gray;
   text-align: center;
 }
 
-.fieldCreate{
+.fieldCreate {
   padding: 10px;
   border: 1px solid rgb(152, 40, 204);
 }
 
-.buttonCreateCategory{
+.buttonCreateCategory {
   margin-left: 15px;
 }
 
@@ -186,26 +191,128 @@ color: gray;
 .select {
   padding-bottom: 10px;
 }
+.file-select {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.file-select::before {
+  border: .25em solid var(--glow-color);
+   padding: 1em 3em;
+   color: var(--glow-color);
+   font-size: 15px;
+   font-weight: bold;
+   background-color: var(--btn-color);
+   border-radius: 1em;
+   outline: none;
+   box-shadow: 0 0 1em 3.25em var(--glow-color),
+      0 0 4em -1em var(--glow-spread-color),
+      inset 0 0 .75em .25em var(--glow-color);
+   text-shadow: 0 0 .5em var(--glow-color);   position: relative;
+   transition: all 0.3s;
+  content: 'Upload'; /* testo por defecto */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.file-select:hover{
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 1.25em var(--glow-color),
+     0 0 4em 1em var(--glow-spread-color),
+     inset 0 0 .75em .25em var(--glow-color);
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 100px;
+  height: 32px;
+  display: inline-block;
+}
+
+#src-file1::before {
+  content: 'Upload File';
+  
+}
+
 @media screen and (max-width: 1366px) {
   .containerCreate {
     margin: auto;
     margin-top: 20px;
-    width: 40%;
-    height: 70.5vh;
+    width: 32%;
+    height: 70.4vh;
     margin-bottom: 10px;
-  }  
-  .formCreateProduct {
-    width: 45%;
+    flex-wrap: nowrap;
   }
+
+  .formCreateProduct {
+    width: 55%;
+  }
+
+  .l__form__input-field {
+    margin: auto;
+    margin-top: 15px;
+  }
+
   .l__form__input-field input {
     width: 100%;
-    height: 80%;  
-    padding-left: 0px;    
-    font-size: .7rem;    
+    height: 80%;
+    padding-left: 0px;
+    font-size: .7rem;
     font-weight: 300;
   }
-}
-/*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2048px) {
 
+  .select {
+    padding-bottom: 1px;
+  }
+
+  #txtCreate {
+    margin-top: 43px;
+    height: 30px;
+  }
+
+  #fileInput {
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+    margin-bottom: -35px;
+  }
+
+  .todosCampos {
+    margin-top: 0px;
+  }
+
+  .label-form {
+    margin-top: -15px;
+    font-size: .8em !important;
+  }
+
+  .label-formTxt {
+    margin-top: 15px;
+    font-size: .8em !important;
+  }
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1725px)  {
+  .containerCreate {
+    height: 72.4vh;
+  }
+}
+/*----------Media Queries (UHD DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2160px)  {
+  .containerCreate {
+    /* margin: auto;
+    margin-top: 20px;
+    width: 32%;
+    margin-bottom: 10px;
+    flex-wrap: nowrap; */
+    height: 70vh;
+  }
 }

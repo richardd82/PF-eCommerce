@@ -37,6 +37,7 @@ export const PUT_USERS = "PUT_USERS";
 export const GET_SEARCH_USER = "GET_SEARCH_USER";
 export const SEARCH_ID = "SEARCH_ID";
 export const PUT_STOCKS = "PUT_STOCKS";
+export const IMAGE_POST = "IMAGE_POST"
 
 
 
@@ -333,16 +334,6 @@ export function DeleteDrop(payload) {
 
 /* CREAR PRODUCTO */
 
-export function CreateNewProduct(payload) {
-  return async function () {
-    const response = await axios.post(
-      REACT_APP_URL_BACK + "/product/",
-      payload
-    );
-    return response;
-  };
-}
-
 export function getChecklogin(newLoggedUser) {
   return async function (dispatch) {
     try {
@@ -458,7 +449,8 @@ export function getOrders(type, parameter) {
 
 export function createOrder(payload) {
   console.log(payload);
-  return function (dispatch) {
+  return  async function (dispatch) {
+    try{
     axios
       .post(`${REACT_APP_URL_BACK}/orders`, payload)
       .then((res) => {
@@ -467,8 +459,22 @@ export function createOrder(payload) {
           payload: res,
         });
       })
-      .catch((error) => console.log(error));
+    }
+    catch(error) {
+     console.log(error);}
   };
+}
+
+export async function createOrder2(payload) {
+    try{
+    axios
+      .post(`${REACT_APP_URL_BACK}/orders`, payload)
+      .then((res) => {
+        return res;
+      })
+    }
+    catch(error) {
+     console.log(error);}
 }
 
 //USERS ADMIN
@@ -642,5 +648,17 @@ export function ObtenerLogin() {
   };
 }
 
+export function CreateNewProduct(payload) {
 
-
+  const { name, price, brand, gender, nameCategory, description, imageData } = payload
+  return async function (dispatch) {
+    try {
+      let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
+      console.log(clouData)
+      const response = await axios.post(REACT_APP_URL_BACK + "/product/", { name, price, brand, gender, nameCategory, description, image: clouData.data.url });
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
