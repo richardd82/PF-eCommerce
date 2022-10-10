@@ -1,6 +1,22 @@
-.GoogleMapPlacesSearch{
+.GoogleMapPlacesSearch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 10%;
+    left: 65%;
+    width: 30%;
+    display: flex;
+}
+
+.OpcionesAdress {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+p.SearchBox {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

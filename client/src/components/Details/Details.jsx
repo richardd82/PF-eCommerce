@@ -116,12 +116,14 @@ export default function Details(props) {
       return producto.name;
     }
   });
+  
+
   return (
     <div className="cardDetailMainContainer">
       {detail.length > 0 ? (
         // Se agrego un ternario y se movió la imagen para poder acomodar el CSS con la propiedad Flex
         <div className="imageContainer">
-          <img src={`https://${detail[0].image}`} alt="Not Found" />
+          <img src={detail[0].image} alt="Not Found" />
         </div>
       ) : null}
       <div className="cardDetail">
