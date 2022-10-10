@@ -5,6 +5,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../db");
 const { response } = require("express");
+const { URL_FRONT } = process.env;
+const { sendRegisterEmail } = require("../Email/mail.config");
+const { getTokenData } = require("../tokenVerify/tokenVerify")
 // const { googleVerify } = require("../helpers/google-verify.js");
 
 const router = Router();
@@ -18,7 +21,7 @@ router.post("/", async (req, res, next) => {
      { username: username, }
     
   });
-
+console.log("usuario de logueo", user)
   const passwordCorrect =
     user === null || user.length === 0
       ? false
@@ -35,12 +38,16 @@ router.post("/", async (req, res, next) => {
     email: user.email,
     name: user.name,
     image: user.image,
+    address: user.address,
+    phone: user.phone
   };
+
+  console.log(userForToken, "user for token")
 
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
-  user.deleted
-    ? res.status(200).json({ error: "User is blocked" })
+  (user.verify === false)
+    ? res.redirect("/register").json({ error: "Usuario no verificado" })
     : res.status(200).json({ auth: "User login success", userForToken, token });
 } catch (error) {
      console.log(error)
@@ -49,26 +56,24 @@ router.post("/", async (req, res, next) => {
 
  // Registro
  router.post("/register", async (req, res) => {
-    try {
-      const { username, password, email, name, lastName } = req.body;
-      if (!username) return res.status(400).send("Faltan datos necesarios (username).");
-      if (!lastName) return res.status(400).send("Faltan datos necesarios (lastName).");
-      if (!password)
-        return res.status(400).send("Faltan datos necesarios (password).");
-      if (!email) return res.status(400).send("Faltan datos necesarios (email).");
-      if (!name) return res.status(400).send("Faltan datos necesarios (name).");
-      if (!isNaN(parseInt(name)))
-        return res
-          .status(400)
-          .send(
-            "Formato de datos invalido (name) debe ser una cadena texto."
-          );
-      if (!isNaN(parseInt(email)))
-        return res
-          .status(400)
-          .send(
-            "Formato de datos invalido (email) debe ser una cadena texto."
-          );
+
+     try {
+       const { username, password, email, name, lastName, image, address, phone } = req.body;
+
+      let user = await User.findOne({
+        where: {
+          email: email
+        }
+      }) 
+
+      if(user !== null){
+        return res.json({
+          succes: false,
+          msj: 'Usuario ya existe'
+        })
+      }
+      console.log(user, "USERRR")
+
         var  isAdmin=false
           if (
             email === "rider_shock@outlook.es" ||
@@ -79,26 +84,74 @@ router.post("/", async (req, res, next) => {
           ) {
            isAdmin = true;
          }    
-  
       await bcrypt.hash(password, 10, async function (err, hash) {
         try {
-          const userNew = await User.create({
+            user = await User.create({
             username,
             password: hash,
             email,
             name: name.toLowerCase(),
             lastName: lastName.toLowerCase(),
+
+            image,
+            address,
+            phone      
             isAdmin:isAdmin
+
           });
-          return res.status(201).json(userNew);
+          const token = jwt.sign( JSON.stringify(user), process.env.JWT_secret_key);
+          console.log(token, "TOKEN")
+          console.log(user,"NEW USER")
+          await sendRegisterEmail(email, name, token)
+          return res.status(201).json(user);
         } catch (error) {
-          return res.status(400).send("Error: " + error);
+          return res.status(400).send("EL Error: " + error);
         }
       });
     } catch (e) {
       return res.status(400).send("Error: " + e);
     }
-  });
+
+   });
+
+  router.get("/confirm/:token", async (req, res, next) => {
+    
+    try {
+      const { token } = req.params
+
+      const data = await getTokenData(token);
+
+      if(data === null) {
+           return res.json({
+               success: false,
+               msg: 'Error al obtener data'
+           });
+      }
+
+      console.log("DATA",data);
+
+      const { email, id } = data
+
+      console.log(data.email)
+
+      let user = await User.findOne({
+        where: {
+          email: email
+        }
+      }) 
+      console.log(user)
+      if(id !== user.id){
+        console.log("El id no coincide con el usuario")
+      }
+
+      user.verify = true
+      await user.save()
+      console.log("USER", user)
+      res.redirect(`${URL_FRONT}`)
+    } catch (error) {
+      console.log("Error para verificar token")
+    }
+  })
 
   router.post("/google", async (req, res, next) => {
     const { email, password, name, lastName, image, address } = req.body;

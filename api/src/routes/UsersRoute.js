@@ -63,6 +63,7 @@ router.get("/", async (req, res, next) => {
       let users = allUsers.map((item) => {
          return {
             id: item.id,
+            username: item.username,
             email: item.email,
             name: item.name,
             lastName: item.lastName,
@@ -70,6 +71,7 @@ router.get("/", async (req, res, next) => {
             address: item.address,
             isAdmin: item.isAdmin,
             isBaned: item.isBaned,
+            verify: item.verify
          };
       });
       res.send(users);
