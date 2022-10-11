@@ -56,7 +56,7 @@ console.log("usuario de logueo", user)
       }) 
 
       if(user !== null)
-        return res.status(400).send("Usuario ya existe");
+        return res.status(400).send("Usuario ya existe") ;
 
         var  isAdmin=false
           if (

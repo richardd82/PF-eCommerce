@@ -4,9 +4,8 @@ import { withRouter } from "react-router";
 import "./FormularioContacto.css";
 
 export class FormularioContactoDelivery extends Component {
-
   componentDidMount() {
-   // if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.admin==true)
+    // if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.admin==true)
     //this.props.history.push("/");
   }
 
@@ -16,9 +15,9 @@ export class FormularioContactoDelivery extends Component {
 
   render() {
     return (
-      <div >
-        <div>
-          <label>An address reference: </label>
+      <div className="containerContactPay">
+        <div className="formContactPay1">
+          <label>Address reference: </label>
           <input
             type="text"
             id="Direccion"
@@ -26,6 +25,8 @@ export class FormularioContactoDelivery extends Component {
             value={this.props.reference}
             onChange={(e) => this.props.handleChangeContact(e, "reference")}
           />
+        </div>
+        <div className="formContactPay2">
           <label>Your Phone </label>
           <input
             type="number"
@@ -41,4 +42,4 @@ export class FormularioContactoDelivery extends Component {
   }
 }
 //las propiedades del estado que quiero conectar //las acciones que quiero poder dispatchar
-export default (FormularioContactoDelivery);
+export default FormularioContactoDelivery;

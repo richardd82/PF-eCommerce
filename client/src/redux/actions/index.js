@@ -645,9 +645,6 @@ export function CreateNewProduct(payload) {
   }
 }
 
-
-
-
 export async function register (payload) {
   const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)
   console.log(resp)
