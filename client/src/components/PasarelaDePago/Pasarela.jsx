@@ -123,8 +123,7 @@ function Pasarela() {
 
   return (
     <div className='BoxPasarela'>
-      <div className='Pasarela '>
-        <nav>
+        <div className='navMaps'>
           <ul className='ListaPasarela'>
             <li key={"Pasarela" + 1}
               id={page==1?"LisPasarelaSelect":"ListPasarelaNoSelect"+1}
@@ -140,7 +139,8 @@ function Pasarela() {
                 id={page==4?"LisPasarelaSelect":"ListPasarelaNoSelect"+4}
               className="page-itemPasarela"><IconContext.Provider value={{ size: "40px" }}> <AiFillCarryOut /> </IconContext.Provider></li>
           </ul>
-        </nav>
+        </div>
+      <div className='Pasarela '>
         {page == 1 &&
           <GoogleMapPasarela ChangeTypeSearch={ChangeTypeSearch}
             setMap={setMap}
@@ -168,9 +168,9 @@ function Pasarela() {
           <Thanks />}
 
         {Validacion2 &&
-          <button className='buttonContinue' onClick={() => ClickContinue()}>Continue</button>}
+          <button className='buttonContinue btnGlobal' onClick={() => ClickContinue()}>Continue</button>}
         {page > 1 && page != 4 &&
-          <button className='buttonPreview' onClick={() => ClickPreview()}>Preview</button>}
+          <button className='buttonPreview btnGlobal' onClick={() => ClickPreview()}>Preview</button>}
       </div>
     </div>
   )
