@@ -43,10 +43,10 @@
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1728px)  {
     .virtualBody{
-        height: 78vh;
+        height: 75vh;
     }
     .imgCarrousel{
-        width: 85% !important;
+        width: 63% !important;
     }
   }
 /*----------Media Queries (HIGH DEVICES) ----------*/
