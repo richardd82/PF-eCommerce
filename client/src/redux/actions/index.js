@@ -432,6 +432,7 @@ export function getAllComments() {
 }
 
 export function getOrders(type, parameter) {
+  console.log(type," ",parameter)
   return function (dispatch) {
     axios
       .get(

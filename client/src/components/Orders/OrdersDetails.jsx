@@ -36,7 +36,7 @@ class OrdersDetails extends Component {
                   <div className={styles.cardContainer}>
                     <div className={styles.imgContainer}>
                       <Link to={`/details/${c.productId}`}>
-                        <img src={`https://${c.image}`} alt="No found"></img>
+                        <img src={`${c.image}`} alt="No found"></img>
                       </Link>
                     </div>
                     <div className={styles.dataContainer}>
