@@ -3,19 +3,23 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import styles from "./Pay.module.css";
-import { DeleteDrop, ChangeCarryProducts, createOrder } from "../../redux/actions";
+import "./Pay.css";
+import {
+  DeleteDrop,
+  ChangeCarryProducts,
+  createOrder,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Pay(props) {
   const dispatch = useDispatch();
   const carryProducts = useSelector((state) => state.carryProducts);
   const history = useHistory();
-  const user = useSelector(state => state.user_login)
-  let [arrProduc, setArrProduc] = useState([])
-  let [arrPrecio, setArrPrecio] = useState(0)
+  const user = useSelector((state) => state.user_login);
+  let [arrProduc, setArrProduc] = useState([]);
+  let [arrPrecio, setArrPrecio] = useState(0);
 
-  console.log(props)
+  console.log(props);
 
   useEffect(() => {
     let articulos = carryProducts.map((e) => {
@@ -29,8 +33,9 @@ export default function Pay(props) {
         quantity: e.amount,
       };
     });
-    setArrProduc(articulos)
-    let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
+    setArrProduc(articulos);
+    let PrecioTotalArticulos =
+      articulos[0].unit_amount.value * articulos[0].quantity;
 
     let multiplicacionEntreValueYQuantity = articulos.map((e) => {
       return e.unit_amount.value * e.quantity;
@@ -43,12 +48,11 @@ export default function Pay(props) {
         }
       );
     }
-    setArrPrecio(PrecioTotalArticulos)
-  }, [])
-
+    setArrPrecio(PrecioTotalArticulos);
+  }, []);
 
   const createOrderPaypal = (data, actions) => {
-    console.log("Entra aca")
+    console.log("Entra aca");
     return actions.order
       .create({
         purchase_units: [
@@ -69,9 +73,8 @@ export default function Pay(props) {
       })
       .then((orderId) => {
         return orderId;
-      }).catch(error =>
-        console.log(error)
-      )
+      })
+      .catch((error) => console.log(error));
   };
 
   const onApprove = (data, actions) => {
@@ -112,16 +115,15 @@ export default function Pay(props) {
             props.ClickContinue()
       }
 
-      await axios({
-        method: "put",
-        url: `${process.env.REACT_APP_URL_BACK}/stock/drop`,
-        data: stockProducts,
+        await axios({
+          method: "put",
+          url: `${process.env.REACT_APP_URL_BACK}/stock/drop`,
+          data: stockProducts,
+        })
+          .then((e) => e.data, CambioPagina())
+          .catch((e) => console.log(e), CambioPagina());
       })
-        .then((e) => e.data, CambioPagina())
-        .catch((e) => console.log(e), CambioPagina());
-
-    }).catch(error => console.log(error)
-    )
+      .catch((error) => console.log(error));
   };
 
   //   {id: '6DX94897RC997852V', intent: 'CAPTURE', status: 'COMPLETED', purchase_units: Array(1), payer: {…}, …}
@@ -135,7 +137,7 @@ export default function Pay(props) {
   //   update_time: "2022-06-29T17:22:20Z"
 
   function onCancel() {
-    console.log("cancel")
+    console.log("cancel");
     Swal.fire({
       icon: "error",
       title: "Payment Cancelled",
@@ -144,7 +146,6 @@ export default function Pay(props) {
   };
 
   function onError(error) {
-
     Swal.fire({
       icon: "error",
       title: "Payment Error",
@@ -154,7 +155,7 @@ export default function Pay(props) {
   };
 
   return (
-    <div className="">
+    <div className="paypalContainer" >
       {/*<div className="">
         <h1 className={styles.title}>CIOCLOTHES</h1>
   </div>

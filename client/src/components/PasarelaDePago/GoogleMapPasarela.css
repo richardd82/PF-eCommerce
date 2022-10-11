@@ -2,20 +2,23 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-radius: 5px;
 }
 .Columnas{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
+    margin-top: -110px;
     gap: 15px;
+    align-content: center;
+    align-items: baseline;
 }
 
 .OpcionesAdress {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-left: -315%;
 }
 
 .SearchBox {
@@ -35,8 +38,11 @@
 
 input.inputSearchbox{
     width: 300px;
+    padding: 10px;
 }
-
+.chakra-button{
+    padding: 11px !important;
+}
 
 .Adress{
     width: 300px;

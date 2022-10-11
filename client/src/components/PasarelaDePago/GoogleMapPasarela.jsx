@@ -70,18 +70,18 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap, Pointer, Adress, SelectT
             alignItems="center"
             justifyItems="center"
         >
-            <Box h='600px' w='1100px'>
+            <Box h='580px' w='1100px'>
                 {/* Google Map Box */}
                 <GoogleMap
                     center={center}
                     onClick={e => (Pointer(e))}
                     zoom={15}
-                    mapContainerStyle={{ width: '100%', height: '100%' }}
+                    mapContainerStyle={{ width: '80%', height: '80%', margin: 'auto', marginTop:'5px' }}
                     options={{
-                        zoomControl: false,
-                        streetViewControl: false,
-                        mapTypeControl: false,
-                        fullscreenControl: false,
+                        zoomControl: true,
+                        streetViewControl: true,
+                        mapTypeControl: true,
+                        fullscreenControl: true,
                     }}
                     onLoad={map => setMap(map)}
                 >

@@ -76,8 +76,8 @@ export class ResumenPago extends Component {
 
     console.log(this.props.carry);
     return (
-      <div >
-        <div >
+      <div className="test" >
+        <div className="test2">
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650 }}
@@ -116,7 +116,7 @@ export class ResumenPago extends Component {
           <p>TOTAL : {total}</p>
           <p>Do you want to pay in cash or by PayPal/Credit Card?</p>
         </div>
-        <button className={"btnPayPasarela"} onClick={() => this.Compra()}>
+        <button className="btnPayPasarela" onClick={() => this.Compra()}>
           Pay in cash{" "}
         </button>
         <Pay ClickContinue={this.props.ClickContinue} contact={this.props.contact} myAdress={this.props.myAdress} />
