@@ -192,8 +192,13 @@
     height: 45vh;
   }
 }
-
-/*----------Media Queries (HIGH DEVICES) ----------*/
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1728px)  {
+  .parendAbout {
+    margin-left: 12%;
+  }
+}
+/*----------Media Queries (UHD DEVICES) ----------*/
 @media screen and (min-width: 2040px) and (max-width: 2160px)  {
   .parendAbout {
     margin-left: 7%;

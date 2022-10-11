@@ -435,12 +435,12 @@ function Formulario() {
 
         {/* <div> */}
         <input
-          id="fileInput"
+          id="src-file1"
           type="file"
           name="image"
           onChange={imageHandleChange}
           value={fileInputState}
-          className={input.image == "" ? "l__form__input-field" : "l__form__input-field2"}
+          className={input.image == "" ? "l__form__input-field file-select" : "l__form__input-field2 file-select"}
         />
 
         {/* <div /> */}
