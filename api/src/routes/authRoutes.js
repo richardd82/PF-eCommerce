@@ -33,9 +33,7 @@ console.log("usuario de logueo", user)
 
   const userForToken = user;
 
-  console.log(userForToken, "user for token")
-
-  const token = jwt.sign(userForToken.toJSON(), process.env.JWT_secret_key);
+  const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
   (user.verify === false)
     ? res.redirect("/register").json({ error: "Usuario no verificado" })
@@ -188,18 +186,12 @@ console.log("usuario de logueo", user)
              where: { email: email },
           });
        }
+    
+      console.log(userValidate)
 
-       const userForToken = {
-        username: "username",
-        name: userValidate[0].dataValues.name,
-        lastName: userValidate[0].dataValues.lastName,
-        image: userValidate[0].dataValues.image,
-        address: userValidate[0].dataValues.address,
-        isAdmin: userValidate[0].dataValues.isAdmin,
-        id: userValidate[0].dataValues.id,
-       }
+       const userForToken = user;
 
-       const token = jwt.sign(userForToken, process.env.JWT_secret_key);
+       const token = jwt.sign(userForToken.toJSON(), process.env.JWT_secret_key);
 
        res.status(200).json({ userForToken, token })
     } catch (err) {

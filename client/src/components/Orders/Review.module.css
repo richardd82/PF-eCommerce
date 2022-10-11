@@ -1,0 +1,24 @@
+.containerModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxModal {
+  background-color: white;
+  max-width: 250px;
+  padding: 10px;
+  text-align: center;
+}
+
+.boxModal img {
+  margin-bottom: 10px;
+}
+
+.boxModal span {
+  margin: 5px 0;
+}
+
+.labelReview {
+  cursor: pointer;
+}
