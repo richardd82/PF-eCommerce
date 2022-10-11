@@ -466,18 +466,6 @@ export function createOrder(payload) {
   };
 }
 
-export async function createOrder2(payload) {
-    try{
-    axios
-      .post(`${REACT_APP_URL_BACK}/orders`, payload)
-      .then((res) => {
-        return res;
-      })
-    }
-    catch(error) {
-     console.log(error);}
-}
-
 //USERS ADMIN
 
 export function getAllUsers() {
@@ -572,14 +560,6 @@ export function deleteFavs() {
   };
 }
 
-export function register(payload) {
-  return async function () {
-    const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)
-    console.log(resp)
-    return resp.data
-  }
-}
-
 export function loginAction(payload) {
   return async function () {
     try {
@@ -663,4 +643,25 @@ export function CreateNewProduct(payload) {
       console.log(e);
     }
   }
+}
+
+
+
+
+export async function register (payload) {
+  const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)
+  console.log(resp)
+  return resp.data
+}
+
+export async function createOrder2(payload) {
+  try{
+  axios
+    .post(`${REACT_APP_URL_BACK}/orders`, payload)
+    .then((res) => {
+      return res;
+    })
+  }
+  catch(error) {
+   console.log(error);}
 }

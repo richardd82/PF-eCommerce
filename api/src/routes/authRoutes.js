@@ -55,13 +55,8 @@ console.log("usuario de logueo", user)
         }
       }) 
 
-      if(user !== null){
-        return res.json({
-          succes: false,
-          msj: 'Usuario ya existe'
-        })
-      }
-      console.log(user, "USERRR")
+      if(user !== null)
+        return res.status(400).send("Usuario ya existe");
 
         var  isAdmin=false
           if (
@@ -73,6 +68,7 @@ console.log("usuario de logueo", user)
           ) {
            isAdmin = true;
          }    
+         
       await bcrypt.hash(password, 10, async function (err, hash) {
         try {
             user = await User.create({
