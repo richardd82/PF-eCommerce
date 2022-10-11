@@ -216,7 +216,7 @@ export default function Register() {
             <label>Phone:</label>
             </div>
             <input
-              type="text"
+              type="number"
               value={input.phone}
               name="phone"
               onChange={(e) => handleChange(e)}
