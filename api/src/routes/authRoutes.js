@@ -35,7 +35,7 @@ console.log("usuario de logueo", user)
 
   console.log(userForToken, "user for token")
 
-  const token = jwt.sign(userForToken, process.env.JWT_secret_key);
+  const token = jwt.sign(userForToken.toJSON(), process.env.JWT_secret_key);
 
   (user.verify === false)
     ? res.redirect("/register").json({ error: "Usuario no verificado" })
