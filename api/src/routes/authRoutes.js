@@ -31,16 +31,7 @@ console.log("usuario de logueo", user)
     return res.status(401).json({ error: "Invalid user or password" });
   }
 
-  const userForToken = {
-    id: user.id,
-    username: user.username,
-    admin: user.isAdmin,
-    email: user.email,
-    name: user.name,
-    image: user.image,
-    address: user.address,
-    phone: user.phone
-  };
+  const userForToken = user;
 
   console.log(userForToken, "user for token")
 
@@ -95,7 +86,7 @@ console.log("usuario de logueo", user)
 
             image,
             address,
-            phone      
+            phone,      
             isAdmin:isAdmin
 
           });
