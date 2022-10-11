@@ -17,12 +17,8 @@ class Carry extends Component {
   }
 
   componentDidMount() {
-    if (
-      this.props.user_login != "Loading" &&
-      this.props.user_login !== false &&
-      this.props.user_login.admin == true
-    )
-      this.props.history.push("/");
+    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.isAdmin==true)
+    this.props.history.push("/");
 
     let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);

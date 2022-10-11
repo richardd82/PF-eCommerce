@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
+import OrdersDetails from "./components/Orders/OrdersDetails";
 
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -90,6 +91,7 @@ function App() {
           <Route exact path="/pasarela">
 						<Pasarela/>
 					</Route>
+          <Route path="/OrderDetails/:id" component={OrdersDetails}/>
           
                      {/*
 					<Route exact path="/profile" component={Profile} />

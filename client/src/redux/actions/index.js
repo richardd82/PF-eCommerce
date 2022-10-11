@@ -625,6 +625,7 @@ export function ObtenerLogin() {
     try {
       if (Data !== undefined && Data !== null) {
         var Datos = await axios.post(`${process.env.REACT_APP_URL_BACK}/auth/verify`, { authorization: `PalabraSecreta ${Data.token}` });
+        console.log(Datos)
         return dispatch(
           {
             type: CHANGE_USER_LOGIN,

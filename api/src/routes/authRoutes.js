@@ -33,8 +33,6 @@ console.log("usuario de logueo", user)
 
   const userForToken = user;
 
-  console.log(userForToken, "user for token")
-
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
   (user.verify === false)
@@ -188,6 +186,8 @@ console.log("usuario de logueo", user)
              where: { email: email },
           });
        }
+    
+      console.log(userValidate)
 
        const userForToken = {
         username: "username",
