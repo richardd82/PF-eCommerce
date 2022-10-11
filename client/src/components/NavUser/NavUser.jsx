@@ -45,7 +45,7 @@ function NavUser() {
           <a href="/profile">Profile</a>
           {
             user2 !== false && (user2.isAdmin === false) &&
-            <a href={`/OrderDetails/${user2.id}`}>Your Orders</a>
+            <a href={`/OrdersUser`}>Your Orders</a>
           }
           {
             user2 !== false && (user2.isAdmin === true) &&

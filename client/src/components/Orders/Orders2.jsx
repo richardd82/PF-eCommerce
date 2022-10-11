@@ -9,9 +9,25 @@ import DataTable from "react-data-table-component";
 
 class Orders2 extends Component {
   componentDidMount() {
+    console.log(this.props.user)
     this.props.getOrders("UserID", this.props.user.id);
   }
+  
+  state = {
+    Loading:false,
+  }
+
+
+
   render() {
+    
+    if(this.props.user!="Loading" && this.state.Loading==false){
+      this.props.getOrders("UserID", this.props.user.id);
+      this.setState({
+        Loading: true,
+      })
+    }
+
     const { orders } = this.props;
     console.log(orders);
 

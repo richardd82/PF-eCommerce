@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
 import OrdersDetails from "./components/Orders/OrdersDetails";
+import Orders from"./components/Orders/Orders2.jsx";
 
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -92,6 +93,7 @@ function App() {
 						<Pasarela/>
 					</Route>
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
+          <Route path="/OrdersUser" component={Orders}/>
           
                      {/*
 					<Route exact path="/profile" component={Profile} />
