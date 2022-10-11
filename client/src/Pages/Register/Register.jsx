@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register, getAllUsers } from "../../redux/actions";
+import Swal from "sweetalert2";
 import "./register.css";
 
 function validate(input, allUsers) {
-  let errors = {};
-  //const allUsers = useSelector((state) => state.allUsers)
+    let errors = {};
+    //const allUsers = useSelector((state) => state.allUsers)
 
   let urlValidator = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
   let emailValidator = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -56,65 +57,70 @@ export default function Register() {
     image: "",
   });
 
-  useEffect(() => {
-    dispatch(getAllUsers());
-  }, []);
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, [])
 
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-  }
-
-  const usersNames = allUsers.map((n) => {
-    return n.username;
-  });
-  console.log(usersNames);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("ALLUSERS", allUsers);
-    console.log("INPUT:username", input.username);
-    if (usersNames.includes(input.username)) {
-      alert(
-        `The username ${input.username} is already registered. Please enter a different one`
-      );
-      setInput({
-        email: "",
-        username: "",
-        name: "",
-        lastName: "",
-        password: "",
-        confirmPass: "",
-        phone: null,
-        address: "",
-        image: "",
-      });
-      history.push("/register");
-    } else {
-      dispatch(register(input));
-      alert("User successfully created");
-      setInput({
-        email: "",
-        username: "",
-        name: "",
-        lastName: "",
-        password: "",
-        confirmPass: "",
-        phone: null,
-        address: "",
-        image: "",
-      });
-      history.push("/");
+    function handleChange(e) {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]: e.target.value,
+            })
+        )
     }
-  }
+
+    const usersNames = allUsers.map(n => {
+        return n.username
+    })
+    console.log(usersNames)
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log("ALLUSERS", allUsers)
+        console.log("INPUT:username", input.username)
+        if (usersNames.includes(input.username)) {
+            alert(`The username ${input.username} is already registered. Please enter a different one`)
+            setInput({
+                email: '',
+                username: '',
+                name: '',
+                lastName: '',
+                password: '',
+                confirmPass: '',
+                phone: null,
+                address: '',
+                image: '',
+            })
+            history.push('/register')
+        } else {
+            register(input).then(e => {
+                Swal.fire({
+                    title: 'User successfully created',
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "Yes",
+                    denyButtonText: `No`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        history.push('/')
+                    }
+                })
+            }).catch(e =>
+                Swal.fire({
+                    title: e.response.data,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "Yes",
+                    denyButtonText: `No`,
+                }).then((result) => { console.log(result)})
+            )
+        }
+    }
 
   return (
     <div className="registerContainer">
