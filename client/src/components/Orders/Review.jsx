@@ -43,7 +43,7 @@ class Review extends Component {
       try {
         let Datos = await axios({
           method: "post",
-          url: `http://localhost:3001/comment`,
+          url: `${process.env.REACT_APP_URL_BACK}/comment`,
           data: productos,
         });
         return Datos.data;
@@ -59,7 +59,7 @@ class Review extends Component {
         console.log(type, id, data);
         let Datos = await axios({
           method: "put",
-          url: `http://localhost:3001/orders/${id}?type=${type}`,
+          url: `${process.env.REACT_APP_URL_BACK}/orders/${id}?type=${type}`,
           data: { data: data },
         });
         return Datos.data;
@@ -186,7 +186,7 @@ class Review extends Component {
               >
                 <Fade in={this.state.OpenModal} timeout={500}>
                   <img
-                    src={`https://${order.image}`}
+                    src={`${order.image}`}
                     alt="asd"
                     style={{ maxHeight: "70%", maxWidth: "70%" }}
                   />

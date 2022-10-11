@@ -16,8 +16,8 @@ function Orders() {
   const product = useSelector((state) => state.products);
   console.log(product,"soy products")
   const user = useSelector(state=>state.user_login)
+ 
   let userOrders = ordersArr?.filter((data) => data.userId === user.id)
-  console.log(userOrders, "userOrders")
     // console.log(JSON.parse(localStorage.getItem(CARRY_LOCALHOST)))
     
   useEffect(() => {

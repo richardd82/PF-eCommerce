@@ -100,7 +100,7 @@ export default function Pay(props) {
 
       function CambioPagina() {
         dispatch(ChangeCarryProducts([]))
-        Swal.fire({
+       /* Swal.fire({
           title: "Se creo la orden con exito",
           showDenyButton: false,
           showCancelButton: false,
@@ -108,10 +108,8 @@ export default function Pay(props) {
           denyButtonText: `No`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
+         /* if (result.isConfirmed) {*/
             props.ClickContinue()
-          }
-        });
       }
 
       await axios({
@@ -143,7 +141,6 @@ export default function Pay(props) {
       title: "Payment Cancelled",
       text: "Your payment has been cancelled and will not be charged",
     });
-    history.push("/");
   };
 
   function onError(error) {
@@ -154,7 +151,6 @@ export default function Pay(props) {
       text: "There has been an error in your payment and will not be charged",
     });
     console.log("Error: ", error);
-    history.push("/");
   };
 
   return (
