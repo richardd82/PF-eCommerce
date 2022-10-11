@@ -104,7 +104,7 @@ export default function Register() {
                     showDenyButton: false,
                     showCancelButton: false,
                     confirmButtonText: "Yes",
-                    denyButtonText: `No`,
+                    icon: "success",
                 }).then((result) => {
                     if (result.isConfirmed) {
                         history.push('/')
@@ -115,8 +115,8 @@ export default function Register() {
                     title: e.response.data,
                     showDenyButton: false,
                     showCancelButton: false,
-                    confirmButtonText: "Yes",
-                    denyButtonText: `No`,
+                    confirmButtonText: "Ok",
+                    icon: "error",
                 }).then((result) => { console.log(result)})
             )
         }
