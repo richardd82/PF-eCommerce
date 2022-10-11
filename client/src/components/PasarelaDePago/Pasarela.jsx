@@ -30,7 +30,7 @@ function Pasarela() {
 
 
   useEffect(() => {
-    if(JSON.stringify(carry)===JSON.stringify([]))
+    if(JSON.stringify(carry)===JSON.stringify([]) || user_login==false || user_login.isAdmin)
     history.push("/");
   }, [])
 

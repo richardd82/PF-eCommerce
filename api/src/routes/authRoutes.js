@@ -28,14 +28,7 @@ router.post("/", async (req, res, next) => {
     return res.status(401).json({ error: "Invalid user or password" });
   }
 
-  const userForToken = {
-    id: user.id,
-    username: user.username,
-    admin: user.isAdmin,
-    email: user.email,
-    name: user.name,
-    image: user.image,
-  };
+  const userForToken =user
 
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
@@ -144,6 +137,8 @@ router.post("/", async (req, res, next) => {
              where: { email: email },
           });
        }
+    
+      console.log(userValidate)
 
        const userForToken = {
         username: "username",
