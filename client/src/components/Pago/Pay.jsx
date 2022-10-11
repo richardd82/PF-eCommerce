@@ -78,45 +78,42 @@ export default function Pay(props) {
   };
 
   const onApprove = (data, actions) => {
-    return actions.order
-      .capture()
-      .then(async function (detalles) {
-        const sendOrderPP = {
-          stocks: carryProducts.map((e) => {
-            return {
-              amount: e.amount,
-              value: e.details.price,
-              productId: e.id,
-              image: e.details.image,
-            };
-          }),
-          userId: user.id,
-          estado: "Cancelada",
-          contactAdress: { contact: props.contact, myAdress: props.myAdress },
-        };
-        dispatch(createOrder(sendOrderPP));
+    return actions.order.capture().then(async function (detalles) {
 
-        let arregloObjetosIdQuantity = carryProducts.map((e) => {
-          return { size: e.state.size, stock: e.amount, id: e.id };
-        });
+      const sendOrderPP = {
+        stocks: carryProducts.map((e) => {
+          return {
+            amount: e.amount,
+            value: e.details.price,
+            productId: e.id,
+            image: e.details.image,
+          }
+        }),
+        userId: user.id,
+        estado: 'Cancelada',
+        contactAdress: { contact: props.contact, myAdress: props.myAdress }
+      };
+      dispatch(createOrder(sendOrderPP));
 
-        let stockProducts = { stockProducts: arregloObjetosIdQuantity };
+      let arregloObjetosIdQuantity = carryProducts.map((e) => {
+        return { size: e.state.size, stock: e.amount, id: e.id };
+      });
 
-        function CambioPagina() {
-          dispatch(ChangeCarryProducts([]));
-          Swal.fire({
-            title: "Se creo la orden con exito",
-            showDenyButton: false,
-            showCancelButton: false,
-            confirmButtonText: "Yes",
-            denyButtonText: `No`,
-          }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-              props.ClickContinue();
-            }
-          });
-        }
+      let stockProducts = { stockProducts: arregloObjetosIdQuantity };
+
+      function CambioPagina() {
+        dispatch(ChangeCarryProducts([]))
+       /* Swal.fire({
+          title: "Se creo la orden con exito",
+          showDenyButton: false,
+          showCancelButton: false,
+          confirmButtonText: "Yes",
+          denyButtonText: `No`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+         /* if (result.isConfirmed) {*/
+            props.ClickContinue()
+      }
 
         await axios({
           method: "put",
@@ -146,8 +143,7 @@ export default function Pay(props) {
       title: "Payment Cancelled",
       text: "Your payment has been cancelled and will not be charged",
     });
-    history.push("/");
-  }
+  };
 
   function onError(error) {
     Swal.fire({
@@ -156,8 +152,7 @@ export default function Pay(props) {
       text: "There has been an error in your payment and will not be charged",
     });
     console.log("Error: ", error);
-    history.push("/");
-  }
+  };
 
   return (
     <div className="paypalContainer" >

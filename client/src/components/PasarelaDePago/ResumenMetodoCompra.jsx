@@ -27,18 +27,7 @@ export class ResumenPago extends Component {
 
   CambiarPagina() {
     this.props.ChangeCarryProducts([]);
-    Swal.fire({
-      title: "Se creo la orden con exito",
-      showDenyButton: false,
-      showCancelButton: false,
-      confirmButtonText: "Yes",
-      denyButtonText: `No`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        this.props.ClickContinue()
-      }
-    });
+        this.props.ClickContinue();
   }
 
   async Compra() {
