@@ -7,7 +7,8 @@ const { User } = require("../db");
 const { response } = require("express");
 const { URL_FRONT } = process.env;
 const { sendRegisterEmail } = require("../Email/mail.config");
-const { getTokenData } = require("../tokenVerify/tokenVerify")
+const { getTokenData } = require("../tokenVerify/tokenVerify");
+const { parse } = require("path");
 // const { googleVerify } = require("../helpers/google-verify.js");
 
 const router = Router();
@@ -48,6 +49,7 @@ console.log("usuario de logueo", user)
 
      try {
        const { username, password, email, name, lastName, image, address, phone } = req.body;
+      phone=parseInt(phone)
 
       let user = await User.findOne({
         where: {
@@ -55,13 +57,8 @@ console.log("usuario de logueo", user)
         }
       }) 
 
-      if(user !== null){
-        return res.json({
-          succes: false,
-          msj: 'Usuario ya existe'
-        })
-      }
-      console.log(user, "USERRR")
+      if(user !== null)
+        return res.status(400).send("Usuario ya existe") ;
 
         var  isAdmin=false
           if (
@@ -73,6 +70,7 @@ console.log("usuario de logueo", user)
           ) {
            isAdmin = true;
          }    
+         
       await bcrypt.hash(password, 10, async function (err, hash) {
         try {
             user = await User.create({
