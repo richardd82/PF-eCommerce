@@ -38,6 +38,7 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
+        defaultValue:undefined,
       },
       address: {
         type: DataTypes.STRING,
@@ -52,6 +53,11 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
       isBaned: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      verify: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,

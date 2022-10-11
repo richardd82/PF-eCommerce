@@ -14,10 +14,12 @@ function CarryCard({
   onDecrease,
   onIncrease,
 }) {
+
+
   return (
     <div className={styles.productContainer}>
       <div className={styles.photoContainer}>
-        <img src={`https://${img}`} alt="No Found" />
+        <img src={img} alt="No Found" />
       </div>
       <div className={styles.texContainer}>
         <p>{name}</p>

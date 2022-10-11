@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ChangeCarryProducts, createOrder } from "../../redux/actions";
+import { ChangeCarryProducts, createOrder, createOrder2 } from "../../redux/actions";
 import { withRouter } from "react-router";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,14 +11,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pay from "../Pago/Pay";
 import axios from "axios";
-import Swal from "sweetalert";
-import styles from "./ResumenMetodoPago.module.css";
+import Swal from "sweetalert2";
+import "./ResumenMetodoCompra.css";
 
 export class ResumenPago extends Component {
 
   componentDidMount() {
-    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.admin==true)
-    this.props.history.push("/");
+   
   }
 
 
@@ -28,8 +27,18 @@ export class ResumenPago extends Component {
 
   CambiarPagina() {
     this.props.ChangeCarryProducts([]);
-    this.props.history.push("/orders");
-    window.location.reload();
+    Swal.fire({
+      title: "Se creo la orden con exito",
+      showDenyButton: false,
+      showCancelButton: false,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.props.ClickContinue()
+      }
+    });
   }
 
   async Compra() {
@@ -43,9 +52,10 @@ export class ResumenPago extends Component {
         };
       }),
       userId: this.props.user_login.id,
-      estado:'Creada'
+      estado: 'Creada',
+      contactAdress: { contact: this.props.contact, myAdress: this.props.myAdress }
     };
-    this.props.createOrder(sendOrderPP);
+    createOrder2(sendOrderPP).then(console.log("holaaa")).catch(console.log("error"));
 
     let arregloObjetosIdQuantity = this.props.carry.map((e) => {
       return { size: e.state.size, stock: e.amount, id: e.id };
@@ -77,8 +87,8 @@ export class ResumenPago extends Component {
 
     console.log(this.props.carry);
     return (
-      <div className={styles.componentContainer}>
-        <div className={styles.container}>
+      <div className="test" >
+        <div className="test2">
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650 }}
@@ -117,10 +127,10 @@ export class ResumenPago extends Component {
           <p>TOTAL : {total}</p>
           <p>Do you want to pay in cash or by PayPal/Credit Card?</p>
         </div>
-        <button className={styles.btnPay} onClick={() => this.Compra()}>
+        <button className="btnPayPasarela" onClick={() => this.Compra()}>
           Pay in cash{" "}
         </button>
-        <Pay />
+        <Pay ClickContinue={this.props.ClickContinue} contact={this.props.contact} myAdress={this.props.myAdress} />
       </div>
     );
   }
@@ -138,7 +148,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   //pasandole al componente la posibilidad como props de hacer un dispatch de la function getProducts
   return {
-    ChangeCarryProducts: (elementos) =>dispatch(ChangeCarryProducts(elementos)),
+    ChangeCarryProducts: (elementos) => dispatch(ChangeCarryProducts(elementos)),
     createOrder: (productos) => dispatch(createOrder(productos)),
   };
 }

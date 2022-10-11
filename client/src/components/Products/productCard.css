@@ -75,6 +75,25 @@
         width: 97%;
     }
 }
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1728px)  {
+    .card {
+        width: 270px;
+        height: 430px;
+    }
+    .card__content {
+        margin: 3px;
+        width: 232px;
+        font-size: .7em;
+        padding-top: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 8px;
+    }
+    .imgCard {
+        width: 97%;
+    }
+  }
 /*----------Media Queries (HIGH DEVICES) ----------*/
 @media screen and (min-width: 2048px) {
   

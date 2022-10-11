@@ -6,6 +6,8 @@ import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
+import OrdersDetails from "./components/Orders/OrdersDetails";
+import Orders from"./components/Orders/Orders2.jsx";
 
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -44,9 +46,7 @@ import { ObtenerLogin } from "./redux/actions";
 
 // import styles from "./App.module.css";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
- import FormDelivery from "./components/PasarelaDePago/FormularioContactoDelivery";
-import MethodPay from "./components/PasarelaDePago/ResumenMetododeCompra";
-import GoogleMap from "./components/GoogleMap/GoogleMap";
+import Pasarela from "./components/PasarelaDePago/Pasarela";
 
 
 
@@ -89,9 +89,11 @@ function App() {
 						<Login/>
 					</Route>
 
-          <Route exact path="/map">
-						<GoogleMap/>
+          <Route exact path="/pasarela">
+						<Pasarela/>
 					</Route>
+          <Route path="/OrderDetails/:id" component={OrdersDetails}/>
+          <Route path="/OrdersUser" component={Orders}/>
           
                      {/*
 					<Route exact path="/profile" component={Profile} />
@@ -115,8 +117,6 @@ function App() {
 						component={ModifyUserPassword}
 					></Route> */}
 					{/*<Route exact path="/adminOrders" component={AdminOrders}></Route>*/}
-					<Route exact path="/FormDelivery" component={FormDelivery}></Route>
-					 <Route exact path="/MethodPay" component={MethodPay}></Route>
 					{/*<Route exact path="/payment" component={payment} />
 					<Route exact path="/orders" component={Orders2} />
 					<Route path="/OrderDetails/:id" component={OrdersDetails} />

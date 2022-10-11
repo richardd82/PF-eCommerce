@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./CreateProduct.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CreateNewProduct, image_post} from "../../redux/actions";
+import { CreateNewProduct, image_post } from "../../redux/actions";
 import swal from "sweetalert";
 import {
   getCategorys, searchNameProduct,
@@ -50,6 +50,7 @@ function validate(input) {
   } else if (!isNumeric(input.price)) {
     errores.price = "The price must be a positive number";
   }
+  
   // } else if (!input.image) {
   /*    IMG    */
   //   errores.image = "URL Image is required";
@@ -107,7 +108,7 @@ function validate(input) {
 function Formulario() {
   const [fileInputState, setFileInputState] = useState('');
   //const [previewSource, setPreviewSource] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState('');
   const dispatch = useDispatch();
   const categorys = useSelector((state) => state.categorys);
   const products = useSelector((state) => state.products);
@@ -152,8 +153,9 @@ function Formulario() {
       })
     );
   }
-  function imageHandleChange(e){
+  function imageHandleChange(e) {
     //console.log(e.target.defaultValue);
+    console.log(e.target)
     e.preventDefault();
     const file = e.target.value;
     //previewFile(file);
@@ -227,40 +229,38 @@ function Formulario() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(selectedFile);
-    console.log(fileInputState);
-    if (!selectedFile) return;
+    if (!selectedFile || selectedFile=="") return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
-    reader.onloadend = () => {
-      dispatch(image_post(reader.result));
-    };
-    if (
-      input.description &&
-      input.name &&
-      input.price &&
-      input.image &&
-      (input.nameBrand && input.nameBrand != "Disable") &&
-      input.gender &&
-      (input.nameCategory && input.nameCategory != "Disable")
-    ) {
-      dispatch(CreateNewProduct({
-        name: input.name,
-        price: input.price,
-        image: input.image,
-        brand: input.nameBrand,
-        gender: input.gender,
-        nameCategory: input.nameCategory,
-        description: input.description,
-      }));
-      swal({
-        title: "Product created successfully!",
-        icon: "success",
-        button: "Ok",
-      });
-      SetInput(initialState);
-      history.push("/");
-    } else alert(" missing data for the creation of a new product");
+    reader.onload = () => {
+      if (
+        input.description &&
+        input.name &&
+        input.price &&
+        selectedFile!=='' &&
+        (input.nameBrand && input.nameBrand != "Disable") &&
+        input.gender &&
+        (input.nameCategory && input.nameCategory != "Disable")
+      ) {
+        dispatch(CreateNewProduct({
+          name: input.name,
+          price: input.price,
+          brand: input.nameBrand,
+          gender: input.gender,
+          nameCategory: input.nameCategory,
+          description: input.description,
+          imageData:reader.result
+        }));
+        swal({
+          title: "Product created successfully!",
+          icon: "success",
+          button: "Ok",
+        });
+        SetInput(initialState);
+        history.push("/");
+      }
+      else alert(" missing data for the creation of a new product");
+    }
   }
   //comprobacion de INPUT
 
@@ -434,17 +434,17 @@ function Formulario() {
         </div>
 
         {/* <div> */}
-          <input 
-            id="fileInput"
-            type="file"
-            name="image"
-            onChange={imageHandleChange}
-            value={fileInputState}
-            className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
-          />
+        <input
+          id="src-file1"
+          type="file"
+          name="image"
+          onChange={imageHandleChange}
+          value={fileInputState}
+          className={input.image == "" ? "l__form__input-field file-select" : "l__form__input-field2 file-select"}
+        />
 
-          {/* <div /> */}
-          {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
+        {/* <div /> */}
+        {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
             {error.image && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.image}</p>
               )}
@@ -457,7 +457,7 @@ function Formulario() {
             />
               <label className="label-form">Link Img:</label>
           </div> */}
-          {/*<div>
+        {/*<div>
             <p>brand:</p>
             {error.brand && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{error.brand}</p>

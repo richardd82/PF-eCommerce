@@ -37,9 +37,9 @@ orderRouter.get("/", async (req, res, next) => {
 
 orderRouter.post("/", async (req, res) => {
    // email para orden creada osea se compro
-   const { userId, stocks, estado } = req.body;
+   const { userId, stocks, estado ,contactAdress} = req.body;
 
-   console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",userId,"  ",stocks,"  ",estado)
+   //console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",userId,"  ",stocks,"  ",estado)
    try {
       console.log("Entra")   
       var priceTotal = 0;
@@ -51,6 +51,7 @@ orderRouter.post("/", async (req, res) => {
       priceTotal = priceTotal.toFixed(2);
 
       let stocksJSON = JSON.stringify(stocks);
+      let contactAdressJSON=JSON.stringify(contactAdress)
       console.log(stocksJSON);
 
       let newOrder = await Order.create({
@@ -58,6 +59,7 @@ orderRouter.post("/", async (req, res) => {
          userId,
          stocks: stocksJSON,
          stateOrder: estado,
+         contactAdress:contactAdressJSON,
       });
 
       res.send(newOrder);

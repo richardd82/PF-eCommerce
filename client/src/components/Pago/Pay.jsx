@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import axios from "axios";
-import {Link, useHistory }from "react-router-dom";
-import styles from "./Pay.module.css";
-import { DeleteDrop ,ChangeCarryProducts,createOrder} from "../../redux/actions";
+import { Link, useHistory } from "react-router-dom";
+import "./Pay.css";
+import {
+  DeleteDrop,
+  ChangeCarryProducts,
+  createOrder,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Pay() {
+export default function Pay(props) {
   const dispatch = useDispatch();
   const carryProducts = useSelector((state) => state.carryProducts);
   const history = useHistory();
-  const user = useSelector(state=>state.user_login)
-  let [arrProduc,setArrProduc] = useState([])
-  let [arrPrecio,setArrPrecio] = useState(0)
+  const user = useSelector((state) => state.user_login);
+  let [arrProduc, setArrProduc] = useState([]);
+  let [arrPrecio, setArrPrecio] = useState(0);
 
-  useEffect(()=>{
+  console.log(props);
+
+  useEffect(() => {
     let articulos = carryProducts.map((e) => {
       return {
         name: e.details.name,
@@ -27,13 +33,14 @@ export default function Pay() {
         quantity: e.amount,
       };
     });
-    setArrProduc(articulos)
-    let PrecioTotalArticulos = articulos[0].unit_amount.value * articulos[0].quantity;
-  
+    setArrProduc(articulos);
+    let PrecioTotalArticulos =
+      articulos[0].unit_amount.value * articulos[0].quantity;
+
     let multiplicacionEntreValueYQuantity = articulos.map((e) => {
       return e.unit_amount.value * e.quantity;
     });
-  
+
     if (articulos.length > 1) {
       PrecioTotalArticulos = multiplicacionEntreValueYQuantity.reduce(
         (prev, current) => {
@@ -41,12 +48,11 @@ export default function Pay() {
         }
       );
     }
-    setArrPrecio(PrecioTotalArticulos)
-  }, [])
+    setArrPrecio(PrecioTotalArticulos);
+  }, []);
 
-  
   const createOrderPaypal = (data, actions) => {
-    console.log("Entra aca")
+    console.log("Entra aca");
     return actions.order
       .create({
         purchase_units: [
@@ -67,50 +73,60 @@ export default function Pay() {
       })
       .then((orderId) => {
         return orderId;
-      }).catch(error =>
-        console.log(error)
-        )
+      })
+      .catch((error) => console.log(error));
   };
 
   const onApprove = (data, actions) => {
-    return actions.order.capture().then(async function (detalles) {
+    return actions.order
+      .capture()
+      .then(async function (detalles) {
+        const sendOrderPP = {
+          stocks: carryProducts.map((e) => {
+            return {
+              amount: e.amount,
+              value: e.details.price,
+              productId: e.id,
+              image: e.details.image,
+            };
+          }),
+          userId: user.id,
+          estado: "Cancelada",
+          contactAdress: { contact: props.contact, myAdress: props.myAdress },
+        };
+        dispatch(createOrder(sendOrderPP));
 
-       const sendOrderPP = {
-        stocks: carryProducts.map((e) => {
-          return {
-            amount: e.amount,
-            value: e.details.price,
-            productId: e.id,
-            image: e.details.image,
-          }
-        }),
-        userId: user.id,
-        estado:'Cancelada'
-      };
-      dispatch(createOrder(sendOrderPP));
+        let arregloObjetosIdQuantity = carryProducts.map((e) => {
+          return { size: e.state.size, stock: e.amount, id: e.id };
+        });
 
-      let arregloObjetosIdQuantity = carryProducts.map((e) => {
-        return {size: e.state.size, stock: e.amount ,id:e.id};
-      });
+        let stockProducts = { stockProducts: arregloObjetosIdQuantity };
 
-      let stockProducts = {stockProducts:arregloObjetosIdQuantity};
+        function CambioPagina() {
+          dispatch(ChangeCarryProducts([]));
+          Swal.fire({
+            title: "Se creo la orden con exito",
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              props.ClickContinue();
+            }
+          });
+        }
 
-      function CambioPagina(){
-        dispatch(ChangeCarryProducts([]))
-        history.push("/orders")  
-        window.location.reload();
-      }
-
-      await axios({
-        method: "put",
-        url: `${process.env.REACT_APP_URL_BACK}/stock/drop`,
-        data: stockProducts,
+        await axios({
+          method: "put",
+          url: `${process.env.REACT_APP_URL_BACK}/stock/drop`,
+          data: stockProducts,
+        })
+          .then((e) => e.data, CambioPagina())
+          .catch((e) => console.log(e), CambioPagina());
       })
-        .then((e)=>e.data,CambioPagina())
-        .catch((e) => console.log(e),CambioPagina());
-
-  }).catch(error =>console.log(error)
-    )
+      .catch((error) => console.log(error));
   };
 
   //   {id: '6DX94897RC997852V', intent: 'CAPTURE', status: 'COMPLETED', purchase_units: Array(1), payer: {…}, …}
@@ -124,17 +140,16 @@ export default function Pay() {
   //   update_time: "2022-06-29T17:22:20Z"
 
   function onCancel() {
-    console.log("cancel")
+    console.log("cancel");
     Swal.fire({
       icon: "error",
       title: "Payment Cancelled",
       text: "Your payment has been cancelled and will not be charged",
     });
     history.push("/");
-  };
+  }
 
-  function onError (error){
-
+  function onError(error) {
     Swal.fire({
       icon: "error",
       title: "Payment Error",
@@ -142,10 +157,10 @@ export default function Pay() {
     });
     console.log("Error: ", error);
     history.push("/");
-  };
+  }
 
   return (
-    <div className="">
+    <div className="paypalContainer" >
       {/*<div className="">
         <h1 className={styles.title}>CIOCLOTHES</h1>
   </div>
@@ -153,17 +168,14 @@ export default function Pay() {
       <br />
       <br />
       */}
-      <PayPalScriptProvider deferLoading = { false }>
+      <PayPalScriptProvider deferLoading={false}>
         <PayPalButtons
           createOrder={(data, actions) => createOrderPaypal(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
-          onCancel={()=>onCancel()}
-          onError={(error)=>onError(error)}
+          onCancel={() => onCancel()}
+          onError={(error) => onError(error)}
         />
       </PayPalScriptProvider>
-      <a href="/">
-        <button className={styles.btnBack}>Back to home</button>
-      </a>
     </div>
   );
 }

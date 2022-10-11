@@ -1,30 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStockbyIDTotalFilterCarry, ChangeCarryProducts, createOrder, getOrders } from "../../redux/actions";
+import {
+  getStockbyIDTotalFilterCarry,
+  ChangeCarryProducts,
+  createOrder,
+  getOrders,
+} from "../../redux/actions";
 import "./Carry.css";
 import CarryCard from "./CarryCard.jsx";
 import Swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
 
 class Carry extends Component {
-
   Number2Decimals(x) {
     return Number.parseFloat(x).toFixed(2);
   }
 
   componentDidMount() {
-    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.admin==true)
+    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.isAdmin==true)
     this.props.history.push("/");
 
     let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
-    console.log(this.props.user_login.id)
+    console.log(this.props.user_login.id);
     this.props.getOrders("UserID", this.props.user_login.id);
   }
 
   DecreaseElementCarry(carryElements, index) {
     let array = Object.assign([], carryElements);
-    let cantidad = (Number.parseInt(array[index].amount)) - 1;
+    let cantidad = Number.parseInt(array[index].amount) - 1;
 
     if (cantidad <= 0) {
       Swal.fire({
@@ -37,13 +41,13 @@ class Carry extends Component {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           array.splice(index, 1);
-          this.props.ChangeCarryProducts(array)
+          this.props.ChangeCarryProducts(array);
           Swal.fire("The product was removed!", "", "success");
         }
       });
     } else {
       array[index].amount = cantidad;
-      this.props.ChangeCarryProducts(array)
+      this.props.ChangeCarryProducts(array);
     }
     return array;
   }
@@ -51,7 +55,7 @@ class Carry extends Component {
   IncreaseElementCarry(carryElements, index) {
     let array = Object.assign([], carryElements);
 
-    let cantidad = (Number.parseInt(array[index].amount)) + 1;
+    let cantidad = Number.parseInt(array[index].amount) + 1;
     if (cantidad > array[index].state.stock) {
       Swal.fire({
         title: `There is no more stock for this product`,
@@ -75,7 +79,7 @@ class Carry extends Component {
     let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     Data = this.DeleteElementCarry(Data, index);
-    this.props.ChangeCarryProducts(Data)
+    this.props.ChangeCarryProducts(Data);
     this.props.getStockbyIDTotalFilterCarry(Data);
 
     Swal.fire({
@@ -96,7 +100,7 @@ class Carry extends Component {
     let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
     Data = this.IncreaseElementCarry(Data, index);
-    this.props.ChangeCarryProducts(Data)
+    this.props.ChangeCarryProducts(Data);
   }
 
   onContinueBuy() {
@@ -108,10 +112,9 @@ class Carry extends Component {
         icon: "info",
         button: "Ok",
       });
-    }
-    else {
-      if (actualiceBuy) return
-      
+    } else {
+      if (actualiceBuy) return;
+
       /*for (let index = 0; index < this.props.orders.length; index++) {
         const element = this.props.orders[index];
         console.log(element)
@@ -124,7 +127,7 @@ class Carry extends Component {
           return
         }
       }*/
-      this.props.history.push("/FormDelivery");
+      this.props.history.push("/pasarela");
     }
   }
 
@@ -137,22 +140,29 @@ class Carry extends Component {
     let actualizoBuy = false;
 
     //Metodo para iterar 2 arrays para encontrar el elemento del local Storage dentro del Stock y hacer verificaciones
-    console.log(Stocks, "  ", Data)
+    console.log(Stocks, "  ", Data);
 
     for (let index = 0; index < Stocks.length; index++) {
       const stock = Stocks[index];
       for (let index2 = start; index2 < Data.length; index2++) {
-        console.log("entra 1")
+        console.log("entra 1");
         const datalocal = Data[index2];
-        let monto = (Number.parseInt(datalocal.amount))
+        let monto = Number.parseInt(datalocal.amount);
         /// Encontrar dentro Stock el mismo id del elemento del local storage
-        console.log(datalocal.id, "  ", stock.productId, "  ",
-          datalocal.state.size, "  ", stock.productSize)
+        console.log(
+          datalocal.id,
+          "  ",
+          stock.productId,
+          "  ",
+          datalocal.state.size,
+          "  ",
+          stock.productSize
+        );
         if (
           datalocal.id == stock.productId &&
           datalocal.state.size == stock.productSize
         ) {
-          console.log("entra 2")
+          console.log("entra 2");
           /// Verificar si el stock ha sido cambiado y modificar el local storage
           if (stock.stock !== datalocal.state.stock) {
             Data[index2].state.stock = stock.stock;
@@ -184,7 +194,9 @@ class Carry extends Component {
             datalocal.amount = datalocal.state.stock;
           }
           //Sumar el total de la compra
-          Total += (Number.parseInt(datalocal.amount)) * parseFloat(datalocal.details.price);
+          Total +=
+            Number.parseInt(datalocal.amount) *
+            parseFloat(datalocal.details.price);
 
           //Metodo para hacer la iteracion mas rapida
           let elementoStart = Data[start];
@@ -198,14 +210,12 @@ class Carry extends Component {
     // Si hubo cambio en el Stock, actualiza los elementos del local Storage, asi como su stock nuevo, o cantidad de productos
     // del mismo elemento
     if (Actualizar) {
-      this.props.ChangeCarryProducts(Data)
+      this.props.ChangeCarryProducts(Data);
       this.setState({ carry: Data });
     }
     //retorna el precio total
     return { priceTotal: Total, actualiceBuy: actualizoBuy };
   }
-
-
 
   render() {
     let carryProducts = this.props.carryProducts;
@@ -215,9 +225,9 @@ class Carry extends Component {
 
     return (
       <div className="mainContainer">
-       {carryProducts.length !== 0 ? (
+        {carryProducts.length !== 0 ? (
           <div className="containCarry">
-          <div>
+            <div>
               {carryProducts?.map((c, index) => (
                 <CarryCard
                   id={c.details.id}
@@ -233,9 +243,11 @@ class Carry extends Component {
                 />
               ))}
             </div>
+            
+            <div>
             <div className="PriceTotalGlobal">
               <div className="PriceTotal">
-               <p>Total: ${this.Number2Decimals(priceTotal)}</p>
+                <p>Total: ${this.Number2Decimals(priceTotal)}</p>
                 <button
                   className="Login_btnLoginModal__1R93O"
                   onClick={() => this.onContinueBuy()}
@@ -243,6 +255,7 @@ class Carry extends Component {
                   Continuar Compra
                 </button>
               </div>
+            </div>
             </div>
           </div>
         ) : (
@@ -264,14 +277,15 @@ function mapStateToProps(state) {
     carryProductsStocks: state.carryProductsStocks,
     carryProducts: state.carryProducts,
     user_login: state.user_login,
-    orders: state.orders
+    orders: state.orders,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   //pasandole al componente la posibilidad como props de hacer un dispatch de la function getcountries
   return {
-    getStockbyIDTotalFilterCarry: (carry) => dispatch(getStockbyIDTotalFilterCarry(carry)),
+    getStockbyIDTotalFilterCarry: (carry) =>
+      dispatch(getStockbyIDTotalFilterCarry(carry)),
     ChangeCarryProducts: (carrynew) => dispatch(ChangeCarryProducts(carrynew)),
     createOrder: (SendPP) => dispatch(createOrder(SendPP)),
     getOrders: (type, parameter) => dispatch(getOrders(type, parameter)),

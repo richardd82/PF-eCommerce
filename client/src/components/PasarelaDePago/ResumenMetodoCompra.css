@@ -7,8 +7,9 @@
   padding: 15px;
 }
 
-.btnPay {
+.btnPayPasarela {
   margin: 0 auto;
+  margin-left: 0px;
   display: block;
   max-width: 100%;
   width: 750px;
@@ -16,12 +17,12 @@
   padding: 10px 15px;
   outline: none;
   cursor: pointer;
-  background-color: #008000;
+  background-color: #b311fe;
   color: white;
   border: none;
   font-size: 1.2rem;
 }
 
-.btnPay:hover {
-  background-color: #05b405;
+.btnPayPasarela:hover {
+  background-color: #f51ce7;
 }

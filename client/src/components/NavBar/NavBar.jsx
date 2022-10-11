@@ -56,11 +56,6 @@ export default function NavBar(props) {
                 WOMEN
               </Link>
             </li>
-            <li>
-              <Link to={"/create"} className="btnNavEffect">
-                CREATE
-              </Link>
-            </li>
 
 
             {/*<li className="itemRigh">
@@ -86,7 +81,7 @@ export default function NavBar(props) {
               </li>
             )*/}
 
-              { user_login != "Loading" &&(user_login == false || (user_login.admin !== true)) && (
+              { user_login != "Loading" &&(user_login == false || (user_login.isAdmin !== true)) && (
                 <li className="itemRigh">
                   <Link to={"/carry"} className="btnNavEffect">
                     <Badge badgeContent={Cantidad} color="primary">

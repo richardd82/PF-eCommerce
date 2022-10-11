@@ -334,16 +334,6 @@ export function DeleteDrop(payload) {
 
 /* CREAR PRODUCTO */
 
-export function CreateNewProduct(payload) {
-  return async function () {
-    const response = await axios.post(
-      REACT_APP_URL_BACK + "/product/",
-      payload
-    );
-    return response;
-  };
-}
-
 export function getChecklogin(newLoggedUser) {
   return async function (dispatch) {
     try {
@@ -442,6 +432,7 @@ export function getAllComments() {
 }
 
 export function getOrders(type, parameter) {
+  console.log(type," ",parameter)
   return function (dispatch) {
     axios
       .get(
@@ -459,7 +450,8 @@ export function getOrders(type, parameter) {
 
 export function createOrder(payload) {
   console.log(payload);
-  return function (dispatch) {
+  return  async function (dispatch) {
+    try{
     axios
       .post(`${REACT_APP_URL_BACK}/orders`, payload)
       .then((res) => {
@@ -468,8 +460,22 @@ export function createOrder(payload) {
           payload: res,
         });
       })
-      .catch((error) => console.log(error));
+    }
+    catch(error) {
+     console.log(error);}
   };
+}
+
+export async function createOrder2(payload) {
+    try{
+    axios
+      .post(`${REACT_APP_URL_BACK}/orders`, payload)
+      .then((res) => {
+        return res;
+      })
+    }
+    catch(error) {
+     console.log(error);}
 }
 
 //USERS ADMIN
@@ -620,6 +626,7 @@ export function ObtenerLogin() {
     try {
       if (Data !== undefined && Data !== null) {
         var Datos = await axios.post(`${process.env.REACT_APP_URL_BACK}/auth/verify`, { authorization: `PalabraSecreta ${Data.token}` });
+        console.log(Datos)
         return dispatch(
           {
             type: CHANGE_USER_LOGIN,
@@ -643,21 +650,17 @@ export function ObtenerLogin() {
   };
 }
 
-export function image_post(payload){
-  return async function(dispatch) {
+export function CreateNewProduct(payload) {
+
+  const { name, price, brand, gender, nameCategory, description, imageData } = payload
+  return async function (dispatch) {
     try {
-      let json = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`,{file:payload})
-      return dispatch({
-        type: IMAGE_POST,
-        payload: json.data,
-      });
-  
-  } catch(e) {
+      let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
+      console.log(clouData)
+      const response = await axios.post(REACT_APP_URL_BACK + "/product/", { name, price, brand, gender, nameCategory, description, image: clouData.data.url });
+      return response;
+    } catch (e) {
       console.log(e);
+    }
   }
-  }
-  
 }
-
-
-
