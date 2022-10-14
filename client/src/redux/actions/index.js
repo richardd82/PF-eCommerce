@@ -664,6 +664,8 @@ export async function createOrder2(payload) {
 }
 
 export function forgotPassword(payload) {
+
+  console.log(payload);
   return async function () {
     try {
       const resp = await axios.post(`${REACT_APP_URL_BACK}/auth/forgot` , payload)
@@ -676,11 +678,11 @@ export function forgotPassword(payload) {
   }
 }
 
-export function resetPassword(payload) {
-  console.log(payload)
+export function resetPassword(password,token) {
+  console.log(password,token)
   return async function () {
     try {
-      const resp = await axios.put(`${REACT_APP_URL_BACK}/auth/reset/${resetToken}` , payload)
+      const resp = await axios.put(`${REACT_APP_URL_BACK}/auth/reset`, {password,token})
       console.log(resp.data)
       return resp.data
 

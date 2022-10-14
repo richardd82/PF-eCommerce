@@ -231,12 +231,16 @@ router.post("/forgot", async(req, res) => {
   
     const token = jwt.sign(user.toJSON(), process.env.JWT_secret_key, { expiresIn: "30m" }) 
     console.log("user de /forgot", user)
-    user.resetToken = token
+    user.token = token
   
     await user.save()
   
+    console.log(token)
+
     await forgotEmail(email, token)
-  
+    
+    
+
     console.log("email enviado")
   
     res.status(200).json({auth: "email send", token:token})
@@ -247,33 +251,32 @@ router.post("/forgot", async(req, res) => {
 
 })
 
-router.put("/reset/:resetToken", async(req,res) => {
+router.put("/reset", async(req,res) => {
   
   try {
-    const { newPass } = req.body
-    const { resetToken } = req.params
-    console.log("NEW PASS", newPass)
-    const compare = jwt.verify(resetToken, process.env.JWT_secret_key)
+    const { password,token } = req.body
+
+    console.log("NEW PASS", password,"  ",token)
+    const compare = jwt.verify(token, process.env.JWT_secret_key)
 
     if(!compare){
       res.status(400).json({error: "Wrong or expired token"})
     }
 
-    let user = await User.findOne({ where: { resetToken: resetToken } })
+    let user = await User.findOne({ where: { resetToken: token } })
     console.log(user)
     if(user.resetToken === null){
       res.status(400).json({error: "Expired token"})
     }
-    res.redirect(`${URL_FRONT}/reset/?token=${resetToken}`)
     
-    user.password = await bcrypt.hash(newPass, 10) 
+    user.password = await bcrypt.hash(password, 10) 
     
     user.resetToken = ""
     
     await user.save()
-    res.status(200).json({ auth: "Password changed" });
+    res.redirect(`${URL_FRONT}/`)
     console.log("contraseña cambiada")
-
+    res.status(200).json({ auth: "Password changed" });
   } catch (error) {
     console.log(error)
   }
