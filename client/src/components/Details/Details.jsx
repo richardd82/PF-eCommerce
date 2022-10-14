@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./details.css";
 import CARRY_LOCALHOST from "../Globales";
 import swal from "sweetalert2";
-// import FeedBack from "../Orders/FeedBack";
+ import FeedBack from "../Orders/FeedBack";
 // import Favs from "../Favs/Favs";
 
 import {
@@ -116,7 +116,7 @@ export default function Details(props) {
       return producto.name;
     }
   });
-  
+
 
   return (
     <div className="cardDetailMainContainer">
@@ -147,8 +147,8 @@ export default function Details(props) {
                   <div className="containerFormAddCarry">
                     {(stateSize === undefined ||
                       stateSize.size === undefined) && (
-                      <label className="textChooseSize">Choose Size</label>
-                    )}
+                        <label className="textChooseSize">Choose Size</label>
+                      )}
                     <div className="paragraphSizes">
                       Available sizes:
                       <br />
@@ -227,15 +227,13 @@ export default function Details(props) {
         )}
       </div>
       <div className="btnBackFav">
-        <div>
-          {/* <Favs id={props.match.params.id} key="id" /> */}{" "}
-          <p>AQUI VA FAVORITOS</p>
-        </div>
+       {/* <div>
+          {/* <Favs id={props.match.params.id} key="id" /> */}
+         {/* <p>AQUI VA FAVORITOS</p>
+        </div>*/}
       </div>
-      {/* <Comments userName={user.name} productId={props.match.params.id}></Comments> */}
-      {/* <FeedBack productId={props.match.params.id} products={producto} /> */}{" "}
       <div>
-        <p>AQUI VA FEEDBACK</p>
+        <FeedBack productId={props.match.params.id} products={producto} />
       </div>
       <div>
         <Link to={`/products/${genderPrevius}`}>

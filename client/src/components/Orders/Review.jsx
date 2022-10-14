@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createComment, updateReview, getOrders } from "../../redux/actions";
+import { createComment, updateReview, getOrders, searchNameProductID } from "../../redux/actions";
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -15,6 +15,15 @@ class Review extends Component {
     // Don't call this.setState() here!
     this.state = { OpenModal: false, rating: 0, comment: "", disabled: false };
   }
+
+  componentDidMount() {
+    this.props.searchNameProductID(this.props.order.productId)
+  }
+  componentWillUnmount() {
+    this.props.searchNameProductID(0)
+  }
+
+
 
   HandleReview() {
     this.setState({
@@ -155,8 +164,9 @@ class Review extends Component {
   }
 
   render() {
-    const { index, order, orderId } = this.props;
+    const { index, order, orderId, productsId } = this.props;
     console.log(index, " ", order, " ", orderId);
+    console.log(this.props.productsId);
     console.log(this.state.OpenModal);
     return (
       <div>
@@ -193,11 +203,10 @@ class Review extends Component {
                 </Fade>
 
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Text in a modal
+                  {productsId.length > 0 ? productsId[0].name : "Loading"}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor
-                  ligula.
+                  {productsId.length > 0 ? productsId[0].description : "Loading"}
                 </Typography>
 
                 <Rating
@@ -227,7 +236,7 @@ class Review extends Component {
                     marginTop: "10px",
                   }}
                 >
-                  Publicar
+                  Post
                 </Button>
               </Box>
             </Modal>
@@ -242,6 +251,7 @@ function mapStateToProps(state) {
   return {
     orders: state.orders,
     user: state.user_login,
+    productsId: state.productsId,
   };
 }
 
@@ -251,6 +261,7 @@ function mapDispatchToProps(dispatch) {
     createComment: (comment) => dispatch(createComment(comment)),
     updateReview: (commentUp) => dispatch(updateReview(commentUp)),
     getOrders: (user, id) => dispatch(getOrders(user, id)),
+    searchNameProductID: (id) => dispatch(searchNameProductID(id)),
     //changePaginatedPage: (page) => dispatch(changePaginatedPage(page)),
   };
 }
