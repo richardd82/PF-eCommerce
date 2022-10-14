@@ -1,9 +1,9 @@
-import { propNames } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { resetPassword } from "../../redux/actions";
+import { Link } from "react-router-dom";
 
 function validate(input) {
     let errors = {}
@@ -18,13 +18,16 @@ function validate(input) {
     return errors    
 }
 
-export default function ResetPassword() {
+export default function ResetPassword(props) {
     const dispatch = useDispatch()
     const history = useHistory()
     const [input, setInput] = useState({
         password: "",
         confirmPass: "",
     })
+
+    var token=history.location.pathname.slice(7,history.location.pathname.length);
+
     const [errors, setErrors] = useState({})
 
     // await axios.put(`${REACT_APP_URL_BACK}/auth/reset/${props.match.params.resetToken}` , password, {
@@ -49,7 +52,7 @@ export default function ResetPassword() {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(input)
-        dispatch(resetPassword(input.password))
+        dispatch(resetPassword(input.password,token))
         setInput({
             password: "",
             confirmPass:""
@@ -57,7 +60,8 @@ export default function ResetPassword() {
         alert("Password changed successfully")
         history.push("/")
     }
-
+   
+    console.log(props)
     return (
         <div>
             <form>
