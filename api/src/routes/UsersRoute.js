@@ -71,7 +71,8 @@ router.get("/", async (req, res, next) => {
             address: item.address,
             isAdmin: item.isAdmin,
             isBaned: item.isBaned,
-            verify: item.verify
+            verify: item.verify,
+            resetToken: item.resetToken
          };
       });
       res.send(users);
