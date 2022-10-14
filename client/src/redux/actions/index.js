@@ -662,3 +662,31 @@ export async function createOrder2(payload) {
   catch(error) {
    console.log(error);}
 }
+
+export function forgotPassword(payload) {
+  return async function () {
+    try {
+      const resp = await axios.post(`${REACT_APP_URL_BACK}/auth/forgot` , payload)
+      console.log(resp.data)
+      return resp.data
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function resetPassword(payload) {
+  console.log(payload)
+  return async function () {
+    try {
+      const resp = await axios.put(`${REACT_APP_URL_BACK}/auth/reset/${resetToken}` , payload)
+      console.log(resp.data)
+      return resp.data
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+

@@ -20,7 +20,8 @@ import About from "./components/About/About.jsx";
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
-
+import Forgot from "./components/ForgotPassword/forgot.jsx"
+import Reset from "./components/ForgotPassword/reset.jsx"
 import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
 import Contact from "./components/Contact/Contact";
@@ -87,6 +88,12 @@ function App() {
 					</Route>
 					<Route exact path="/login">
 						<Login/>
+					</Route>
+					<Route exact path="/forgot">
+						<Forgot/>
+					</Route>
+					<Route path="/reset">
+						<Reset/>
 					</Route>
 
           <Route exact path="/pasarela">

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../db");
 const { response } = require("express");
 const { URL_FRONT } = process.env;
-const { sendRegisterEmail } = require("../Email/mail.config");
+const { sendRegisterEmail, forgotEmail } = require("../Email/mail.config");
 const { getTokenData } = require("../tokenVerify/tokenVerify");
 // const { googleVerify } = require("../helpers/google-verify.js");
 
@@ -218,6 +218,66 @@ console.log("usuario de logueo", user)
   });
 
 });
+
+router.post("/forgot", async(req, res) => {
+  const { email } = req.body
+
+  try {
+    let user = await User.findOne({ where: { email: email } })
+     console.log(user.email)
+    if(user.email === null) {
+      return res.status(400).json({ error: "User with this email does not exists." })
+    }
+  
+    const token = jwt.sign(user.toJSON(), process.env.JWT_secret_key, { expiresIn: "30m" }) 
+    console.log("user de /forgot", user)
+    user.resetToken = token
+  
+    await user.save()
+  
+    await forgotEmail(email, token)
+  
+    console.log("email enviado")
+  
+    res.status(200).json({auth: "email send", token:token})
+    
+  } catch (error) {
+    console.log(error)
+  }
+
+})
+
+router.put("/reset/:resetToken", async(req,res) => {
+  
+  try {
+    const { newPass } = req.body
+    const { resetToken } = req.params
+    console.log("NEW PASS", newPass)
+    const compare = jwt.verify(resetToken, process.env.JWT_secret_key)
+
+    if(!compare){
+      res.status(400).json({error: "Wrong or expired token"})
+    }
+
+    let user = await User.findOne({ where: { resetToken: resetToken } })
+    console.log(user)
+    if(user.resetToken === null){
+      res.status(400).json({error: "Expired token"})
+    }
+    res.redirect(`${URL_FRONT}/reset/?token=${resetToken}`)
+    
+    user.password = await bcrypt.hash(newPass, 10) 
+    
+    user.resetToken = ""
+    
+    await user.save()
+    res.status(200).json({ auth: "Password changed" });
+    console.log("contraseña cambiada")
+
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 
 function verifyToken(req,res,next){
