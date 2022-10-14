@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAction, put_User_Login, LoginGoogleUser } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
@@ -174,6 +174,7 @@ export default function Login(props) {
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
         <button onClick={handleGoogleSignIn} className={style.loginGoogle}></button>
+        <Link to="/forgot">Forgot your password?</Link>
       </div>
       <hr />
       <div className={style.createAcc}>
