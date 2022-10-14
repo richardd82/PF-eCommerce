@@ -228,8 +228,10 @@ router.post("/forgot", async(req, res) => {
     if(user.email === null) {
       return res.status(400).json({ error: "User with this email does not exists." })
     }
-  
-    const token = jwt.sign(user.toJSON(), process.env.JWT_secret_key, { expiresIn: "30m" }) 
+    
+    var data={id:user.id}
+
+    const token = jwt.sign(data, process.env.JWT_secret_key, { expiresIn: "30m" }) 
     console.log("user de /forgot", user)
     user.token = token
   
