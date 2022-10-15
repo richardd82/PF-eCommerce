@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { resetPassword } from "../../redux/actions";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function validate(input) {
     let errors = {}
@@ -25,16 +26,11 @@ export default function ResetPassword(props) {
         password: "",
         confirmPass: "",
     })
-
-    var token=history.location.pathname.slice(7,history.location.pathname.length);
-
+    console.log("history", history)
+    var token = props.match.params.token;
+     console.log("token",token)
     const [errors, setErrors] = useState({})
 
-    // await axios.put(`${REACT_APP_URL_BACK}/auth/reset/${props.match.params.resetToken}` , password, {
-    //     where: {
-    //         resetToken: props.match.params.resetToken
-    //     }
-    // })
     
     function handleChange(e) {
         setInput({
@@ -52,16 +48,35 @@ export default function ResetPassword(props) {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(input)
-        dispatch(resetPassword(input.password,token))
+        dispatch(resetPassword(input.password,token)).then(e => {
+            Swal.fire({
+                title: 'Your password has been changed successfully',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "Yes",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push('/')
+                }
+            })
+        }).catch(e =>
+            Swal.fire({
+                title: e.response.data,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "Ok",
+                icon: "error",
+            }).then((result) => { console.log(result) })
+        )
+        
         setInput({
             password: "",
             confirmPass:""
         })
-        alert("Password changed successfully")
-        history.push("/")
+        
     }
-   
-    console.log(props)
+
     return (
         <div>
             <form>

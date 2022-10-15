@@ -21,7 +21,7 @@ import ComponentProducts from "./components/ComponentProducts/ComponentProducts.
 import Register from "./Pages/Register/Register"
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx";
 import Forgot from "./components/ForgotPassword/forgot.jsx"
-import Reset from "./components/ForgotPassword/Reset.jsx"
+import Reset from "./components/ForgotPassword/reset.jsx"
 import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
 import Contact from "./components/Contact/Contact";

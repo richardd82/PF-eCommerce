@@ -233,7 +233,7 @@ router.post("/forgot", async(req, res) => {
 
     const token = jwt.sign(data, process.env.JWT_secret_key, { expiresIn: "30m" }) 
     console.log("user de /forgot", user)
-    user.token = token
+    user.resetToken = token
   
     await user.save()
   
@@ -241,8 +241,6 @@ router.post("/forgot", async(req, res) => {
 
     await forgotEmail(email, token)
     
-    
-
     console.log("email enviado")
   
     res.status(200).json({auth: "email send", token:token})
@@ -260,7 +258,7 @@ router.put("/reset", async(req,res) => {
 
     console.log("NEW PASS", password,"  ",token)
     const compare = jwt.verify(token, process.env.JWT_secret_key)
-
+    console.log("COMPARE", compare)
     if(!compare){
       res.status(400).json({error: "Wrong or expired token"})
     }
@@ -276,7 +274,7 @@ router.put("/reset", async(req,res) => {
     user.resetToken = ""
     
     await user.save()
-    res.redirect(`${URL_FRONT}/`)
+    //res.redirect(`${URL_FRONT}/`)
     console.log("contraseña cambiada")
     res.status(200).json({ auth: "Password changed" });
   } catch (error) {
