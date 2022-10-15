@@ -233,7 +233,6 @@ router.post("/forgot", async(req, res) => {
 
     const token = jwt.sign(data, process.env.JWT_secret_key, { expiresIn: "30m" }) 
     console.log("user de /forgot", user)
-    user.resetToken = token
   
     await user.save()
   
@@ -258,20 +257,15 @@ router.put("/reset", async(req,res) => {
 
     console.log("NEW PASS", password,"  ",token)
     const compare = jwt.verify(token, process.env.JWT_secret_key)
+
     console.log("COMPARE", compare)
-    if(!compare){
+    if(!compare || compare.id==undefined){
       res.status(400).json({error: "Wrong or expired token"})
     }
 
-    let user = await User.findOne({ where: { resetToken: token } })
+    let user = await User.findOne({ where: { id: compare.id } })
     console.log(user)
-    if(user.resetToken === null){
-      res.status(400).json({error: "Expired token"})
-    }
-    
     user.password = await bcrypt.hash(password, 10) 
-    
-    user.resetToken = ""
     
     await user.save()
     //res.redirect(`${URL_FRONT}/`)
