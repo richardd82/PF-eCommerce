@@ -26,11 +26,11 @@ import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
 import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
+import Profile from "./components/Profile/Profile";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
  //import payment from "./components/Pago/Pay";
-// import Profile from "./components/Profile/Profile";
 // import ModifyItem from "./components/ModifyITem/ModifyItem";
 // import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
 // import AdminOrders from "./components/AdminOrders/AdminOrders.tsx";
@@ -97,7 +97,7 @@ function App() {
 					</Route>
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
           <Route path="/OrdersUser" component={Orders}/>
-          
+          <Route exact path="/profile" component={Profile} />
                      {/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />
