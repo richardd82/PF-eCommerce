@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Profile.module.css";
 import ProfileCard from "./ProfileCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/actions";
 
 
-const {userData, setUserData} = useState();
-const{initialState, setInitialState} = useState();
-const{editMode, setEditMode} = useState();
 
 
 
 const EditProfileFormulary = ({ name, image, address, phone }) => {
-
+    
+    const {userData, setUserData} = useState();
+    const{initialState, setInitialState} = useState();
+    const{editMode, setEditMode} = useState();
     const dispatch = useDispatch();
     const users = useSelector((state) => state.allUsers);
     const user_login = useSelector((state) => state.user_login);
