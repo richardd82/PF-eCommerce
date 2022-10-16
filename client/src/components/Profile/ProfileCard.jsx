@@ -6,21 +6,22 @@ import  EditProfileFormulary  from "./editProfileFormulary";
   abajo 
  */
 
-function ProfileCard({ email, name, lastName, image, address, typeUser }) {
+function ProfileCard({ email, name, lastName, image, address, phone }) {
   return (
     <div className={styles.productContainer}>
-      <button>Editar</button>
+      
       <h2 className={styles.titulo}>Your Profile</h2>
 
       <section className={styles.informacionContainer}>
         <div className={styles.photoContainer}>
-          <img src={`${image}`} alt="No Found" />
+          <img src={`${image}`} alt="imagen" />
         </div>
         <div className={styles.InforContainerText}>
-          <p><b>Nombre:</b>  {name}</p>
-          <p><b>Apellido:</b>  {lastName}</p>
-          {/* <p><b>Apellido:</b>  {email}</p> */}
-          <p><b>Direccion:</b>   {address}</p>
+        <p><b>E-mail:</b>  {email}</p>
+          <p><b>Name:</b>  {name}</p>
+          <p><b>Lastname:</b>  {lastName}</p>
+          <p><b>Adress:</b>   {address}</p>
+          <p><b>Phone:</b>   {phone}</p>
         </div>
       </section>
 
