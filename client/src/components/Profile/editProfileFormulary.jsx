@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/actions";
 
 
-export default function Profile () {
+const {userData, setUserData} = useState();
+const{initialState, setInitialState} = useState();
+const{editMode, setEditMode} = useState();
+
+
+
+const EditProfileFormulary = ({ name, image, address, phone }) => {
 
     const dispatch = useDispatch();
     const users = useSelector((state) => state.allUsers);
@@ -18,9 +24,8 @@ export default function Profile () {
     }, [dispatch]);
 
     const userConected = users.find(user => user.id === user_login.id)
-    
-    
-        return (
+
+    return (
  
             <div className={style.mainContainer}>
                 {userConected ? (
@@ -46,4 +51,6 @@ export default function Profile () {
                 }
             </div>
         )
-    };
+};
+
+export default EditProfileFormulary;
