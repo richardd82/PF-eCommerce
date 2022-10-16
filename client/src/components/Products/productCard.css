@@ -72,11 +72,14 @@
         padding-bottom: 10px;
     }
     .imgCard {
-        width: 97%;
+        min-width: 204px;
+        max-width: 204px;
+        min-height: 290px;
+        max-height: 290px;
     }
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (max-width: 1728px)  {
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
     .card {
         width: 270px;
         height: 430px;
@@ -91,7 +94,10 @@
         padding-bottom: 8px;
     }
     .imgCard {
-        width: 97%;
+        min-width: 264px;
+        max-width: 264px;
+        min-height: 360px;
+        max-height: 360px;
     }
   }
 /*----------Media Queries (HIGH DEVICES) ----------*/
