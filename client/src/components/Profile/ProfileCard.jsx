@@ -6,7 +6,7 @@ import  ModifyUser  from "../ModifyUser/ModifyUser";
   abajo 
  */
 
-function ProfileCard({ email, name, lastName, image, address, isAdmin }) {
+function ProfileCard({ email, name, lastName, image, address, typeUser }) {
   return (
     <div className={styles.productContainer}>
       <h2 className={styles.titulo}>Your Profile</h2>

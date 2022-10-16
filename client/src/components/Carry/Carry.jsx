@@ -17,7 +17,7 @@ class Carry extends Component {
   }
 
   componentDidMount() {
-    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.isAdmin==true)
+    if(this.props.user_login != "Loading" && this.props.user_login!==false && this.props.user_login.typeUser=="Admin")
     this.props.history.push("/");
 
     let Data = this.props.carryProducts;

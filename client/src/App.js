@@ -26,6 +26,7 @@ import Login from "./components/Login/Login"
 import Carry from "./components/Carry/Carry";
 import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
+import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -91,6 +92,7 @@ function App() {
 					</Route>
 					<Route exact path="/forgot" component={Forgot}/>
 					<Route path="/reset/:token"  component={Reset}/>
+          <Route path="/userAdmin" component={UserAdmin}/>
 
           <Route exact path="/pasarela">
 						<Pasarela/>

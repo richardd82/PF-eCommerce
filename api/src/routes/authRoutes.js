@@ -81,7 +81,7 @@ console.log("usuario de logueo", user)
             image,
             address,
             phone:parseInt(phone),      
-            isAdmin:isAdmin
+            typeUser:isAdmin?"Admin":"User"
 
           });
           const token = jwt.sign( JSON.stringify(user), process.env.JWT_secret_key);
@@ -143,7 +143,6 @@ console.log("usuario de logueo", user)
 
     console.log("entro validacion Google", email, password, name, lastName, image, address);
     let isAdmin = false;
-    let isBaned = false;
     try {
        var userValidate = await User.findAll({
           where: { email: email },
@@ -172,8 +171,7 @@ console.log("usuario de logueo", user)
                 password: passwordHash,
                 image: image,
                 address: address,
-                isAdmin: isAdmin,
-                isBaned: isBaned,
+                typeUser:isAdmin?"Admin":"User"
              },
           });
           // await transporter.sendMail({ , // html body
@@ -186,12 +184,6 @@ console.log("usuario de logueo", user)
       console.log(userValidate)
 
        const userForToken = {
-        username: "username",
-        name: userValidate[0].dataValues.name,
-        lastName: userValidate[0].dataValues.lastName,
-        image: userValidate[0].dataValues.image,
-        address: userValidate[0].dataValues.address,
-        isAdmin: userValidate[0].dataValues.isAdmin,
         id: userValidate[0].dataValues.id,
        }
 
