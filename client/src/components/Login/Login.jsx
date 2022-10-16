@@ -145,6 +145,10 @@ export default function Login(props) {
        });
  
 };
+  const handleForgot = () => {
+    history.push("/forgot");
+    location.reload();
+  }
  
   const handleGoogleSignIn = async() => {
     
@@ -170,11 +174,11 @@ export default function Login(props) {
         <input type="input" name="username" onChange={(e) => handleChange(e)} placeholder="UserName" />
         <label>Password:</label>
         <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" />
+        <Link onClick={handleForgot} className={style.forgotPswd}>Forgot your password?</Link>
         <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
         <button onClick={handleGoogleSignIn} className={style.loginGoogle}></button>
-        <Link to="/forgot">Forgot your password?</Link>
       </div>
       <hr />
       <div className={style.createAcc}>
