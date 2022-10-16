@@ -16,12 +16,12 @@
 .login {
    display: flex;
    flex-direction: column;
-   gap: 10px;
+   gap: 0px;
    align-items: center;
 }
 
 .login h1 {
-   margin-top: 0;
+   margin-top: -20px;
 }
 
 .btnPrimary:hover {
@@ -41,7 +41,18 @@
 .login p {
    margin-bottom: 0;
 }
-
+.forgotPswd{
+   font-family: 'Square peg', cursive;
+   font-size: 25px;
+   margin-top: 0px;
+   margin-bottom: -8px;
+   color: rgb(217, 176, 255);
+	text-shadow: 0 0 0.5em rgb(217, 176, 255);
+   transition: all 0.5s;
+}
+.forgotPswd:hover{
+   transform: scale(1.2);
+}
 .btnGoogle {
    outline: none;
    border: none;
@@ -125,7 +136,7 @@
 }
 
 .loginGoogle {
-   width: 18%;
+   width: 15%;
    height: 10vh;
    background-image: url('../../assets/logoGoogle.png');
    background-size: 110%;
@@ -141,9 +152,9 @@
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
    .loginContainer {
-      width: 330px;
-      height: 67vh;
-      margin: 10px auto;
+      width: 450px;
+      height: 80vh;
+      margin: -40px;
       padding: 0px 0px;
    }
    .btnClose {
@@ -156,7 +167,7 @@
       cursor: pointer;
    }
    .login {
-      gap: 0px;
+      gap: 6px;
    }
    .login input{
       padding: 5px 9px;
@@ -166,10 +177,30 @@
       padding: 0.5em 1em;
    }
    .createAcc {
-      margin-left: 25%;
+      margin-left: 31%;
    }   
+   .loginGoogle {
+      width: 80px;
+      height: 80px;
+   }
 }
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
+   .loginGoogle {
+      width: 18%;
+   }
+   .login {
+      gap: 10px;
+   }
+   .forgotPswd{
+      margin-top: 5px;
+      margin-bottom: -10px;
+   }
+   .forgotPswd:hover{
+      transform: scale(1.5);
+   }
+ }
 /*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2048px) {
-  
+@media screen and (min-width: 2040px) and (max-width: 2161px)  {
+
 }

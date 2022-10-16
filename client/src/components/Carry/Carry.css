@@ -1,34 +1,35 @@
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #ea0be3 rgb(216, 148, 233);
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ea0be3 rgb(216, 148, 233);
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 10px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: rgb(220, 151, 245);
-  }
+*::-webkit-scrollbar-track {
+  background: rgb(220, 151, 245);
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color:  rgba(181, 88, 191, 0.626);
-    border-radius: 5px;
-    border: 2px solid #ba0bea;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(181, 88, 191, 0.626);
+  border-radius: 5px;
+  border: 2px solid #ba0bea;
+}
+
 .mainContainer {
   margin: auto;
   margin-top: 2.2%;
   margin-bottom: 0%;
   padding: 35px;
-  height: 68vh;
+  height: 66.2vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 59%;
   overflow-y: scroll;
 }
 
@@ -47,9 +48,11 @@
   color: white;
   font-size: 2rem;
 }
-.PriceTotalGlobal{
+
+.PriceTotalGlobal {
   margin-left: 100px;
 }
+
 .PriceTotal {
   position: absolute;
   display: block;
@@ -67,7 +70,7 @@
   padding: 20px;
   background-image: url('../../assets/backgroundBlocks2.jpg');
   background-size: 100%;
-  background-repeat:repeat-y;
+  background-repeat: repeat-y;
   border-radius: 15px;
   -webkit-box-shadow: 5px 5px 50px 5px #000000;
   box-shadow: 5px 5px 40px -4px #000000;
@@ -81,29 +84,57 @@
   margin: auto;
   margin-top: 10px;
 }
+
+.btnCarryContinue {
+  margin: 0px;
+  width: 160px;
+  height: 8vh;
+  margin-top: 10px;
+}
+
 @media screen and (max-width: 1366px) {
   .mainContainer {
-    height: 60vh;
+    height: 60.3vh;
+  }
+
+  .btnCarryContinue {
+    margin-left: -5px;
+    width: 151px;
+    height: 12vh;
+    margin-top: 10px;
+    text-align: justify;
+  }
+
+  .PriceTotal {
+    margin-top: -10%;
+    margin-left: 60px;
+    width: 145px;
+  }
+  .containCarry{
+    height: 68vh;
+    width: 98%;
   }
 }
+
+
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px) {
+  .mainContainer {
+    height: 68.3vh;
+  }
+  
+  .PriceTotal p {
+    margin: 0px;
+    margin-top: 0px;
+    text-align: center;
+  }
+}
+
 /*----------Media Queries (2K DEVICES) ----------*/
-@media screen and (min-width: 1400px) and (max-width: 1680px){
-	.mainContainer{
+@media screen and (min-width: 1400px) and (max-width: 1680px) {
+  .mainContainer {
     height: 63vh;
   }
 }
-/*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (max-width: 1728px)  {
-  .mainContainer{
-    height: 68.3vh;
-  }
-  .PriceTotal {
-    margin-top: -5%;
-    margin-left: 105px;
-    margin-bottom: 40px;
-}
-}
 /*----------Media Queries (UHD DEVICES) ----------*/
-@media screen and (min-width: 2048px) {
-  
-}
+@media screen and (min-width: 2048px) {}

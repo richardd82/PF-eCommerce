@@ -4,6 +4,7 @@
   gap: 10px;
   list-style-type: none;  
   margin-top: 5px;
+  width: 72%;
 }
 
 .pagination li {
@@ -41,3 +42,17 @@
 /* #Inhabilitado:hover {
   cursor: default;
 } */
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+  .pagination {
+    width: 70%;
+  }
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
+
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2161px)  {
+
+}

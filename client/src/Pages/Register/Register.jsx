@@ -105,7 +105,7 @@ export default function Register() {
         } else {
             register(input).then(e => {
                 Swal.fire({
-                    title: 'User successfully created',
+                    title: 'User successfully created, check your email to verify the account',
                     showDenyButton: false,
                     showCancelButton: false,
                     confirmButtonText: "Yes",

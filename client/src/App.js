@@ -89,12 +89,8 @@ function App() {
 					<Route exact path="/login">
 						<Login/>
 					</Route>
-					<Route exact path="/forgot">
-						<Forgot/>
-					</Route>
-					<Route path="/reset">
-						<Reset/>
-					</Route>
+					<Route exact path="/forgot" component={Forgot}/>
+					<Route path="/reset/:token"  component={Reset}/>
 
           <Route exact path="/pasarela">
 						<Pasarela/>

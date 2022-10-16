@@ -2,7 +2,7 @@
    display: flex;
    justify-content: center;
    margin-top: 10px;
-   /* background-color: aqua; */
+   width: 79%;
 }
 
 .filterC {

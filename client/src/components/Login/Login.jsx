@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAction, put_User_Login, LoginGoogleUser } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
@@ -145,6 +145,10 @@ export default function Login(props) {
        });
  
 };
+  const handleForgot = () => {
+    history.push("/forgot");
+    location.reload();
+  }
  
   const handleGoogleSignIn = async() => {
     
@@ -170,6 +174,7 @@ export default function Login(props) {
         <input type="input" name="username" onChange={(e) => handleChange(e)} placeholder="UserName" />
         <label>Password:</label>
         <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" />
+        <Link onClick={handleForgot} className={style.forgotPswd}>Forgot your password?</Link>
         <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}

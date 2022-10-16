@@ -1,9 +1,11 @@
-import { propNames } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { resetPassword } from "../../redux/actions";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import './reset.css';
 
 function validate(input) {
     let errors = {}
@@ -18,20 +20,18 @@ function validate(input) {
     return errors    
 }
 
-export default function ResetPassword() {
+export default function ResetPassword(props) {
     const dispatch = useDispatch()
     const history = useHistory()
     const [input, setInput] = useState({
         password: "",
         confirmPass: "",
     })
+    console.log("history", history)
+    var token = props.match.params.token;
+     console.log("token",token)
     const [errors, setErrors] = useState({})
 
-    // await axios.put(`${REACT_APP_URL_BACK}/auth/reset/${props.match.params.resetToken}` , password, {
-    //     where: {
-    //         resetToken: props.match.params.resetToken
-    //     }
-    // })
     
     function handleChange(e) {
         setInput({
@@ -49,20 +49,40 @@ export default function ResetPassword() {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(input)
-        dispatch(resetPassword(input.password))
+        dispatch(resetPassword(input.password,token)).then(e => {
+            Swal.fire({
+                title: 'Your password has been changed successfully',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "Yes",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push('/')
+                }
+            })
+        }).catch(e =>
+            Swal.fire({
+                title: e.response.data,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "Ok",
+                icon: "error",
+            }).then((result) => { console.log(result) })
+        )
+        
         setInput({
             password: "",
             confirmPass:""
         })
-        alert("Password changed successfully")
-        history.push("/")
+        
     }
 
     return (
-        <div>
-            <form>
+        <div className="resetContainer">
+            <form className="resetForm">
                 <div>
-                    <label>Your new assword:</label>
+                    <label>Your new Password:</label>
                 </div>
                 <input
                     type="password"
@@ -72,11 +92,11 @@ export default function ResetPassword() {
                     onChange={(e) => handleChange(e)}
                 />
                 <div>
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <p className="errorRegister">{errors.password}</p>}
                 </div>
 
                 <div>
-                    <label>Confirm password:</label>
+                    <label>Confirm Password:</label>
                 </div>
                 <input
                     type="password"
@@ -90,6 +110,7 @@ export default function ResetPassword() {
                 </div>
 
                 <button
+                    className="btnGlobal btnSubmitReset"
                     type="submit"
                     onClick={(e) => handleSubmit(e)}
                 >Submit
