@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../db");
 const { response } = require("express");
 const { URL_FRONT } = process.env;
-const { sendRegisterEmail } = require("../Email/mail.config");
+const { sendRegisterEmail, forgotEmail } = require("../Email/mail.config");
 const { getTokenData } = require("../tokenVerify/tokenVerify");
 // const { googleVerify } = require("../helpers/google-verify.js");
 
@@ -218,6 +218,63 @@ console.log("usuario de logueo", user)
   });
 
 });
+
+router.post("/forgot", async(req, res) => {
+  const { email } = req.body
+
+  try {
+    let user = await User.findOne({ where: { email: email } })
+     console.log(user.email)
+    if(user.email === null) {
+      return res.status(400).json({ error: "User with this email does not exists." })
+    }
+    
+    var data={id:user.id}
+
+    const token = jwt.sign(data, process.env.JWT_secret_key, { expiresIn: "30m" }) 
+    console.log("user de /forgot", user)
+  
+    await user.save()
+  
+    console.log(token)
+
+    await forgotEmail(email, token)
+    
+    console.log("email enviado")
+  
+    res.status(200).json({auth: "email send", token:token})
+    
+  } catch (error) {
+    console.log(error)
+  }
+
+})
+
+router.put("/reset", async(req,res) => {
+  
+  try {
+    const { password,token } = req.body
+
+    console.log("NEW PASS", password,"  ",token)
+    const compare = jwt.verify(token, process.env.JWT_secret_key)
+
+    console.log("COMPARE", compare)
+    if(!compare || compare.id==undefined){
+      res.status(400).json({error: "Wrong or expired token"})
+    }
+
+    let user = await User.findOne({ where: { id: compare.id } })
+    console.log(user)
+    user.password = await bcrypt.hash(password, 10) 
+    
+    await user.save()
+    //res.redirect(`${URL_FRONT}/`)
+    console.log("contraseña cambiada")
+    res.status(200).json({ auth: "Password changed" });
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 
 function verifyToken(req,res,next){

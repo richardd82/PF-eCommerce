@@ -17,6 +17,8 @@ import {
 } from "../../redux/actions/index";
 
 export default function Details(props) {
+  console.log(props)
+
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.details);
   const genderPrevius = useSelector((state) => state.filters.filterGender);
