@@ -6,7 +6,7 @@ import  EditProfileFormulary  from "./editProfileFormulary";
   abajo 
  */
 
-function ProfileCard({ email, name, lastName, image, address, isAdmin }) {
+function ProfileCard({ email, name, lastName, image, address, typeUser }) {
   return (
     <div className={styles.productContainer}>
       <button>Editar</button>

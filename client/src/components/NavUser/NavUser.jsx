@@ -35,10 +35,10 @@ function NavUser() {
             Logout
           </a>
           <a href="/profile">Profile</a>
-          {user2 !== false && user2.isAdmin === false && (
+          {user2 !== false && user2.typeUser!="Admin" && (
             <a href={`/OrdersUser`}>Your Orders</a>
           )}
-          {user2 !== false && user2.isAdmin === true && (
+          {user2 !== false && user2.typeUser=="Admin" && (
             <div>
               {/*<a href="/gestionProducts">Administracion Productos</a>
           <a href="/usersAdmin">Administracion Usuarios</a>
