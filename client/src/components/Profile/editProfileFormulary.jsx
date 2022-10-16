@@ -9,7 +9,7 @@ import { deleteUsers, getAllUsers } from "../../redux/actions";
 
 
 
-const EditProfileFormulary = ({ name, image, address, phone }) => {
+const EditProfileFormulary = () => {
 
     const { userData, setUserData } = useState();
     const { initialState, setInitialState } = useState();
