@@ -9,12 +9,11 @@ import { deleteUsers, getAllUsers } from "../../redux/actions";
 
 
 
-const EditProfileFormulary = () => {
-
-    const { userData, setUserData } = useState();
-    const { initialState, setInitialState } = useState();
-    const { editMode, setEditMode } = useState();
-    const allUsers = useSelector((state) => state.allUsers);
+const EditProfileFormulary = ({ name, image, address, phone }) => {
+    
+    const {userData, setUserData} = useState();
+    const{initialState, setInitialState} = useState();
+    const{editMode, setEditMode} = useState();
     const dispatch = useDispatch();
     const users = useSelector((state) => state.allUsers);
     const user_login = useSelector((state) => state.user_login);
