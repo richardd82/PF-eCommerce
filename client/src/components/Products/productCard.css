@@ -17,7 +17,7 @@
     background: rgba(5, 6, 45, 0.423);
     color: rgb(76 56 99);
     border-radius: 0px 0px 10px 10px;
-    width: 313px;
+    width: 314px;
     display: block;
     text-align: center;
     padding-top: 25px;
@@ -36,9 +36,12 @@
 
 .imgCard {
     border-radius: 10px;
-    width: 98%;
-    margin-top: -19px;
+    margin-top: -25px;
     margin-left: 3px;
+    min-width: 344px;
+    max-width: 344px;
+    min-height: 435px;
+    max-height: 435px;
 }
 
 .linkCard {
@@ -57,11 +60,13 @@
 .cardContent2 {
     color: aliceblue;
 }
+
 @media screen and (max-width: 1366px) {
     .card {
         width: 210px;
         height: 360px;
     }
+
     .card__content {
         margin: 3px;
         width: 176px;
@@ -71,36 +76,43 @@
         padding-right: 15px;
         padding-bottom: 10px;
     }
+
     .imgCard {
+        margin-top: -20px;
         min-width: 204px;
         max-width: 204px;
         min-height: 290px;
         max-height: 290px;
     }
 }
+
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (min-width: 1367px) and (max-width: 1728px)  {
+@media screen and (min-width: 1367px) and (max-width: 1728px) {
     .card {
         width: 270px;
         height: 430px;
     }
+
     .card__content {
         margin: 3px;
-        width: 232px;
+        width: 234px;
         font-size: .7em;
         padding-top: 25px;
         padding-left: 15px;
         padding-right: 15px;
         padding-bottom: 8px;
     }
+
     .imgCard {
+        margin-top: -19px;
         min-width: 264px;
         max-width: 264px;
         min-height: 360px;
         max-height: 360px;
     }
-  }
+}
+
 /*----------Media Queries (HIGH DEVICES) ----------*/
 @media screen and (min-width: 2048px) {
-  
+    
 }
