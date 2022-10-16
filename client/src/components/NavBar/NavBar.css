@@ -52,11 +52,11 @@ nav {
 	margin: auto;
 	margin-top: -5%;
 	color: rgb(217, 176, 255);
+	text-shadow: 0 0 0.5em rgb(217, 176, 255);
 	font-family: 'Square Peg', cursive;
 	font-style: italic;
 	font-size: 40px;
 	font-weight: bold;
-	text-shadow: 0 0 0.5em rgb(217, 176, 255);
 }
 
 

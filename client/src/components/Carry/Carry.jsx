@@ -249,10 +249,10 @@ class Carry extends Component {
               <div className="PriceTotal">
                 <p>Total: ${this.Number2Decimals(priceTotal)}</p>
                 <button
-                  className="Login_btnLoginModal__1R93O"
+                  className="btnGlobal btnCarryContinue"
                   onClick={() => this.onContinueBuy()}
                 >
-                  Continuar Compra
+                  Continue Checkout
                 </button>
               </div>
             </div>

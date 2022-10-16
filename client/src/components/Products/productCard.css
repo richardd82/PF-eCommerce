@@ -1,8 +1,10 @@
 .card {
     position: relative;
     margin: auto;
-    width: 350px;
-    height: 550px;
+    margin-top: 90px;
+    margin-bottom: 70px;
+    width: 282px;
+    height: 470px;
     border-radius: 10px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
@@ -17,13 +19,13 @@
     background: rgba(5, 6, 45, 0.423);
     color: rgb(76 56 99);
     border-radius: 0px 0px 10px 10px;
-    width: 314px;
+    width: 245px;
     display: block;
     text-align: center;
-    padding-top: 25px;
+    padding-top: 0px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     backdrop-filter: blur(10px);
     text-shadow: -1px -1px 6px var(--glow-color);
     position: absolute;
@@ -37,11 +39,11 @@
 .imgCard {
     border-radius: 10px;
     margin-top: -25px;
-    margin-left: 3px;
-    min-width: 344px;
-    max-width: 344px;
-    min-height: 435px;
-    max-height: 435px;
+    margin-left: 4.4px;
+    min-width: 273px;
+    max-width: 273px;
+    min-height: 350px;
+    max-height: 350px;
 }
 
 .linkCard {
@@ -91,6 +93,7 @@
     .card {
         width: 270px;
         height: 430px;
+        margin-top: 15px;
     }
 
     .card__content {

@@ -32,7 +32,7 @@
   color: white;
   background-color: inherit;
    font-family: inherit;
-   margin: 0; 
+   margin: -1px; 
    overflow: hidden;
 }
 /* / Add a red background color to navbar links on hover / */
@@ -76,12 +76,12 @@
   cursor: pointer;
 }
 .avatar{
-  margin-left: -22%;
+  margin-left: -20%;
   margin-top: -2px;
-  min-width: 90px;
-  min-height: 90px;
-  max-width: 90px;
-  max-height: 90px;
+  min-width: 95px;
+  min-height: 91px;
+  max-width: 95px;
+  max-height: 91px;
   width: fit-content;
   /* margin-top: -2px; */
 }
@@ -97,7 +97,7 @@
     height: 70px;
 	}
   .avatar{
-    margin-left: -33%;
+    margin-left: -37%;
     margin-top:  -10px;
   }
   .dropdown_content {
@@ -107,7 +107,11 @@
 }
 /*----------Media Queries (FHD DEVICES) ----------*/
 @media screen and (min-width: 1367px) and (max-width: 1728px)  {
-
+ 
+  .dropdown .dropbtn {
+     margin: -2px;
+     margin-top: -10px;
+  }
   }
 /*----------Media Queries (UHD DEVICES) ----------*/
 @media screen and (min-width: 2048px) {

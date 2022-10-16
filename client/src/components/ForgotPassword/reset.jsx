@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { resetPassword } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import './reset.css';
 
 function validate(input) {
     let errors = {}
@@ -78,10 +79,10 @@ export default function ResetPassword(props) {
     }
 
     return (
-        <div>
-            <form>
+        <div className="resetContainer">
+            <form className="resetForm">
                 <div>
-                    <label>Your new assword:</label>
+                    <label>Your new Password:</label>
                 </div>
                 <input
                     type="password"
@@ -91,11 +92,11 @@ export default function ResetPassword(props) {
                     onChange={(e) => handleChange(e)}
                 />
                 <div>
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <p className="errorRegister">{errors.password}</p>}
                 </div>
 
                 <div>
-                    <label>Confirm password:</label>
+                    <label>Confirm Password:</label>
                 </div>
                 <input
                     type="password"
@@ -109,6 +110,7 @@ export default function ResetPassword(props) {
                 </div>
 
                 <button
+                    className="btnGlobal btnSubmitReset"
                     type="submit"
                     onClick={(e) => handleSubmit(e)}
                 >Submit
