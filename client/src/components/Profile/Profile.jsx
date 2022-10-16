@@ -32,7 +32,7 @@ export default function Profile () {
                                 lastName={userConected.lastName}
                                 image={userConected.image}
                                 address={userConected.address}
-                                isAdmin={userConected.isAdmin}
+                                typeUser={userConected.typeUser}
                             />
                         </div>
                     </div>
