@@ -251,7 +251,7 @@ export class ModifyItem extends Component {
                 })}
               </ul>
             </nav>
-            <button className={styles.btnSave} onClick={() => this.Guardar()}>
+            <button className="btnGlobal" onClick={() => this.Guardar()}>
               Guardar Cambios
             </button>
           </div>

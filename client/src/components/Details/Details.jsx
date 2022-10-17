@@ -5,7 +5,7 @@ import "./details.css";
 import CARRY_LOCALHOST from "../Globales";
 import swal from "sweetalert2";
  import FeedBack from "../Orders/FeedBack";
-// import Favs from "../Favs/Favs";
+import Favs from "../Favs/Favs";
 
 import {
   deleteDetails,
@@ -229,10 +229,7 @@ export default function Details(props) {
         )}
       </div>
       <div className="btnBackFav">
-       {/* <div>
-          {/* <Favs id={props.match.params.id} key="id" /> */}
-         {/* <p>AQUI VA FAVORITOS</p>
-        </div>*/}
+         <Favs id={props.match.params.id} key="id" />
       </div>
       <div>
         <FeedBack productId={props.match.params.id} products={producto} />

@@ -36,16 +36,19 @@ function NavUser() {
           </a>
           <a href="/profile">Profile</a>
           {user2 !== false && user2.typeUser != "Admin" && (
-            <a href={`/OrdersUser`}>Your Orders</a>
+            <div>
+              <a href={`/OrdersUser`}>Your Orders</a>
+              <a href={`/favorites`}>Your Favorites</a>
+            </div>
           )}
           {user2 !== false && user2.typeUser == "Admin" && (
-              <div>
+            <div>
               <a href="/productsAdmin">Administracion Productos</a>
               <a href="/usersAdmin">Administracion Usuarios</a>
               <a href="/ordersAdmin">Administracion Ventas</a>
               <a href="/createProduct">Create Product</a>
-              </div>
-            )
+            </div>
+          )
           }
           {/*<a href="#">Link 2</a>
           <a href="#">Link 3</a>*/}

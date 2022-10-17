@@ -17,7 +17,7 @@ import ProductsAdmin from "./components/ProductsAdmin/ProductsAdmin.jsx";
 // // register
 // import Register from "./components/Register/Register.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-
+import Favorites from "./components/Favs/Favorites";
 import About from "./components/About/About.jsx";
 import ComponentProducts from "./components/ComponentProducts/ComponentProducts.jsx";
 import Register from "./Pages/Register/Register"
@@ -111,6 +111,7 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
+          <Route path={"/favorites"} component={Favorites}></Route>
 					<Route exact path="/about" component={About}></Route>
           <Route path="/carry">
 						<Carry />{" "}
