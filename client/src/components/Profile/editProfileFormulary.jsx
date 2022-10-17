@@ -3,13 +3,46 @@ import style from "./Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers, putUser } from "../../redux/actions";
 
+function validate(input, allUsers) {
 
+  let errors = {};
+  //const allUsers = useSelector((state) => state.allUsers)
+
+  let urlValidator = /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+  let emailValidator = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  let usernameValidator =
+      /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){4,18}[a-zA-Z0-9]$/;
+  let passwordValidator = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+
+  if (!input.username || usernameValidator.test(input.username) === false)
+      errors.username = "It should have between 4 and 18 characters, only contain letter,number";
+  else if (!input.email || emailValidator.test(input.email) === false)
+      errors.email = "Please Enter a valid email direction";
+  else if (!input.name || input.name < 1 || input.name > 20)
+      errors.name = "It should have between 2 and 20 characters";
+  else if (!input.lastName || input.lastName < 1 || input.lastName > 20)
+      errors.lastName = "It should have between 2 and 20 characters";
+  // else if (!input.password || passwordValidator.test(input.password) === false)
+  //     errors.password =
+  //         "one digit,lowercase, uppercase, min least 8 characters max 20";
+  // else if (!input.confirmPass || input.password !== input.confirmPass)
+  //     errors.confirmPass = "Check that you have entered your password correctly";
+  else if (!input.phone || isNaN(input.phone) === true)
+      errors.phone =
+          "Please enter your phone number";
+  else if (!input.address) errors.address = "Please enter your address";
+  else if (!input.image || urlValidator.test(input.image) == false)
+      errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
+
+  return errors;
+}
 
 const EditProfileFormulary = () => {
 
 
 
     const allUsers = useSelector((state) => state.allUsers);
+    const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const users = useSelector((state) => state.allUsers);
     const user_login = useSelector((state) => state.user_login);
@@ -37,12 +70,12 @@ const EditProfileFormulary = () => {
             ...input,
             [e.target.name]: e.target.value
         })
-        // setErrors(
-        //     validate({
-        //         ...input,
-        //         [e.target.name]: e.target.value,
-        //     })
-        // )
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]: e.target.value,
+            })
+        )
     }
     function handleSubmit(e){
         e.preventDefault();
@@ -63,6 +96,9 @@ const EditProfileFormulary = () => {
                              placeholder="Name" name="name"
                              onChange={(e) => handleChange(e)}
                               />
+                        <div>
+                            {errors.name && <p className="errorRegister">{errors.name}</p>}
+                        </div>
 
                         </div>
                         <div >
@@ -72,10 +108,16 @@ const EditProfileFormulary = () => {
                              />
                         </div>
                         <div>
+                            {errors.lastName && <p className="errorRegister">{errors.lastName}</p>}
+                        </div>
+                        <div>
                             <input type="email" className="form-control"
                              placeholder="Email Address" name="email" 
                              onChange={(e) => handleChange(e)}
                             />
+                        </div>
+                        <div>
+                            {errors.email && <p className="errorRegister">{errors.email}</p>}
                         </div>
                         <div>
                             <input type="address" className="form-control"
@@ -90,10 +132,16 @@ const EditProfileFormulary = () => {
                             />
                         </div>
                         <div>
+                            {errors.image && <p className="errorRegister">{errors.image}</p>}
+                        </div>
+                        <div>
                             <input type="number" className="form-control"
                              placeholder="phone" name="phone" 
                              onChange={(e) => handleChange(e)}
                             />
+                        </div>
+                        <div>
+                            {errors.phone && <p className="errorRegister">{errors.phone}</p>}
                         </div>
                         <button onClick={(e) => handleSubmit(e)}>Agregar o cambiar datos</button>
                     </form>
