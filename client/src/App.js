@@ -8,6 +8,8 @@ import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
 import OrdersDetails from "./components/Orders/OrdersDetails";
 import Orders from"./components/Orders/Orders2.jsx";
+import OrdersAdmin from "./components/OrdersAdmin/OrdersAdmin.jsx";
+import ProductsAdmin from "./components/ProductsAdmin/ProductsAdmin.jsx";
 
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -28,6 +30,7 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
+import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -93,13 +96,15 @@ function App() {
 					<Route exact path="/forgot" component={Forgot}/>
 					<Route path="/reset/:token"  component={Reset}/>
           <Route path="/userAdmin" component={UserAdmin}/>
-
+          <Route path="/ordersAdmin" component={OrdersAdmin}/>
+          <Route path="/productsAdmin" component={ProductsAdmin}/>
           <Route exact path="/pasarela">
 						<Pasarela/>
 					</Route>
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
           <Route path="/OrdersUser" component={Orders}/>
           <Route exact path="/profile" component={Profile} />
+          <Route path={"/productEdit/:id"} component={ModifyItem} />
                      {/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />

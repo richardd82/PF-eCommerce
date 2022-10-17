@@ -38,10 +38,12 @@ export class ResumenPago extends Component {
           value: e.details.price,
           productId: e.id,
           image: e.details.image,
+          size: e.state.size,
+          name: e.details.name,
         };
       }),
       userId: this.props.user_login.id,
-      estado: 'Creada',
+      estado: 'Created',
       contactAdress: { contact: this.props.contact, myAdress: this.props.myAdress }
     };
     createOrder2(sendOrderPP).then(console.log("holaaa")).catch(console.log("error"));
