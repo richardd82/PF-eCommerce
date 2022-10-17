@@ -247,7 +247,7 @@ router.put("/:userId", async (req, res, next) => {
 router.put("/put/:id", async (req, res, next) => {
    try {
       const { id } = req.params;
-      const { name, lastName, address, phone } = req.body;
+      const { name, lastName, address, phone, email, image} = req.body;
       console.log({ name, lastName, address, phone });
       const toEdit = await User.update(
          {
@@ -255,6 +255,8 @@ router.put("/put/:id", async (req, res, next) => {
             lastName,
             address,
             phone,
+            email,
+            image
          },
          { where: { id } }
       );

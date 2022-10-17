@@ -30,6 +30,7 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
+import EditProfileFormulary from "./components/Profile/editProfileFormulary.jsx";
 import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
@@ -84,9 +85,7 @@ function App() {
 						<ComponentProducts />{" "} 
 						{/*Se pone asi porque los componentes estan creadas como Clase*/} 
 					</Route>
-					<Route exact path="/create">
-						<CreateProduct />
-					</Route>
+					
 					<Route exact path="/register">
 						<Register />
 					</Route>
@@ -95,15 +94,17 @@ function App() {
 					</Route>
 					<Route exact path="/forgot" component={Forgot}/>
 					<Route path="/reset/:token"  component={Reset}/>
-          <Route path="/userAdmin" component={UserAdmin}/>
+
+          <Route exact path="/createProduct">	<CreateProduct /></Route>
+          <Route path="/usersAdmin" component={UserAdmin}/>
           <Route path="/ordersAdmin" component={OrdersAdmin}/>
           <Route path="/productsAdmin" component={ProductsAdmin}/>
-          <Route exact path="/pasarela">
-						<Pasarela/>
-					</Route>
+         
+          <Route exact path="/pasarela"><Pasarela/></Route>
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
           <Route path="/OrdersUser" component={Orders}/>
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
           <Route path={"/productEdit/:id"} component={ModifyItem} />
                      {/*
 					<Route exact path="/profile" component={Profile} />
