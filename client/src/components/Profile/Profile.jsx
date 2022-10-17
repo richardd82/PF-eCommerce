@@ -18,7 +18,7 @@ export default function Profile () {
     }, [dispatch]);
 
     const userConected = users.find(user => user.id === user_login.id)
-    
+    console.log(userConected)
     
         return (
  

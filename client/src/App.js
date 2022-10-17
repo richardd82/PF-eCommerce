@@ -30,6 +30,7 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
+import EditProfileFormulary from "./components/Profile/editProfileFormulary.jsx";
 import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
@@ -104,6 +105,7 @@ function App() {
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
           <Route path="/OrdersUser" component={Orders}/>
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
           <Route path={"/productEdit/:id"} component={ModifyItem} />
                      {/*
 					<Route exact path="/profile" component={Profile} />
