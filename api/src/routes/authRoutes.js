@@ -198,15 +198,26 @@ router.post("/google", async (req, res, next) => {
 
 router.post("/verify", verifyToken, (req, res) => {
 
-  jwt.verify(req.token, process.env.JWT_secret_key, (error, authData) => {
+  jwt.verify(req.token, process.env.JWT_secret_key, async(error, authData) => {
     if (error) {
       res.sendStatus(403);
     }
     else {
+      try{
+      var  userValidate = await User.findOne({
+        where: { id: authData.id },
+      });
+      
+      if(userValidate.length==0)
+      res.sendStatus(403);
+
       res.json({
         mensaje: "Post fue creado",
-        authData
-      })
+        userValidate
+      })}
+      catch(error){
+        res.sendStatus(403);
+      }
     }
   });
 
