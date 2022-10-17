@@ -63,7 +63,7 @@ const EditProfileFormulary = () => {
                              placeholder="Name" name="name"
                              onChange={(e) => handleChange(e)}
                               />
-                              
+
                         </div>
                         <div >
                             <input type="text" className="form-control"
