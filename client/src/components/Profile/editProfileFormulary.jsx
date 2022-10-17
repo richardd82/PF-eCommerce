@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import style from "./Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers, putUser } from "../../redux/actions";
+import { useHistory } from "react-router-dom";
+
 
 function validate(input, allUsers) {
 
@@ -40,19 +42,21 @@ function validate(input, allUsers) {
 const EditProfileFormulary = () => {
 
 
-
+    const history = useHistory(); 
     const allUsers = useSelector((state) => state.allUsers);
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const users = useSelector((state) => state.allUsers);
     const user_login = useSelector((state) => state.user_login);
+    const userConnected = users.find(user => user.id === user_login.id)
     const [input, setInput] = useState({
-        email: "",
-        name: "",
+        email: user_login.email,
+        name: user_login.name,
         lastName: "",
         image: "",
         address: "",
-        phone: null
+        phone: null,
+        loading: true
     });
     console.log(user_login)
     useEffect(() => {
@@ -60,10 +64,10 @@ const EditProfileFormulary = () => {
         dispatch(deleteUsers())
     }, [dispatch]);
 
-    const userConnected = users.find(user => user.id === user_login.id)
+   
     const id = user_login.id;
 
-    console.log(userConnected);
+    console.log(user_login);
 
     function handleChange(e) {
         setInput({
@@ -82,8 +86,23 @@ const EditProfileFormulary = () => {
         console.log(input)
         dispatch(putUser(input, id))
         alert("usuario modificado")
+        history.push("/profile")
     }
 
+    if(input.loading === true && user_login !== false && user_login !== "Loading") {
+      
+
+      setInput({
+        ...input,
+        loading: false,
+        email: user_login.email,
+        name: user_login.name,
+        lastName: user_login.lastName,
+        image: user_login.image,
+        address: user_login.address,
+        phone: user_login.phone,
+    })
+    };
 
     return (
 
@@ -92,8 +111,8 @@ const EditProfileFormulary = () => {
                 <div className={style.containCarry}>
                     <form>
                         <div >
-                            <input type="text" className="form-control"
-                             placeholder="Name" name="name"
+                            <input value={input.name} type="text" className="form-control"
+                             placeholder="name"  name="name"
                              onChange={(e) => handleChange(e)}
                               />
                         <div>
@@ -102,7 +121,7 @@ const EditProfileFormulary = () => {
 
                         </div>
                         <div >
-                            <input type="text" className="form-control"
+                            <input value={input.lastName} type="text" className="form-control"
                              placeholder="Lastname" name="lastName"
                              onChange={(e) => handleChange(e)}
                              />
@@ -111,7 +130,7 @@ const EditProfileFormulary = () => {
                             {errors.lastName && <p className="errorRegister">{errors.lastName}</p>}
                         </div>
                         <div>
-                            <input type="email" className="form-control"
+                            <input value={input.email} type="email" className="form-control"
                              placeholder="Email Address" name="email" 
                              onChange={(e) => handleChange(e)}
                             />
@@ -120,13 +139,13 @@ const EditProfileFormulary = () => {
                             {errors.email && <p className="errorRegister">{errors.email}</p>}
                         </div>
                         <div>
-                            <input type="address" className="form-control"
+                            <input value={input.address} type="address" className="form-control"
                              placeholder="Address" name="address" 
                              onChange={(e) => handleChange(e)}
                             />
                         </div>
                         <div>
-                            <input type="string" className="form-control"
+                            <input value={input.image} type="string" className="form-control"
                              placeholder="image" name="image" 
                              onChange={(e) => handleChange(e)}
                             />
@@ -135,7 +154,7 @@ const EditProfileFormulary = () => {
                             {errors.image && <p className="errorRegister">{errors.image}</p>}
                         </div>
                         <div>
-                            <input type="number" className="form-control"
+                            <input value={input.phone} type="number" className="form-control"
                              placeholder="phone" name="phone" 
                              onChange={(e) => handleChange(e)}
                             />
