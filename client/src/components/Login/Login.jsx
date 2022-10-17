@@ -83,7 +83,6 @@ export default function Login(props) {
     try {
       const user = await dispatch(loginAction(input))
       if (user === undefined) {
-
         Swal.fire({
           customClass: {
             container: `${style.myswal}`
@@ -93,7 +92,6 @@ export default function Login(props) {
         });
       } else {
         props.close(false)
-
         Swal.fire({
           title: `User successfully sign in`,
           position: "center",
@@ -101,7 +99,6 @@ export default function Login(props) {
           showConfirmButton: false,
           timer: 1000,
         });
-
         dispatch(put_User_Login(user))
         /*window.localStorage.setItem(
             'loggedHenryApp', JSON.stringify(user)

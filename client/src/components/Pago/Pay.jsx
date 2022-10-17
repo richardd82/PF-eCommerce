@@ -87,10 +87,12 @@ export default function Pay(props) {
             value: e.details.price,
             productId: e.id,
             image: e.details.image,
-          }
+            size: e.state.size,
+            name: e.details.name,
+          };
         }),
         userId: user.id,
-        estado: 'Cancelada',
+        estado: 'Paid',
         contactAdress: { contact: props.contact, myAdress: props.myAdress }
       };
       dispatch(createOrder(sendOrderPP));
