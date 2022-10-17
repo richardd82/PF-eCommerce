@@ -667,6 +667,7 @@ export function CreateNewProduct(payload) {
       let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
       console.log(clouData)
       const response = await axios.post(REACT_APP_URL_BACK + "/product/", { name, price, brand, gender, nameCategory, description, image: clouData.data.url });
+      console.log(response);
       return response;
     } catch (e) {
       console.log(e);

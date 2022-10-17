@@ -50,7 +50,7 @@ function validate(input) {
   } else if (!isNumeric(input.price)) {
     errores.price = "The price must be a positive number";
   }
-  
+
   // } else if (!input.image) {
   /*    IMG    */
   //   errores.image = "URL Image is required";
@@ -229,7 +229,7 @@ function Formulario() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!selectedFile || selectedFile=="") return;
+    if (!selectedFile || selectedFile == "") return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onload = () => {
@@ -237,7 +237,7 @@ function Formulario() {
         input.description &&
         input.name &&
         input.price &&
-        selectedFile!=='' &&
+        selectedFile !== '' &&
         (input.nameBrand && input.nameBrand != "Disable") &&
         input.gender &&
         (input.nameCategory && input.nameCategory != "Disable")
@@ -249,15 +249,16 @@ function Formulario() {
           gender: input.gender,
           nameCategory: input.nameCategory,
           description: input.description,
-          imageData:reader.result
-        }));
-        swal({
-          title: "Product created successfully!",
-          icon: "success",
-          button: "Ok",
-        });
-        SetInput(initialState);
-        history.push("/");
+          imageData: reader.result
+        })).then(e => {
+          var ID=e.data[0].id;
+          swal({
+            title: "Product created successfully!",
+            icon: "success",
+            button: "Ok",
+          }).then(e => history.push(`/productEdit/${ID}`));
+        }
+        );
       }
       else alert(" missing data for the creation of a new product");
     }
