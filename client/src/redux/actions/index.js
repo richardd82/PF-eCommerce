@@ -466,6 +466,22 @@ export function createOrder(payload) {
   };
 }
 
+export function ActualiceOrder(type, id, data){
+  return async function (dispatch) {
+    try {
+      console.log(type, id, data)
+      let Datos = await axios({
+        method: "put",
+        url: `${REACT_APP_URL_BACK}/orders/${id}?type=${type}`,
+        data: { data: data },
+      })
+      return Datos.data;
+    } catch (error) {
+      console.log("Cargando o los productos no son los indicados");
+    }
+  }
+}
+
 //USERS ADMIN
 
 export function getAllUsers() {
@@ -494,6 +510,19 @@ export function putUser(input, id) {
         type: PUT_USERS,
         payload: res.data,
       });
+    } catch (error) {
+      alert("Already exist or some trouble during creation! Come back later");
+    }
+  };
+}
+
+export function putUserType(type, userid,anotherParam) {
+  return async function (dispatch) {
+    try {
+      console.log(type, userid,anotherParam);
+      const res = await axios.put(
+        REACT_APP_URL_BACK + `/users/${userid}/?type=${type}&anotherParam=${anotherParam}`);
+      return res;
     } catch (error) {
       alert("Already exist or some trouble during creation! Come back later");
     }
@@ -606,11 +635,11 @@ export function ObtenerLogin() {
     try {
       if (Data !== undefined && Data !== null) {
         var Datos = await axios.post(`${process.env.REACT_APP_URL_BACK}/auth/verify`, { authorization: `PalabraSecreta ${Data.token}` });
-        console.log(Datos)
+        console.log(Datos.data.userValidate)
         return dispatch(
           {
             type: CHANGE_USER_LOGIN,
-            payload: { user: Datos.data.authData, token: Data.token }
+            payload: { user: Datos.data.userValidate, token: Data.token }
           });
       }
       else {

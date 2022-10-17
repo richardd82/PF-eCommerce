@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       stateOrder:{
-        type: DataTypes.ENUM('Creada', 'Cancelada', 'Despachada')
+        type: DataTypes.ENUM('Created', 'Paid', 'Dispatched')
       }
     }
     // {

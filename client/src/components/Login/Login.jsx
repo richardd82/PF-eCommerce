@@ -38,6 +38,7 @@ export default function Login(props) {
 
   useEffect(() => {
     if (userLog !== false && userLog !== "Loading") {
+      console.log("Entra aca")
       props.close(false)
       history.push('/')
     }
@@ -67,11 +68,13 @@ export default function Login(props) {
   }
 
   function handleClose() {
+    console.log("Entra aca")
     props.close(false)
   }
 
   function changePageCreateAccount(e) {
     e.preventDefault();
+    console.log("Entra aca")
     props.close(false)
     history.push("/register")
   }
@@ -83,7 +86,6 @@ export default function Login(props) {
     try {
       const user = await dispatch(loginAction(input))
       if (user === undefined) {
-
         Swal.fire({
           customClass: {
             container: `${style.myswal}`
@@ -92,8 +94,8 @@ export default function Login(props) {
           icon: "warning",
         });
       } else {
+        console.log("Entra aca")
         props.close(false)
-
         Swal.fire({
           title: `User successfully sign in`,
           position: "center",
@@ -101,7 +103,6 @@ export default function Login(props) {
           showConfirmButton: false,
           timer: 1000,
         });
-
         dispatch(put_User_Login(user))
         /*window.localStorage.setItem(
             'loggedHenryApp', JSON.stringify(user)
@@ -129,41 +130,47 @@ export default function Login(props) {
     const { uid, email, photoURL } = user;
     console.log('USER_LOGIN', user)
     return await axios
-       .post(`${REACT_APP_URL_BACK}/auth/google`, {
-          username: email,
-          name: name,
-          email: email,
-          password: uid,
-          lastName: lastname,
-          image: photoURL,
-          address: "Need to complete",
-       })
-       .then((response) => {
-          props.close(false)
-          console.log("respuesta ", response.data);
-          dispatch(LoginGoogleUser(response.data))
-       });
- 
-};
+      .post(`${REACT_APP_URL_BACK}/auth/google`, {
+        username: email,
+        name: name,
+        email: email,
+        password: uid,
+        lastName: lastname,
+        image: photoURL,
+        address: "Need to complete",
+      })
+      .then((response) => {
+        console.log("Entra aca")
+        props.close(false)
+        console.log("respuesta ", response);
+        dispatch(LoginGoogleUser({userForToken:response.data.userValidate[0],token:response.data.token}))
+      });
+
+  };
   const handleForgot = () => {
     history.push("/forgot");
     location.reload();
   }
- 
-  const handleGoogleSignIn = async() => {
-    
+
+if(user){
+  console.log(user.providerData[0])
+  register(user.providerData[0])
+}
+
+  const handleGoogleSignIn = async () => {
+
     try {
-      await googleLogin()
-      history.push('/')
+      await googleLogin().then(e => {
+        if (user) {
+          console.log(user, "  ",e)
+          register(user.providerData[0])
+        }})
     } catch (error) {
       console.log(error)
     }
   }
 
-  if (user) {
-    console.log(user)
-    register(user.providerData[0])
- }
+ 
 
   return (
     <div className={style.loginContainer}>
@@ -174,11 +181,11 @@ export default function Login(props) {
         <input type="input" name="username" onChange={(e) => handleChange(e)} placeholder="UserName" />
         <label>Password:</label>
         <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" />
-        <Link onClick={handleForgot} className={style.forgotPswd}>Forgot your password?</Link>
+        <Link onClick={() => handleForgot()} className={style.forgotPswd}>Forgot your password?</Link>
         <button className={style.btnLoginModal} onClick={(e) => handleLogin(e)}>LOGIN</button>
         <p>Or log using google:</p>
         {/* <LoginGoogle />*/}
-        <button onClick={handleGoogleSignIn} className={style.loginGoogle}></button>
+        <button onClick={() => handleGoogleSignIn()} className={style.loginGoogle}></button>
       </div>
       <hr />
       <div className={style.createAcc}>

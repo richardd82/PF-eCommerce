@@ -93,10 +93,10 @@ router.post("/Google", async (req, res, next) => {
                password: passwordHash,
                image: image,
                address: address,
-               typeUser:isAdmin?"Admin":"User"
+               typeUser: isAdmin ? "Admin" : "User"
             },
          });
-        
+
          userValidate = User.findAll({
             where: { email: email },
          });
@@ -157,7 +157,7 @@ router.post("/", async (req, res, next) => {
                password: passwordHash,
                image: image,
                address: address,
-               typeUser:isAdmin?"Admin":"User"
+               typeUser: isAdmin ? "Admin" : "User"
             },
          });
          res.send(user);
@@ -170,22 +170,22 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/:userId", async (req, res, next) => {
-   const { type } = req.query;
+   const { type,anotherParam } = req.query;
    const { userId } = req.params;
    console.log("SOY TYPE", type, "SOY USERID", userId);
    const user = await User.findOne({ where: { id: userId } });
-   console.log(userId);
+   console.log(userId," ",anotherParam," ",type);
+   
+   if(user.length==0)
+      return res.status(400).send("Usuario no existe") ;
+
    try {
       switch (type) {
-         case "admin":
-            if (user.typeUser=="Admin") {
-               user.typeUser=="User";
+         case "typeUser":
+            if (user.typeUser !== anotherParam) {
+               user.typeUser = anotherParam;
                await user.save();
-               res.send(`the user ${user.name} is no longer an administrator`);
-            } else {
-               user.typeUser=="Admin";
-               await user.save();
-               res.send(`the user ${user.name} is now an administrator`);
+               res.send(`the user type of the user${user.name}  is now ${anotherParam}`);
             }
             break;
          case "profile":
