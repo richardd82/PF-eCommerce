@@ -35,25 +35,26 @@ function NavUser() {
             Logout
           </a>
           <a href="/profile">Profile</a>
-          {user2 !== false && user2.typeUser!="Admin" && (
+          {user2 !== false && user2.typeUser != "Admin" && (
             <a href={`/OrdersUser`}>Your Orders</a>
           )}
-          {user2 !== false && user2.typeUser=="Admin" && (
-            <div>
-              {/*<a href="/gestionProducts">Administracion Productos</a>
-          <a href="/usersAdmin">Administracion Usuarios</a>
-          <a href="/adminOrders">Administracion Ventas</a>*/}
-              <a href="/create">Create Product</a>
-            </div>
-          )}
+          {user2 !== false && user2.typeUser == "Admin" && (
+              <div>
+              <a href="/productsAdmin">Administracion Productos</a>
+              <a href="/usersAdmin">Administracion Usuarios</a>
+              <a href="/ordersAdmin">Administracion Ventas</a>
+              <a href="/createProduct">Create Product</a>
+              </div>
+            )
+          }
           {/*<a href="#">Link 2</a>
           <a href="#">Link 3</a>*/}
         </div>
         <button className={Style.dropbtn}>
           {user2.image == undefined ? (
-              <IconContext.Provider value={{ color: "white", size: "25px" }}>
-                <BiUser />
-              </IconContext.Provider>
+            <IconContext.Provider value={{ color: "white", size: "25px" }}>
+              <BiUser />
+            </IconContext.Provider>
           ) : (
             <img src={user2.image} className={Style.avatar} />
           )}
