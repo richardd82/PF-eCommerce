@@ -6,7 +6,7 @@ const { User } = require("../db");
 const orderRouter = Router();
 //email
 const transporter = require("../../config/mailer");
-const { changeStateOrder, createOrder } = require("../Email/mail.config");
+const { changeStateOrder, createOrder, changeStateOrderDispatched } = require("../Email/mail.config");
 
 require("dotenv").config();
 
@@ -53,12 +53,12 @@ orderRouter.post("/", async (req, res) => {
 
       let stocksJSON = JSON.stringify(stocks);
       let contactAdressJSON=JSON.stringify(contactAdress)
-      console.log(stocksJSON);
+      //console.log(stocksJSON);
 
       const user = await User.findOne({
          where: { id: userId }
       })
-      console.log("USER ORDEN", user)
+      //console.log("USER ORDEN", user)
       let newOrder = await Order.create({
          price: priceTotal,
          userId,
@@ -67,7 +67,7 @@ orderRouter.post("/", async (req, res) => {
          contactAdress:contactAdressJSON,
       });
       createOrder(user.email, newOrder)
-      console.log("NEW ORDER", newOrder)
+      //console.log("NEW ORDER", newOrder)
       res.send(newOrder);
    } catch (error) {
       console.log(error)
@@ -102,7 +102,12 @@ orderRouter.put("/:id", async (req, res, next) => {
          case "stateOrder":
             order.stateOrder = data;
             await order.save();
-            changeStateOrder(user.email, data, id)
+            if(data === "Dispatched"){
+               console.log("DISPATCHED DATA", data)
+               changeStateOrderDispatched(user.email, data, id)
+            }else{
+               changeStateOrder(user.email, data, id)
+            }
             res.send(`The state has been changed`);
             break;
          case "stocks":
