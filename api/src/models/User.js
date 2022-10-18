@@ -47,15 +47,9 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
-      isBaned: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
+      typeUser: {
+        type: DataTypes.ENUM('Banned', 'User', 'Admin'),
+        defaultValue: 'User',
       },
       verify: {
         type: DataTypes.BOOLEAN,

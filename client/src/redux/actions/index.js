@@ -466,16 +466,20 @@ export function createOrder(payload) {
   };
 }
 
-export async function createOrder2(payload) {
-    try{
-    axios
-      .post(`${REACT_APP_URL_BACK}/orders`, payload)
-      .then((res) => {
-        return res;
+export function ActualiceOrder(type, id, data){
+  return async function (dispatch) {
+    try {
+      console.log(type, id, data)
+      let Datos = await axios({
+        method: "put",
+        url: `${REACT_APP_URL_BACK}/orders/${id}?type=${type}`,
+        data: { data: data },
       })
+      return Datos.data;
+    } catch (error) {
+      console.log("Cargando o los productos no son los indicados");
     }
-    catch(error) {
-     console.log(error);}
+  }
 }
 
 //USERS ADMIN
@@ -506,6 +510,19 @@ export function putUser(input, id) {
         type: PUT_USERS,
         payload: res.data,
       });
+    } catch (error) {
+      alert("Already exist or some trouble during creation! Come back later");
+    }
+  };
+}
+
+export function putUserType(type, userid,anotherParam) {
+  return async function (dispatch) {
+    try {
+      console.log(type, userid,anotherParam);
+      const res = await axios.put(
+        REACT_APP_URL_BACK + `/users/${userid}/?type=${type}&anotherParam=${anotherParam}`);
+      return res;
     } catch (error) {
       alert("Already exist or some trouble during creation! Come back later");
     }
@@ -572,14 +589,6 @@ export function deleteFavs() {
   };
 }
 
-export function register(payload) {
-  return async function () {
-    const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)
-    console.log(resp)
-    return resp.data
-  }
-}
-
 export function loginAction(payload) {
   return async function () {
     try {
@@ -626,11 +635,11 @@ export function ObtenerLogin() {
     try {
       if (Data !== undefined && Data !== null) {
         var Datos = await axios.post(`${process.env.REACT_APP_URL_BACK}/auth/verify`, { authorization: `PalabraSecreta ${Data.token}` });
-        console.log(Datos)
+        console.log(Datos.data.userValidate)
         return dispatch(
           {
             type: CHANGE_USER_LOGIN,
-            payload: { user: Datos.data.authData, token: Data.token }
+            payload: { user: Datos.data.userValidate, token: Data.token }
           });
       }
       else {
@@ -658,9 +667,58 @@ export function CreateNewProduct(payload) {
       let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
       console.log(clouData)
       const response = await axios.post(REACT_APP_URL_BACK + "/product/", { name, price, brand, gender, nameCategory, description, image: clouData.data.url });
+      console.log(response);
       return response;
     } catch (e) {
       console.log(e);
     }
   }
 }
+
+export async function register (payload) {
+  const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)
+  console.log(resp)
+  return resp.data
+}
+
+export async function createOrder2(payload) {
+  try{
+  axios
+    .post(`${REACT_APP_URL_BACK}/orders`, payload)
+    .then((res) => {
+      return res;
+    })
+  }
+  catch(error) {
+   console.log(error);}
+}
+
+export function forgotPassword(payload) {
+
+  console.log(payload);
+  return async function () {
+    try {
+      const resp = await axios.post(`${REACT_APP_URL_BACK}/auth/forgot` , payload)
+      console.log(resp.data)
+      return resp.data
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function resetPassword(password,token) {
+  console.log(password,token)
+  return async function () {
+    try {
+      const resp = await axios.put(`${REACT_APP_URL_BACK}/auth/reset`, {password,token})
+      console.log(resp.data)
+      return resp.data
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+

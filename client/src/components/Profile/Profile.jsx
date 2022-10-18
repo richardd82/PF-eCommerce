@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import style from "./Profile.module.css";
+import "./profile.css";
 import ProfileCard from "./ProfileCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/actions";
+
 
 export default function Profile () {
 
@@ -17,13 +18,13 @@ export default function Profile () {
     }, [dispatch]);
 
     const userConected = users.find(user => user.id === user_login.id)
-    
+    console.log(userConected)
     
         return (
  
-            <div className={style.mainContainer}>
+            <div className="mainContainerProfile">
                 {userConected ? (
-                    <div className={style.containCarry}>
+                    <div className="containCarry">
                         <div>
                             <ProfileCard
                                 email={userConected.email}
@@ -31,7 +32,7 @@ export default function Profile () {
                                 lastName={userConected.lastName}
                                 image={userConected.image}
                                 address={userConected.address}
-                                isAdmin={userConected.isAdmin}
+                                phone={userConected.phone}
                             />
                         </div>
                     </div>

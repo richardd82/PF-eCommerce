@@ -2,7 +2,7 @@
     position: relative;
     margin: auto;
     width: fit-content;
-    height: 79vh;
+    height: 77.9vh;
 }
 
 .virtualBody2 {
@@ -28,22 +28,13 @@
         height: 74.7vh;
     }
     .imgCarrousel{
-        width: 63% !important;
-    }
-    .slider-wrapper{
-        background-color: #21072b4d;
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        width: 90%;
-    }
-    footer {
-        height: 13.3vh;
+        width: 62% !important;
     }
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (max-width: 1728px)  {
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
     .virtualBody{
-        height: 75vh;
+        height: 78.1vh;
     }
     .imgCarrousel{
         width: 63% !important;

@@ -81,7 +81,7 @@ export default function NavBar(props) {
               </li>
             )*/}
 
-              { user_login != "Loading" &&(user_login == false || (user_login.isAdmin !== true)) && (
+              { user_login != "Loading" &&(user_login == false || (user_login.typeUser !== "Admin")) && (
                 <li className="itemRigh">
                   <Link to={"/carry"} className="btnNavEffect">
                     <Badge badgeContent={Cantidad} color="primary">

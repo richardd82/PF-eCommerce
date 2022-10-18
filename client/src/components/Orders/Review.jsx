@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createComment, updateReview, getOrders } from "../../redux/actions";
+import {
+  createComment,
+  updateReview,
+  getOrders,
+  searchNameProductID,
+} from "../../redux/actions";
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -14,6 +19,13 @@ class Review extends Component {
     super(props);
     // Don't call this.setState() here!
     this.state = { OpenModal: false, rating: 0, comment: "", disabled: false };
+  }
+
+  componentDidMount() {
+    this.props.searchNameProductID(this.props.order.productId);
+  }
+  componentWillUnmount() {
+    this.props.searchNameProductID(0);
   }
 
   HandleReview() {
@@ -43,7 +55,7 @@ class Review extends Component {
       try {
         let Datos = await axios({
           method: "post",
-          url: `http://localhost:3001/comment`,
+          url: `${process.env.REACT_APP_URL_BACK}/comment`,
           data: productos,
         });
         return Datos.data;
@@ -59,7 +71,7 @@ class Review extends Component {
         console.log(type, id, data);
         let Datos = await axios({
           method: "put",
-          url: `http://localhost:3001/orders/${id}?type=${type}`,
+          url: `${process.env.REACT_APP_URL_BACK}/orders/${id}?type=${type}`,
           data: { data: data },
         });
         return Datos.data;
@@ -155,19 +167,15 @@ class Review extends Component {
   }
 
   render() {
-    const { index, order, orderId } = this.props;
+    const { index, order, orderId, productsId } = this.props;
     console.log(index, " ", order, " ", orderId);
+    console.log(this.props.productsId);
     console.log(this.state.OpenModal);
     return (
       <div>
         {order.comment == false && this.state.disabled == false && (
           <div>
-            <label
-              className={styles.labelReview}
-              onClick={() => this.HandleReview()}
-            >
-              Create Review
-            </label>
+           <div onClick={() => this.HandleReview()}> <label className={styles.labelReview}>Create Review</label> </div>
             <Modal
               className={styles.containerModal}
               open={this.state.OpenModal}
@@ -186,18 +194,19 @@ class Review extends Component {
               >
                 <Fade in={this.state.OpenModal} timeout={500}>
                   <img
-                    src={`https://${order.image}`}
+                    src={`${order.image}`}
                     alt="asd"
-                    style={{ maxHeight: "70%", maxWidth: "70%" }}
+                    // style={{ maxHeight: "70%", maxWidth: "70%" }}
                   />
                 </Fade>
 
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Text in a modal
+                <Typography id="modal-modal-title" variant="h5" component="h5">
+                  {productsId.length > 0 ? productsId[0].name : "Loading"}
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor
-                  ligula.
+                <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+                  {productsId.length > 0
+                    ? productsId[0].description
+                    : "Loading"}
                 </Typography>
 
                 <Rating
@@ -208,6 +217,7 @@ class Review extends Component {
                 />
                 <TextField
                   id="outlined-multiline-static"
+                  className="txtBoxReview"
                   label="Your comment"
                   multiline
                   rows={4}
@@ -227,7 +237,7 @@ class Review extends Component {
                     marginTop: "10px",
                   }}
                 >
-                  Publicar
+                  Post
                 </Button>
               </Box>
             </Modal>
@@ -242,6 +252,7 @@ function mapStateToProps(state) {
   return {
     orders: state.orders,
     user: state.user_login,
+    productsId: state.productsId,
   };
 }
 
@@ -251,6 +262,7 @@ function mapDispatchToProps(dispatch) {
     createComment: (comment) => dispatch(createComment(comment)),
     updateReview: (commentUp) => dispatch(updateReview(commentUp)),
     getOrders: (user, id) => dispatch(getOrders(user, id)),
+    searchNameProductID: (id) => dispatch(searchNameProductID(id)),
     //changePaginatedPage: (page) => dispatch(changePaginatedPage(page)),
   };
 }

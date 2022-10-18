@@ -26,9 +26,6 @@ router.delete("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const { name, price, image, brand, gender, nameCategory, description } =
     req.body;
-  // let id = 0;
-  // let l = UUID(id).uuid()
-  // console.log(l)
   let id = uuidv4();
   try {
     var createCategory = await Category.findOrCreate({
@@ -51,17 +48,7 @@ router.post("/", async (req, res, next) => {
         description,
       },
     });
-    //////////HARCODEADOOOOO
-    size.forEach((item) => {
-      Stock.create({
-        productSize: item,
-        stock: stock[Math.floor(Math.random() * 7)],
-        productId: id,
-      });
-    });
-    //////////////////////////////
-
-    res.status(202).send("Producto Creado Satisfactoriamente");
+    res.json(product);
   } catch (err) {
     next(err);
   }
