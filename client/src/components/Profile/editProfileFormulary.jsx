@@ -168,7 +168,7 @@ const EditProfileFormulary = () => {
             {user_login !== false && user_login !== "Loading" ? (
                 <div className="profileContainerForm">
                   <h1 className="titleCreate titleUpdateProfile">UPDATE PROFILE</h1>
-                    <form "profileForm">
+                    <form className="profileForm">
                         <div >
                             <input value={input.name} type="text" className="form-control"
                                 placeholder="name" name="name"
