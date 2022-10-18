@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import style from "./Profile.module.css";
+import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers, putUser } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
@@ -106,10 +106,11 @@ const EditProfileFormulary = () => {
 
     return (
 
-        <div className={style.mainContainer}>
+        <div className="profileContainer">
             {userConnected ? (
-                <div className={style.containCarry}>
-                    <form>
+                <div className="profileContainerForm">
+                    <h1 className="titleCreate titleUpdateProfile">UPDATE PROFILE</h1>
+                    <form className="profileForm">
                         <div >
                             <input value={input.name} type="text" className="form-control"
                              placeholder="name"  name="name"
@@ -162,7 +163,7 @@ const EditProfileFormulary = () => {
                         <div>
                             {errors.phone && <p className="errorRegister">{errors.phone}</p>}
                         </div>
-                        <button onClick={(e) => handleSubmit(e)}>Agregar o cambiar datos</button>
+                        <button className="btnGlobal btnUpdateProfile" onClick={(e) => handleSubmit(e)}>Agregar o cambiar datos</button>
                     </form>
                 </div>
             ) : (

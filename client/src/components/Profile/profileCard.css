@@ -1,49 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,600&display=swap');
+
 .productContainer {
+   margin: 15px auto;
    min-width: 500px;
    height: 50vh;
-   background-size:contain;
+   background-size: contain;
    color: black;
    padding: 15px;
-   margin: 15px auto;
-   display:flexbox;
+   display: flexbox;
    font-size: 22px;
    gap: 5px;
-   align-items:stretch;
+   align-items: stretch;
    flex-direction: column;
    border-radius: 15px;
    -webkit-box-shadow: 5px 5px 50px 5px #000000;
    box-shadow: 5px 5px 50px 5px #575555;
    border-width: 0px;
-   letter-spacing:initial;
-   font-family:serif;
-
-
+   letter-spacing: initial;
+   font-family: 'Poppins', cursive;
 }
+
 .titulo {
-    color: #CCC;
-    display: block;
-    font-size: 2.1em;
-    min-height: 20px;
-    padding: 15px 20px;
-    position: relative;
-    cursor: pointer;
-    font-weight:900;
-    transition: all .15s ease-out;
-    background-color: #ededed;
-    font-family: Montserrat;
-    font-size: 30px;
-    color: #444;
-    text-transform: uppercase;
-    margin: 5px 5px 30px;
-    background-color: #ededed;
+   color: #CCC;
+   display: block;
+   font-size: 2.1em;
+   min-height: 20px;
+   padding: 15px 20px;
+   position: relative;
+   cursor: pointer;
+   font-weight: 900;
+   transition: all .15s ease-out;
+   background-color: transparent;
+   font-family: 'Poppins', cursive;
+   font-size: 30px;
+   color: var(--glow-spread-color);
+   text-shadow: 1px 2px 3px rgb(88, 1, 122);
+   text-transform: uppercase;
+   margin: 5px 5px 30px;
+   text-align: center;
 }
 
 .informacionContainer {
+   margin: auto;
    width: 80%;
    margin-top: 45px;
    display: flex;
-   justify-content:space-evenly;
-   font-family:serif;
+   justify-content: space-evenly;
+   font-family: 'Poppins', cursive;
 }
 
 .photoContainer {
@@ -58,7 +61,8 @@
 
 .InforContainerText {
    display: flex;
-   flex-direction:column;
+   flex-direction: column;
+   width: 600px;
 }
 
 .InforContainerText p b {
@@ -67,7 +71,7 @@
 }
 
 .InforContainerText p {
-   margin:10px 8px;
+   margin: 10px 8px;
 }
 
 .buttonModify {
@@ -86,7 +90,7 @@
    font-size: 1.4rem;
    font-weight: bold;
    text-align: justify;
-   font-family: "DM-Sans", sans-serif;
+   font-family: 'Poppins', cursive;
    color: #efb810;
    margin: initial;
 }
@@ -98,7 +102,7 @@
    height: 40px;
    background-image: url("../image/confi-icon.png");
    background-size: contain;
-   align-items:flex-start;
+   align-items: flex-start;
 
    background-repeat: no-repeat;
 }
@@ -111,7 +115,7 @@
    align-items: center;
 }
 
-.buttonChanImg{
+.buttonChanImg {
 
    padding: 10px 15px;
    outline: none;
@@ -123,34 +127,51 @@
    font-size: 1.2rem;
    margin-right: 1px;
    margin-bottom: 2px;
-   
+
 }
-.buttonChanImg:hover{
+
+.buttonChanImg:hover {
    background-color: #05b405;
 
 
 }
 
 
-.buttonChangePass{
-  padding: 10px 15px;
-  outline: none;
-  cursor: pointer;
-  background-color: #008000;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-  margin-left: 1px;
-  
+.buttonChangePass {
+   padding: 10px 15px;
+   outline: none;
+   cursor: pointer;
+   background-color: #008000;
+   color: white;
+   border-radius: 5px;
+   border: none;
+   font-size: 1.2rem;
+   margin-bottom: 2px;
+   margin-left: 1px;
+
 
 }
-.buttonChangePass:hover{
+
+.buttonChangePass:hover {
    background-color: #05b405;
 
 }
 
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+   .productContainer {
+      height: 68vh;
+   }
+   .titulo {
+      padding: 10px;
+   }
+}
+
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px) {}
+
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2161px) {}
 
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ProfileCard.module.css";
+import "./profileCard.css";
 import { Link } from "react-router-dom";
 import  EditProfileFormulary  from "./editProfileFormulary";
 /** Debemos agregar Componente para poder modificar El perfil de la persona usando el boton de 
@@ -8,15 +8,15 @@ import  EditProfileFormulary  from "./editProfileFormulary";
 
 function ProfileCard({ email, name, lastName, image, address, phone }) {
   return (
-    <div className={styles.productContainer}>
+    <div className="productContainer">
       
-      <h2 className={styles.titulo}>Your Profile</h2>
+      <h2 className="titulo">Your Profile</h2>
 
-      <section className={styles.informacionContainer}>
-        <div className={styles.photoContainer}>
+      <section className="informacionContainer">
+        <div className="photoContainer">
           <img src={`${image}`} alt="imagen" />
         </div>
-        <div className={styles.InforContainerText}>
+        <div className="InforContainerText">
         <p><b>E-mail:</b>  {email}</p>
           <p><b>Name:</b>  {name}</p>
           <p><b>Lastname:</b>  {lastName}</p>
@@ -25,9 +25,9 @@ function ProfileCard({ email, name, lastName, image, address, phone }) {
         </div>
       </section>
 
-      <div className={styles.buttonModify}>
+      <div className="buttonModify">
         <Link to={"./editProfileFormulary"}>
-          <button className= {styles.buttonChangePass}> <span></span></button>
+          <button className= "buttonChangePass"> <span></span></button>
           {/* se debe de agregar el componente para configurar el usuario */}
         </Link>
       </div>

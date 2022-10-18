@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import style from "./Profile.module.css";
+import "./profile.css";
 import ProfileCard from "./ProfileCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, getAllUsers } from "../../redux/actions";
@@ -22,9 +22,9 @@ export default function Profile () {
     
         return (
  
-            <div className={style.mainContainer}>
+            <div className="mainContainerProfile">
                 {userConected ? (
-                    <div className={style.containCarry}>
+                    <div className="containCarry">
                         <div>
                             <ProfileCard
                                 email={userConected.email}
