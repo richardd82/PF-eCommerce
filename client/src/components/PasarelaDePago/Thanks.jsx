@@ -18,4 +18,4 @@ export class Thanks extends Component {
     }
 }
 //las propiedades del estado que quiero conectar //las acciones que quiero poder dispatchar
-export default (Thanks);
+export default Thanks;

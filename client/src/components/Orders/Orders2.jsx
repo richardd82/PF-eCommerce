@@ -92,7 +92,7 @@ class Orders2 extends Component {
     const customStyles = {
       rows: {
         style: {
-          minHeight: '72px', // override the row height
+          minHeight: '40px', // override the row height
         },
       },
       headCells: {
@@ -123,7 +123,7 @@ class Orders2 extends Component {
       },
       context: {
         background: '#cb4b16',
-        text: '#FFFFFF',
+        color: '#ff01c6;',
       },
       divider: {
         default: '#073642',

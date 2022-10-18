@@ -4,6 +4,7 @@ import Style from "./NavUser.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
+import { Link } from "react-router-dom";
 
 function NavUser() {
   //login Google
@@ -31,22 +32,20 @@ function NavUser() {
     <div className={Style.navbar}>
       <div className={Style.dropdown}>
         <div className={Style.dropdown_content}>
-          <a href="#" onClick={handleLogout}>
-            Logout
-          </a>
-          <a href="/profile">Profile</a>
+          <a href="#" onClick={handleLogout}>Logout</a>
+          <Link to={`/profile`}>Profile </Link>
           {user2 !== false && user2.typeUser != "Admin" && (
             <div>
-              <a href={`/OrdersUser`}>Your Orders</a>
-              <a href={`/favorites`}>Your Favorites</a>
+              <Link to={`/OrdersUser`}>Your Orders </Link>
+              <Link to={`/favorites`}>Your Favorites </Link>
             </div>
           )}
           {user2 !== false && user2.typeUser == "Admin" && (
             <div>
-              <a href="/productsAdmin">Administracion Productos</a>
-              <a href="/usersAdmin">Administracion Usuarios</a>
-              <a href="/ordersAdmin">Administracion Ventas</a>
-              <a href="/createProduct">Create Product</a>
+              <Link to={`/productsAdmin`}>Administracion Productos </Link>
+              <Link to={`/usersAdmin`}>Administracion Usuarios </Link>
+              <Link to={`/ordersAdmin`}>Administracion Ventas </Link>
+              <Link to={`/createProduct`}>Create Product </Link>
             </div>
           )
           }

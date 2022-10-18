@@ -1,5 +1,9 @@
 .cards {
-  min-height: 76vh;
+	height: 75.9vh;
+    margin: auto;
+    margin-top: 27px;
+    width: 80%;
+    overflow-y: scroll;
 }
 
 .ButtonOrdersUsers {
@@ -10,13 +14,13 @@
 	border:1px solid #c584f3;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color:rgb(255, 2, 158);
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #9752cc;
+	text-shadow:0px 1px 0px #9752cc7b;
 }
 .ButtonOrdersUsers:hover {
 	background:linear-gradient(to bottom, #a20dbd 5%, #c123de 100%);
@@ -25,4 +29,7 @@
 .ButtonOrdersUsers:active {
 	position:relative;
 	top:1px;
+}
+#pagination-first-page{
+	color: #a20dbd;
 }

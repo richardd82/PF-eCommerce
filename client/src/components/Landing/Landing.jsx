@@ -14,24 +14,24 @@ function Landing() {
         showIndicators={true}
         showThumbs={false}
         showArrows={true}
-        width={"100%"}		
+        width={"100%"}
         className="virtualBody2"
         emulateTouch={true}
         infiniteLoop={true}
         transitionTime={500}
         autoPlay={true}
-		dynamicHeight={false}
+        dynamicHeight={false}
       >
         <div>
-          <img src={descuento1} className="imgCarrousel"/>
+          <img src={descuento1} className="imgCarrousel" />
           {/*<p className="legend">Legend 1</p>*/}
         </div>
         <div>
-          <img src={descuento2} className="imgCarrousel"/>
+          <img src={descuento2} className="imgCarrousel" />
           {/*<p className="legend">Legend2</p>*/}
         </div>
         <div>
-          <img src={descuento3} className="imgCarrousel"/>
+          <img src={descuento3} className="imgCarrousel" />
           {/*<p className="legend">Legend 3</p>*/}
         </div>
       </Carousel>

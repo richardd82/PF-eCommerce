@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import swal from "sweetalert";
 import { getAllFavs } from "../../redux/actions";
-import styles from "./Favs.module.css";
+import "./favs.css";
 
 //LE LLEGA EL ID DEL FAVORITO
 export default function Favs({ id }) {
@@ -31,7 +31,7 @@ export default function Favs({ id }) {
   const handleClickAddFav = async () => {
     if (user_login.id !== undefined && user_login.id !== false) {
       await axios
-        .post("http://localhost:3001/favorites", {
+        .post(`${process.env.REACT_APP_URL_BACK}/favorites`, {
           userId: user_login.id,
           productId: id,
         })
@@ -58,7 +58,7 @@ export default function Favs({ id }) {
   const handleClickRemoveFav = async () => {
     if (user_login.id !== undefined && user_login.id !== false) {
       await axios
-        .delete("http://localhost:3001/favorites", {
+        .delete(process.env.REACT_APP_URL_BACK + "/favorites", {
           data: {
             userId: user_login.id,
             productId: id,
@@ -101,14 +101,14 @@ export default function Favs({ id }) {
       {loading == false ?
         <div>
           {!user_login.id || !isInFav ? (
-            <button className={styles.btnFavs} onClick={handleClickAddFav}>
+            <button className="btnFavs" onClick={handleClickAddFav}>
               <span role="img" aria-label="Fav">
                 {" "}
                 Add To Favs{" "}
               </span>
             </button>
           ) : (
-            <button className={styles.btnFavs} onClick={handleClickRemoveFav}>
+            <button className="btnFavs" onClick={handleClickRemoveFav}>
               <span role="img" aria-label="Fav">
                 {" "}
                 Remove From Favs{" "}
