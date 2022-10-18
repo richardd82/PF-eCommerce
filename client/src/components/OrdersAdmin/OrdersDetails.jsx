@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import styles from "./OrdersDetails.module.css";
 import { withRouter } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import Review from "./Review";
 //import { withRouter } from "react-router-dom";
 
 class OrdersDetails extends Component {
@@ -26,6 +25,7 @@ class OrdersDetails extends Component {
           <div className={styles.cards}>
             <div className={styles.headerOrder}>
               <p>Cod ID: {orders[0].id}</p>
+              <p>User ID: {orders[0].userId}</p>
               <p>Creation Date: {(new Date (orders[0].createdAt)).toLocaleString()}</p>
               <p>ID Paypal: {orders[0].idpurchase}</p>
               <p>State Order: {orders[0].stateOrder}</p>
@@ -43,17 +43,6 @@ class OrdersDetails extends Component {
                       <p>Amount:{c.amount}</p>
                       <p>Value: {c.value}</p>
                       <p>Total: {(c.amount * c.value).toFixed(2)} </p>
-                      {Stocks!==undefined && Stocks.length>0 && Stocks[0].comment==false &&
-                      <button className={styles.btnReview}>
-                        {
-                          <Review
-                            order={c}
-                            orderId={orders[0].id}
-                            index={index}
-                            allStocks={Stocks}
-                          />
-                        }
-                      </button>}
                     </div>
                   </div>
                 ))}

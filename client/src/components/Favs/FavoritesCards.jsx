@@ -10,7 +10,7 @@ export default function FavoritesCards ({id, name, image, user_login}) {
     const handleClickRemoveFav = async () => {
         if(user_login.id!==undefined && user_login.id !== false) {
             
-            await axios.delete("http://localhost:3001/favorites", { data: {
+            await axios.delete(`${process.env.REACT_APP_URL_BACK}/favorites`, { data: {
                 userId: user_login.id,
                 productId: id
             }}

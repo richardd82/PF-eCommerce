@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./details.css";
-import CARRY_LOCALHOST from "../Globales";
 import swal from "sweetalert2";
  import FeedBack from "../Orders/FeedBack";
 import Favs from "../Favs/Favs";
