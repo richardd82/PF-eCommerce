@@ -70,7 +70,7 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap, Pointer, Adress, SelectT
             alignItems="center"
             justifyItems="center"
         >
-            <Box h='580px' w='1100px'>
+            <Box  className="boxGmap">
                 {/* Google Map Box */}
                 <GoogleMap
                     center={center}

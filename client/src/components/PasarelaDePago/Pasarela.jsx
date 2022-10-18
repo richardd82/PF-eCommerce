@@ -168,7 +168,7 @@ function Pasarela() {
           <Thanks />}
 
         {Validacion2 &&
-          <button className='buttonContinue btnGlobal' onClick={() => ClickContinue()}>Continue</button>}
+          <button className='buttonContinue btnGlobal btnContinueReference' onClick={() => ClickContinue()}>Continue</button>}
         {page > 1 && page != 4 &&
           <button className='buttonPreview btnGlobal' onClick={() => ClickPreview()}>Preview</button>}
       </div>

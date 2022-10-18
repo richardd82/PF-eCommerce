@@ -3,7 +3,7 @@
     flex-direction: row;
     align-content: center;
     justify-content: center;
-    height: 80.1vh;
+    height: 79vh;
 }
 .Pasarela {
     position: relative;
@@ -26,15 +26,18 @@
 .buttonContinue {
     width: 160px;
     margin: auto;
-    margin-top: 539px;
-    margin-left: 300px;
+    margin-top: 450px;
+    margin-left: 40px;
     position: absolute;
 }
 
 .buttonPreview {
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    margin-top: 450px;
+    margin-left: -150px;
+}
+.btnContinueReference{
+    margin-left: 200px;
 }
 /* .css-1kvipzo{
     
@@ -59,4 +62,41 @@
     background-color: rgb(204, 131, 228);
     padding: 15px;
     border-radius: 5px;
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+    .BoxPasarela {
+        height: 76.3vh;
+    }
+    .ListaPasarela{
+        width: 80%;
+        margin-top: 10px;
+    }
+    .Pasarela{
+        margin-top: 95px;
+    }
+    .buttonContinue {
+        width: 160px;
+        transform: scale(.7);
+        margin-top: 310px;
+        margin-left: 180px;
+    }
+    .buttonPreview {
+        position: absolute;
+        margin-top: 310px;
+        margin-left: -150px;
+        transform: scale(.7);
+    }
+    /* .btnContinueReference{
+        margin-bottom: 20px;
+        margin-left: 200px;
+    } */
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
+
+  }
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2161px)  {
+
 }

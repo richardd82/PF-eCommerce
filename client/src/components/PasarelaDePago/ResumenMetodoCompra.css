@@ -1,5 +1,10 @@
+.test{
+  margin-top: -100px;
+  height: 50vh;
+  overflow-y: scroll;
+}
 .componentContainer {
-  min-height: 75vh;
+  height: 100%;
 }
 
 .container {
@@ -25,4 +30,22 @@
 
 .btnPayPasarela:hover {
   background-color: #f51ce7;
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+  .test{
+    margin-top: -80px;
+    height: 50vh;
+  }
+  .MuiTableCell-root{
+    font-size: .7em;
+  }
+}
+/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (min-width: 1367px) and (max-width: 1728px)  {
+
+}
+/*----------Media Queries (HIGH DEVICES) ----------*/
+@media screen and (min-width: 2040px) and (max-width: 2161px)  {
+
 }

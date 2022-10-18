@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createComment, updateReview, getOrders, searchNameProductID } from "../../redux/actions";
+import {
+  createComment,
+  updateReview,
+  getOrders,
+  searchNameProductID,
+} from "../../redux/actions";
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -17,13 +22,11 @@ class Review extends Component {
   }
 
   componentDidMount() {
-    this.props.searchNameProductID(this.props.order.productId)
+    this.props.searchNameProductID(this.props.order.productId);
   }
   componentWillUnmount() {
-    this.props.searchNameProductID(0)
+    this.props.searchNameProductID(0);
   }
-
-
 
   HandleReview() {
     this.setState({
@@ -172,12 +175,7 @@ class Review extends Component {
       <div>
         {order.comment == false && this.state.disabled == false && (
           <div>
-            <label
-              className={styles.labelReview}
-              onClick={() => this.HandleReview()}
-            >
-              Create Review
-            </label>
+           <div onClick={() => this.HandleReview()}> <label className={styles.labelReview}>Create Review</label> </div>
             <Modal
               className={styles.containerModal}
               open={this.state.OpenModal}
@@ -198,15 +196,17 @@ class Review extends Component {
                   <img
                     src={`${order.image}`}
                     alt="asd"
-                    style={{ maxHeight: "70%", maxWidth: "70%" }}
+                    // style={{ maxHeight: "70%", maxWidth: "70%" }}
                   />
                 </Fade>
 
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title" variant="h5" component="h5">
                   {productsId.length > 0 ? productsId[0].name : "Loading"}
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {productsId.length > 0 ? productsId[0].description : "Loading"}
+                <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+                  {productsId.length > 0
+                    ? productsId[0].description
+                    : "Loading"}
                 </Typography>
 
                 <Rating
@@ -217,6 +217,7 @@ class Review extends Component {
                 />
                 <TextField
                   id="outlined-multiline-static"
+                  className="txtBoxReview"
                   label="Your comment"
                   multiline
                   rows={4}
