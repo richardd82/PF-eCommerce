@@ -10,7 +10,7 @@ import OrdersDetails from "./components/Orders/OrdersDetails";
 import Orders from"./components/Orders/Orders2.jsx";
 import OrdersAdmin from "./components/OrdersAdmin/OrdersAdmin.jsx";
 import ProductsAdmin from "./components/ProductsAdmin/ProductsAdmin.jsx";
-
+import ProfileUserAdmin from "./components/UserAdmin/Profile.jsx";
 
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
 // import Formulario from "./components/Formulario/Formulario";
@@ -30,8 +30,9 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
-import EditProfileFormulary from "./components/Profile/editProfileFormulary.jsx";
+import EditProfileFormulary from "./components/Profile/EditProfileFormulary.jsx";
 import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
+import OrdersDetailsAdmin from "./components/OrdersAdmin/OrdersDetails.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
@@ -102,10 +103,12 @@ function App() {
          
           <Route exact path="/pasarela"><Pasarela/></Route>
           <Route path="/OrderDetails/:id" component={OrdersDetails}/>
+          <Route path="/orderAdminDetail/:id" component={OrdersDetailsAdmin}/>
           <Route path="/OrdersUser" component={Orders}/>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
-          <Route path={"/productEdit/:id"} component={ModifyItem} />
+          <Route path={"/productEdit/:id"} component={ModifyItem}/>
+          <Route exact path="/userAdminDetail/:id" component={ProfileUserAdmin} />
                      {/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />

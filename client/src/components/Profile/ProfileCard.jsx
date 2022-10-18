@@ -1,7 +1,7 @@
 import React from "react";
 import "./profileCard.css";
 import { Link } from "react-router-dom";
-import  EditProfileFormulary  from "./editProfileFormulary";
+import  EditProfileFormulary  from "./EditProfileFormulary";
 /** Debemos agregar Componente para poder modificar El perfil de la persona usando el boton de 
   abajo 
  */

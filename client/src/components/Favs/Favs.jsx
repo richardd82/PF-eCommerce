@@ -31,7 +31,7 @@ export default function Favs({ id }) {
   const handleClickAddFav = async () => {
     if (user_login.id !== undefined && user_login.id !== false) {
       await axios
-        .post(process.env.REACT_APP_URL_BACK + "/favorites", {
+        .post(`${process.env.REACT_APP_URL_BACK}/favorites`, {
           userId: user_login.id,
           productId: id,
         })

@@ -511,7 +511,7 @@ export function putUser(input, id) {
         payload: res.data,
       });
     } catch (error) {
-      alert("Already exist or some trouble during creation! Come back later");
+      return(error);
     }
   };
 }
@@ -626,6 +626,7 @@ export function put_User_Login(newLoggedUser) {
     }
   };
 }
+
 
 
 export function ObtenerLogin() {
