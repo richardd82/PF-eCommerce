@@ -40,6 +40,16 @@
    color: rgb(152, 40, 204);
    padding: 10px;
 }
+.btnEditAddressContainer{
+   position: absolute;
+   right: 630px;
+   top: 420px;
+}
+.btnEditAddress{
+   transform: scale(0.5) !important;
+   width: 200px;
+   font-size: 16px;
+}
 .error {
   color: rgb(255, 0, 166);
   margin-top: 45px;
