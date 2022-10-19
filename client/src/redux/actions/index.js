@@ -511,7 +511,7 @@ export function putUser(input, id) {
         payload: res.data,
       });
     } catch (error) {
-      alert("Already exist or some trouble during creation! Come back later");
+      return(error);
     }
   };
 }
@@ -628,6 +628,7 @@ export function put_User_Login(newLoggedUser) {
 }
 
 
+
 export function ObtenerLogin() {
   let Data = JSON.parse(localStorage.getItem(USER_ID));
   console.log(Data)
@@ -674,6 +675,22 @@ export function CreateNewProduct(payload) {
     }
   }
 }
+
+
+export async function CrearImagenCloudinary(imageData,name) {
+  console.log("Entra")
+    try {
+      let clouData = await axios.post(`${process.env.REACT_APP_URL_BACK}/cloudinary/upload`, { file: imageData, folder: "Products", name })
+      console.log(clouData);
+      return clouData;
+    } catch (e) {
+      console.log(e);
+    }
+}
+
+
+
+
 
 export async function register (payload) {
   const resp = await axios.post(REACT_APP_URL_BACK + '/auth/register', payload)

@@ -1,53 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,600&display=swap');
-
 .productContainer {
-   margin: 15px auto;
    min-width: 500px;
    height: 50vh;
-   background-size: contain;
+   background-size:contain;
    color: black;
    padding: 15px;
-   display: flexbox;
+   margin: 15px auto;
+   display:flexbox;
    font-size: 22px;
    gap: 5px;
-   align-items: stretch;
+   align-items:stretch;
    flex-direction: column;
    border-radius: 15px;
    -webkit-box-shadow: 5px 5px 50px 5px #000000;
    box-shadow: 5px 5px 50px 5px #575555;
    border-width: 0px;
-   letter-spacing: initial;
-   font-family: 'Poppins', cursive;
-}
+   letter-spacing:initial;
+   font-family:serif;
 
+
+}
 .titulo {
-   color: #CCC;
-   display: block;
-   font-size: 2.1em;
-   min-height: 20px;
-   padding: 0px 20px;
-   position: relative;
-   cursor: pointer;
-   font-weight: 900;
-   transition: all .15s ease-out;
-   background-color: transparent;
-   font-family: 'Poppins', cursive;
-   font-size: 30px;
-   color: var(--glow-spread-color);
-   text-shadow: 1px 2px 3px rgb(88, 1, 122);
-   text-transform: uppercase;
-   margin: 5px 5px 5px;
-   text-align: center;
+    color: #CCC;
+    display: block;
+    font-size: 2.1em;
+    min-height: 20px;
+    padding: 15px 20px;
+    position: relative;
+    cursor: pointer;
+    font-weight:900;
+    transition: all .15s ease-out;
+    background-color: #ededed;
+    font-family: Montserrat;
+    font-size: 30px;
+    color: #444;
+    text-transform: uppercase;
+    margin: 5px 5px 30px;
+    background-color: #ededed;
 }
 
 .informacionContainer {
-   margin: auto;
    width: 80%;
-   margin-top: 38px;
+   margin-top: 45px;
    display: flex;
-   justify-content: space-evenly;
-   font-family: 'Poppins', cursive;
-   margin-bottom: 5px;
+   justify-content:space-evenly;
+   font-family:serif;
 }
 
 .photoContainer {
@@ -62,8 +58,7 @@
 
 .InforContainerText {
    display: flex;
-   flex-direction: column;
-   width: 600px;
+   flex-direction:column;
 }
 
 .InforContainerText p b {
@@ -72,7 +67,7 @@
 }
 
 .InforContainerText p {
-   margin: 10px 8px;
+   margin:10px 8px;
 }
 
 .buttonModify {
@@ -86,13 +81,13 @@
    width: 150px;
    height: 44px;
    background-color: #1c1c1c;
-   border: 2px solid #ef10ef;
+   border: 2px solid #efb810;
    border-radius: 4px;
    font-size: 1.4rem;
    font-weight: bold;
    text-align: justify;
-   font-family: 'Poppins', cursive;
-   color: #ef10ef;
+   font-family: "DM-Sans", sans-serif;
+   color: #efb810;
    margin: initial;
 }
 
@@ -103,20 +98,20 @@
    height: 40px;
    background-image: url("../image/confi-icon.png");
    background-size: contain;
-   align-items: flex-start;
+   align-items:flex-start;
 
    background-repeat: no-repeat;
 }
 
 .buttonModify button:hover {
-   background-color: #ef10ef;
+   background-color: rgb(235, 184, 44);
    cursor: pointer;
    color: #1c1c1c;
    border: 1px solid #1c1c1c;
    align-items: center;
 }
 
-.buttonChanImg {
+.buttonChanImg{
 
    padding: 10px 15px;
    outline: none;
@@ -128,64 +123,34 @@
    font-size: 1.2rem;
    margin-right: 1px;
    margin-bottom: 2px;
-
+   
 }
-
-.buttonChanImg:hover {
+.buttonChanImg:hover{
    background-color: #05b405;
 
 
 }
 
 
-.buttonChangePass {
-   padding: 10px 15px;
-   outline: none;
-   cursor: pointer;
-   background-color: #008000;
-   color: white;
-   border-radius: 5px;
-   border: none;
-   font-size: 1.2rem;
-   margin-bottom: 2px;
-   margin-left: 1px;
-
+.buttonChangePass{
+  padding: 10px 15px;
+  outline: none;
+  cursor: pointer;
+  background-color: #008000;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  margin-left: 1px;
+  
 
 }
-
-.buttonChangePass:hover {
+.buttonChangePass:hover{
    background-color: #05b405;
 
 }
 
-/*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (max-width: 1366px) {
-   .profileCardContainer{
-      width: 100%;
-      margin: auto;
-      margin-left: 21%;
-   }
-   .productContainer {
-      height: 68vh;
-      margin-top: -40px;
-   }
-   .titulo {
-      padding: 10px;
-      margin-bottom: 0px;
-   }
-   .buttonModify{
-      margin-top: 0px;
-   }
-   .informacionContainer{
-      margin-top: 15px;
-   }
-}
-
-/*----------Media Queries (MEDIUM DEVICES) ----------*/
-@media screen and (min-width: 1367px) and (max-width: 1728px) {}
-
-/*----------Media Queries (HIGH DEVICES) ----------*/
-@media screen and (min-width: 2040px) and (max-width: 2161px) {}
 
 
 

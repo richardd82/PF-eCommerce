@@ -247,8 +247,8 @@ router.put("/:userId", async (req, res, next) => {
 router.put("/put/:id", async (req, res, next) => {
    try {
       const { id } = req.params;
-      const { name, lastName, address, phone, email, image} = req.body;
-      console.log({ name, lastName, address, phone });
+      const { name, lastName, address, phone, email, image,lat,lng} = req.body;
+      console.log({ name, lastName, address, phone,lat,lng });
       const toEdit = await User.update(
          {
             name,
@@ -256,12 +256,14 @@ router.put("/put/:id", async (req, res, next) => {
             address,
             phone,
             email,
-            image
+            image,
+            address,
+            lat,
+            lng
          },
          { where: { id } }
       );
-      res.send("done");
-      console.log("chau");
+      res.send("The data was modified");
    } catch (error) {
       next(error);
    }

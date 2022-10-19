@@ -31,7 +31,7 @@ export default function Favs({ id }) {
   const handleClickAddFav = async () => {
     if (user_login.id !== undefined && user_login.id !== false) {
       await axios
-        .post(process.env.REACT_APP_URL_BACK + "/favorites", {
+        .post(`${process.env.REACT_APP_URL_BACK}/favorites`, {
           userId: user_login.id,
           productId: id,
         })
@@ -101,14 +101,14 @@ export default function Favs({ id }) {
       {loading == false ?
         <div>
           {!user_login.id || !isInFav ? (
-            <button className="btnFavs" onClick={handleClickAddFav}>
+            <button className="btnFavs btnDetailsBack" onClick={handleClickAddFav}>
               <span role="img" aria-label="Fav">
                 {" "}
                 Add To Favs{" "}
               </span>
             </button>
           ) : (
-            <button className="btnFavs" onClick={handleClickRemoveFav}>
+            <button className="btnFavs btnDetailsBack" onClick={handleClickRemoveFav}>
               <span role="img" aria-label="Fav">
                 {" "}
                 Remove From Favs{" "}
