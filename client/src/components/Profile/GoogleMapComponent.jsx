@@ -22,7 +22,7 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap,
     Pointer, address, SelectTypeSearch, PlaceRef, coordinates, SelectAdress, myAdress,
     map, SearchByBox, handleModalClose, handleSetAdress, setCoordinates,input}) {
 
-    var center = { lat: 4.520617, lng: -74.047162 }
+    var center = { lat: 4.640487, lng: -74.079624 }
 
     if (myAdress.name != "" && myAdress.address != "" && myAdress.address.lat!==null) {
         center = myAdress.address;
