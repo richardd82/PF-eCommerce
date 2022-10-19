@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginAction, put_User_Login, LoginGoogleUser } from "../../redux/actions";
+import { loginAction, put_User_Login, LoginGoogleUser,getAllUsers } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
 const { REACT_APP_URL_BACK } = process.env;
 import style from "./Login.module.css";
@@ -29,6 +29,7 @@ export default function Login(props) {
   const userLog = useSelector((state) => state.user_login);
   //const [errors, setErrors] = useState({})
   //const [user, setUser] = useState(null)
+  const allUsers = useSelector((state) => state.allUsers);
   const { googleLogin, user } = useAuth()
 
   const [input, setInput] = useState({
@@ -37,6 +38,7 @@ export default function Login(props) {
   })
 
   useEffect(() => {
+    dispatch(getAllUsers())
     if (userLog !== false && userLog !== "Loading") {
       console.log("Entra aca")
       props.close(false)
@@ -78,8 +80,8 @@ export default function Login(props) {
     props.close(false)
     history.push("/register")
   }
-
-
+console.log(allUsers)
+ console.log(user)
   const handleLogin = async (e) => {
     e.preventDefault()
 
@@ -93,8 +95,17 @@ export default function Login(props) {
           title: `User or password invalid`,
           icon: "warning",
         });
-      } else {
-        console.log("Entra aca")
+      } else if (user.userForToken.typeUser === "Banned"){
+        Swal.fire({
+          title: `Your user has been banned`,
+          showDenyButton: false,
+          showCancelButton: false,
+          confirmButtonText: "Ok",
+          icon: "error",
+      })
+      }
+        else{
+        console.log("Entra aca", user)
         props.close(false)
         Swal.fire({
           title: `User successfully sign in`,
