@@ -1,13 +1,13 @@
 /* import "./App.css"; */
 import { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthProvider } from "./context/authContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Details from "./components/Details/Details";
 import Landing from "./components/Landing/Landing";
 import OrdersDetails from "./components/Orders/OrdersDetails";
-import Orders from"./components/Orders/Orders2.jsx";
+import Orders from "./components/Orders/Orders2.jsx";
 import OrdersAdmin from "./components/OrdersAdmin/OrdersAdmin.jsx";
 import ProductsAdmin from "./components/ProductsAdmin/ProductsAdmin.jsx";
 import ProfileUserAdmin from "./components/UserAdmin/Profile.jsx";
@@ -30,13 +30,13 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
-import EditProfileFormulary from "./components/Profile/EditProfileFormulary.jsx";
+import EditProfileFormulary from "./components/Profile/editProfileFormulary.jsx";
 import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
 import OrdersDetailsAdmin from "./components/OrdersAdmin/OrdersDetails.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";
 // import GoogleLogin from "react-google-login";
 // import Login from "./components/Login/Login";
- //import payment from "./components/Pago/Pay";
+//import payment from "./components/Pago/Pay";
 // import ModifyItem from "./components/ModifyITem/ModifyItem";
 // import UsersAdmin from "./components/UsersAdmin/UsersAdmin";
 // import AdminOrders from "./components/AdminOrders/AdminOrders.tsx";
@@ -54,18 +54,19 @@ import OrdersDetailsAdmin from "./components/OrdersAdmin/OrdersDetails.jsx";
 // import styles from "./App.module.css";
 // import AdminDetailOrder from "./components/AdminOrders/AdminDetailOrder.jsx";
 import Pasarela from "./components/PasarelaDePago/Pasarela";
+import Loader from "./components/Loader/Loader.jsx";
 
 
 
 function App() {
-  const dispatch = useDispatch()
-  const user_login = useSelector((state) => state.user_login);
+	const dispatch = useDispatch()
+	const user_login = useSelector((state) => state.user_login);
 
-  useEffect(() => {
-    if (user_login === "Loading"){
-      dispatch(ObtenerLogin())
-    }
-  }, [])
+	useEffect(() => {
+		if (user_login === "Loading") {
+			dispatch(ObtenerLogin())
+		}
+	}, [])
 
 	return (
 		<div >
@@ -80,46 +81,38 @@ function App() {
 					</Route>
 					{/* <Route exact path="/gestionProducts">
 						<ComponentProductsGestion />{" "} */}
-						{/*Se pone asi porque los componentes estan creadas como Clase*/}
-					 {/* </Route> */}
+					{/*Se pone asi porque los componentes estan creadas como Clase*/}
+					{/* </Route> */}
 					<Route exact path="/products/:gender">
-						<ComponentProducts />{" "} 
-						{/*Se pone asi porque los componentes estan creadas como Clase*/} 
+						<ComponentProducts />{" "}
+						{/*Se pone asi porque los componentes estan creadas como Clase*/}
 					</Route>
-					
+
 					<Route exact path="/register">
 						<Register />
 					</Route>
 					<Route exact path="/login">
-						<Login/>
+						<Login />
 					</Route>
-					<Route exact path="/forgot" component={Forgot}/>
-					<Route path="/reset/:token"  component={Reset}/>
-
-          <Route exact path="/createProduct">	<CreateProduct /></Route>
-          <Route path="/usersAdmin" component={UserAdmin}/>
-          <Route path="/ordersAdmin" component={OrdersAdmin}/>
-          <Route path="/productsAdmin" component={ProductsAdmin}/>
-         
-          <Route exact path="/pasarela"><Pasarela/></Route>
-          <Route path="/OrderDetails/:id" component={OrdersDetails}/>
-          <Route path="/orderAdminDetail/:id" component={OrdersDetailsAdmin}/>
-          <Route path="/OrdersUser" component={Orders}/>
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
-          <Route path={"/productEdit/:id"} component={ModifyItem}/>
-          <Route exact path="/userAdminDetail/:id" component={ProfileUserAdmin} />
-                     {/*
+					<Route exact path="/forgot" component={Forgot} />
+					<Route path="/reset/:token" component={Reset} />
+                    
+					<Route exact path="/pasarela"><Pasarela /></Route>
+					<Route path="/OrderDetails/:id" component={OrdersDetails} />
+					<Route path="/OrdersUser" component={Orders} />
+					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
+					{/*
 					<Route exact path="/profile" component={Profile} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/createProduct" component={Formulario} />{" "} */}
 					{/*Se pone asi porque los componentes estan creadas como Funcion*/}
-          <Route path={"/favorites"} component={Favorites}></Route>
+					<Route path={"/favorites"} component={Favorites}></Route>
 					<Route exact path="/about" component={About}></Route>
-          <Route path="/carry">
+					<Route path="/carry">
 						<Carry />{" "}
 					</Route>
-          <Route exact path="/contact" component={Contact}></Route>
+					<Route exact path="/contact" component={Contact}></Route>
 					{/*  
 					<Route exact path="/LoginGoogle" component={LoginGoogle} />
 					<Route exact path="/register" component={Register} />
@@ -139,10 +132,22 @@ function App() {
 					<Route exact path="/usersAdmin" component={UsersAdmin} />
 					<Route exact path="/modifyProduct/:id" component={ModifyItem} />
 					<Route component={ErrorPage}></Route> */}
-          {/* Componentes recien generados */}
+					{/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
+
+					{(user_login==="Loading" || (user_login!==false && user_login.typeUser==="Admin"))?
+					(<Switch>
+					<Route exact path="/createProduct"> {user_login==="Loading" ? Loader : <CreateProduct />}</Route>
+					<Route path="/usersAdmin" component={user_login==="Loading" ? Loader : UserAdmin} />
+					<Route path="/ordersAdmin" component={user_login==="Loading" ? Loader : OrdersAdmin} />
+					<Route path="/productsAdmin" component={user_login==="Loading" ? Loader : ProductsAdmin} />
+					<Route path="/orderAdminDetail/:id" component={user_login==="Loading" ? Loader : OrdersDetailsAdmin} />
+					<Route exact path="/userAdminDetail/:id" component={user_login==="Loading" ? Loader : ProfileUserAdmin} />
+					<Route path={"/productEdit/:id"} component={user_login==="Loading" ? Loader : ModifyItem} />
+					</Switch>):<Redirect to="/"/>}
+
 				</Switch>
-			<Footer />
+				<Footer />
 			</AuthProvider>
 		</div>
 	);

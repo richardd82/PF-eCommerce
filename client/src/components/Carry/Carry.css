@@ -116,6 +116,11 @@
   }
 }
 
+.emptyCart {
+  height: 400px;
+  width: 500px;
+}
+
 
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (min-width: 1367px) and (max-width: 1728px) {

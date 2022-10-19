@@ -16,3 +16,9 @@
     height: 100%;
     overflow-y: scroll;
 }
+
+.emptyHeart {
+    height: 300px;
+    width: 400px;
+    margin-left: 32%;
+  }
