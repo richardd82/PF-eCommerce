@@ -6,7 +6,7 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import Paginated from "../Paginated Reutilizable/Paginated_Reutilizable.jsx";
 import stylePaginated from "./Paginated.module.css";
-import styles from "./FeedBack.module.css";
+import "./feedBack.css";
 
 export default function FeedBack({ productId, products }) {
   const dispatch = useDispatch();
@@ -70,8 +70,8 @@ export default function FeedBack({ productId, products }) {
   }
 
   return (
-    <div className={styles.containerFeedback}>
-      <Paginated
+    <div className="containerFeedback">
+      {/* <Paginated
         stylePaginated={stylePaginated}
         NumMaxtarg={10}
         changePaginatedPage={(e) => changePaginatedPage(e)}
@@ -91,16 +91,16 @@ export default function FeedBack({ productId, products }) {
             }
           />
         </Box>
-      </div>
+      </div> */}
 
-      <div className={""}>
-        <h1 className={styles.title}>Customers Review:</h1>
+      <div className="feedSubContainer">
+        <h1 className="titleCreate">Customers Review:</h1>
         <br />
-        <div className={styles.flexContainer}>
+        <div className="flexContainer">
           {paginated.productsViewPage.length ? (
             paginated.productsViewPage.map((e) => {
               return (
-                <div className={styles.boxprueba} key={e.id}>
+                <div className="boxprueba" key={e.id}>
                   <Box>
                     <Rating
                       name="text-feedback"

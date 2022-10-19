@@ -31,21 +31,28 @@ export default function FavoritesCards({ id, name, image, user_login }) {
   };
 
   return (
-    <div>
-      <div>
+    // <div>
+    <div className="cardContainerFavs">
+      <div className="favProductContainer">
         <Link to={`/details/${id}`}>
           <img
+            className="imgFavs"
             src={`${image}`}
             alt="Image Not Found"
             width="140"
             height="150"
           />
-          <span>{name}</span>
         </Link>
-        {/* <div> */}
-          <button onClick={handleClickRemoveFav}>Delete</button>
-        {/* </div> */}
+      </div>
+      <div className="nameProductFavs">
+        <span>{name}</span>
+      </div>
+      <div className="deleteFavs">
+        <button className="btnGlobal" onClick={handleClickRemoveFav}>
+          Delete
+        </button>
       </div>
     </div>
+    // </div>
   );
 }
