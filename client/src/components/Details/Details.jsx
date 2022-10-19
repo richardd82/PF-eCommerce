@@ -227,13 +227,14 @@ export default function Details(props) {
           <p>LOADING...</p>
         )}
       </div>
-      <div className="btnBackFav">
-         <Favs id={props.match.params.id} key="id" />
-      </div>
-      <div>
+      
+      <div className="feedbackContainer">
         <FeedBack productId={props.match.params.id} products={producto} />
       </div>
       <div>
+        <div>
+         <Favs id={props.match.params.id} key="id" />
+      </div>
         <Link to={`/products/${genderPrevius}`}>
           <button className="btnDetailsBack">Go Back</button>
         </Link>

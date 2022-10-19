@@ -200,7 +200,9 @@ const EditProfileFormulary = () => {
                             <input value={input.address} type="text" className="form-control"
                                 placeholder="Add your address" name="address" disabled
                             />
-                            <button onClick={(e) => handleOpen(e)}>Edit address</button>
+                            <div className="btnEditAddressContainer">
+                            <button className="btnGlobal btnEditAddress" onClick={(e) => handleOpen(e)}>Edit address</button>
+                            </div>
                         </div>
                         <div>
                             <input value={input.image} type="string" className="form-control"

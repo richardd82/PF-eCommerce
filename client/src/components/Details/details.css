@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 99%;
-    height: 73.9vh;
+    height: 72.8vh;
 }
 
 .imageContainer {
@@ -14,6 +14,7 @@
 }
 
 .imageContainer img {
+    margin-left: 0px;
     border: .25em solid var(--glow-color);
     border-radius: 1em;
     box-shadow: 0 0 1em .25em var(--glow-color),
@@ -39,13 +40,13 @@
 }
 
 .cardDetail {
-    width: 25%;
+    width: 20%;
+    margin-right: 50px;
     height: fit-content;
     --border-radius: 15px;
     --border-width: 4px;
-    appearance: none;
     position: relative;
-    padding: 1em 2em;
+    padding: 0px 0px 0px 10px;
     border: 0;
     background: rgba(19, 5, 22, 0.795);
     font-size: 18px;
@@ -158,7 +159,7 @@
 
 
 .btnDetailsBack {
-    margin-left: 40%;
+    margin-left: -10%;
     border: .25em solid var(--glow-color);
     padding: 1em 3em;
     color: var(--glow-color);
@@ -173,6 +174,7 @@
     text-shadow: 0 0 .5em var(--glow-color);
     position: relative;
     transition: all 0.3s;
+    transform: scale(.7);
 }
 
 .btnDetailsBack::after {
@@ -195,6 +197,9 @@
     box-shadow: 0 0 1em .25em var(--glow-color),
         0 0 4em 2em var(--glow-spread-color),
         inset 0 0 .75em .25em var(--glow-color);
+}
+.feedbackContainer{
+    width: 600px;
 }
 @media screen and (max-width: 1366px) {
     .cardDetailMainContainer{
@@ -219,6 +224,11 @@
     }
     .SizeOnSale, .SizeSoldOut{
         margin-top: 10px !important;
+    }
+}/*----------Media Queries (MEDIUM DEVICES) ----------*/
+@media screen and (max-width: 1366px) {
+    .cardDetailMainContainer {
+        height: 69.8vh;
     }
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
