@@ -30,7 +30,7 @@ import Contact from "./components/Contact/Contact";
 import { ObtenerLogin } from "./redux/actions";
 import UserAdmin from "./components/UserAdmin/userAdmin.jsx";
 import Profile from "./components/Profile/Profile";
-import EditProfileFormulary from "./components/Profile/editProfileFormulary.jsx";
+import EditProfileFormulary from "./components/Profile/EditProfileFormulary2.jsx";
 import ModifyItem from "./components/ModifyITem/ModifyItem.jsx";
 import OrdersDetailsAdmin from "./components/OrdersAdmin/OrdersDetails.jsx";
 // import ComponentProductsGestion from "./components/ComponentProductsGestion/ComponentProductsGestion";

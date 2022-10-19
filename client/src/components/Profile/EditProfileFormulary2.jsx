@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUsers, getAllUsers, putUser, ObtenerLogin } from "../../redux/actions";
+import { deleteUsers, getAllUsers, putUser, ObtenerLogin, ObtenerImagenes } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import GoogleMapAdress from "./GoogleMapAdress";
 import Swal from "sweetalert2";
-
+import { TbWorldDownload } from "react-icons/tb";
+import { IconContext } from "react-icons";
+import { MdPhotoCamera } from "react-icons/md";
+import Avatar from "./Avatares";
 
 function validate(input, allUsers) {
 
@@ -46,21 +49,38 @@ const EditProfileFormulary = () => {
     const [myAdress, setMyAdress] = useState({ name: "", address: "" })
     const history = useHistory();
     const allUsers = useSelector((state) => state.allUsers);
+    const Avatares = useSelector((state) => state.imagesCloudinary);
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const user_login = useSelector((state) => state.user_login);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModalWorld, setOpenModalWorld] = useState(false);
+    const [openModalAvatar, setOpenModalAvatar] = useState(false);
+
+    useEffect(() => {
+        dispatch(ObtenerImagenes("Avatares"));
+    }, [])
 
 
     function handleOpen(e) {
         e.preventDefault();
-        setOpenModal(true);
+        setOpenModalWorld(true);
     }
 
     function handleModalClose(e) {
         e.preventDefault();
-        setOpenModal(false);
+        setOpenModalWorld(false);
     }
+
+    function handleOpenAvatar(e) {
+        e.preventDefault();
+        setOpenModalAvatar(true);
+    }
+
+    function handleModalCloseAvatar(e) {
+        e.preventDefault();
+        setOpenModalAvatar(false);
+    }
+
 
     const [input, setInput] = useState({
         email: user_login.email,
@@ -80,9 +100,14 @@ const EditProfileFormulary = () => {
     }, [dispatch]);
 
 
-    const id = user_login.id;
 
-    console.log(user_login);
+    function handleChangeImage(image) {
+        setInput({
+            ...input,
+            image: image
+        })
+        setOpenModalAvatar(false);
+    }
 
     function handleChange(e) {
         setInput({
@@ -104,7 +129,7 @@ const EditProfileFormulary = () => {
             lat: MyAdress.address.lat,
             lng: MyAdress.address.lng,
         })
-        setOpenModal(false);
+        setOpenModalWorld(false);
     }
 
 
@@ -112,7 +137,7 @@ const EditProfileFormulary = () => {
         e.preventDefault();
         console.log(input);
 
-        dispatch(putUser(input, id)).then((e) => {
+        dispatch(putUser(input, user_login.id)).then((e) => {
             Swal.fire({
                 title: e.payload,
                 position: "center",
@@ -126,8 +151,7 @@ const EditProfileFormulary = () => {
         }).catch(e => console.log(e));
     }
 
-    if (input.loading === true && user_login !== false && user_login !== "Loading") {
-    
+    if (input.loading === true && user_login !== "Loading" && user_login !== false) {
         console.log(user_login)
         if (user_login.lat !== -1 && user_login.lng !== -1) {
             setInput({
@@ -164,11 +188,12 @@ const EditProfileFormulary = () => {
     return (
 
         <div className="profileContainer">
-            {openModal && <div className="ModalAbiertoBackground"></div>}
+            {(openModalWorld || openModalAvatar) && <div className="ModalAbiertoBackground"></div>}
             {user_login !== false && user_login !== "Loading" ? (
                 <div className="profileContainerForm">
-                  <h1 className="titleCreate titleUpdateProfile">UPDATE PROFILE</h1>
+                    <h1 className="titleCreate titleUpdateProfile">UPDATE PROFILE</h1>
                     <form className="profileForm">
+                   
                         <div >
                             <input value={input.name} type="text" className="form-control"
                                 placeholder="name" name="name"
@@ -178,6 +203,7 @@ const EditProfileFormulary = () => {
                                 {errors.name && <p className="errorRegister">{errors.name}</p>}
                             </div>
                         </div>
+                        <label>Name</label>
                         <div >
                             <input value={input.lastName} type="text" className="form-control"
                                 placeholder="Lastname" name="lastName"
@@ -187,47 +213,47 @@ const EditProfileFormulary = () => {
                         <div>
                             {errors.lastName && <p className="errorRegister">{errors.lastName}</p>}
                         </div>
-                        <div>
-                            <input value={input.email} type="email" className="form-control"
-                                placeholder="Email Address" name="email"
-                                onChange={(e) => handleChange(e)}
-                            />
-                        </div>
-                        <div>
-                            {errors.email && <p className="errorRegister">{errors.email}</p>}
-                        </div>
+                        <label>Lastname</label>
                         <div>
                             <input value={input.address} type="text" className="form-control"
                                 placeholder="Add your address" name="address" disabled
                             />
-                            <div className="btnEditAddressContainer">
-                            <button className="btnGlobal btnEditAddress" onClick={(e) => handleOpen(e)}>Edit address</button>
-                            </div>
+                            <IconContext.Provider value={{ size: "25px" }}>
+                            <TbWorldDownload onClick={(e) => handleOpen(e)}/>
+                            </IconContext.Provider>
                         </div>
+                        <label>Adress</label>
                         <div>
-                            <input value={input.image} type="string" className="form-control"
-                                placeholder="image" name="image"
-                                onChange={(e) => handleChange(e)}
+                            <input value={input.image} type="text" className="form-control"
+                                placeholder="Add your Avatar" name="avatar" disabled
                             />
+                            <IconContext.Provider value={{ size: "25px" }}>
+                            <MdPhotoCamera onClick={(e) => handleOpenAvatar(e)}/>
+                            </IconContext.Provider>
                         </div>
-                        <div>
-                            {errors.image && <p className="errorRegister">{errors.image}</p>}
-                        </div>
+                        <label>Avatar</label>
                         <div>
                             <input value={input.phone} type="number" className="form-control"
                                 placeholder="phone" name="phone"
                                 onChange={(e) => handleChange(e)}
                             />
                         </div>
+                        <label>Phone</label>
                         <div>
                             {errors.phone && <p className="errorRegister">{errors.phone}</p>}
                         </div>
                         <button className="btnGlobal btnUpdateProfile" onClick={(e) => handleSubmit(e)}>Agregar o cambiar datos</button>
                     </form>
-                    {openModal && (
+                    {openModalWorld && (
                         <div className={"ModalLogin"}>
                             <GoogleMapAdress myAdress={myAdress} setMyAdress={setMyAdress} handleModalClose={handleModalClose}
                                 handleSetAdress={handleSetAdress} input={input} />
+                        </div>
+                    )}
+                    {openModalAvatar&& (
+                        <div className={"ModalLogin2Avatar"}>
+                            <Avatar handleModalCloseAvatar={handleModalCloseAvatar} images={Avatares} 
+                            handleChangeImage={handleChangeImage} imageInput={input.image} />
                         </div>
                     )}
                 </div>

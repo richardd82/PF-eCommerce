@@ -28,7 +28,8 @@ import {
   DELETE_FAVS,
   GET_SEARCH_USER,
   SEARCH_ID,
-  IMAGE_POST
+  IMAGE_POST,
+  CHANGE_IMAGES
 } from "../actions";
 
 
@@ -62,6 +63,7 @@ const initialState = {
   orders: [],
   comments: [],
   favs: [],
+  imagesCloudinary:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -273,6 +275,11 @@ const rootReducer = (state = initialState, action) => {
       return{
         ...state,
       }
+    case CHANGE_IMAGES:
+      return {
+        ...state,
+        imagesCloudinary: action.payload,
+      };
     default:
       return state;
   }
