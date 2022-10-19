@@ -67,4 +67,11 @@
 @media screen and (min-width: 2040px) and (max-width: 2161px)  {
 
 }
- 
+
+
+.emptyHeart {
+    height: 300px;
+    width: 400px;
+    margin-left: 32%;
+  }
+
