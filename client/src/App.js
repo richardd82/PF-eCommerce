@@ -135,7 +135,7 @@ function App() {
 					{/* Componentes recien generados */}
 					<Route path="/details/:id" component={Details}></Route>{" "}
                      
-					 {console.log(user_login)}
+					 {console.log(user_login) }
 					{(user_login==="Loading" || (user_login!==false && user_login.typeUser==="Admin"))?
 					(<Switch>
 					<Route exact path="/createProduct"> {user_login==="Loading" ? Loader : <CreateProduct />}</Route>
