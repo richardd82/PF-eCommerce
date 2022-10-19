@@ -218,18 +218,20 @@ const EditProfileFormulary = () => {
                             <input value={input.address} type="text" className="form-control"
                                 placeholder="Add your address" name="address" disabled
                             />
-                            <IconContext.Provider value={{ size: "25px" }}>
-                            <TbWorldDownload onClick={(e) => handleOpen(e)}/>
-                            </IconContext.Provider>
+                            <button className="buttonEditProfile"  onClick={(e) => handleOpen(e)}>
+                            <IconContext.Provider value={{ size: "18px" }}>
+                            <TbWorldDownload />
+                            </IconContext.Provider></button>
                         </div>
                         <label>Adress</label>
                         <div>
                             <input value={input.image} type="text" className="form-control"
                                 placeholder="Add your Avatar" name="avatar" disabled
                             />
-                            <IconContext.Provider value={{ size: "25px" }}>
-                            <MdPhotoCamera onClick={(e) => handleOpenAvatar(e)}/>
-                            </IconContext.Provider>
+                            <button className="buttonEditProfile" onClick={(e) => handleOpenAvatar(e)}>
+                            <IconContext.Provider value={{ size: "18px" }}>
+                            <MdPhotoCamera />
+                            </IconContext.Provider></button>
                         </div>
                         <label>Avatar</label>
                         <div>
