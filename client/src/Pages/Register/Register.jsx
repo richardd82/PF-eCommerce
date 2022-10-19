@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register, getAllUsers } from "../../redux/actions";
+import { register, getAllUsers ,ObtenerImagenes} from "../../redux/actions";
 import Swal from "sweetalert2";
 import "./register.css";
 
@@ -33,11 +33,10 @@ function validate(input, allUsers) {
         errors.phone =
             "Please enter your phone number";
     else if (!input.address) errors.address = "Please enter your address";
-    else if (!input.image || urlValidator.test(input.image) == false)
-        errors.image = "Image cannot be null or incorrect (png, gif, jpg)";
 
     return errors;
 }
+
 
 export default function Register() {
     const dispatch = useDispatch();
@@ -52,13 +51,23 @@ export default function Register() {
         lastName: "",
         password: "",
         confirmPass: "",
-        phone: null,
+        phone: "",
         address: "",
-        image: "",
+        image:"",
     });
 
     useEffect(() => {
         dispatch(getAllUsers())
+        dispatch(ObtenerImagenes("Avatares")).then(e=>{
+            if(e.payload.length>0){
+                var element=e.payload[Math.floor(Math.random() * e.payload.length)]  
+                console.log(element.url)
+                setInput({
+                    ...input,
+                   image: element.url
+                })
+            }
+        });
     }, [])
 
     function handleChange(e) {
@@ -70,6 +79,19 @@ export default function Register() {
             validate({
                 ...input,
                 [e.target.name]: e.target.value,
+            })
+        )
+    }
+
+    function handleChangePhone(e) {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.valueAsNumber
+        })
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]: e.target.valueAsNumber,
             })
         )
     }
@@ -100,7 +122,6 @@ export default function Register() {
                 confirmPass: '',
                 phone: null,
                 address: '',
-                image: '',
             })
         } else {
             register(input).then(e => {
@@ -224,7 +245,7 @@ export default function Register() {
                             type="number"
                             value={input.phone}
                             name="phone"
-                            onChange={(e) => handleChange(e)}
+                            onChange={(e) => handleChangePhone(e)}
                         />
                         <div>
                             {errors.phone && <p className="errorRegister">{errors.phone}</p>}
@@ -244,20 +265,6 @@ export default function Register() {
                             {errors.address && <p className="errorRegister">{errors.address}</p>}
                         </div>
                     </div>
-                    <div>
-                        <div>
-                            <label>Image:</label>
-                        </div>
-                        <input
-                            type="text"
-                            value={input.image}
-                            name="image"
-                            onChange={(e) => handleChange(e)}
-                        />
-                        <div>
-                            {errors.image && <p className="errorRegister">{errors.image}</p>}
-                        </div>
-                    </div>
                     {!Object.keys(errors).length ? (
                         <button
                             type="submit"
@@ -267,7 +274,7 @@ export default function Register() {
                             Create
                         </button>
                     ) : (
-                        <button hidden="true">Create</button>
+                        <button hidden={true}>Create</button>
                     )}
                 </form>
             </div>

@@ -227,9 +227,10 @@ export default function Details(props) {
           <p>LOADING...</p>
         )}
       </div>
+      {user!=="Loading" && user!==false &&
       <div className="btnBackFav">
          <Favs id={props.match.params.id} key="id" />
-      </div>
+      </div>}
       <div>
         <FeedBack productId={props.match.params.id} products={producto} />
       </div>

@@ -41,10 +41,10 @@ export class ModifyItem extends Component {
 
 
   imageHandleChange(e) {
-    if (e.target.files[0].type === "image/png") {
+   console.log(e.target.files[0].type)
+   
+    if (e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/jpg") {
       
-      const objectUrl = URL.createObjectURL(e.target.files[0])
-      console.log(objectUrl);
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
 

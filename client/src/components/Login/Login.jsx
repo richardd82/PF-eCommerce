@@ -125,7 +125,17 @@ export default function Login(props) {
     let nombreSep = user.displayName.split(" ");
 
     let name = nombreSep[0]
-    let lastname = nombreSep[1].concat(" ", nombreSep[2])
+    var lastname = "";
+    if (nombreSep.length == 2)
+      lastname = nombreSep[1]
+    else
+      if (nombreSep.length == 3)
+        lastname = nombreSep[1].concat(" ", nombreSep[2])
+      else
+        if (nombreSep.length >= 4) {
+          name = nombreSep[0].concat(" ", nombreSep[1])
+          lastname = nombreSep[2].concat(" ", nombreSep[3])
+        }
 
     const { uid, email, photoURL } = user;
     console.log('USER_LOGIN', user)
@@ -143,7 +153,7 @@ export default function Login(props) {
         console.log("Entra aca")
         props.close(false)
         console.log("respuesta ", response);
-        dispatch(LoginGoogleUser({userForToken:response.data.userValidate[0],token:response.data.token}))
+        dispatch(LoginGoogleUser({ userForToken: response.data.userValidate[0], token: response.data.token }))
       });
 
   };
@@ -152,25 +162,26 @@ export default function Login(props) {
     location.reload();
   }
 
-if(user){
-  console.log(user.providerData[0])
-  register(user.providerData[0])
-}
+  if (user) {
+    console.log(user.providerData[0])
+    register(user.providerData[0])
+  }
 
   const handleGoogleSignIn = async () => {
 
     try {
       await googleLogin().then(e => {
         if (user) {
-          console.log(user, "  ",e)
+          console.log(user, "  ", e)
           register(user.providerData[0])
-        }})
+        }
+      })
     } catch (error) {
       console.log(error)
     }
   }
 
- 
+
 
   return (
     <div className={style.loginContainer}>
