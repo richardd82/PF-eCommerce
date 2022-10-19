@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStockbyID, searchNameProductID } from "../../redux/actions";
+import { getStockbyID, searchNameProductID, CrearImagenCloudinary } from "../../redux/actions";
 import { withRouter } from "react-router";
 import axios from "axios";
 import styles from "./ModifyItem.module.css";
 import Swal from "sweetalert2";
+import { async } from "@firebase/util";
 
 const SizesArray = ["XS", "S", "M", "L", "XL"];
 
@@ -33,9 +34,44 @@ export class ModifyItem extends Component {
       stocks: {},
       name: "",
       image: "",
+      file: "",
       price: "",
     };
   }
+
+
+  imageHandleChange(e) {
+    if (e.target.files[0].type === "image/png") {
+      
+      const objectUrl = URL.createObjectURL(e.target.files[0])
+      console.log(objectUrl);
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+
+      reader.onload = async () => {
+         let objeto = {
+          ...this.state,
+          image: reader.result,
+        };
+        this.setState(objeto);
+      }
+
+      let objeto = {
+        ...this.state,
+        file: e.target.files[0],
+      };
+
+      this.setState(objeto);
+    } else {
+      Swal.fire({
+        title: "Insert valid image",
+        showDenyButton: false,
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+        icon: "error"
+      })
+    }
+  };
 
   componentDidMount() {
     let Id = this.props.match.params.id;
@@ -81,7 +117,11 @@ export class ModifyItem extends Component {
     this.setState(objeto);
   }
 
+
+
+
   async Guardar() {
+
     if (this.props.products != undefined && this.props.products.length > 0) {
       Swal.fire({
         title: "Do you want to save these changes?",
@@ -98,28 +138,42 @@ export class ModifyItem extends Component {
                 Sizes: this.state.stocks,
                 idProduct: this.props.products[0].id,
               };
-              console.log(objeto)
               await putStocks(objeto).then(console.log("cambio Stock Exitoso"));
-              await changeProduct(this.props.products[0].id, "name", {
-                name: this.state.name,
-              });
-              await changeProduct(this.props.products[0].id, "price", {
-                price: this.state.price,
-              });
-              await changeProduct(this.props.products[0].id, "image", {
-                image: this.state.image,
-              });
+
+              if (this.props.products[0].name != this.state.name)
+                await changeProduct(this.props.products[0].id, "name", {
+                  name: this.state.name,
+                });
+              if (this.props.products[0].price != this.state.price)
+                await changeProduct(this.props.products[0].id, "price", {
+                  price: this.state.price,
+                });
+
+              if (this.props.products[0].image !== this.state.image && this.state.file && this.state.file !== "") {
+                const reader = new FileReader();
+                reader.readAsDataURL(this.state.file);
+                reader.onload = async () => {
+                  await CrearImagenCloudinary(reader.result, this.props.products[0].name).then(e => {
+                    console.log(e);
+                    changeProduct(this.props.products[0].id, "image", {
+                      image: e.data.url,
+                    })
+                  }
+                  )
+                }
+              }
               Swal.fire({
                 title: "successful change",
                 showDenyButton: false,
                 showCancelButton: false,
                 confirmButtonText: "Yes",
                 denyButtonText: `No`,
+                icon: "success"
               }).then((result) => {
                 if (result.isConfirmed) {
-                this.props.history.push("/productsAdmin")
+                  this.props.history.push("/productsAdmin")
                 }
-              }) 
+              })
             } catch (error) {
               Swal.fire({
                 title: error,
@@ -182,10 +236,10 @@ export class ModifyItem extends Component {
               }
             ></label>
             <input
-              id={"Image"}
-              name={"Image"}
-              value={this.state.image}
-              onChange={(e) => this.ChangeProp(e.target.value, "image")}
+              id="Image"
+              name="Image"
+              type="file"
+              onChange={(e) => this.imageHandleChange(e)}
             />
 
             <p>Price:</p>
@@ -275,6 +329,7 @@ function mapDispatchToProps(dispatch) {
   //pasandole al componente la posibilidad como props de hacer un dispatch de la function getProducts
   return {
     searchNameProductID: (id) => dispatch(searchNameProductID(id)),
+    CrearImagenCloudinary: (image) => dispatch(CrearImagenCloudinary(image)),
   };
 }
 

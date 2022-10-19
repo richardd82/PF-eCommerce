@@ -111,7 +111,6 @@ export class ProductsAdmin extends Component {
             },
         ]
 
-        console.log(this.setState)
         return (
             <div>
                 {this.props.categorys.length == 0 ?
