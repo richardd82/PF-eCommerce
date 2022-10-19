@@ -10,6 +10,7 @@ import "./Carry.css";
 import CarryCard from "./CarryCard.jsx";
 import Swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
+import emptyCart from "../../assets/emptyCart.png"
 
 class Carry extends Component {
   Number2Decimals(x) {
@@ -260,6 +261,7 @@ class Carry extends Component {
           </div>
         ) : (
           <div className="cards">
+            <img alt="cart" className="emptyCart" src={emptyCart} />
             <p>
               <b>{fraseNoResultados}</b>
             </p>

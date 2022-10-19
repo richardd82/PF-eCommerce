@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./details.css";
 import swal from "sweetalert2";
- import FeedBack from "../Orders/FeedBack";
+import FeedBack from "../Orders/FeedBack";
 import Favs from "../Favs/Favs";
 
 import {
@@ -227,10 +227,10 @@ export default function Details(props) {
           <p>LOADING...</p>
         )}
       </div>
-      {user!=="Loading" && user!==false &&
-      <div className="btnBackFav">
-         <Favs id={props.match.params.id} key="id" />
-      </div>}
+      {user !== "Loading" && user !== false &&
+        <div className="btnBackFav">
+          <Favs id={props.match.params.id} key="id" />
+        </div>}
       <div>
         <FeedBack productId={props.match.params.id} products={producto} />
       </div>
@@ -239,6 +239,5 @@ export default function Details(props) {
           <button className="btnDetailsBack">Go Back</button>
         </Link>
       </div>
-    </div>
-  );
-}
+      </div>)
+  }

@@ -25,7 +25,7 @@
    display: block;
    font-size: 2.1em;
    min-height: 20px;
-   padding: 15px 20px;
+   padding: 0px 20px;
    position: relative;
    cursor: pointer;
    font-weight: 900;
@@ -36,17 +36,18 @@
    color: var(--glow-spread-color);
    text-shadow: 1px 2px 3px rgb(88, 1, 122);
    text-transform: uppercase;
-   margin: 5px 5px 30px;
+   margin: 5px 5px 5px;
    text-align: center;
 }
 
 .informacionContainer {
    margin: auto;
    width: 80%;
-   margin-top: 45px;
+   margin-top: 38px;
    display: flex;
    justify-content: space-evenly;
    font-family: 'Poppins', cursive;
+   margin-bottom: 5px;
 }
 
 .photoContainer {
@@ -85,13 +86,13 @@
    width: 150px;
    height: 44px;
    background-color: #1c1c1c;
-   border: 2px solid #efb810;
+   border: 2px solid #ef10ef;
    border-radius: 4px;
    font-size: 1.4rem;
    font-weight: bold;
    text-align: justify;
    font-family: 'Poppins', cursive;
-   color: #efb810;
+   color: #ef10ef;
    margin: initial;
 }
 
@@ -108,7 +109,7 @@
 }
 
 .buttonModify button:hover {
-   background-color: rgb(235, 184, 44);
+   background-color: #ef10ef;
    cursor: pointer;
    color: #1c1c1c;
    border: 1px solid #1c1c1c;
@@ -159,11 +160,24 @@
 
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
+   .profileCardContainer{
+      width: 100%;
+      margin: auto;
+      margin-left: 21%;
+   }
    .productContainer {
       height: 68vh;
+      margin-top: -40px;
    }
    .titulo {
       padding: 10px;
+      margin-bottom: 0px;
+   }
+   .buttonModify{
+      margin-top: 0px;
+   }
+   .informacionContainer{
+      margin-top: 15px;
    }
 }
 
