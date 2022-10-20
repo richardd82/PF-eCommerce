@@ -11,6 +11,9 @@ import Thanks from "./Thanks.jsx";
 import { AiFillCarryOut } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { putUserAddrees } from "../../redux/actions";
+import Swal from 'sweetalert2';
+
 
 
 
@@ -26,6 +29,8 @@ function Pasarela() {
   const [map, setMap] = useState(/** @type google.maps.Map */(null))
   const PlaceRef = useRef()
   const [startPage, SetstartPage] = useState(true)
+  const dispatch = useDispatch();
+  
 
   console.log(carry)
 
@@ -83,8 +88,50 @@ function Pasarela() {
   }
 
   function ClickContinue() {
+    if (page == 1) {
+      console.log(myAdress)
+      if (user_login.lat === -1 && user_login.lng === -1 && myAdress.adress!=="" && myAdress.name!=="") {
+        Swal.fire({
+          title: "Do you want to add this address to your data?",
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: "Yes",
+          denyButtonText: "No",
+          icon: "question",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            dispatch(putUserAddrees({ lat: myAdress.adress.lat, lng: myAdress.adress.lng, address: myAdress.name }, user_login.id)).then((e) => {
+              Swal.fire({
+                title: e.payload,
+                position: "center",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
+              }).then(e => setPage(page + 1))
+            }
+            ).catch(e =>
+              Swal.fire({
+                title: e.response.data,
+                position: "center",
+                icon: "error",
+                showConfirmButton: true,
+              }))
+          }
+          else {
+            setPage(page + 1)
+          }
+        }).catch(e =>
+          Swal.fire({
+            title: e,
+            position: "center",
+            icon: "error",
+            showConfirmButton: true,
+          }))
+      }
+    }
     setPage(page + 1)
   }
+
   function ClickPreview() {
     if (page == 2) {
       SetstartPage(true);
@@ -131,6 +178,7 @@ function Pasarela() {
     return false
   }
 
+  console.log(user_login)
 
   var Validacion2 = Validacion();
 
@@ -158,7 +206,7 @@ function Pasarela() {
       <div className='Pasarela '>
         {page == 1 &&
           (
-            (startPage && user_login !== "Loading" && user_login !== "false" && user_login.lat !== -1 && user_login.lng != -1) ?
+            (startPage && user_login !== "Loading" && user_login !== "false" && user_login.lat !== -1 && user_login.lng !== -1) ?
               <div>
                 <GoogleMapPasarela ChangeTypeSearch={ChangeTypeSearch}
                   setMap={setMap}
@@ -171,7 +219,7 @@ function Pasarela() {
                   myAdress={myAdress}
                   map={map}
                   SearchByBox={SearchByBox}
-                  question={startPage}
+                  question={true}
                   adress={{ lat: user_login.lat, lng: user_login.lng }}
                   ChangeStartYes={ChangeStartYes}
                   ChangeStartNo={ChangeStartNo}
@@ -188,7 +236,7 @@ function Pasarela() {
                 myAdress={myAdress}
                 map={map}
                 SearchByBox={SearchByBox}
-                question={startPage}
+                question={false}
                 adress={{ lat: 0, lng: 0 }}
                 ChangeStartYes={ChangeStartYes}
                 ChangeStartNo={ChangeStartNo}
