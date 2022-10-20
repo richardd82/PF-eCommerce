@@ -43,7 +43,7 @@ class OrdersDetails extends Component {
                       <p>Amount:{c.amount}</p>
                       <p>Value: {c.value}</p>
                       <p>Total: {(c.amount * c.value).toFixed(2)} </p>
-                      {Stocks!==undefined && Stocks.length>0 && Stocks[0].comment==false &&
+                      {Stocks!==undefined && Stocks.length>0 && Stocks[0].comment==false && orders[0].stateOrder==="Dispatched" &&
                       <button className={styles.btnReview}>
                         {
                           <Review

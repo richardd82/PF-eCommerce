@@ -241,6 +241,19 @@ color: gray;
   content: 'Upload File';
   
 }
+.ContainerImageCreateProduct{
+  position: absolute;
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 300px;
+  max-height: 300px;
+  margin-top: 240px;
+  margin-left: 288px;
+  transition: all 0.3s;
+}
+.ContainerImageCreateProduct:hover{
+  transform: scale(1.2);
+}
 
 @media screen and (max-width: 1366px) {
   .containerCreate {
@@ -315,4 +328,10 @@ color: gray;
     flex-wrap: nowrap; */
     height: 70vh;
   }
+}
+
+.ImageCreateProductM{
+  width: 100%;
+  margin-bottom: 10%;
+  
 }

@@ -1,4 +1,4 @@
-import { useRef, useState,useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import { useHistory } from "react-router-dom";
 import './Pasarela.css';
@@ -11,6 +11,9 @@ import Thanks from "./Thanks.jsx";
 import { AiFillCarryOut } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { putUserAddrees } from "../../redux/actions";
+import Swal from 'sweetalert2';
+
 
 
 
@@ -25,13 +28,16 @@ function Pasarela() {
   const [myAdress, setMyAdress] = useState({ name: "", adress: "" })
   const [map, setMap] = useState(/** @type google.maps.Map */(null))
   const PlaceRef = useRef()
+  const [startPage, SetstartPage] = useState(true)
+  const dispatch = useDispatch();
   
+
   console.log(carry)
 
 
   useEffect(() => {
-    if(JSON.stringify(carry)===JSON.stringify([]) || user_login==false || user_login.typeUser=="Admin")
-    history.push("/");
+    if (JSON.stringify(carry) === JSON.stringify([]) || user_login == false || user_login.typeUser == "Admin")
+      history.push("/");
   }, [])
 
 
@@ -58,6 +64,16 @@ function Pasarela() {
     }
   }
 
+  function ChangeStartYes(e) {
+    setMyAdress({ name: user_login.adress, adress: { lat: user_login.lat, lng: user_login.lng } })
+    ClickContinue();
+    SetstartPage(false)
+  }
+
+  function ChangeStartNo(e) {
+    SetstartPage(false)
+  }
+
   function ChangeTypeSearch(e) {
     setSelectTypeSearch(e)
   }
@@ -72,9 +88,55 @@ function Pasarela() {
   }
 
   function ClickContinue() {
+    if (page == 1) {
+      console.log(myAdress)
+      if (user_login.lat === -1 && user_login.lng === -1 && myAdress.adress!=="" && myAdress.name!=="") {
+        Swal.fire({
+          title: "Do you want to add this address to your data?",
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: "Yes",
+          denyButtonText: "No",
+          icon: "question",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            dispatch(putUserAddrees({ lat: myAdress.adress.lat, lng: myAdress.adress.lng, address: myAdress.name }, user_login.id)).then((e) => {
+              Swal.fire({
+                title: e.payload,
+                position: "center",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
+              }).then(e => setPage(page + 1))
+            }
+            ).catch(e =>
+              Swal.fire({
+                title: e.response.data,
+                position: "center",
+                icon: "error",
+                showConfirmButton: true,
+              }))
+          }
+          else {
+            setPage(page + 1)
+          }
+        }).catch(e =>
+          Swal.fire({
+            title: e,
+            position: "center",
+            icon: "error",
+            showConfirmButton: true,
+          }))
+      }
+    }
     setPage(page + 1)
   }
+
   function ClickPreview() {
+    if (page == 2) {
+      SetstartPage(true);
+      setMyAdress({ name: "", adress: "" })
+    }
     setPage(page - 1)
   }
 
@@ -116,6 +178,7 @@ function Pasarela() {
     return false
   }
 
+  console.log(user_login)
 
   var Validacion2 = Validacion();
 
@@ -123,37 +186,63 @@ function Pasarela() {
 
   return (
     <div className='BoxPasarela'>
-        <div className='navMaps'>
-          <ul className='ListaPasarela'>
-            <li key={"Pasarela" + 1}
-              id={page==1?"LisPasarelaSelect":"ListPasarelaNoSelect"+1}
-              className="page-itemPasarela">
-              <IconContext.Provider value={{ size: "40px" }}>  <BiWorld /></IconContext.Provider></li>
-            <li key={"Pasarela" + 2}
-                id={page==2?"LisPasarelaSelect":"ListPasarelaNoSelect"+2}
-              className="page-itemPasarela"> <IconContext.Provider value={{ size: "40px" }}><MdContactPhone /></IconContext.Provider></li>
-            <li key={"Pasarela" + 3}
-                id={page==3?"LisPasarelaSelect":"ListPasarelaNoSelect"+3}
-              className="page-itemPasarela"> <IconContext.Provider value={{ size: "40px" }}><MdPayment /></IconContext.Provider> </li>
-            <li key={"Pasarela" + 4}
-                id={page==4?"LisPasarelaSelect":"ListPasarelaNoSelect"+4}
-              className="page-itemPasarela"><IconContext.Provider value={{ size: "40px" }}> <AiFillCarryOut /> </IconContext.Provider></li>
-          </ul>
-        </div>
+      <div className='navMaps'>
+        <ul className='ListaPasarela'>
+          <li key={"Pasarela" + 1}
+            id={page == 1 ? "LisPasarelaSelect" : "ListPasarelaNoSelect" + 1}
+            className="page-itemPasarela">
+            <IconContext.Provider value={{ size: "40px" }}>  <BiWorld /></IconContext.Provider></li>
+          <li key={"Pasarela" + 2}
+            id={page == 2 ? "LisPasarelaSelect" : "ListPasarelaNoSelect" + 2}
+            className="page-itemPasarela"> <IconContext.Provider value={{ size: "40px" }}><MdContactPhone /></IconContext.Provider></li>
+          <li key={"Pasarela" + 3}
+            id={page == 3 ? "LisPasarelaSelect" : "ListPasarelaNoSelect" + 3}
+            className="page-itemPasarela"> <IconContext.Provider value={{ size: "40px" }}><MdPayment /></IconContext.Provider> </li>
+          <li key={"Pasarela" + 4}
+            id={page == 4 ? "LisPasarelaSelect" : "ListPasarelaNoSelect" + 4}
+            className="page-itemPasarela"><IconContext.Provider value={{ size: "40px" }}> <AiFillCarryOut /> </IconContext.Provider></li>
+        </ul>
+      </div>
       <div className='Pasarela '>
         {page == 1 &&
-          <GoogleMapPasarela ChangeTypeSearch={ChangeTypeSearch}
-            setMap={setMap}
-            Pointer={Pointer}
-            Adress={Adress}
-            SelectTypeSearch={SelectTypeSearch}
-            PlaceRef={PlaceRef}
-            coordinates={coordinates}
-            SelectAdress={SelectAdress}
-            myAdress={myAdress}
-            map={map}
-            SearchByBox={SearchByBox}
-          />}
+          (
+            (startPage && user_login !== "Loading" && user_login !== "false" && user_login.lat !== -1 && user_login.lng !== -1) ?
+              <div>
+                <GoogleMapPasarela ChangeTypeSearch={ChangeTypeSearch}
+                  setMap={setMap}
+                  Pointer={Pointer}
+                  Adress={Adress}
+                  SelectTypeSearch={SelectTypeSearch}
+                  PlaceRef={PlaceRef}
+                  coordinates={coordinates}
+                  SelectAdress={SelectAdress}
+                  myAdress={myAdress}
+                  map={map}
+                  SearchByBox={SearchByBox}
+                  question={true}
+                  adress={{ lat: user_login.lat, lng: user_login.lng }}
+                  ChangeStartYes={ChangeStartYes}
+                  ChangeStartNo={ChangeStartNo}
+                />
+              </div>
+              : <GoogleMapPasarela ChangeTypeSearch={ChangeTypeSearch}
+                setMap={setMap}
+                Pointer={Pointer}
+                Adress={Adress}
+                SelectTypeSearch={SelectTypeSearch}
+                PlaceRef={PlaceRef}
+                coordinates={coordinates}
+                SelectAdress={SelectAdress}
+                myAdress={myAdress}
+                map={map}
+                SearchByBox={SearchByBox}
+                question={false}
+                adress={{ lat: 0, lng: 0 }}
+                ChangeStartYes={ChangeStartYes}
+                ChangeStartNo={ChangeStartNo}
+              />
+          )
+        }
         {page == 2 &&
           <FormularioContacto handleChangeContact={handleChangeContact}
             adress={contact.adress}

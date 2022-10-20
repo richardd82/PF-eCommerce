@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import {
   getCategorys, searchNameProduct,
 } from "../../redux/actions";
+import Swal from "sweetalert2";
 
 // instalar sweetalert y usarla, crear nuevos inputs: talle, y stock
 
@@ -154,20 +155,27 @@ function Formulario() {
     );
   }
   function imageHandleChange(e) {
-    //console.log(e.target.defaultValue);
-    console.log(e.target)
-    e.preventDefault();
-    const file = e.target.value;
-    //previewFile(file);
-    setSelectedFile(e.target.files[0]);
-    setFileInputState(e.target.value);
+    console.log(e.target.files[0])
+    if (e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/jpg") {
 
-    SetErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      }));
+      const reader2 = new FileReader();
+      reader2.readAsDataURL(e.target.files[0]);
+      reader2.onloadend = () => {
+        setFileInputState(reader2.result);
+      }
+      setSelectedFile(e.target.files[0]);
+
+    } else {
+      Swal.fire({
+        title: "Insert valid image",
+        showDenyButton: false,
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+        icon: "error"
+      })
+    }
   };
+
 
   function handleSelect(e) {
     dispatch(getCategorys());
@@ -251,7 +259,7 @@ function Formulario() {
           description: input.description,
           imageData: reader.result
         })).then(e => {
-          var ID=e.data[0].id;
+          var ID = e.data[0].id;
           swal({
             title: "Product created successfully!",
             icon: "success",
@@ -404,7 +412,10 @@ function Formulario() {
       {console.log(error)}
       <h2 className="titleCreate">Product creation</h2>
       <form className="formCreateProduct" onSubmit={(e) => handleSubmit(e)}>
-        {console.log(input)}
+        {fileInputState!=="" &&
+        <div className="ContainerImageCreateProduct">
+          <img  className="ImageCreateProductM" src={`${fileInputState}`} alt="Not found" ></img>
+        </div>}
         <div className={input.name == "" ? "l__form__input-field" : "l__form__input-field2"}>
           {error.name && ( // si hay un error hara un <p> nuevo con el error
             <p className="error">{error.name}</p>
@@ -440,7 +451,6 @@ function Formulario() {
           type="file"
           name="image"
           onChange={imageHandleChange}
-          value={fileInputState}
           className={input.image == "" ? "l__form__input-field file-select" : "l__form__input-field2 file-select"}
         />
 

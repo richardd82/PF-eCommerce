@@ -1,7 +1,7 @@
 .favsContainer{
     /* border: 1px solid black; */
     width: 80%;
-    height: 74.1vh;
+    height: 75.8vh;
     margin: auto;
     /* display: flex; */
     flex-direction: column;
@@ -43,6 +43,10 @@
 .btnFavs{
     margin-left: -30px;
 }
+.heartContainer{
+    margin: auto;
+    width: 78%;
+}
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
     .favsContainer{
@@ -67,4 +71,11 @@
 @media screen and (min-width: 2040px) and (max-width: 2161px)  {
 
 }
- 
+
+
+.emptyHeart {
+    height: 300px;
+    width: 400px;
+    margin-left: 32%;
+  }
+

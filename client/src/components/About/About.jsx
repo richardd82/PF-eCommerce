@@ -43,6 +43,10 @@ var arregloDiv = [
 
 export default function About() {
   return (
+<div>
+    <div className="titleAbout titleCreate">
+    <h1>Developers Team</h1>
+</div>
     <main className="mainAbout">
       <div className={"parendAbout"}>
         {arregloDiv.map((elemento) => {
@@ -108,6 +112,7 @@ export default function About() {
         })}
       </div>
     </main>
+    </div>
   );
 }
 

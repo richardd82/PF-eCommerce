@@ -38,6 +38,7 @@ export const GET_SEARCH_USER = "GET_SEARCH_USER";
 export const SEARCH_ID = "SEARCH_ID";
 export const PUT_STOCKS = "PUT_STOCKS";
 export const IMAGE_POST = "IMAGE_POST"
+export const CHANGE_IMAGES="CHANGE_IMAGES"
 
 
 
@@ -516,6 +517,24 @@ export function putUser(input, id) {
   };
 }
 
+export function putUserAddrees(input, id) {
+  return async function (dispatch) {
+    try {
+      console.log(input, id);
+      const res = await axios.put(
+        REACT_APP_URL_BACK + `/users/putAddrees/${id}`,
+        input
+      );
+      return dispatch({
+        type: PUT_USERS,
+        payload: res.data,
+      });
+    } catch (error) {
+      return(error);
+    }
+  };
+}
+
 export function putUserType(type, userid,anotherParam) {
   return async function (dispatch) {
     try {
@@ -661,7 +680,6 @@ export function ObtenerLogin() {
 }
 
 export function CreateNewProduct(payload) {
-
   const { name, price, brand, gender, nameCategory, description, imageData } = payload
   return async function (dispatch) {
     try {
@@ -739,3 +757,19 @@ export function resetPassword(password,token) {
   }
 }
 
+
+
+export function ObtenerImagenes(folder) {
+  return async function (dispatch) {
+    try {
+        var Images = await axios.get(`${process.env.REACT_APP_URL_BACK}/cloudinary/images/?folder=${folder}`);
+        return dispatch(
+          {
+            type: CHANGE_IMAGES,
+            payload: Images.data
+          });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+}

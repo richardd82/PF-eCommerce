@@ -71,14 +71,14 @@ export default function FeedBack({ productId, products }) {
 
   return (
     <div className="containerFeedback">
-      {/* <Paginated
+      <Paginated
         stylePaginated={stylePaginated}
         NumMaxtarg={10}
         changePaginatedPage={(e) => changePaginatedPage(e)}
         changePaginatedByPage={(e) => changePaginatedByPage(e)}
         paginated={paginated}
       />
-      <div className={""}>
+      {/* <div className={""}>
         <h1 className={""}>{products}</h1>
         <Box>
           <Rating
@@ -116,7 +116,9 @@ export default function FeedBack({ productId, products }) {
                     />
                   </Box>
                   <h5 className={""}>User: {e.name}</h5>
-                  <h5 className={""}>Comment: "{e.comment}"</h5>
+                  <div className="txtFeedback">
+                    <textarea value= {e.comment} rows="4" cols="50" />
+                  </div>
                 </div>
               );
             })

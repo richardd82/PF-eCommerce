@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllFavs, deleteFavs } from "../../redux/actions";
 import FavoritesCards from "./FavoritesCards";
+import heart from "../../assets/brokenHeart.png"
 import Login from "../Login/Login";
 import { style as s } from "@mui/system";
 import "./favs.css";
@@ -49,7 +50,9 @@ export default function Favorites() {
                 );
               })
             ) : (
-              <span>NOTHING HERE</span>
+              <div className="heartContainer">
+              <img alt="favs" className="emptyHeart" src={heart} />
+              </div>
             )}
           </div>
         </div>
