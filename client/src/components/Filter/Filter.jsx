@@ -132,7 +132,7 @@ export class Filter extends Component {
                 <label className="NameFilter" for={"ActivateFilterPrice"}> Filter for Price</label>
                 <input type="number" min="0" step="50" placeholder="Precio Minimo" value={min} onChange={(e) => this.props.changeFilterMin(e)} />
                 <br />
-                <div className="priceA">{" a "}</div>
+                <div className="priceA">{" to "}</div>
                 <br />
                 <input type="number" min="0" step="50" placeholder="Precio Maximo" value={max} onChange={(e) => this.props.changeFilterMax(e)} />
               </li>

@@ -56,7 +56,7 @@
     border-radius: 15px;
     font-size: 1.5em;
     border: 1px solid;
-    z-index: 999;
+    z-index: 1;
 }
 
 .cardDetail::after {

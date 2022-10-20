@@ -79,8 +79,9 @@
    margin-left: 30px;
 }
 .btnMapProfile{
-   margin-left: 47px;
-   margin-top: -51px;
+   margin-left: -25px;
+   margin-top: -25px;
+   transform: scale(.6);
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
@@ -97,6 +98,11 @@
    }
    .btnUpdateProfile{
       margin-top: 20px;
+   }
+   .btnMapProfile{
+      margin-left: -25px;
+      margin-top: 0px;
+      margin-bottom: 35px;
    }
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
