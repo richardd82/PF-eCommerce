@@ -269,6 +269,25 @@ router.put("/put/:id", async (req, res, next) => {
    }
 });
 
+
+router.put("/putAddrees/:id", async (req, res, next) => {
+   try {
+      const { id } = req.params;
+      const {address,lat,lng} = req.body;
+      const toEdit = await User.update(
+         {
+            address,
+            lat,
+            lng
+         },
+         { where: { id } }
+      );
+      res.send("The data was modified");
+   } catch (error) {
+      next(error);
+   }
+});
+
 // {
 //     "email": "enzoholgadocdb@gmail.com",
 //     "password": "huevos123",

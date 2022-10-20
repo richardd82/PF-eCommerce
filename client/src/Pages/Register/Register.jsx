@@ -32,7 +32,6 @@ function validate(input, allUsers) {
     else if (!input.phone || isNaN(input.phone) === true)
         errors.phone =
             "Please enter your phone number";
-    else if (!input.address) errors.address = "Please enter your address";
 
     return errors;
 }
@@ -249,20 +248,6 @@ export default function Register() {
                         />
                         <div>
                             {errors.phone && <p className="errorRegister">{errors.phone}</p>}
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label>Address:</label>
-                        </div>
-                        <input
-                            type="text"
-                            value={input.address}
-                            name="address"
-                            onChange={(e) => handleChange(e)}
-                        />
-                        <div>
-                            {errors.address && <p className="errorRegister">{errors.address}</p>}
                         </div>
                     </div>
                     {!Object.keys(errors).length ? (
