@@ -517,6 +517,24 @@ export function putUser(input, id) {
   };
 }
 
+export function putUserAddrees(input, id) {
+  return async function (dispatch) {
+    try {
+      console.log(input, id);
+      const res = await axios.put(
+        REACT_APP_URL_BACK + `/users/putAddrees/${id}`,
+        input
+      );
+      return dispatch({
+        type: PUT_USERS,
+        payload: res.data,
+      });
+    } catch (error) {
+      return(error);
+    }
+  };
+}
+
 export function putUserType(type, userid,anotherParam) {
   return async function (dispatch) {
     try {
