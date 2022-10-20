@@ -148,10 +148,10 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap, Pointer, Adress,
                             </div>}
                     </div>
                     :
-                    <div>
+                    <div className="btnsAddress">
                         <label>Do you want to use your address?</label>
-                        <button onClick={(e) => ChangeStartYes(e)}>Yes</button>
-                        <button onClick={(e) => ChangeStartNo(e)}>No</button>
+                        <button className="btnGlobal btnYes" onClick={(e) => ChangeStartYes(e)}>Yes</button>
+                        <button className="btnGlobal btnNo" onClick={(e) => ChangeStartNo(e)}>No</button>
                     </div>
                 }
             </div>

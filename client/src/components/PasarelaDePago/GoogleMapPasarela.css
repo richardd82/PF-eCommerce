@@ -74,6 +74,17 @@ input.inputSearchbox {
     width: 300px;
     display: flex;
 }
+.btnYes{
+margin: auto;
+transform: scale(.7);
+}
+.btnNo{
+    margin: auto;
+    transform: scale(.7);
+}
+.btnsAddress{
+    margin-top: -50px;
+}
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
     .boxGmap{
@@ -81,6 +92,9 @@ input.inputSearchbox {
         margin-bottom: 50px;
         width: 1150px;
         height: 350px;
+    }
+    .btnsAddress{
+        margin-top: -80px;
     }
 }
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
