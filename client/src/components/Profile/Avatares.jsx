@@ -46,10 +46,10 @@ class Avatares extends Component {
                             ))}
                         </div>
                         <div className="AvataresButtons">
-                            <button className="Avatarbutton" onClick={(e) => this.props.handleModalCloseAvatar(e)}>Cancel</button>
+                            <button className="btnGlobal Avatarbutton" onClick={(e) => this.props.handleModalCloseAvatar(e)}>Cancel</button>
                             {(this.state.image !== this.props.imageInput && this.state.image != "") ?
-                                <button className="Avatarbutton" onClick={() => this.props.handleChangeImage(this.state.image)}>Set Change</button>
-                                : <label>Select Your Avatar</label>}
+                                <button className="btnGlobal Avatarbutton" onClick={() => this.props.handleChangeImage(this.state.image)}>Set Change</button>
+                                : <label className="btnAvatarHide">Select Your Avatar</label>}
                         </div>
                     </div>
                 </div>

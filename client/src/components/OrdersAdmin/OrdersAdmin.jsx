@@ -101,7 +101,7 @@ export class OrdersAdmin extends Component {
 
         console.log(this.props.orders)
         return (
-            <div style={{ height: 800, width: '100%' }}>
+            <div className="orderAdminContainer" style={{ height: 800, width: '100%', marginTop: '33px' }}>
                 <MaterialReactTable
                     columns={columns}
                     data={this.props.orders}

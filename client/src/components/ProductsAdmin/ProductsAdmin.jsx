@@ -5,6 +5,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { withRouter } from "react-router";
 import MaterialReactTable from 'material-react-table';
 import { IconContext } from "react-icons";
+import './productAdmin.css';
 
 export class ProductsAdmin extends Component {
     componentDidMount() {
@@ -112,10 +113,10 @@ export class ProductsAdmin extends Component {
         ]
 
         return (
-            <div>
+            <div className="productAdminContainer">
                 {this.props.categorys.length == 0 ?
                     <div>LOADING</div> :
-                    <div style={{ height: 2300, width: '100%'}}>
+                    <div style={{ height: 2300, width: '100%', marginTop: '33px'}}>
                         <MaterialReactTable
                             columns={columns}
                             data={this.props.products}

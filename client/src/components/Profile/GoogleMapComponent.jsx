@@ -151,12 +151,12 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap,
                         </div>}
                 </div>
                 <div style={{ justifyItems: "center", display: "flex", justifyContent: "center", gap: "20px" }}>
-                    <button onClick={(e) => handleModalClose(e)} style={{ maxWidth: "400px" }}>
+                    <button className="btnGlobal btnMapProfile" onClick={(e) => handleModalClose(e)} style={{ maxWidth: "400px" }}>
                         Cancel
                     </button>
                     {myAdress.name != "" && myAdress.address != "" && myAdress.name != -1 && myAdress.address != -1 &&
                     input!==undefined && input.address!==myAdress.name &&
-                        <button onClick={(e) => handleSetAdress(e, myAdress)} style={{ maxWidth: "400px" }}>
+                        <button className="btnGlobal btnMapProfile" onClick={(e) => handleSetAdress(e, myAdress)} style={{ maxWidth: "400px" }}>
                             Set Change
                         </button>}
                 </div>

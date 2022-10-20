@@ -66,6 +66,9 @@
    margin: auto;
    margin-left: 30px;
 }
+.btnMapProfile{
+   margin-left: 0px;
+}
 /*----------Media Queries (MEDIUM DEVICES) ----------*/
 @media screen and (max-width: 1366px) {
    .profileContainer{

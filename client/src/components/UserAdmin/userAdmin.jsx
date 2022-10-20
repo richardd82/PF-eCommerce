@@ -116,7 +116,7 @@ export class UserAdmin extends Component {
         ]
 
         return (
-            <div style={{ height: 800, width: '100%' }}>
+            <div style={{ height: 800, width: '100%', marginTop: '33px' }}>
                 <MaterialReactTable
                     columns={columns}
                     data={this.props.allUsers}

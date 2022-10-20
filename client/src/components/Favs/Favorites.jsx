@@ -50,7 +50,7 @@ export default function Favorites() {
                 );
               })
             ) : (
-              <div>
+              <div className="heartContainer">
               <img alt="favs" className="emptyHeart" src={heart} />
               </div>
             )}
