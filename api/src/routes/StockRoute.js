@@ -70,68 +70,25 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
-
-/*
-router.put("/Add_Stock_Size", async (req, res, next) => {
-  const { idProduct, size, stock } = req.body;
-  try {
-    const product = await Product.findOne({
-      where: {
-        id: idProduct
-      },
-      include: {
-        model: Stock,
-      }
-    });
-
-    if (product !== undefined && product.length !== 0) {
-      var FraseRespuesta = "No found Stock"
-      for (let index = 0; index < product.stocks.length; index++) {
-        const stockData = product.stocks[index];
-        if (stockData.productSize == size) {
-          console.log(Number.parseInt(stockData.stock), "  ", Number.parseInt(stock))
-          FraseRespuesta = `Product "${product.name}" (Size ${size}) modified a Stock ${stockData.stock}`
-          console.log((Number.isInteger(stockData.stock) + Number.isInteger(stock)))
-          product.stocks[index].stock = Number.isInteger(stockData.stock) + Number.isInteger(stock)
-          await product.save()
-          break;
-        }
-      }
-      if (FraseRespuesta == "No found Stock") {
-        Stock.create({
-          productSize: size,
-          stock: stock,
-          productId: idProduct,
-        });
-        FraseRespuesta = `Product "${product.name}" (Size ${size}) created with Stock ${stockData.stock}`
-      }
-    }
-
-    res.status(202).send(FraseRespuesta);
-  } catch (err) {
-    next(err);
-  }
-});*/
-
-
 router.put("/AddStocks", async (req, res, next) => {
   const { idProduct, Sizes } = req.body;
-  console.log("ACAAAAAAA ",idProduct,"  ",Sizes)
+  console.log("ACAAAAAAA ", idProduct, "  ", Sizes)
   try {
     const stock = await Stock.findAll({ where: { productId: idProduct } });
 
     var FraseRespuesta = "No found Product"
-      
-    console.log(stock)
 
-    if (stock !== undefined && stock.length !== 0) {
-      for (const property in Sizes) {
-        let size = property;
-        let amount = Sizes[property];
-        
-        FraseRespuesta = "No found Stock"
+    console.log(idProduct, "  ", Sizes)
 
-       for (let index = 0; index < stock.length; index++) {
+
+    for (const property in Sizes) {
+      let size = property;
+      let amount = Sizes[property];
+
+      FraseRespuesta = "No found Stock"
+
+      if (stock !== undefined && stock.length !== 0)
+        for (let index = 0; index < stock.length; index++) {
           const stockData = stock[index];
           if (stockData.productSize == size) {
             FraseRespuesta = `Product "${stockData.name}" (Size ${size}) modified a Stock ${amount}`
@@ -140,17 +97,17 @@ router.put("/AddStocks", async (req, res, next) => {
             break;
           }
         }
-        if (FraseRespuesta == "No found Stock") {
-          Stock.create({
-            productSize: size,
-            stock: amount,
-            productId: idProduct,
-          });
-          FraseRespuesta = `Product "${product.name}" (Size ${size}) created with Stock ${stockData.stock}`
-        }
+      if (FraseRespuesta == "No found Stock") {
+        Stock.create({
+          productSize: size,
+          stock: amount,
+          productId: idProduct,
+        });
+        FraseRespuesta = `Product (Size ${size}) created with Stock ${amount}`
       }
     }
-    console.log("ACA  ",FraseRespuesta);
+
+    console.log("ACA  ", FraseRespuesta);
     res.status(202).send(FraseRespuesta);
   } catch (err) {
     next(err);
