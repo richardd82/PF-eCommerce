@@ -97,8 +97,9 @@ export class UserAdmin extends Component {
                 header: 'Type User',
                 editable: true,
                 Cell: ({ cell, row }) => {
+                    var booleano=this.props.user!=="Loading" && this.props.user!==false && this.props.user.id=== row.original.id
                     return (
-                        <Select
+                        <Select disabled={booleano}
                             labelId="demo-simple-select-label"
                             value={row.original.typeUser}
                             onChange={(e) => this.changeUser(e.target.value, row.original.id)}
@@ -138,7 +139,8 @@ export class UserAdmin extends Component {
 
 function mapStateToProps(state) {
     return {
-        allUsers: state.allUsers
+        allUsers: state.allUsers,
+        user:state.user_login
     }
 }
 
