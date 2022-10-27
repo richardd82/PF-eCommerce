@@ -69,6 +69,7 @@ router.put('/add', async (req, res, next) => {
     next(err);
   }
 })
+
 router.put("/AddStocks", async (req, res, next) => {
   const { idProduct, Sizes } = req.body;
   console.log("ACAAAAAAA ", idProduct, "  ", Sizes)
@@ -79,10 +80,10 @@ router.put("/AddStocks", async (req, res, next) => {
 
     console.log(idProduct, "  ", Sizes)
 
+
     for (const property in Sizes) {
       let size = property;
       let amount = Sizes[property];
-      console.log("ACAAAAAA DATOS ",size,"  ",amount,"  ",stock)
       FraseRespuesta = "No found Stock"
 
       if (stock !== undefined && stock.length !== 0)
