@@ -4,17 +4,19 @@ import Style from "./NavUser.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../redux/actions";
 import { useAuth } from "../../context/authContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function NavUser() {
   //login Google
   const { logout, user } = useAuth();
   const user2 = useSelector((state) => state.user_login);
+  const history = useHistory()
 
   const handleLogout = async () => {
     try {
       await logout();
       dispatch(Logout());
+      history.push("/")
     } catch (error) {
       console.error(error.message);
     }
