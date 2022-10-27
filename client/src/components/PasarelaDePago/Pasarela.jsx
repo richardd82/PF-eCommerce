@@ -75,6 +75,7 @@ function Pasarela() {
   }
 
   function ChangeTypeSearch(e) {
+    console.log(myAdress);
     setSelectTypeSearch(e)
   }
   async function SelectAdress(e, elemento) {
