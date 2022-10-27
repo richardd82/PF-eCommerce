@@ -76,7 +76,7 @@ function GoogleMapComponent({ ChangeTypeSearch, setMap, Pointer, Adress,
             <Box className="boxGmap">
                 {/* Google Map Box */}
                 <GoogleMap
-                    center={center}
+                    center={myAdress.adress!=""?myAdress.adress: center}
                     onClick={e => (Pointer(e))}
                     zoom={15}
                     mapContainerStyle={{ width: '80%', height: '80%', margin: 'auto', marginTop: '5px' }}
