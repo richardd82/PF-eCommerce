@@ -17,8 +17,8 @@ var arregloDiv = [
     img: "img card2",
     name: "Claudio",
     apellido: "Chumpitaz",
-    twitter: "#",
-    linkedin: "#",
+    twitter: "https://twitter.com/AngeloChumpita2",
+    linkedin: "https://www.linkedin.com/in/claudio-angelo-chumpitaz-flores-29b069252/",
     gitHub: "https://github.com/XDRiderXtremeXD",
   },
   {
