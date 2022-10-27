@@ -58,12 +58,6 @@ export default function NavBar(props) {
             </li>
 
 
-            {/*<li className="itemRigh">
-            {user_login == false ?
-              <Link to={"/login"} >
-                Login/Register
-              </Link>: <NavUser />
-            }</li>*/}
             {user_login != "Loading" &&
               <li className="itemRigh btnLogin">
                 {user_login == false ?
@@ -72,14 +66,6 @@ export default function NavBar(props) {
                   </button> : <NavUser />
                 }</li>
             }
-
-            {/* user_login == false && (
-              <li className="itemRigh">
-                <Link to={"/login"} >
-                  LOGIN
-                </Link>
-              </li>
-            )*/}
 
               { user_login != "Loading" &&(user_login == false || (user_login.typeUser !== "Admin")) && (
                 <li className="itemRigh">
@@ -93,56 +79,14 @@ export default function NavBar(props) {
                 </li>
               )}
 
-
-            {/* <li>
-							<Link to={"/favorites"}>FAVORITES</Link>
-						</li> */}
           </ul>
         </div>
         <div>
           <ul className="listNav listNavRight">
-            {/* <li>
-                <Link to={"/products/Men"} className={Style.letra}>
-                  MEN
-                </Link>
-              </li>
-              <li>
-                <Link to={"/products/Women"} className={Style.letra}>
-                  WOMEN
-                </Link>
-              </li> */}
-            {/* <li>
-                  <Link to={"/about"} className={Style.letra}>
-                    ABOUT
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/contact"} className={Style.letra}>
-                    CONTACT
-                  </Link>
-                </li> */}
-
-            {/*<Link to={"/about"} className={Style.letra}>
-                        LOGIN
-                    </Link>
-                    <Link to={"/register"} className={Style.letra}>
-                        REGISTER
-                    </Link>*/}
-            {/* { user_login.id!==undefined && user_login.id !== false && user_login.isAdmin!==undefined && user_login.isAdmin==true &&
-            <li className={Style.liFormat}>
-              
-            </li>
-            } */}
           </ul>
 
         </div>
         <div className="titlePrincipal">Alien Street</div>
-        {/* <div className={Style.right}>
-        
-                <Link to={"/create"}>
-                    ADD CLOTHES
-                </Link>
-            </div> */}
       </nav>
 
       {openModal && <div className="ModalAbiertoBackground"></div>}
