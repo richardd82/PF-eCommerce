@@ -16,7 +16,6 @@ import {
 } from "../../redux/actions/index";
 
 export default function Details(props) {
-  console.log(props)
 
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.details);
@@ -25,7 +24,6 @@ export default function Details(props) {
   const stock_by_ID = useSelector((state) => state.stock_by_ID);
   const user = useSelector((state) => state.user_login);
   const product = useSelector((state) => state.products);
-  console.log(user, "soy user detalle");
 
   const [stateSize, SetstateSize] = useState({
     size: undefined,

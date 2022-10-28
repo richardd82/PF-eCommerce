@@ -68,8 +68,10 @@ function App() {
 					</Route>
 					<Route exact path="/contact" component={Contact}></Route>
 					<Route exact path="/profile" component={Profile} />
+					<Route path="/details/:id" component={Details}></Route>{" "}
+
                     
-					{(user_login.typeUser === "Admin")?
+					{(user_login === "Loading" || user_login.typeUser === "Admin")?
 					(<Switch>
 					<Route exact path="/createProduct"> {user_login==="Loading" ? Loader : <CreateProduct />}</Route>
 					<Route path="/usersAdmin" component={user_login==="Loading" ? Loader : UserAdmin} />
@@ -80,14 +82,13 @@ function App() {
 					<Route path={"/productEdit/:id"} component={user_login==="Loading" ? Loader : ModifyItem} />
 					</Switch>) 
 					: 
-					(user_login.typeUser === "User")?
+					(user_login === "Loading" || user_login.typeUser === "User")?
 					(<Switch>
 					<Route path={"/favorites"} component={Favorites}></Route>
 					<Route exact path="/pasarela"><Pasarela /></Route>
 					<Route path="/OrderDetails/:id" component={OrdersDetails} />
 					<Route path="/OrdersUser" component={Orders} />
 					<Route exact path="/editProfileFormulary" component={EditProfileFormulary} />
-					<Route path="/details/:id" component={Details}></Route>{" "}
 					</Switch>) : <Redirect to="/"/>}
                      
 				</Switch>

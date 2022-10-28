@@ -17,7 +17,6 @@ export default function Favorites() {
 
   //ME ASEGURO DE CARGAR LOS ESTADOS
   useEffect(() => {
-    console.log(user_login);
     if (user_login.id) {
       dispatch(getAllFavs(user_login.id));
       dispatch(deleteFavs());

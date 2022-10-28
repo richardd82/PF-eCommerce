@@ -190,8 +190,6 @@ const { URL_BACK,URL_FRONT } = process.env;
       const createOrder = async (email, data) => {
        const stock = JSON.parse(data.stocks)
        const address = JSON.parse(data.contactAdress)
-       console.log("STOCK", stock)
-       console.log( "ADRESS", address)
        let stockNames = stock.map(n => n.name)
        let stockPrice = stock.map(p => p.value)
        let priceTotal = 0

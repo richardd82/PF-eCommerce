@@ -13,7 +13,6 @@ const stock = [0, 5, 10, 20, 30, 40, 50];
 /////////////////////////////////////////////
 
 router.delete("/:id", async (req, res, next) => {
-  console.log("Entra");
   const { id } = req.params;
   try {
     const exProduct = await Product.destroy({ where: { id: id } });
@@ -117,7 +116,6 @@ router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const { name, price, image, brand, gender, categoryId, description } =
     req.body;
-  console.log(id, type, name, price, image)
   const product = await Product.findOne({ where: { id: id } });
   try {
     switch (type) {

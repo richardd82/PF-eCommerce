@@ -4,9 +4,6 @@ const router = Router();
 
 router.post("/", async (req, res, next) => {
   const { userId, productId } = req.body;
-
-
-  console.log(userId,"  ",productId)
   try {
     const favoriteProduct = await favorites.create({
       productId: productId,
@@ -20,7 +17,6 @@ router.post("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
-  console.log("Soy id ",id)
   let productsFavorites = [];
   try {
     const favoritesProducts = await favorites.findAll({
@@ -32,8 +28,6 @@ router.get("/:id", async (req, res, next) => {
       await Product.findByPk(filterFavs[i])
       .then((res)=> productsFavorites.push(res))
     };
-
-    console.log("SOY PRODUCTS FAVORITES", productsFavorites)
     
     res.send(productsFavorites);
   } catch (err) {
