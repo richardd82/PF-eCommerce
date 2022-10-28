@@ -9,7 +9,6 @@ const getTokenData = (token) => {
             data = decoded;
         }
     });
-//console.log("DATAAAA", data)
     return data;
 }
 

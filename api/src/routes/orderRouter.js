@@ -39,10 +39,7 @@ orderRouter.get("/", async (req, res, next) => {
 orderRouter.post("/", async (req, res) => {
    // email para orden creada osea se compro
    const { userId, stocks, estado ,contactAdress} = req.body;
-
-   //console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",userId,"  ",stocks,"  ",estado)
-   try {
-      console.log("Entra")   
+   try {  
       var priceTotal = 0;
       for (let index = 0; index < stocks.length; index++) {
          const element = stocks[index];
@@ -53,12 +50,10 @@ orderRouter.post("/", async (req, res) => {
 
       let stocksJSON = JSON.stringify(stocks);
       let contactAdressJSON=JSON.stringify(contactAdress)
-      //console.log(stocksJSON);
 
       const user = await User.findOne({
          where: { id: userId }
       })
-      //console.log("USER ORDEN", user)
       let newOrder = await Order.create({
          price: priceTotal,
          userId,
@@ -67,7 +62,6 @@ orderRouter.post("/", async (req, res) => {
          contactAdress:contactAdressJSON,
       });
       createOrder(user.email, newOrder)
-      //console.log("NEW ORDER", newOrder)
       res.send(newOrder);
    } catch (error) {
       console.log(error)
@@ -80,18 +74,13 @@ orderRouter.put("/:id", async (req, res, next) => {
    const { type } = req.query;
    const { id } = req.params;
    const { data } = req.body;
-   console.log(type, " ", id, " ", data);
 
-   console.log("data", data);
    try {
       const order = await Order.findOne({ where: { id: id } });
-      console.log("order", order.userId);
 
       const user = await User.findOne({
          where: { id: order.userId }
       })
-
-      console.log(user.email)
 
       switch (type) {
          case "idpurchase":
@@ -103,7 +92,6 @@ orderRouter.put("/:id", async (req, res, next) => {
             order.stateOrder = data;
             await order.save();
             if(data === "Dispatched"){
-               console.log("DISPATCHED DATA", data)
                changeStateOrderDispatched(user.email, data, id)
             }else{
                changeStateOrder(user.email, data, id)
@@ -125,29 +113,3 @@ orderRouter.put("/:id", async (req, res, next) => {
 });
 
 module.exports = orderRouter;
-
-/* id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-      },
-      stocks: {
-        type: DataTypes.JSON, //ARRAY(DataTypes.JSON)
-        allowNull: false,
-      },
-      price: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
-      idpurchase: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      creationdate: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      stateOrder:{
-        type: DataTypes.ENUM('Creada', 'Cancelada', 'Despachada')
-      }
-    }*/

@@ -82,27 +82,6 @@ function validate(input) {
     errores.description = "Dont input blank space";
   }
 
-
-
-  /*      SOTCK           */
-  // else if (input.stock === 0) {
-  //   errores.stock = "Stock is not 0";
-  // }
-
-  // else if (input.stock < 0) {
-  //   errores.stock = "Stock is not less than 0";
-  // }
-
-  /*   GENDER     */
-  // else if (input.gender === "Men" && input.categoryId === 8799 ||
-  //     input.gender === "Men" && input.categoryId === 3630 ||
-  //     input.gender === "Men" && input.categoryId === 9263 ||
-  //     input.gender === "Men" && input.categoryId === 4169 ||
-  //     input.gender === "Men" && input.categoryId === 2641) {
-  //     errores.brand = "el genero elegido no tiene esa categoria, revisala de nuevo"
-  // }
-
-  // console.log(input.countries.length)
   return errores; // retornamos lo errores
 }
 
@@ -133,14 +112,6 @@ function Formulario() {
   };
   const [input, SetInput] = useState(initialState);
 
-  // const previewFile = (file) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setPreviewSource(reader.result);
-  //   };
-  // };
-
   function handleChange(e) {
     e.preventDefault();
     SetInput({
@@ -155,7 +126,6 @@ function Formulario() {
     );
   }
   function imageHandleChange(e) {
-    console.log(e.target.files[0])
     if (e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/jpg") {
 
       const reader2 = new FileReader();
@@ -198,7 +168,6 @@ function Formulario() {
     let Brands = products.filter(element => element.gender == input.gender);
     Brands = Brands.filter(element => element.categoryId == id)
     Brands = obtenerMarcas(Brands)
-    console.log(Brands)
 
     if (input.categoryId === "Create") {
       SetInput({
@@ -274,9 +243,6 @@ function Formulario() {
   //comprobacion de INPUT
 
   function comprobacionInput(input) {
-    //console.log("entrar input comprobacion");
-    console.log(fileInputState);
-    console.log(selectedFile)
     if (
       input.name &&
       input.price &&
@@ -400,11 +366,6 @@ function Formulario() {
     });
   }, [dispatch]);
 
-
-  console.log(input.categorysGender)
-  console.log(input.BrandOptions)
-  console.log(input.nameCategory)
-
   /*AQUI SE RENDERIZA*/
 
   return (
@@ -454,40 +415,7 @@ function Formulario() {
           className={input.image == "" ? "l__form__input-field file-select" : "l__form__input-field2 file-select"}
         />
 
-        {/* <div /> */}
-        {/* <div className={input.image=="" ? "l__form__input-field" : "l__form__input-field2" }>
-            {error.image && ( // si hay un error hara un <p> nuevo con el error
-              <p className="error">{error.image}</p>
-              )}
-            <input
-              type="text"
-              value={input.image}
-              className={ input.image=="" ? "l__form__input-field" : "l__form__input-field2" }
-              name="image"
-              onChange={(e) => handleChange(e)}
-            />
-              <label className="label-form">Link Img:</label>
-          </div> */}
-        {/*<div>
-            <p>brand:</p>
-            {error.brand && ( // si hay un error hara un <p> nuevo con el error
-              <p className="error">{error.brand}</p>
-            )}
-            <input
-              type="text"
-              value={input.brand}
-              className="field"
-              name="brand"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>*/}
-        {/* </div> */}
-
         <div className="select">
-          {/* {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-            <p className="error">{"choose a gender"}</p>
-          )} */}
-          {/* <p className="SelectCreate">Select Gender:</p> */}
           <select className="select" onChange={(e) => handleSelect(e)}>
             <option selected disabled>
               Select Gender
@@ -497,24 +425,10 @@ function Formulario() {
           </select>
         </div>
         <div>
-          {/* <p className="SelectCreate">Select Category:</p> */}
           <div className="select">
             {input.categoryId === null && ( // si hay un error hara un <p> nuevo con el error
               <p className="error">{"choose a category"}</p>
             )}
-            {/*<select
-                className="select"
-                onChange={(e) => handleSelectCategory(e)}
-              >
-                <option selected disabled>
-                  Select Category
-                </option>
-                <option value="4208">Jeans</option>
-                <option value="7078">Shorts</option>
-                <option value="3602">Shirts</option>
-                <option value="5668">Hoodies & Sweatshirts</option>
-                <option value="14274">Sweatpants</option>
-          </select>*/}
 
             <select value={input.nameCategory} className="select" onChange={(e) => handleSelectCategory(e)}>
               <option selected disabled value={"Disable"} title={"Disable"} > Select Category</option>
@@ -596,39 +510,6 @@ function Formulario() {
             <label className="label-formTxt">Description</label>
           </div>
 
-
-          {/* STOCK */}
-          {    /*
-          <p className="stockTitle">Create Stock:</p>
-          <div className="stockContainerPrincipal">
-            <p className="stockNumberContain">stock Product:  <span className="stockNumber">{input.stock}</span></p>
-            {error.stock && ( // si hay un error hara un <p> nuevo con el error
-              <p className="error">{error.stock}</p>
-            )}
-            <section>
-              <button className="buttonStock" onClick={(e) => handleAumentar(e)}>+</button>
-              <button className="buttonStock" onClick={(e) => handleDecrementar(e)} >-</button>
-            </section>
-          </div>
-
-          {/* TALLE */}
-          {/*    
-          <div className="select">
-            {input.size.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-              <p className="error">{"choose a Size"}</p>
-            )}
-            <p>Select Size:</p>
-            <select className="select" onChange={(e) => handleSelectSize(e)}>
-              <option selected disabled>
-                Select size
-              </option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-            </select>
-          </div>
-                */}
-
           {/* BUTTON */}
           {Object.keys(error).length === 0 && comprobacionInput(input) ? (
             <button
@@ -643,8 +524,6 @@ function Formulario() {
               You must fill in all the fields, to be able to Create your product
             </p>
           )}
-
-          {/* <button className="submit" type='submit' onClick={(e) => handleSubmit(e)}>Create New Product</button> */}
         </div>
       </form>
     </div >

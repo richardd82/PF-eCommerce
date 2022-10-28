@@ -21,7 +21,7 @@ router.post("/", async (req, res, next) => {
         { username: username, }
 
     });
-    console.log("usuario de logueo", user)
+    ("usuario de logueo", user)
     const passwordCorrect =
       user === null || user.length === 0
         ? false
@@ -39,7 +39,7 @@ router.post("/", async (req, res, next) => {
       ? res.redirect("/register").json({ error: "Usuario no verificado" })
       : res.status(200).json({ auth: "User login success", userForToken, token });
   } catch (error) {
-    console.log(error)
+    (error)
   }
 });
 
@@ -85,8 +85,8 @@ router.post("/register", async (req, res) => {
 
         });
         const token = jwt.sign(JSON.stringify(user), process.env.JWT_secret_key);
-        console.log(token, "TOKEN")
-        console.log(user, "NEW USER")
+        (token, "TOKEN")
+        (user, "NEW USER")
         await sendRegisterEmail(email, name, token)
         return res.status(201).json(user);
       } catch (error) {
@@ -113,42 +113,42 @@ router.get("/confirm/:token", async (req, res, next) => {
       });
     }
 
-    console.log("DATA", data);
+    ("DATA", data);
 
     const { email, id } = data
 
-    console.log(data.email)
+    (data.email)
 
     let user = await User.findOne({
       where: {
         email: email
       }
     })
-    console.log(user)
+    (user)
     if (id !== user.id) {
-      console.log("El id no coincide con el usuario")
+      ("El id no coincide con el usuario")
     }
 
     user.verify = true
     await user.save()
-    console.log("USER", user)
+    ("USER", user)
     res.redirect(`${URL_FRONT}`)
   } catch (error) {
-    console.log("Error para verificar token")
+    ("Error para verificar token")
   }
 })
 
 router.post("/google", async (req, res, next) => {
   const { email, password, name, lastName, image, address } = req.body;
 
-  console.log("entro validacion Google", email, password, name, lastName, image, address);
+  ("entro validacion Google", email, password, name, lastName, image, address);
   let isAdmin = false;
   try {
     var userValidate = await User.findAll({
       where: { email: email },
     });
 
-    console.log("user validate", userValidate);
+    ("user validate", userValidate);
     if (
       email === "rider_shock@outlook.es" ||
       email === "richardd82@gmail.com" ||
@@ -181,7 +181,7 @@ router.post("/google", async (req, res, next) => {
       });
     }
 
-    console.log(userValidate)
+    (userValidate)
 
     const userForToken = {
       id: userValidate[0].dataValues.id,
@@ -191,7 +191,7 @@ router.post("/google", async (req, res, next) => {
 
     res.status(200).json({ userValidate, token })
   } catch (err) {
-    console.log("entro error");
+    ("entro error");
     next(err);
   }
 });
@@ -228,7 +228,7 @@ router.post("/forgot", async (req, res) => {
 
   try {
     let user = await User.findOne({ where: { email: email } })
-    console.log(user.email)
+    (user.email)
     if (user.email === null) {
       return res.status(400).json({ error: "User with this email does not exists." })
     }
@@ -236,20 +236,20 @@ router.post("/forgot", async (req, res) => {
     var data = { id: user.id }
 
     const token = jwt.sign(data, process.env.JWT_secret_key, { expiresIn: "30m" })
-    console.log("user de /forgot", user)
+    ("user de /forgot", user)
 
     await user.save()
 
-    console.log(token)
+    (token)
 
     await forgotEmail(email, token)
 
-    console.log("email enviado")
+    ("email enviado")
 
     res.status(200).json({ auth: "email send", token: token })
 
   } catch (error) {
-    console.log(error)
+    (error)
   }
 
 })
@@ -259,30 +259,30 @@ router.put("/reset", async (req, res) => {
   try {
     const { password, token } = req.body
 
-    console.log("NEW PASS", password, "  ", token)
+    ("NEW PASS", password, "  ", token)
     const compare = jwt.verify(token, process.env.JWT_secret_key)
 
-    console.log("COMPARE", compare)
+    ("COMPARE", compare)
     if (!compare || compare.id == undefined) {
       res.status(400).json({ error: "Wrong or expired token" })
     }
 
     let user = await User.findOne({ where: { id: compare.id } })
-    console.log(user)
+    (user)
     user.password = await bcrypt.hash(password, 10)
 
     await user.save()
     //res.redirect(`${URL_FRONT}/`)
-    console.log("contraseña cambiada")
+    ("contraseña cambiada")
     res.status(200).json({ auth: "Password changed" });
   } catch (error) {
-    console.log(error)
+    (error)
   }
 })
 
 
 function verifyToken(req, res, next) {
-  console.log(req.body)
+  (req.body)
   const beareHeader = req.body['authorization'];
   if (typeof beareHeader !== 'undefined') {
     req.token = beareHeader.split(" ")[1];

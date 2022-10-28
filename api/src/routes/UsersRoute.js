@@ -61,14 +61,11 @@ router.get("/", async (req, res, next) => {
 
 router.post("/Google", async (req, res, next) => {
    const { email, password, name, lastName, image, address } = req.body;
-   console.log("entro validacion Google");
    let isAdmin = false;
    try {
       var userValidate = await User.findAll({
          where: { email: email },
       });
-
-      console.log("user validate", userValidate);
       if (
          email === "enzoholgadodev@gmail.com" ||
          email === "makoski.ed@gmail.com" ||
@@ -172,9 +169,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:userId", async (req, res, next) => {
    const { type,anotherParam } = req.query;
    const { userId } = req.params;
-   console.log("SOY TYPE", type, "SOY USERID", userId);
    const user = await User.findOne({ where: { id: userId } });
-   console.log(userId," ",anotherParam," ",type);
    
    if(user.length==0)
       return res.status(400).send("Usuario no existe") ;
@@ -190,13 +185,6 @@ router.put("/:userId", async (req, res, next) => {
             break;
          case "profile":
             const { name, lastName, newAddress, newPhone } = req.body;
-            console.log(
-               "SOY API PROFILE",
-               name,
-               lastName,
-               newAddress,
-               newPhone
-            );
             user.name = name;
             user.lastName = lastName;
             user.address = newAddress;
@@ -211,12 +199,6 @@ router.put("/:userId", async (req, res, next) => {
             res.send(`image changed successfully`);
          case "password":
             const { oldPassword, newPassword } = req.body;
-            console.log(
-               "SOY DEL BACK Y TRAIGO OLD",
-               oldPassword,
-               "NEW",
-               newPassword
-            );
             if (bcryptjs.compareSync(oldPassword, user.password)) {
                let passwordHash = await bcryptjs.hash(newPassword, 8);
                user.password = passwordHash;
@@ -248,7 +230,6 @@ router.put("/put/:id", async (req, res, next) => {
    try {
       const { id } = req.params;
       const { name, lastName, address, phone, email, image,lat,lng} = req.body;
-      console.log({ name, lastName, address, phone,lat,lng });
       const toEdit = await User.update(
          {
             name,
@@ -287,14 +268,5 @@ router.put("/putAddrees/:id", async (req, res, next) => {
       next(error);
    }
 });
-
-// {
-//     "email": "enzoholgadocdb@gmail.com",
-//     "password": "huevos123",
-//     "name": "enzo",
-//     "lastName": "holgado",
-//     "image": "",
-//     "address": ""
-//   }
 
 module.exports = router;

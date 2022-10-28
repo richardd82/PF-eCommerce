@@ -18,9 +18,6 @@ router.get('/images', async (req, res) => {
         .sort_by('public_id', 'desc')
         .max_results(30)
         .execute();
-
-    console.log(resources)
-    //const publicIds = resources.map((file) => file.public_id);
     res.send(resources);
 });
 router.post('/upload', async (req, res) => {
@@ -31,17 +28,11 @@ router.post('/upload', async (req, res) => {
             folder: folder,
             public_id: name
         });
-        console.log(uploadResponse);
         res.json(uploadResponse);
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
 });
-
-// const port = process.env.PORT || 3001;
-// router.listen(port, () => {
-//     console.log('listening on 3001');
-// });
 
 module.exports = router;

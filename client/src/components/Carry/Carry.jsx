@@ -23,7 +23,6 @@ class Carry extends Component {
 
     let Data = this.props.carryProducts;
     this.props.getStockbyIDTotalFilterCarry(Data);
-    console.log(this.props.user_login.id);
     this.props.getOrders("UserID", this.props.user_login.id);
   }
 
@@ -106,7 +105,6 @@ class Carry extends Component {
 
   onContinueBuy() {
     let { actualiceBuy } = this.VerificarStocks();
-    console.log(this.props.user_login);
     if (this.props.user_login == false || this.props.user_login == "Loading") {
       Swal.fire({
         title: `You must log in before buying`,
@@ -115,19 +113,6 @@ class Carry extends Component {
       });
     } else {
       if (actualiceBuy) return;
-
-      /*for (let index = 0; index < this.props.orders.length; index++) {
-        const element = this.props.orders[index];
-        console.log(element)
-        if (element.stateOrder === "Cancelada" || element.stateOrder === "Creada") {
-          Swal.fire({
-            title: `You have a pending order`,
-            icon: "warning",
-            button: "Ok",
-          });
-          return
-        }
-      }*/
       this.props.history.push("/pasarela");
     }
   }
@@ -141,29 +126,17 @@ class Carry extends Component {
     let actualizoBuy = false;
 
     //Metodo para iterar 2 arrays para encontrar el elemento del local Storage dentro del Stock y hacer verificaciones
-    console.log(Stocks, "  ", Data);
 
     for (let index = 0; index < Stocks.length; index++) {
       const stock = Stocks[index];
       for (let index2 = start; index2 < Data.length; index2++) {
-        console.log("entra 1");
         const datalocal = Data[index2];
         let monto = Number.parseInt(datalocal.amount);
         /// Encontrar dentro Stock el mismo id del elemento del local storage
-        console.log(
-          datalocal.id,
-          "  ",
-          stock.productId,
-          "  ",
-          datalocal.state.size,
-          "  ",
-          stock.productSize
-        );
         if (
           datalocal.id == stock.productId &&
           datalocal.state.size == stock.productSize
         ) {
-          console.log("entra 2");
           /// Verificar si el stock ha sido cambiado y modificar el local storage
           if (stock.stock !== datalocal.state.stock) {
             Data[index2].state.stock = stock.stock;
@@ -222,7 +195,6 @@ class Carry extends Component {
     let carryProducts = this.props.carryProducts;
     let { priceTotal } = this.VerificarStocks();
     let fraseNoResultados = "There are no products added to the shopping cart";
-    console.log(this.props.orders);
 
     return (
       <div className="mainContainer">
