@@ -5,7 +5,7 @@ const { Order } = require("../db");
 const { User } = require("../db");
 const orderRouter = Router();
 //email
-const transporter = require("../../config/mailer");
+//const transporter = require("../../config/mailer");
 const { changeStateOrder, createOrder, changeStateOrderDispatched } = require("../Email/mail.config");
 
 require("dotenv").config();
