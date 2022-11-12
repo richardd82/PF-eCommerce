@@ -4,7 +4,7 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 const bcryptjs = require("bcrypt");
 // emails
-const transporter = require("../../config/mailer");
+// const transporter = require("../../config/mailer");
 
 const router = Router();
 
