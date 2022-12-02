@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAthC57xgrnfKan_0A22npdngwMwsjJJlw",
-  authDomain: "alienstreet-816f2.firebaseapp.com",
-  projectId: "alienstreet-816f2",
-  storageBucket: "alienstreet-816f2.appspot.com",
-  messagingSenderId: "424492007210",
-  appId: "1:424492007210:web:812c7c008325248775a853",
-  measurementId: "G-6ZSMH599SL"
+  apiKey: "AIzaSyCwKuosJCtBHudenrTG1c2sqQN7IF8mRFE",
+  authDomain: "alien-8f953.firebaseapp.com",
+  projectId: "alien-8f953",
+  storageBucket: "alien-8f953.appspot.com",
+  messagingSenderId: "92777818540",
+  appId: "1:92777818540:web:4f6bc8c34919a808d5f209",
+  measurementId: "G-Y1DECS6BXX"
   };
 
   
