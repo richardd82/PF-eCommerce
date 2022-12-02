@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDbOFjInaJ2C5dZFF7kQ7D4H_IoPXtfzME",
-    authDomain: "cio-clothes-1c354.firebaseapp.com",
-    projectId: "cio-clothes-1c354",
-    storageBucket: "cio-clothes-1c354.appspot.com",
-    messagingSenderId: "355957269528",
-    appId: "1:355957269528:web:1029840c00a731dfa30f6d",
-    measurementId: "G-JG6CD38YD4"
+  apiKey: "AIzaSyAthC57xgrnfKan_0A22npdngwMwsjJJlw",
+  authDomain: "alienstreet-816f2.firebaseapp.com",
+  projectId: "alienstreet-816f2",
+  storageBucket: "alienstreet-816f2.appspot.com",
+  messagingSenderId: "424492007210",
+  appId: "1:424492007210:web:812c7c008325248775a853",
+  measurementId: "G-6ZSMH599SL"
   };
 
   
