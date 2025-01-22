@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const CourierClient = require("@trycourier/courier").CourierClient;
-const courier = CourierClient({
+const courier = new CourierClient({
   authorizationToken: process.env.COURRIER_API_KEY,
 });
 const { URL_BACK,URL_FRONT } = process.env;
